@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration>
+	<Appenders>
+		<Console name="Out" target="SYSTEM_OUT">
+			<PatternLayout charset="UTF-8"
+				pattern="%-5level: %logger{1}.%M() - %msg%n" />
+		</Console>
+	</Appenders>
+
+	<Loggers>
+		<Logger name="com.mycompany.codebrew" level="info"
+			additivity="false">
+			<AppenderRef ref="Out" />
+		</Logger>
+		<!-- WebApplication이 DB로 보내는 SQL문을 로그로 출력하기 위한 설정 -->
+		<Logger name="jdbc.sqlonly" level="info" additivity="false">
+			<AppenderRef ref="Out" />
+		</Logger>
+		<!-- DB가 보내는 결과를 로그로 출력하기 위한 설정 -->
+		<!-- <Logger name="jdbc.resultset" level="info" additivity="false"> <AppenderRef 
+			ref="Out"/> </Logger> -->
+		<Root level="error">
+			<AppenderRef ref="Out" />
+		</Root>
+	</Loggers>
+</Configuration>

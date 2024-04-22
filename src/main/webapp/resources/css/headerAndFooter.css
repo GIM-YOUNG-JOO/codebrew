@@ -1,0 +1,46 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
+	;
+
+
+.footer {
+	padding-left: 5%;
+}
+
+.footer>li {
+	font-family: "Kanit", sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	border: none
+}
+
+a:link {
+	color: black;
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #00CCFF;
+	text-decoration: none;
+	transition: all 0.2s ease-out;
+}
+
+.btn {
+	font-family: 'HY견고딕';
+	font-weight: 500;
+}
+
+.nav-link {
+	font-family: 'HY견고딕';
+	font-weight: 700;
+	color: black;
+}
+
+.nav-link:hover {
+	color: #00CCFF;
+}

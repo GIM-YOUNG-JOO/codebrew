@@ -19,5 +19,13 @@ public class BoardController {
 		log.info("실행");
 		return "board/boardDetail";
 	}
+	
+	@RequestMapping("/boardRegister")
+	public String boardRegister() {
+		log.info("실행");
+		return "board/boardRegister";
+	}
+	
+	
 }
 

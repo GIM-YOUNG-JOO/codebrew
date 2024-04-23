@@ -25,7 +25,7 @@
     <div class="container justify-content-start">
         <div class="text-start mt-5">
             <p class="h1">Menu</p>
-            <p class="h3 mt-5">Drinks</p>
+            <p class="h3 mt-5">Coffee</p>
             <hr class="m-0"/>
         </div>
         <div class="row">

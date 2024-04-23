@@ -12,49 +12,16 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 		<!-- jQuery 외부 라이브러리 설정 -->
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/payments.css">
+		
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
 
 		</script>
       
         <style>
-            * {
-            padding: 10;
-            }
-
-           .flex-container1 {
-           
-        
-            padding: 10;
-            }
-
-
-            #BillingInformation {
-            background-color: #f8f1c0fd;
-            }
-
-            #shippingInformation {
-            background-color: #f8f1c0fd;
-            }
-
-            #orderHistory {
-            background-color: #f8f1c0fd;
-            }
-
-            #checkout {
-            background-color: #f8f1c0fd;
-            }
-
-            #requestDropdownBtn, #card, #deposit {
-            background-color: #265631fd
-            }
-            
-            span {
-             display: flex;
-			 justify-content: center;
-			 align-items: center;
-            }
-           
 
         </style>
 	</head>
@@ -105,22 +72,22 @@
 	                <p id="orderHistory" class="text-center p-2">주문내역</p>
 					<div class="d-flex m-3">
 						<img id="img1" class="rounded-circle" src="/codebrew/resources/image/cut/Americano.jpg" width="50" height="50"/>
-						<span class="text-end flex-grow-1">x1</span>
-						<span class="text-end flex-grow-1">670$</span>
+						<span class="flex-grow-1">x1</span>
+						<span class="flex-grow-1">670$</span>
 					</div>
 					<div class="d-flex m-3">
 						<img id="img2" class="rounded-circle" src="/codebrew/resources/image/cut/AppleJuice.png" width="50" height="50"/>
-						<span class="text-end flex-grow-1">x1</span>
-						<span class="text-end flex-grow-1">670$</span>
+						<span class="flex-grow-1">x1</span>
+						<span class="flex-grow-1">670$</span>
 					</div>
 					<div class="d-flex m-3">
 						<img id="img3" class="rounded-circle" src="/codebrew/resources/image/cut/CaffeLatte.png" width="50" height="50"/>
-						<span class="text-end flex-grow-1">x1</span>
-						<span class="text-end flex-grow-1">670$</span>
+						<span class="flex-grow-1">x1</span>
+						<span class="flex-grow-1">670$</span>
 					</div>
 					<div class="d-flex m-3">
 						<img id="img4" class="rounded-circle" src="/codebrew/resources/image/cut/CaramelMacchiato.png" width="50" height="50"/>
-						<span class="flex-grow-1" style="justify-content-center">x1</span>
+						<span class="flex-grow-1">x1</span>
 						<span class="flex-grow-1">670$</span>
 					</div>
 	            </form>

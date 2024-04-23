@@ -52,7 +52,7 @@
 	                <div class="d-flex align-items-center m-3"><input class="p-1 flex-grow-1" placeholder="주소"></input></div>
 	                <div class="d-flex align-items-center m-3"><input class="p-1 flex-grow-1" placeholder="상세주소"></input></div>
 	                <div class="dropdown d-flex align-items-center m-3">요청사항 
-	                    <button class="btn bg-secondary-subtle dropdown-toggle flex-grow-1  ms-2" type="button" id="requestDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+	                    <button class="btn btn-light dropdown-toggle flex-grow-1  ms-2" type="button" id="requestDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
 	                      배송시 요청사항을 선택해주세요
 	                    </button>
 	                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -100,7 +100,31 @@
 	                    <button id="card" type="submit" class="btn btn-light btn-lg flex-grow-1 me-2">Credit Card</button>
 	                    <button id="deposit" type="submit" class="btn btn-light btn-lg flex-grow-1 ms-2">Account</button>
 	                </div>
-	                <div class="d-flex m-3" ><button type="submit" class="btn btn-success btn-lg rounded-pill flex-grow-1 p-3">$670 Pay Now </button></div>
+	                <div class="d-flex m-3" ><button type="button" class="btn btn-success btn-lg rounded-pill flex-grow-1 p-3 mx-3" data-bs-toggle="modal" data-bs-target="#myModal">$670 Pay Now </button></div>
+					<!-- The Modal -->
+					<div class="modal fade" id="myModal">
+					  <div class="modal-dialog modal-dialog-centered">
+					    <div class="modal-content">
+					
+					      <!-- Modal Header -->
+					      <div class="modal-header">
+					        <h4 class="modal-title">Success</h4>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					      </div>
+					
+					      <!-- Modal body -->
+					      <div class="modal-body">
+					        주문이 완료되었습니다.
+					      </div>
+					
+					      <!-- Modal footer -->
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-success rounded-pill" data-bs-dismiss="modal">Close</button>
+					      </div>
+					
+					    </div>
+					  </div>
+					</div>
 	            </form>
 	        
 	        </div>

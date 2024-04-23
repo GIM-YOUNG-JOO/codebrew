@@ -12,49 +12,16 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 		<!-- jQuery 외부 라이브러리 설정 -->
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/paments.css">
+		
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
 
 		</script>
       
         <style>
-            * {
-            padding: 10;
-            }
-
-           .flex-container1 {
-           
-        
-            padding: 10;
-            }
-
-
-            #BillingInformation {
-            background-color: #f8f1c0fd;
-            }
-
-            #shippingInformation {
-            background-color: #f8f1c0fd;
-            }
-
-            #orderHistory {
-            background-color: #f8f1c0fd;
-            }
-
-            #checkout {
-            background-color: #f8f1c0fd;
-            }
-
-            #requestDropdownBtn, #card, #deposit {
-            background-color: #265631fd
-            }
-            
-            span {
-             display: flex;
-			 justify-content: center;
-			 align-items: center;
-            }
-           
 
         </style>
 	</head>

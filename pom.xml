@@ -9,7 +9,7 @@
 
 	<dependencies>
 
-		<!-- 서블링 4.0 라이브러리를 사용 -->
+		<!-- 서블릿 4.0 라이브러리를 사용 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

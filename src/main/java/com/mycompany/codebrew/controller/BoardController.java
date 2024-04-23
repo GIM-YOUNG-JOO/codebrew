@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("board")
-public class boardController {
+@RequestMapping("/board")
+public class BoardController {
 	@RequestMapping("/boardList")
 	public String boardList() {
 		log.info("실행");

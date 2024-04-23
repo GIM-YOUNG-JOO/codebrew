@@ -82,7 +82,7 @@
                 </div>
 
                 <button class="clear_button round_box align-middle">
-                    <i class="material-icons align-middle">loop</i>
+                    <i class="bi bi-arrow-clockwise"></i>
                     초기화</button>
              </div>
 

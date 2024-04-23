@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Menu</title>
+		<title>Code Brew - Menu</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -25,7 +25,7 @@
     <div class="container justify-content-start">
         <div class="text-start mt-5">
             <p class="h1">Menu</p>
-            <p class="h3 mt-5">Drinks</p>
+            <p class="h3 mt-5">Coffee</p>
             <hr class="m-0"/>
         </div>
         <div class="row">

@@ -2,7 +2,6 @@
 
 <footer>
 	<br>
-	<br>
 	<hr />
 	<ul class="list-group footer">
 		<li class="list-group-item">

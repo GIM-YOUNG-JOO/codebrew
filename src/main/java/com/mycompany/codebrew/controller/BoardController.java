@@ -14,5 +14,10 @@ public class BoardController {
 		log.info("실행");
 		return "board/boardList";
 	}
-
+	@RequestMapping("/boardDetail")
+	public String boardDetail() {
+		log.info("실행");
+		return "board/boardDetail";
+	}
 }
+

@@ -20,4 +20,9 @@ public class OrderController {
 		log.info("실행");
 		return "order/cart";
 	}
+	@RequestMapping("/detailPage")
+	public String detailPage() {
+		log.info("실행");
+		return "order/detailPage";
+	}
 }

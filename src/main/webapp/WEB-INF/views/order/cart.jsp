@@ -75,7 +75,7 @@
 			<div class="flex-grow-1 ms-4">
 				<p class="h3">Reusable ColdCup</p>
 				<p class="h5 mt-3">None</p>
-				<p class="h6 mt-3">종이컵도 여러번 쓰면 리유저블 아닌가</p>
+				<p class="h6 mt-3">종이컵도 여러번 쓰면 리유저블인데</p>
 				<div class="mt-4 d-flex align-items-center">
                     <i class="bi bi-pen text-muted cart-icon"></i>
                     <i class="bi bi-plus-circle text-muted ms-5 me-3 cart-icon" onclick="increaseAmount(this)"></i>

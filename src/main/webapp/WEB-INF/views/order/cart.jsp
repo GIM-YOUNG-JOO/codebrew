@@ -85,7 +85,7 @@
 			</div>
 		</div>
 	</div>
-	<button class="btn btn-success btn-lg rounded-pill border z-1 position-fixed bottom-0 end-0 m-5">Buy Now</button>
+	<a href="${pageContext.request.contextPath}/payments"><button class="btn btn-success btn-lg rounded-pill border z-1 position-fixed bottom-0 end-0 m-5">Buy Now</button></a>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

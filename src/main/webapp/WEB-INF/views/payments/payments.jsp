@@ -12,8 +12,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 		<!-- jQuery 외부 라이브러리 설정 -->
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-		
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/payments.css">
 		
 		<!-- 사용자 정의 자바스크립트 -->
@@ -27,12 +27,13 @@
 	</head>
 	
 	<body>
+	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	    <div class="flex-container1 d-flex">
 	
-	        <div class="flex-container2 border-end" style="width: 50%; min-width: 450px;">
+	        <div class="flex-container2 border-end p-5" style="width: 50%; min-width: 450px;">
 	            <!-- 주문자 정보 폼 -->
 	            <form class="border-secondary p-3">
-	                <p id="BillingInformation" class="text-center p-2">주문자정보</p>
+	                <h6 id="BillingInformation" class="rounded text-center p-2 bg-warning-subtle">주문자정보</h6>
 	                <div class="d-flex align-items-center m-3">주문자<input class="p-1 flex-grow-1 ms-2" placeholder="이름을 입력해 주세요."style="flex-grow: 3;"></input></div>
 	            
 	                <div class="d-flex align-items-center m-3">연락처<input class="p-1 flex-grow-1 ms-2" placeholder="&quot; - &quot;없이 입력해 주세요."></input></div>
@@ -41,7 +42,7 @@
 	
 	            <!-- 배송지 정보 폼 -->
 	            <form class="border-secondary p-3">
-	                <p  id="shippingInformation" class="text-center p-2">배송지정보</p>
+	                <h6 id="shippingInformation" class="rounded text-center p-2 bg-warning-subtle">배송지정보</h6>
 	                <div class="p-1">
 	                    <input type="checkbox"> 주문자 정보와 동일 </input>
 	                </div>
@@ -51,7 +52,7 @@
 	                <div class="d-flex align-items-center m-3"><input class="p-1 flex-grow-1" placeholder="주소"></input></div>
 	                <div class="d-flex align-items-center m-3"><input class="p-1 flex-grow-1" placeholder="상세주소"></input></div>
 	                <div class="dropdown d-flex align-items-center m-3">요청사항 
-	                    <button class="btn btn-secondary dropdown-toggle flex-grow-1  ms-2" type="button" id="requestDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+	                    <button class="btn bg-secondary-subtle dropdown-toggle flex-grow-1  ms-2" type="button" id="requestDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
 	                      배송시 요청사항을 선택해주세요
 	                    </button>
 	                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -65,11 +66,11 @@
 	         
 	        </div>
 	
-	        <div class="flex-container3" style="width: 50%; min-width: 450px;">
+	        <div class="flex-container3 p-5" style="width: 50%; min-width: 450px;">
 	
 	            <!-- 주문 내역 폼 -->
 	            <form class="border-secondary p-3" >
-	                <p id="orderHistory" class="text-center p-2">주문내역</p>
+	                <h6 id="orderHistory" class="rounded text-center p-2 bg-warning-subtle">주문내역</h6>
 					<div class="d-flex m-3">
 						<img id="img1" class="rounded-circle" src="/codebrew/resources/image/cut/Americano.jpg" width="50" height="50"/>
 						<span class="flex-grow-1">x1</span>
@@ -94,17 +95,18 @@
 	
 	            <!-- 결제 폼 -->
 	            <form class="border-secondar p-3">
-	                <p id="checkout" class="text-center p-2">결제</p>
+	                <h6 id="checkout" class="rounded text-center p-2 bg-warning-subtle">결제</h6>
 	                <div class="d-flex m-3">
-	                    <button id="card" type="submit" class="btn btn-secondary btn-lg flex-grow-1 me-2">카드</button>
-	                    <button id="deposit" type="submit" class="btn btn-secondary btn-lg flex-grow-1 ms-2">입금</button>
+	                    <button id="card" type="submit" class="btn btn-light btn-lg flex-grow-1 me-2">Credit Card</button>
+	                    <button id="deposit" type="submit" class="btn btn-light btn-lg flex-grow-1 ms-2">Account</button>
 	                </div>
-	                <div class="d-flex m-3" ><button type="submit" class="btn btn-secondary btn-lg flex-grow-1">결제하기</button></div>
+	                <div class="d-flex m-3" ><button type="submit" class="btn btn-success btn-lg rounded-pill flex-grow-1 p-3">$670 Pay Now </button></div>
 	            </form>
 	        
 	        </div>
 	
 	      </div>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	</body>
 
 </html>

@@ -14,7 +14,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 		
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/paments.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/payments.css">
 		
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
@@ -72,22 +72,22 @@
 	                <p id="orderHistory" class="text-center p-2">주문내역</p>
 					<div class="d-flex m-3">
 						<img id="img1" class="rounded-circle" src="/codebrew/resources/image/cut/Americano.jpg" width="50" height="50"/>
-						<span class="text-end flex-grow-1">x1</span>
-						<span class="text-end flex-grow-1">670$</span>
+						<span class="flex-grow-1">x1</span>
+						<span class="flex-grow-1">670$</span>
 					</div>
 					<div class="d-flex m-3">
 						<img id="img2" class="rounded-circle" src="/codebrew/resources/image/cut/AppleJuice.png" width="50" height="50"/>
-						<span class="text-end flex-grow-1">x1</span>
-						<span class="text-end flex-grow-1">670$</span>
+						<span class="flex-grow-1">x1</span>
+						<span class="flex-grow-1">670$</span>
 					</div>
 					<div class="d-flex m-3">
 						<img id="img3" class="rounded-circle" src="/codebrew/resources/image/cut/CaffeLatte.png" width="50" height="50"/>
-						<span class="text-end flex-grow-1">x1</span>
-						<span class="text-end flex-grow-1">670$</span>
+						<span class="flex-grow-1">x1</span>
+						<span class="flex-grow-1">670$</span>
 					</div>
 					<div class="d-flex m-3">
 						<img id="img4" class="rounded-circle" src="/codebrew/resources/image/cut/CaramelMacchiato.png" width="50" height="50"/>
-						<span class="flex-grow-1" style="justify-content-center">x1</span>
+						<span class="flex-grow-1">x1</span>
 						<span class="flex-grow-1">670$</span>
 					</div>
 	            </form>

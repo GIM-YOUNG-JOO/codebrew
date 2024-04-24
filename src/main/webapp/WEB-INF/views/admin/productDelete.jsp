@@ -40,12 +40,12 @@
                                 <img src="${pageContext.request.contextPath}/resources/image/Americano_cut.jpg" alt="Coffee" width="50px">
                             </td>
                             <td>
-                                Hot Coffee
+                                Americano
                             </td>
                             <!-- 카테고리 -->
                             <td>커피</td>
                             <!-- 가격 -->
-                            <td>5000</td>
+                            <td>3000</td>
                             <!-- 관리 -->
                             <td>
                                 <button class="btn btn-danger btn-md rounded-pill border">Delete</button>
@@ -56,15 +56,15 @@
                             <td>2</td>
                             <!-- 상품명 -->
                             <td>
-                                <img src="${pageContext.request.contextPath}/resources/image/Americano_cut.jpg" alt="Coffee" width="50px">
+                                <img src="${pageContext.request.contextPath}/resources/image/cut/PineapplePassionfruitRefreshersLemonade.png" alt="Coffee" width="50px">
                             </td>
                             <td>
-                                Hot Coffee
+                                Pineapple Passionfruit Refreshers Lemonade
                             </td>
                             <!-- 카테고리 -->
-                            <td>커피</td>
+                            <td>음료</td>
                             <!-- 가격 -->
-                            <td>5000</td>
+                            <td>7000</td>
                             <!-- 관리 -->
                             <td>
                                 <button class="btn btn-danger btn-md rounded-pill border">Delete</button>

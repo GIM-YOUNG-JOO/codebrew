@@ -27,7 +27,7 @@
         <div class="nav_bar">
             <button class="button_tags hover_grey button">공지사항</button>
             <button class="button_tags hover_grey button">Q&A</button>
-            <button class="button_tags hover_grey button">질문&답변</button>
+            <button class="button_tags hover_grey button">질문&답변</button> 
         </div>
 
         <div class="info_box ss">

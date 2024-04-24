@@ -48,8 +48,8 @@
 				</ul>
 				<hr>
 				<div class="d-flex justify-content-around align-items-center">
-					<button class="btn btn-light btn-md rounded-pill border ms-4 me-2">Sign In</button>
-					<button class="btn btn-dark btn-md rounded-pill border ms-2 me-4">Join Now</button>
+					<a href="${pageContext.request.contextPath}/signJoin/signIn"><button class="btn btn-light btn-md rounded-pill border ms-4 me-2" >Sign In</button></a>
+					<a href="${pageContext.request.contextPath}/signJoin/joinNow"><button class="btn btn-dark btn-md rounded-pill border ms-2 me-4">Join Now</button></a>
 				</div>
 			</div>
 		</div>

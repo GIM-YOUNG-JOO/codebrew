@@ -30,13 +30,13 @@
         </div>
         <div class="row">
             <div class="col">
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/menu/detailPage">
                     <img src="resources/image/cut/Americano.jpg" style="width:122px; height:122px; border-radius: 50%;">
                     Americano
                 </a>
             </div>
             <div class="col">
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/menu/detailPage">
                     <img src="resources/image/cut/Espresso_Single.png" style="width:122px; height:122px; border-radius: 50%;">
                     Espresso
                 </a>

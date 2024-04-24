@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailPage.css">
 
-<
 </head>
 
 <body>

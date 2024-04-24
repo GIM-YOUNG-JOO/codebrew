@@ -15,7 +15,6 @@
 	function displayImage(input) {
 		var imageContainer = document.getElementById("imageContainer");
 
-		// 이미지를 표시하기 전에 기존 이미지를 지웁니다.
 		imageContainer.innerHTML = "";
 
 		if (input.files && input.files[0]) {

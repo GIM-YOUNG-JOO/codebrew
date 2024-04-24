@@ -40,7 +40,7 @@
                                 <img src="${pageContext.request.contextPath}/resources/image/Americano_cut.jpg" alt="Coffee" width="50px">
                             </td>
                             <td>
-                                Americano
+                            	Americano
                             </td>
                             <!-- 카테고리 -->
                             <td>커피</td>

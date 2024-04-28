@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class beansOption {
+public class BoardCategory {
 	
-	private int bopId;
-	private String bopName;
+	private int bcId;
+	private String bcname;
+
 }

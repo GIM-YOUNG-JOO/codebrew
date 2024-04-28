@@ -1,7 +1,6 @@
 package com.mycompany.codebrew.dto;
 
-import java.sql.Clob;
-import java.sql.Date;
+import java.sql.Blob;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,12 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class boardComment {
+public class BoardImg {
 
-	private int bocId;
+	private int biId;
 	private int boId;
-	private Clob bocContents;
-	private Date bocDate;
-	private Date bocNewdate;
+	private Blob bifile;
 	
 }

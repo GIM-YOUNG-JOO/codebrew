@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class branch {
+public class TempOption {
 	
-	private int brId;
-	private String brName;
-	
+	private int topId;
+	private String topName;
 }

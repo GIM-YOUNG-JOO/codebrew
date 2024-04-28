@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class payment {
+public class Payment {
 	
 	private int paId;
 	private int acId;
 	private int pdId;
-	private int paPdcount;
+	private int paPdCount;
 	private String paName;
 	private String paTel;
 	private Date paDate;

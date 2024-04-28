@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class board {
+public class Board {
 	
 	private int boId;
 	private int acId;

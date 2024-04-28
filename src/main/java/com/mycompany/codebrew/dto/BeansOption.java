@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class sizeOption {
+public class BeansOption {
 	
-	private int sopId;
-	private String sopName;
-
+	private int bopId;
+	private String bopName;
 }

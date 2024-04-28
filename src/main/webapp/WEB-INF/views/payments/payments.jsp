@@ -30,7 +30,7 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	    <div class="flex-container1 d-flex">
 	
-	        <div class="flex-container2 border-end p-5" style="width: 50%; min-width: 450px;">
+	        <div class="flex-container2 border-end p-5" style="width: 50%; min-width: 600px;">
 	           
 	
 	            <!-- 지점 선택 폼 -->
@@ -57,7 +57,7 @@
 	         
 	        </div>
 	
-	        <div class="flex-container3 p-5" style="width: 50%; min-width: 450px;">
+	        <div class="flex-container3 p-5" style="width: 50%; min-width: 600px;">
 	
 	            <!-- 주문 내역 폼 -->
 	            <form class="border-secondary p-3" >

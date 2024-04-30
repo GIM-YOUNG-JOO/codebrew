@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+ <configuration>
+ 	<typeAliases>
+ 		<typeAlias type="com.mycompany.codebrew.dto.Account" alias="Account"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.BeansOption" alias="BeansOption"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.Board" alias="Board"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.BoardCategory" alias="BoardCategory"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.BoardComment" alias="BoardComment"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.Branch" alias="Branch"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.Cart" alias="Cart"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.Payment" alias="Payment"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.Product" alias="Product"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.ProductCategory" alias="ProductCategory"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.ProductDetail" alias="ProductDetail"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.SizeOption" alias="SizeOption"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.TempOption" alias="TempOption"/>
+ 	</typeAliases>
+ </configuration>

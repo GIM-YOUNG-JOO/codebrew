@@ -37,7 +37,7 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/common/adminHeader.jsp"%>
-	<form>
+	<form id="productRegistration" method="post" action="RegistComplete" enctype="multipart/form-data">
 		<div class="container-fluid d-flex justify-content-center mt-5">
 			<div class="overflow-hidden card table-nowrap shadow" style="width: 900px; min-width: 600px;">
 				<div class="card-header bg-black text-white">Product Registration</div>
@@ -51,15 +51,16 @@
 					</div>
 					<div class="d-flex flex-column flex-grow-1 h-100">
 						<div class="input-group flex-grow-1 p-2">
-							<span class="input-group-text" id="basic-addon1">상품 번호</span> <input type="text" class="form-control" placeholder="Product No"
-								aria-label="Username" aria-describedby="basic-addon1">
+							<span class="input-group-text" id="basic-addon1">상품 번호</span>
+							<input type="text" class="form-control" id="prid" name="prid" placeholder="Product No" aria-label="Username" aria-describedby="basic-addon1">
 						</div>
 						<div class="input-group flex-grow-1 p-2">
-							<span class="input-group-text text-center" id="basic-addon1">상품명</span> <input type="text" class="form-control" placeholder="Menu Name"
-								aria-label="Username" aria-describedby="basic-addon1">
+							<span class="input-group-text text-center" id="basic-addon1">상품명</span>
+							<input type="text" class="form-control" id="prname" name="prname" placeholder="Menu Name" aria-label="Username" aria-describedby="basic-addon1">
 						</div>
 						<div class="input-group flex-grow-1 p-2">
-							<label class="input-group-text" for="inputGroupSelect01">카테고리</label> <select class="form-select" id="inputGroupSelect01">
+							<label class="input-group-text" for="inputGroupSelect01">카테고리</label>
+							<select class="form-select" id="pcid" name="pcid">
 								<option selected value="1">커피</option>
 								<option value="2">음료</option>
 								<option value="3">원두</option>
@@ -67,19 +68,19 @@
 							</select>
 						</div>
 						<div class="input-group flex-grow-1 p-2">
-							<span class="input-group-text" id="basic-addon1">가격</span> <input type="text" class="form-control" placeholder="Price" aria-label="Username"
-								aria-describedby="basic-addon1">
+							<span class="input-group-text" id="basic-addon1">가격</span>
+							<input type="text" class="form-control" id="prprice" name="prprice" placeholder="Price">
 						</div>
 					</div>
 				</div>
 				<div class="d-flex flex-column">
 					<div class="input-group p-2" style="height: 150px">
 						<span class="input-group-text">상품 설명</span>
-						<textarea class="form-control" aria-label="With textarea"></textarea>
+						<textarea class="form-control" id="prInfo" name="prInfo" aria-label="With textarea"></textarea>
 					</div>
 					<div class="input-group p-2" style="height: 150px">
 						<span class="input-group-text">관리자 메모</span>
-						<textarea class="form-control" aria-label="With textarea"></textarea>
+						<textarea class="form-control" id="prMemo" name="prMemo" aria-label="With textarea"></textarea>
 					</div>
 					<div class="d-flex justify-content-around mb-2">
 						<button class="btn btn-light btn-md rounded-pill border">Save</button>

@@ -10,6 +10,7 @@
  		<typeAlias type="com.mycompany.codebrew.dto.Board" alias="Board"/>
  		<typeAlias type="com.mycompany.codebrew.dto.BoardCategory" alias="BoardCategory"/>
  		<typeAlias type="com.mycompany.codebrew.dto.BoardComment" alias="BoardComment"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.BoardImg" alias="BoardImg"/>
  		<typeAlias type="com.mycompany.codebrew.dto.Branch" alias="Branch"/>
  		<typeAlias type="com.mycompany.codebrew.dto.Cart" alias="Cart"/>
  		<typeAlias type="com.mycompany.codebrew.dto.Payment" alias="Payment"/>

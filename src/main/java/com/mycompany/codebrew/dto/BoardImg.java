@@ -13,6 +13,6 @@ public class BoardImg {
 
 	private int biId;
 	private int boId;
-	private Blob bifile;
+	private Blob biFile;
 	
 }

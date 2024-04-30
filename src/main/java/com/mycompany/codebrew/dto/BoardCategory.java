@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class BoardCategory {
 	
 	private int bcId;
-	private String bcname;
+	private String bcName;
 
 }

@@ -16,7 +16,7 @@ public class Board {
 	private int acId;
 	private String boTitle;
 	private Clob boContent;
-	private Date boDewdate;
+	private Date boNewdate;
 	private int boHitcount;
 	private int biCd;
 

@@ -18,50 +18,58 @@
 		
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
-
+			
 		</script>
       
         <style>
-
+			input, select {
+				height: 70px;
+				color: #888;
+				border: 1px solid #dddddd;
+			}
+			
+			input::placeholder, label {
+				color: #d9d9d9
+			}
         </style>
 	</head>
 	
 	<body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	    <div class="flex-container1 d-flex">
-	
+	    	
 	        <div class="flex-container2 border-end p-5" style="width: 50%; min-width: 600px;">
-	           
-	
 	            <!-- 지점 선택 폼 -->
 	            <form class="border-secondary p-3">
-	                <h6 id="SelectingBranch" class="rounded text-center p-2 bg-warning-subtle">지점선택</h6>
-	               
-	                <div class="d-flex align-items-center mx-3 my-4">이름  &#160; &#160; &#160;&#160; <input class="p-1 flex-grow-1 ms-2" placeholder="이름을 입력해 주세요."></input></div>
-	                <div class="d-flex align-items-center mx-3 my-4">연락처 &#160; &#160; <input class="p-1 flex-grow-1 ms-2" placeholder="000-1234-5678"></input></div>
-	                <div class="dropdown d-flex align-items-center mx-3 my-4">지점 선택 
-	                    <button class="btn btn-light dropdown-toggle flex-grow-1  ms-2" type="button" id="requestDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
-	                      	주문한 제품을 픽업할 지점을 선택해주세요
-	                    </button>
-	                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-	                      <li><a class="dropdown-item" href="#">경찰병원역 지점</a></li>
-	                      <li><a class="dropdown-item" href="#">가락시장역 지점</a></li>
-	                      <li><a class="dropdown-item" href="#">아이티타워 지점</a></li>
-	                    </ul>
+	                <h6 id="SelectingBranch" class="text-center p-4 mb-5 border-bottom border-success border-5">지점선택</h6>
+	                <div>
 	                </div>
-	       
-	                <div class="d-flex align-items-center mx-3 my-4">요청 사항 <input class="p-1 flex-grow-1 ms-2" placeholder="지점에 전달할 사항을 입력해주세요."></input></div>
+	                <div class="d-flex align-items-center mx-3 my-4">이름&#160; &#160; &#160; &#160; &#160;
+	                	<input class="p-2 flex-grow-1 ms-2 rounded" placeholder="ex) 김자바"></input>
+	                </div>
+	                <div class="d-flex align-items-center mx-3 my-4">연락처 &#160; &#160; &#160; 
+	               		<input class="p-2 flex-grow-1 ms-2 rounded" placeholder="ex) 000-1234-5678"></input>
+	                </div>
+					<div class="d-flex align-items-center mx-3 my-4">지점 선택 &#160;
+						<select class="flex-grow-1 p-2 ms-2 rounded">
+							<option selected>주문한 제품을 픽업할 지점을 선택해주세요</option>
+							<option value="1">경찰병원역 지점</option>
+							<option value="2">가락시장역 지점</option>
+							<option value="3">아이티타워 지점</option>
+						</select>
+					</div>	               
 	               
-	                
+	            	<div class="d-flex align-items-center mx-3 my-4">요청 사항 &#160;   
+	               		<input class="p-2 flex-grow-1 ms-2 rounded" placeholder="ex) 부재시 문앞에 놓아주세요"></input>
+	                </div>
 	            </form>
-	         
 	        </div>
 	
-	        <div class="flex-container3 p-5" style="width: 50%; min-width: 600px;">
 	
+	        <div class="flex-container3 p-5" style="width: 50%; min-width: 600px;">
 	            <!-- 주문 내역 폼 -->
 	            <form class="border-secondary p-3" >
-	                <h6 id="orderHistory" class="rounded text-center p-2 bg-warning-subtle">주문내역</h6>
+	                <h6 id="orderHistory" class="text-center p-4 mb-5 border-bottom border-success border-5">주문내역</h6>
 					<div class="d-flex m-3">
 						<img id="img1" class="rounded-circle" src="/codebrew/resources/image/cut/Americano.jpg" width="50" height="50"/>
 						<span class="flex-grow-1">x1</span>
@@ -84,7 +92,7 @@
 					</div>
 	           		
 	           		<!-- 결제 버튼 -->
-	                <div class="d-flex m-3" ><button type="button" class="btn btn-success btn-lg rounded-pill flex-grow-1 p-3 mx-3" data-bs-toggle="modal" data-bs-target="#myModal">$670 Pay Now </button></div>
+	                <div class="d-flex m-3" ><button type="button" class="btn btn-success btn-lg rounded-pill flex-grow-1 p-3 mx-3 my-5" data-bs-toggle="modal" data-bs-target="#myModal">$670 Pay Now </button></div>
 					<!-- The Modal -->
 					<div class="modal fade" id="myModal">
 					  <div class="modal-dialog modal-dialog-centered">

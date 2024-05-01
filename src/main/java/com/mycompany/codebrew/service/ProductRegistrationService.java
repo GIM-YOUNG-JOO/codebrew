@@ -14,7 +14,7 @@ public class ProductRegistrationService {
 	@Autowired
 	private ProductDao productDao;
 	
-	public void RegistComplete(Product product) {
+	public void registComplete(Product product) {
 		//Business Logic
 		int rowNum = productDao.insert(product);
 		log.info("rowNum: " + rowNum + ", prid: " + product.getPrid());

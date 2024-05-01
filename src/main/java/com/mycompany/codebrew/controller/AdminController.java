@@ -11,12 +11,12 @@ import com.mycompany.codebrew.service.ProductRegistrationService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
+@Slf4j
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
-	private ProductRegistrationService prService;
+	private ProductRegistrationService service;
 	
 	@RequestMapping("/productList")
 	public String productList() {
@@ -30,20 +30,20 @@ public class AdminController {
 		return "admin/productRegistration";
 	}
 	
+	@PostMapping("/registComplete")
+	public String registComplete(Product product) {
+
+		log.info("prid : " + product.getPrid());
+		log.info(product.getPrname());
+		log.info("pcid : " + product.getPcid());
+		log.info("price : " + product.getPrprice());
+		service.registComplete(product);
+		return "redirect:/";
+	}
+	
 	@RequestMapping("/productDelete")
 	public String productDelete() {
 		log.info("상품 삭제 실행");
 		return "admin/productDelete";
-	}
-	
-	@PostMapping("/RegistComplete")
-	public String RegistComplete(Product product) {
-		//요청 데이터의 유효성 검사
-		//로그인이 필요한지 조사
-		//product.setPcId(pcId);
-		//비즈니스 로직 처리를 서비스로 위임
-		log.info("" + product.getPrprice());
-		prService.RegistComplete(product);
-		return "redirect:/";
 	}
 }

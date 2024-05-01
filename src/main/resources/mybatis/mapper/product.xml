@@ -7,6 +7,6 @@
 			select prid_seq.nextval from dual
 		</selectKey>
 		insert into product(prid, prname, pcid, prprice)
-		values(${prid}, 'Test', 1, ${prprice})
+		values(#{prid}, #{prname}, #{pcid}, #{prprice})
 	</insert>
 </mapper>

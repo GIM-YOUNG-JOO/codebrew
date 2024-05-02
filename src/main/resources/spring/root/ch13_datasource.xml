@@ -16,6 +16,5 @@
 		<property name="initialSize" value="2"/>
 		<property name="maxTotal" value="8"/>
 		<property name="maxIdle" value="2"/>
-		
 	</bean>
 </beans>

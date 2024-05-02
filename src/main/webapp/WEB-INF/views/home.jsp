@@ -97,7 +97,7 @@
 		
 		            <div class="text_box_out">
 		                <div class="text_box ss mb-5"><span class="h1 first_title">Find your bliss</span><br/>
-		                    Enjoy a super-smooth Chocolate Cream Cold<br/>Brew or Cinnamon Caramel Cream Cold Brew.<br/></div>
+		                    Enjoy a super-smooth Chocolate Cream Cold<br/>Brew or Cinnamon Caramel Cream Cold Brew<br/></div>
 		                    
 		                <div class="button_div">
 		                    <button type="button" class="first_button btn btn-md">Order now</button>

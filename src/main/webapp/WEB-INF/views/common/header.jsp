@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!--nav바 위의 상단바 필요할 시 활용
         <div class="d-flex justify-content-end">
         <a href="#" class=""><i class="me-2 bi-person-circle"></i>
@@ -15,7 +17,8 @@
     </div> -->
 <nav class="navbar navbar-expand-lg shadow bg-body rounded" style="height: 100px">
 	<div class="container-fluid">
-		<a class="navbar-brand ms-5 ps-5 " href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/image/codebrew.png" style="width: 50px"></a>
+		<a class="navbar-brand ms-5 ps-5 " href="${pageContext.request.contextPath}"><img
+			src="${pageContext.request.contextPath}/resources/image/codebrew.png" style="width: 50px"></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -48,8 +51,18 @@
 				</ul>
 				<hr>
 				<div class="d-flex justify-content-around align-items-center">
-					<a href="${pageContext.request.contextPath}/signJoin/signIn"><button class="btn btn-light btn-md rounded-pill border ms-4 me-2" >Sign In</button></a>
-					<a href="${pageContext.request.contextPath}/signJoin/joinNow"><button class="btn btn-dark btn-md rounded-pill border ms-2 me-4">Join Now</button></a>
+					<sec:authorize access="isAnonymous()">
+						<a href="${pageContext.request.contextPath}/signJoin/signIn"><button class="btn btn-light btn-md rounded-pill border ms-4 me-2">Sign
+								In</button></a>
+						<a href="${pageContext.request.contextPath}/signJoin/joinNow"><button class="btn btn-dark btn-md rounded-pill border ms-2 me-4">Join
+								Now</button></a>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+						<%-- 사이트간 요청 위조 방지 설정이 비활성화되어 있을 경우: GET 방식으로도 요청 가능 --%>
+						<b class="text-white me-2"> <sec:authentication property="principal.username" />
+						</b>
+						<a href="${pageContext.request.contextPath}/logout" class="btn btn-danger rounded-pill border">Sign Out</a>
+					</sec:authorize>
 				</div>
 			</div>
 		</div>

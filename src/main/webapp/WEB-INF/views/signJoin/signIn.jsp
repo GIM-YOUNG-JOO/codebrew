@@ -71,12 +71,12 @@
         </div>
         <div class="border border-secondary bg-warning-subtle rounded m-5 p-3" >
             <!-- 로그인폼 -->
-            <form id="signInForm" action="/codebrew" onsubmit="handleCheckSigninData()" novalidate>
+            <form id="signInForm" method="post" action="${pageContext.request.contextPath}/login">
                 <div class="m-2 p-2 text-start"><span class="star">* </span> indicates required field</div>
                 <!-- 아이디바/패스워드바 -->
                 
-                    <div class="d-flex"><input id="mid" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2"  placeholder="*id"></div>
-                    <div class="d-flex"><input id="mpassword" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*password"></div>
+                    <div class="d-flex"><input id="acId" name="acId" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2"  placeholder="*id"></div>
+                    <div class="d-flex"><input id="acPassword" name="acPassword" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*password"></div>
                 
                 <!-- 로그인 정보 저장 -->
                 <div class="m-2 p-2 text-start">

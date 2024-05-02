@@ -47,14 +47,14 @@
         </div>
         <div class="border border-secondary bg-warning-subtle rounded m-5 p-3">
             <!-- 회원가입폼 -->
-            <form id="joinNowForm" action="/codebrew" onsubmit="handleCheckSigninData()" novalidate>
+            <form id="joinNowForm" method="post" action="signUp">
                 <div class="m-2 p-2 text-start"><span class="star">* </span> indicates required field</div>
                 <!-- 항목 -->
-                    <div class="d-flex"><input id="mname" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*name"></div>
-                    <div class="d-flex"><input id="mid" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2"  placeholder="*id"></div>
-                    <div class="d-flex"><input id="mpassword" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*password"></div>
-                    <div class="d-flex"><input id="mphone" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*phone"></div>
-                    <div class="d-flex"><input id="memail" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*email"></div>
+                    <div class="d-flex"><input id="acName" name="acName" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*name"></div>
+                    <div class="d-flex"><input id="acId" name="acId" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2"  placeholder="*id"></div>
+                    <div class="d-flex"><input id="acPassword" name="acPassword" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*password"></div>
+                    <div class="d-flex"><input id="acTel" name="acTel" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*phone"></div>
+                    <div class="d-flex"><input id="acEmail" name="acEmail" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*email"></div>
 
                 <!-- 제출 버튼 -->
                 <div>

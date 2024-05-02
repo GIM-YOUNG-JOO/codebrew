@@ -3,6 +3,13 @@
 
 <mapper namespace="com.mycompany.codebrew.dao.mybatis.AccountDao">
 	<insert id="insert" parameterType="Account">
-
+		insert into account(acName, acId, acPassword, acTel, acEmail, acRole)
+		values(#{acName}, #{acId}, #{acPassword}, #{acTel}, #{acEmail}, 'ROLE_USER')
 	</insert>
+	<select id="selectByAcId" parameterType="String" resultType="Account">
+		select acId, acName, acPassword, acRole
+		from account
+		where acId=#{acId}
+	</select>
+	
 </mapper>

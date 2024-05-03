@@ -1,6 +1,6 @@
 package com.mycompany.codebrew.dto;
 
-import java.sql.Clob;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -10,7 +10,10 @@ public class Product {
 	private String prName;
 	private int pcId;
 	private int prPrice;
-	private Clob prInfo;
-	private Clob prMemo;
-	private byte[] prImage;
+	private String prInfo;
+	private String prMemo;
+	private byte[] prImgData;
+	
+	private MultipartFile prImage;
+
 }

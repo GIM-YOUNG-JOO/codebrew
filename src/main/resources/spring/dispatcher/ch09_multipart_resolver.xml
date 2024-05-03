@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 서블릿 3.0 이상의 경우 <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" 
+		/> -->
+
+	<!-- 서블릿 버전과 상관없이 사용 가능 -->
+	<!-- 방법1: commons-fileupload 라이브러리를 이용 maxUploadSize: 전체 요청 바디의 사이즈 제한: 
+		100M(1024 * 1024 * 100) maxUploadSizePerFile: 요청 바디에 포함된 파일 하나당의 크기를 제한: 
+		20M(1024 * 1024 * 20) uploadTempDir: 임시 파일이 저장될 디렉토리 maxInMemorySize: 임시 
+		파일로 저장하는 크기의 기준: 1M(1024 * 1024) -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="uploadTempDir" value="file:/C:/Temp" />
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxUploadSizePerFile" value="20971520" />
+		<property name="maxInMemorySize" value="1024" />
+	</bean>
+</beans>

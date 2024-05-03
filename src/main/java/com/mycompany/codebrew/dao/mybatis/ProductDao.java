@@ -1,9 +1,12 @@
 package com.mycompany.codebrew.dao.mybatis;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+
 import com.mycompany.codebrew.dto.Pager;
 import com.mycompany.codebrew.dto.Product;
+
 
 @Mapper
 public interface ProductDao {

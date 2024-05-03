@@ -14,6 +14,11 @@
 		<!-- jQuery 외부 라이브러리 설정 -->
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
+		<!-- 폰트설정  -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+		
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
 		</script>
@@ -21,11 +26,18 @@
 
         </script>
         <style>
-        
-	        body{
-	        	border: 1px solid black;
-	        }
-           
+        	* {
+			  font-family: "Do Hyeon", sans-serif;
+			  font-weight: 400;
+			  font-style: normal;
+			}
+			
+			button {
+				font-family: "Do Hyeon", sans-serif;
+			    font-weight: 400;
+			    font-style: normal;
+			}
+
             #signInBtn {
                 float: right;
             }
@@ -69,14 +81,14 @@
         <div class="">
             <div id="signInMent" class="m-1 p-1 text-center" ><h2 class="mt-3">Sign in or create an account</h2></div>
         </div>
-        <div class="border border-secondary bg-warning-subtle rounded m-5 p-3" >
+        <div class="border border-secondar rounded m-5 p-3" style="background: #F0F0F0">
             <!-- 로그인폼 -->
             <form id="signInForm" method="post" action="${pageContext.request.contextPath}/login">
                 <div class="m-2 p-2 text-start"><span class="star">* </span> indicates required field</div>
                 <!-- 아이디바/패스워드바 -->
                 
-                    <div class="d-flex"><input id="acId" name="acId" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2"  placeholder="*id"></div>
-                    <div class="d-flex"><input id="acPassword" name="acPassword" type="text" class="flex-grow-1 border border-secondary rounded m-3 px-3 py-2" placeholder="*password"></div>
+                    <div class="d-flex"><input id="acId" name="acId" type="text" class="flex-grow-1 border rounded m-3 px-3 py-2"  placeholder="*id"></div>
+                    <div class="d-flex"><input id="acPassword" name="acPassword" type="text" class="flex-grow-1 border rounded m-3 px-3 py-2" placeholder="*password"></div>
                 
                 <!-- 로그인 정보 저장 -->
                 <div class="m-2 p-2 text-start">
@@ -89,7 +101,7 @@
                 </div>    -->
                 <!-- 로그인 제출 버튼 -->
                 <div>
-                    <button id="signInBtn" class="m-2 p-2 btn btn-lg btn-success rounded-pill border-secondary" type="submit">Sign in</button>
+                    <button id="signInBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" type="submit" style="background: #2C4E80; color: white;">Sign In</button>
                 </div>
             </form>
         </div>
@@ -103,7 +115,7 @@
             </div>
             <div>
             	<a href="${pageContext.request.contextPath}/signJoin/joinNow">
-            		<button name="joinNowBtn" class="m-2 p-2 rounded-pill" type="button" href="">Join now</button>
+            		<button name="joinNowBtn" class="m-2 p-2 rounded-pill border" type="button" href="">Join now</button>
             	</a>
             </div>
         </div>

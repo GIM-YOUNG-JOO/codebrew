@@ -15,6 +15,11 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/payments.css">
+		<!-- 폰트설정  -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+		
 		
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
@@ -22,15 +27,8 @@
 		</script>
       
         <style>
-			input, select {
-				height: 70px;
-				color: #888;
-				border: 1px solid #dddddd;
-			}
+		
 			
-			input::placeholder, label {
-				color: #d9d9d9
-			}
         </style>
 	</head>
 	
@@ -41,16 +39,19 @@
 	        <div class="flex-container2 border-end p-5" style="width: 50%; min-width: 600px;">
 	            <!-- 지점 선택 폼 -->
 	            <form class="border-secondary p-3">
-	                <h6 id="SelectingBranch" class="text-center p-4 mb-5 border-bottom border-success border-5">지점선택</h6>
+	                <h3 id="SelectingBranch" class="text-center p-4 mb-5 border-bottom border-primary border-5" style="--bs-border-opacity: .5;">지 점 선 택</h3>
 	                <div>
 	                </div>
-	                <div class="d-flex align-items-center mx-3 my-4">이름&#160; &#160; &#160; &#160; &#160;
+	                <div class="SelectingBranchForm d-flex align-items-center mx-3 my-4">
+	                	<h5>이름</h5>
 	                	<input class="p-2 flex-grow-1 ms-2 rounded" placeholder="ex) 김자바"></input>
 	                </div>
-	                <div class="d-flex align-items-center mx-3 my-4">연락처 &#160; &#160; &#160; 
+	                <div class="SelectingBranchForm d-flex align-items-center mx-3 my-4">
+	                	<h5 class="">연락처</h5>
 	               		<input class="p-2 flex-grow-1 ms-2 rounded" placeholder="ex) 000-1234-5678"></input>
 	                </div>
-					<div class="d-flex align-items-center mx-3 my-4">지점 선택 &#160;
+					<div class="SelectingBranchForm d-flex align-items-center mx-3 my-4">
+						<h5>지점 선택</h5>
 						<select class="flex-grow-1 p-2 ms-2 rounded">
 							<option selected>주문한 제품을 픽업할 지점을 선택해주세요</option>
 							<option value="1">경찰병원역 지점</option>
@@ -59,7 +60,8 @@
 						</select>
 					</div>	               
 	               
-	            	<div class="d-flex align-items-center mx-3 my-4">요청 사항 &#160;   
+	            	<div class="SelectingBranchForm d-flex align-items-center mx-3 my-4">
+	            		<h5>요청 사항</h5>   
 	               		<input class="p-2 flex-grow-1 ms-2 rounded" placeholder="ex) 부재시 문앞에 놓아주세요"></input>
 	                </div>
 	            </form>
@@ -69,7 +71,7 @@
 	        <div class="flex-container3 p-5" style="width: 50%; min-width: 600px;">
 	            <!-- 주문 내역 폼 -->
 	            <form class="border-secondary p-3" >
-	                <h6 id="orderHistory" class="text-center p-4 mb-5 border-bottom border-success border-5">주문내역</h6>
+	                <h3 id="orderHistory" class="text-center p-4 mb-5 border-bottom border-primary border-5" style="--bs-border-opacity: .5;">주 문 내 역</h3>
 					<div class="d-flex m-3">
 						<img id="img1" class="rounded-circle" src="/codebrew/resources/image/cut/Americano.jpg" width="50" height="50"/>
 						<span class="flex-grow-1">x1</span>
@@ -92,7 +94,7 @@
 					</div>
 	           		
 	           		<!-- 결제 버튼 -->
-	                <div class="d-flex m-3" ><button type="button" class="btn btn-success btn-lg rounded-pill flex-grow-1 p-3 mx-3 my-5" data-bs-toggle="modal" data-bs-target="#myModal">$670 Pay Now </button></div>
+	                <div class="d-flex m-3" ><button type="button" class="btn btn-lg rounded-pill flex-grow-1 p-3 mx-3 my-5" data-bs-toggle="modal" data-bs-target="#myModal" >${sum} sum &#8361; Pay Now </button></div>
 					<!-- The Modal -->
 					<div class="modal fade" id="myModal">
 					  <div class="modal-dialog modal-dialog-centered">
@@ -111,7 +113,7 @@
 					
 					      <!-- Modal footer -->
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-success rounded-pill" data-bs-dismiss="modal">Close</button>
+					        <button type="button" class="btn rounded-pill" data-bs-dismiss="modal">Close</button>
 					      </div>
 					
 					    </div>

@@ -44,3 +44,9 @@ a:hover {
 .nav-link:hover {
 	color: #00CCFF;
 }
+
+button {
+	font-family: "Do Hyeon", sans-serif;
+	font-weight: 400;
+	font-style: normal;	
+}

@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/signJoin")
-public class SignJoinController {
+public class AccountController {
 	@Autowired
 	private JoinNowService jnservice;
 	

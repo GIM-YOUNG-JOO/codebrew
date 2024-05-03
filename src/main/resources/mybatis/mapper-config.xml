@@ -19,5 +19,6 @@
  		<typeAlias type="com.mycompany.codebrew.dto.ProductDetail" alias="ProductDetail"/>
  		<typeAlias type="com.mycompany.codebrew.dto.SizeOption" alias="SizeOption"/>
  		<typeAlias type="com.mycompany.codebrew.dto.TempOption" alias="TempOption"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.Pager" alias="Pager"/>
  	</typeAliases>
  </configuration>

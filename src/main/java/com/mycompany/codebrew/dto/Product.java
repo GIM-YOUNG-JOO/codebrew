@@ -1,17 +1,14 @@
 package com.mycompany.codebrew.dto;
 
-import java.sql.Blob;
-import java.sql.Clob;
-
 import lombok.Data;
 
 @Data
 public class Product {
-	private int prid;
-	private String prname;
-	private int pcid;
-	private int prprice;
-	private Clob prinfo;
-	private Clob prmemo;
-	private Blob primage;
+	private int prId;
+	private String prName;
+	private int pcId;
+	private int prPrice;
+	//private Clob prinfo;
+	//private Clob prmemo;
+	private byte[] prImage;
 }

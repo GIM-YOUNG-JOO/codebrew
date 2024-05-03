@@ -35,10 +35,10 @@ public class AdminController {
 	@PostMapping("/registComplete")
 	public String registComplete(Product product) {
 
-		log.info("prid : " + product.getPrid());
-		log.info(product.getPrname());
-		log.info("pcid : " + product.getPcid());
-		log.info("price : " + product.getPrprice());
+		log.info("prid : " + product.getPrId());
+		log.info(product.getPrName());
+		log.info("pcid : " + product.getPcId());
+		log.info("price : " + product.getPrPrice());
 		service.registComplete(product);
 		return "redirect:/";
 	}

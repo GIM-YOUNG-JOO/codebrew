@@ -17,6 +17,6 @@ public class ProductRegistrationService {
 	public void registComplete(Product product) {
 		//Business Logic
 		int rowNum = productDao.insert(product);
-		log.info("rowNum: " + rowNum + ", prid: " + product.getPrid());
+		log.info("rowNum: " + rowNum + ", prid: " + product.getPrId());
 	}
 }

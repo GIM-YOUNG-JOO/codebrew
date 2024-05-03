@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/menu")
-public class OrderController {
+public class ProductController {
 	@RequestMapping("")
 	public String menuIndex() {
 		log.info("실행");

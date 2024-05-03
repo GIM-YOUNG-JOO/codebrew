@@ -2,11 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.mycompany.codebrew.dao.mybatis.ProductDao">
+
 	<insert id="insert" parameterType="Product">
-		<selectKey keyProperty="prid" order="BEFORE" resultType="int">
+		<selectKey keyProperty="prId" order="BEFORE" resultType="int">
 			select prid_seq.nextval from dual
 		</selectKey>
-		insert into product(prid, prname, pcid, prprice)
-		values(#{prid}, #{prname}, #{pcid}, #{prprice})
+		insert into product(prId, prName, pcId, prPrice, prInfo, prMemo, prImage)
+		values(#{prId}, #{prName}, #{pcId}, #{prPrice}, #{prInfo}, #{prMemo}, #{prImgData})
 	</insert>
+	
+	<select id="count" resultType="int">
+		select count(*) from product
+	</select>
+	
+	<select id="selectByPage" parameterType="Pager" resultType="Product">
+		<![CDATA[
+		select rnum, prId, prName, pcId, prPrice
+		from (
+		    select rownum as rnum, prId, prName, pcId, prPrice
+		    from (
+		        select prId, prName, pcId, prPrice
+		        from product
+		        order by prId desc
+		    )
+		    where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select>
 </mapper>

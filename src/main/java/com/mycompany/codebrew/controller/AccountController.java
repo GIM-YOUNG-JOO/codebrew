@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.service.JoinNowService;
-import com.mycompany.codebrew.service.ProductRegistrationService;
 
 import lombok.extern.slf4j.Slf4j;
 

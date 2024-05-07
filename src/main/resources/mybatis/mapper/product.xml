@@ -30,8 +30,6 @@
 		where rnum >= #{startRowNo}
 		]]>
 	</select>
-	
-<<<<<<< HEAD
 	<select id="selectByPrId" parameterType="int" resultType="Product">
 		select prId, prName, pcId, prPrice, prInfo, prMemo, prImage as prImgData
 		from product
@@ -56,7 +54,6 @@
 		from product
 		where prId=#{prId}
 	</delete>
-=======
 	<insert id="insertProductDetail" parameterType="ProductDetail">
 		<selectKey keyProperty="pdId" order="BEFORE" resultType="int">
 			select pdid_seq.nextval from dual
@@ -64,5 +61,4 @@
 		insert into productDetail(pdId, prId, bopId, sopId, topId, pdShotCount)
 		values(#{pdId}, #{prId}, #{bopId}, #{sopId}, #{topId}, #{pdShotCount})
 	</insert>
->>>>>>> refs/remotes/origin/master
 </mapper>

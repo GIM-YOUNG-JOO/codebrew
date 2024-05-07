@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.mycompany.codebrew.dto.Pager;
 import com.mycompany.codebrew.dto.Product;
+import com.mycompany.codebrew.dto.ProductDetail;
 
 
 @Mapper
@@ -16,4 +17,5 @@ public interface ProductDao {
 	public List<Product> selectByPage(Pager pager);
 	public int update(Product product);
 	public int deleteByprId(int prId);
+	public int insertProductDetail(ProductDetail productDetail);
 }

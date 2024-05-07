@@ -14,7 +14,5 @@ public class Product {
 	private String prMemo;
 	private byte[] prImgData;
 	private String prImageOut;
-	
 	private MultipartFile prImage;
-
 }

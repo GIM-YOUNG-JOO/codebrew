@@ -30,13 +30,11 @@
 		where rnum >= #{startRowNo}
 		]]>
 	</select>
-	
 	<select id="selectByPrId" parameterType="int" resultType="Product">
 		select prId, prName, pcId, prPrice, prInfo, prMemo, prImage as prImgData
 		from product
 		where prId=#{prId}
 	</select>
-	
 	<update id="update" parameterType="Product">
 		update product set
 			prName=#{prName},
@@ -55,7 +53,7 @@
 		from product
 		where prId=#{prId}
 	</delete>
-	
+
 	<insert id="insertProductDetail" parameterType="ProductDetail">
 		<selectKey keyProperty="pdId" order="BEFORE" resultType="int">
 			select pdid_seq.nextval from dual

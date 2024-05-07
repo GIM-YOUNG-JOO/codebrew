@@ -13,7 +13,6 @@ public class Product {
 	private String prInfo;
 	private String prMemo;
 	private byte[] prImgData;
-	
 	private MultipartFile prImage;
 
 }

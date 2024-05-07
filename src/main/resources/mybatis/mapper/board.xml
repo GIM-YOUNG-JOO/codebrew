@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mycompany.springframework.dao.mybatis.BoardDao">
+<mapper namespace="com.mycompany.codebrew.dao.mybatis.BoardDao">
 
 	<!-- <insert id="insert" parameterType="Board">
-			<selectKey keyProperty="boid" order="BEFORE" resultType="int">
+			<selectKey keyProperty="boId" order="BEFORE" resultType="int">
 			
 			select seq_boid.nextval from dual
 			</selectKey>
 		
-		insert into board(boid, acid, botitle, bocontent, bonewdate, bohitcount, bicd)
-		values(#{boId}, #{acId}, #{boTitle}, #{boContent}, sysdate, #{boHitcount}, #{biCd} )
+		insert into board(boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata)
+		values(#{boId}, #{acId}, #{boTitle}, #{boContent}, sysdate, sysdate, #{boHitcount}, #{bcId} ,#{boAttachdata})
 		
 	</insert> -->
+	<insert id="insert" parameterType="Board">
+		<selectKey keyProperty="boId" order="BEFORE" resultType="int">
+			select seq_boid.nextval from dual
+		</selectKey>
+		insert into board(boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata)
+		values(#{boId}, #{acId}, #{boTitle}, #{boContent}, sysdate, sysdate, #{boHitcount}, #{bcId} ,#{boAttachdata})
+	</insert>
 	
+	<select id="count" resultType="int">
+		select count(*) from board
+	</select>
+	
+	<select id="selectByPage" parameterType="Pager" resultType="Board">
+	<!-- parameterType은 전달되는 매개변수를 말함, 한 행에 대한 resultType을 적어야함 -->
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata
+				from board
+				order by boid desc
+			)
+			where rownum <= #{endRowNo}
+		)
+	where rnum >= #{startRowNo}
+	]]>
+	</select>
+	
+	<select id="selectByDate" resultType="Board">
+		select * from board
+		order by bonewdate desc
+	</select>
+	 
 </mapper>

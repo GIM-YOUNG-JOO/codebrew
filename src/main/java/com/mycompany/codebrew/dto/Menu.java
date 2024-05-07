@@ -1,20 +1,12 @@
 package com.mycompany.codebrew.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Data;
 
 @Data
-public class Product {
+public class Menu {
 	private int prId;
 	private String prName;
-	private int pcId;
 	private int prPrice;
-	private String prInfo;
-	private String prMemo;
 	private byte[] prImgData;
 	private String prImageOut;
-	
-	private MultipartFile prImage;
-
 }

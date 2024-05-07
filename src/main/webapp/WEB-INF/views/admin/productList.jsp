@@ -50,40 +50,14 @@
 						<c:forEach var="product" items="${productList}">
 							<tr class="align-middle">
 								<td>${product.prId}</td>
-								<td>이미지</td>
+								<td><img src="data:image/jpeg;base64,${product.prImageOut}" width="50px" alt="Product Image"></td>
 								<td>${product.prName}</td>
 								<td>${product.pcId}</td>
 								<td>${product.prPrice}</td>
-								<td>버튼</td>
+								<td><button class="btn btn-success btn-md rounded-pill border"
+								onclick="location.href = 'productEdit?prId=${product.prId}'">Edit</button></td>
 							</tr>
 						</c:forEach>
-
-						<tr class="align-middle">
-							<td>1</td>
-							<td><img src="${pageContext.request.contextPath}/resources/image/Americano_cut.jpg" alt="Coffee" width="50px"></td>
-							<td>Americano</td>
-							<td>커피</td>
-							<td>3000</td>
-							<td>
-								<button class="btn btn-success btn-md rounded-pill border">Edit</button>
-							</td>
-						</tr>
-						<tr class="align-middle">
-							<!-- 상품 코드 -->
-							<td>2</td>
-							<!-- 상품명 -->
-							<td><img src="${pageContext.request.contextPath}/resources/image/cut/PineapplePassionfruitRefreshersLemonade.png" alt="Coffee"
-								width="50px"></td>
-							<td>Pineapple Passionfruit Refreshers Lemonade</td>
-							<!-- 카테고리 -->
-							<td>음료</td>
-							<!-- 가격 -->
-							<td>7000</td>
-							<!-- 관리 -->
-							<td>
-								<button class="btn btn-success btn-md rounded-pill border">Edit</button>
-							</td>
-						</tr>
 						<tr class="align-middle">
 							<td colspan="6" class="text-center">
 								<div>

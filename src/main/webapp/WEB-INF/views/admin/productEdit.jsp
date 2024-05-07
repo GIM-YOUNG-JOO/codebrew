@@ -39,53 +39,54 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/common/adminHeader.jsp"%>
-	<form id="productRegistration" method="post" action="registComplete" enctype="multipart/form-data">
+	<form id="productEdit" method="post" action="productUpdate" enctype="multipart/form-data">
 		<div class="container-fluid d-flex justify-content-center mt-5">
 			<div class="overflow-hidden card table-nowrap shadow" style="width: 900px; min-width: 600px;">
-				<div class="card-header bg-black text-white">Product Registration</div>
+				<div class="card-header bg-black text-white">Product Edit</div>
 				<div class="d-flex">
-					<div class="p-2">
+					<div>
 						<div class="border border-5" id="imageContainer" style="width: 200px; height: 200px;"></div>
 						<div class="input-group mt-3" style="width: 200px">
 							<input type="file" class="form-control" id="prImage" name="prImage" aria-describedby="inputGroupFileAddon" aria-label="Upload" accept="image/*"
 								onchange="displayImage(this)">
 						</div>
 					</div>
-					<div class="d-flex flex-column flex-grow-1 h-100">
-<!-- 						<div class="input-group flex-grow-1 p-2">
+					<div class="d-flex flex-column flex-grow-1">
+						<div class="input-group flex-grow-1 p-2">
 							<span class="input-group-text">상품 번호</span> <input type="text" class="form-control" id="prId" name="prId" placeholder="Product No"
-								aria-label="Username" aria-describedby="basic-addon1">
-						</div> -->
+								aria-label="Username" aria-describedby="basic-addon1" value="${product.prId}" readonly>
+						</div>
 						<div class="input-group flex-grow-1 p-2">
 							<span class="input-group-text text-center">상품명</span> <input type="text" class="form-control" id="prName" name="prName" placeholder="Menu Name"
-								aria-label="Username" aria-describedby="basic-addon1">
+								aria-label="Username" aria-describedby="basic-addon1" value="${product.prName}">
 						</div>
 						<div class="input-group flex-grow-1 p-2">
 							<label class="input-group-text" for="pcid">카테고리</label> <select class="form-select" id="pcId" name="pcId">
-								<option selected value="1">커피</option>
-								<option value="2">음료</option>
-								<option value="3">원두</option>
-								<option value="4">물품</option>
+								<option value="1" ${product.pcId == 1 ? 'selected' : ''}>커피</option>
+								<option value="2" ${product.pcId == 2 ? 'selected' : ''}>음료</option>
+								<option value="3" ${product.pcId == 3 ? 'selected' : ''}>원두</option>
+								<option value="4" ${product.pcId == 4 ? 'selected' : ''}>물품</option>
 							</select>
 						</div>
 						<div class="input-group flex-grow-1 p-2">
 							<span class="input-group-text" id="basic-addon1">가격</span> <input type="text" class="form-control" id="prPrice" name="prPrice"
-								placeholder="Price">
+								placeholder="Price" value="${product.prPrice}">
 						</div>
 					</div>
 				</div>
 				<div class="d-flex flex-column">
-					<div class="input-group p-2" style="height: 150px">
+					<div class="input-group" style="height: 150px">
 						<span class="input-group-text">상품 설명</span>
-						<textarea class="form-control" id="prInfo" name="prInfo" aria-label="With textarea"></textarea>
+						<textarea class="form-control" id="prInfo" name="prInfo" aria-label="With textarea">${product.prInfo}</textarea>
 					</div>
-					<div class="input-group p-2" style="height: 150px">
+					<div class="input-group" style="height: 150px">
 						<span class="input-group-text">관리자 메모</span>
-						<textarea class="form-control" id="prMemo" name="prMemo" aria-label="With textarea"></textarea>
+						<textarea class="form-control" id="prMemo" name="prMemo" aria-label="With textarea">${product.prMemo}</textarea>
 					</div>
 					<div class="d-flex justify-content-around mb-2">
-						<button class="btn btn-light btn-md rounded-pill border" type="submit" form="productRegistration">Save</button>
+						<button class="btn btn-light btn-md rounded-pill border" type="submit" form="productEdit">Save</button>
 						<button class="btn btn-dark btn-md rounded-pill border">Cancel</button>
+						<a href="productDelete?prId=${product.prId}" class="btn btn-danger btn-md rounded-pill border">Delete</a>
 					</div>
 				</div>
 			</div>

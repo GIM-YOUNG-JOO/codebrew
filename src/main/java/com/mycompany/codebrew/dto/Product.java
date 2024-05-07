@@ -13,11 +13,8 @@ public class Product {
 	private String prInfo;
 	private String prMemo;
 	private byte[] prImgData;
-<<<<<<< HEAD
 	private String prImageOut;
 	
-=======
->>>>>>> refs/remotes/origin/master
 	private MultipartFile prImage;
 
 }

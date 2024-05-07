@@ -17,5 +17,5 @@ public class BoardComment {
 	private Clob bocContents;
 	private Date bocDate;
 	private Date bocNewdate;
-	
+	private int bocLike;
 }

@@ -30,8 +30,8 @@
 			</div>
 			<div class="offcanvas-body">
 				<ul class="navbar-nav justify-content-start flex-grow-1 ms-3 mt-2 mb-2">
-					<li class="nav-item ms-2"><a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/menu">Menu</a></li>
-					<li class="nav-item ms-2"><a class="nav-link" href="${pageContext.request.contextPath}/menu/cart">Cart</a></li>
+					<li class="nav-item ms-2"><a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/order/menu">Menu</a></li>
+					<li class="nav-item ms-2"><a class="nav-link" href="${pageContext.request.contextPath}/order/cart">Cart</a></li>
 					<li class="nav-item ms-2"><a class="nav-link" href="${pageContext.request.contextPath}/board/boardList">Board</a></li>
 					<!-- 드롭다운 메뉴 쓸 경우를 대비해 유지
                              <li class="nav-item dropdown">

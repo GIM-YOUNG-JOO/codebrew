@@ -24,12 +24,12 @@
                             <ul class="dropdown-menu">
 
                                 <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/productList">상품 목록</a></li>
-                                <li><a class="dropdown-item" href="#">재고 관리</a></li>
+                                <li><a class="dropdown-item" href="#">재고 관리(미구현)</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/productRegistration">상품 등록</a></li>
-                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/productDelete">상품 삭제</a></li>
+                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/productDelete">상품 삭제(edit에 구현)</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -42,7 +42,7 @@
                                 Account
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">고객 관리</a></li>
+                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/accountList">고객 관리</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

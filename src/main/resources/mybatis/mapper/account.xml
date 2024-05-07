@@ -6,10 +6,36 @@
 		insert into account(acName, acId, acPassword, acTel, acEmail, acRole)
 		values(#{acName}, #{acId}, #{acPassword}, #{acTel}, #{acEmail}, 'ROLE_USER')
 	</insert>
+	
 	<select id="selectByAcId" parameterType="String" resultType="Account">
-		select acId, acName, acPassword, acRole
+		select acId, acName, acPassword, acTel, acEmail, acRole
 		from account
 		where acId=#{acId}
 	</select>
 	
+	<select id="selectByPage" parameterType="Pager" resultType="Account">
+		<![CDATA[
+		select rnum, acId, acName, acPassword, acTel, acEmail, acRole
+		from (
+		    select rownum as rnum, acId, acName, acPassword, acTel, acEmail, acRole
+		    from (
+		        select acId, acName, acPassword, acTel, acEmail, acRole
+		        from account
+		        order by acId asc
+		    )
+		    where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select>
+	
+	<update id="update" parameterType="Account">
+		update account set
+			acName=#{acName},
+			acPassword=#{acPassword},
+			acTel=#{acTel},
+			acEmail=#{acEmail},
+			acRole=#{acRole}
+		where acId=#{acId}
+	</update>
 </mapper>

@@ -164,3 +164,11 @@
 .dd{
   border: 1px solid black;
 }
+.cart_add{
+	float: right;
+}
+.under_space{
+	clear:both;
+	width:100%;
+	height:25px;
+}

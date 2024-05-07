@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Pager;
 import com.mycompany.codebrew.dto.Product;
-import com.mycompany.codebrew.service.AccountService;
 import com.mycompany.codebrew.service.AdminService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,19 +34,19 @@ public class AdminController {
 		//pageNo를 받지 못했을 경우, 세션에 저장되어있는지 확인
 		log.info("상품 목록 실행");
 		if(pageNo == null) {
-			pageNo = (String) session.getAttribute("pageNo");
+			pageNo = (String) session.getAttribute("productPageNo");
 			//세션에 저장되어있지 않다면 1로 세팅
 			if(pageNo == null) {
 				pageNo = "1";
 			}
 		}
 		//세션에 pageNo 저장
-		session.setAttribute("pageNo", pageNo);
+		session.setAttribute("productPageNo", pageNo);
 		//문자열을 정수로 변환
 		int intPageNo = Integer.parseInt(pageNo);
 		
 		
-		int rowsPagingTarget = service.getTotalRows();
+		int rowsPagingTarget = service.getTotalRows("product");
 		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 		
 		List<Product> productList = service.getProductList(pager);
@@ -129,19 +128,18 @@ public class AdminController {
 		//pageNo를 받지 못했을 경우, 세션에 저장되어있는지 확인
 		log.info("계정 목록 실행");
 		if(pageNo == null) {
-			pageNo = (String) session.getAttribute("pageNo");
+			pageNo = (String) session.getAttribute("accountPageNo");
 			//세션에 저장되어있지 않다면 1로 세팅
 			if(pageNo == null) {
 				pageNo = "1";
 			}
 		}
 		//세션에 pageNo 저장
-		session.setAttribute("pageNo", pageNo);
+		session.setAttribute("accountPageNo", pageNo);
 		//문자열을 정수로 변환
 		int intPageNo = Integer.parseInt(pageNo);
 		
-		
-		int rowsPagingTarget = service.getTotalRows();
+		int rowsPagingTarget = service.getTotalRows("account");
 		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 		
 		List<Account> accountList = service.getAccountList(pager);
@@ -154,14 +152,15 @@ public class AdminController {
 	
 	@PostMapping("/accountUpdate")
 	public String accountUpdate(Account account) {
-		log.info("계정 이름 수정 : " + account.getAcId());
-		log.info("계정 이름 수정 : " + account.getAcName());
-		log.info("계정 비번 수정 : " + account.getAcPassword());
-		log.info("계정 메일 수정 : " + account.getAcEmail());
-		log.info("계정 권한 수정 : " + account.getAcRole());
-		//비즈니스 로직 처리를 서비스로 위임
 		service.updateAccount(account);
 		
+		return "redirect:/admin/accountList";
+	}
+	
+	@GetMapping("/accountDelete")
+	public String accountDelete(String acId) {
+		log.info("계정 삭제 실행");
+		service.removeAccount(acId);
 		return "redirect:/admin/accountList";
 	}
 	

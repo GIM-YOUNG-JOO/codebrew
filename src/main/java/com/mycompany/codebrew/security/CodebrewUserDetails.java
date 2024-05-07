@@ -7,10 +7,10 @@ import org.springframework.security.core.userdetails.User;
 
 import com.mycompany.codebrew.dto.Account;
 
-public class Ch17UserDetails extends User {
+public class CodebrewUserDetails extends User {
 	private Account member;
 	
-	public Ch17UserDetails(Account member, List<GrantedAuthority> authorities) {
+	public CodebrewUserDetails(Account member, List<GrantedAuthority> authorities) {
 		super(member.getAcId(), member.getAcPassword(), true, true, true, true, authorities);
 		this.member = member;
 	}

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Ch17AuthenticationSuccessHandler
+public class AuthenticationSuccessHandler
 	//로그인 성공 후에 사용자가 접근하고자 했던 페이지로 이동
 	//extends SavedRequestAwareAuthenticationSuccessHandler{
 	//로그인 성공 후에 무조건 defaultTargetUrl로 이동

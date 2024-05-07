@@ -11,14 +11,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.mycompany.codebrew.dao.mybatis.AccountDao;
+import com.mycompany.codebrew.dao.AccountDao;
 import com.mycompany.codebrew.dto.Account;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class Ch17UserDetailsService implements UserDetailsService {
+public class CodebrewUserDetailsService implements UserDetailsService {
 	@Autowired
 	private AccountDao memberDao;
 
@@ -33,7 +33,7 @@ public class Ch17UserDetailsService implements UserDetailsService {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority(member.getAcRole()));
 		
-		UserDetails userDetails = new Ch17UserDetails(member, authorities);
+		UserDetails userDetails = new CodebrewUserDetails(member, authorities);
 		
 		return userDetails;
 	}

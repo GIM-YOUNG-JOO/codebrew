@@ -1,4 +1,4 @@
-package com.mycompany.codebrew.dao.mybatis;
+package com.mycompany.codebrew.dao;
 
 import java.util.Date;
 import java.util.List;

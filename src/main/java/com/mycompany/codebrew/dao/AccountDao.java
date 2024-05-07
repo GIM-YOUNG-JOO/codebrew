@@ -1,4 +1,4 @@
-package com.mycompany.codebrew.dao.mybatis;
+package com.mycompany.codebrew.dao;
 
 import java.util.List;
 
@@ -12,4 +12,6 @@ public interface AccountDao {
 	public Account selectByAcId(String acId);
 	public int update(Account account);
 	public List<Account> selectByPage(Pager pager);
+	public int deleteByAcId(String acId);
+	public int count();
 }

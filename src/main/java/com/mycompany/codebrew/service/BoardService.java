@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.mycompany.codebrew.dao.mybatis.BoardDao;
+import com.mycompany.codebrew.dao.BoardDao;
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.Pager;
 

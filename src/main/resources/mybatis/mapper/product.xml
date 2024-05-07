@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.mycompany.codebrew.dao.mybatis.ProductDao">
+<mapper namespace="com.mycompany.codebrew.dao.ProductDao">
 
 	<insert id="insert" parameterType="Product">
 		<selectKey keyProperty="prId" order="BEFORE" resultType="int">
@@ -50,7 +50,7 @@
 		where prId=#{prId}
 	</update>
 	
-	<delete id="deleteByprId" parameterType="int">
+	<delete id="deleteByPrId" parameterType="int">
 		delete
 		from product
 		where prId=#{prId}

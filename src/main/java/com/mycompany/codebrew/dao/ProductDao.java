@@ -1,4 +1,4 @@
-package com.mycompany.codebrew.dao.mybatis;
+package com.mycompany.codebrew.dao;
 
 import java.util.List;
 
@@ -16,6 +16,6 @@ public interface ProductDao {
 	public Product selectByPrId(int prId);
 	public List<Product> selectByPage(Pager pager);
 	public int update(Product product);
-	public int deleteByprId(int prId);
+	public int deleteByPrId(int prId);
 	public int insertProductDetail(ProductDetail productDetail);
 }

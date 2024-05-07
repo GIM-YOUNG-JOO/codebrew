@@ -1,4 +1,4 @@
-package com.mycompany.codebrew.dao.mybatis;
+package com.mycompany.codebrew.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 

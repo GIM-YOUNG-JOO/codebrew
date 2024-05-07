@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.9.11.201912160804-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+		<config>src/main/resources/spring/root/security.xml</config>
+		<config>src/main/resources/spring/root/mybatis.xml</config>
+		<config>src/main/resources/spring/root/datasource.xml</config>
+		<config>src/main/resources/spring/root/component_scan.xml</config>
+		<config>src/main/resources/spring/dispatcher/multipart_resolver.xml</config>
+		<config>src/main/resources/spring/dispatcher/view_resolver.xml</config>
+		<config>src/main/resources/spring/dispatcher/static_resource.xml</config>
+		<config>src/main/resources/spring/dispatcher/component_scan.xml</config>
+	</configs>
+	<autoconfigs>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

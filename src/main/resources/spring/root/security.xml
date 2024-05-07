@@ -15,11 +15,11 @@
 			username-parameter="acId"
 			password-parameter="acPassword"
 			login-processing-url="/login"
-			authentication-success-handler-ref="ch17AuthenticationSuccessHandler"
-			authentication-failure-handler-ref="ch17AuthenticationFailureHandler" />
+			authentication-success-handler-ref="AuthenticationSuccessHandler"
+			authentication-failure-handler-ref="AuthenticationFailureHandler" />
 
 		<!-- POST 방식으로 요청하는 로그아웃 -->
-		<security:logout logout-url="/logout" success-handler-ref="ch17LogoutSuccessHandler" />
+		<security:logout logout-url="/logout" success-handler-ref="LogoutSuccessHandler" />
 
 		<!-- 사이트간 요청 위조 방지 비활성화 -->
 		<!-- logout도 post 방식으로 요청(_csrf의 토큰을 전달해야함) -->
@@ -27,7 +27,7 @@
 
 		<!-- 요청 URL 권한 설정 방법1 -->
 		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> 
-		<security:intercept-url pattern="/user/**" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/order/cart" access="isAuthenticated()"/>
 		
 		<security:intercept-url pattern="/**" access="permitAll" />
 
@@ -36,15 +36,15 @@
 	</security:http>
 
 	<!-- 로그인 성공했을 때 실행하는 핸들러 -->
-	<bean id="ch17AuthenticationSuccessHandler" class="com.mycompany.codebrew.security.Ch17AuthenticationSuccessHandler">
+	<bean id="AuthenticationSuccessHandler" class="com.mycompany.codebrew.security.AuthenticationSuccessHandler">
 	</bean>
 	
 	<!-- 로그인 실패했을 때 실행하는 핸들러 -->
-	<bean id="ch17AuthenticationFailureHandler" class="com.mycompany.codebrew.security.Ch17AuthenticationFailureHandler">
+	<bean id="AuthenticationFailureHandler" class="com.mycompany.codebrew.security.AuthenticationFailureHandler">
 	</bean>
 	
 	<!-- 로그아웃 했을 때 실행하는 핸들러 -->
-	<bean id="ch17LogoutSuccessHandler" class="com.mycompany.codebrew.security.Ch17LogoutSuccessHandler">
+	<bean id="LogoutSuccessHandler" class="com.mycompany.codebrew.security.LogoutSuccessHandler">
 	</bean>
 	
 
@@ -84,7 +84,7 @@
 	<!-- 인증 제공자 설정 -->
 	<bean id="daoAuthenticationProvider"
 		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-		<property name="userDetailsService" ref="ch17UserDetailsService" />
+		<property name="userDetailsService" ref="codebrewUserDetailsService" />
 		<property name="authoritiesMapper" ref="roleHierarchyAuthoritiesMapper" />
 	</bean>
 

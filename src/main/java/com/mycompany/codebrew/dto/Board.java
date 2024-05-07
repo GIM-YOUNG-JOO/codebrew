@@ -16,14 +16,10 @@ public class Board {
 	private Date boDate;
 	private Date boNewdate;
 	private int boHitcount;
-<<<<<<< HEAD
 	private int bcId;
 	private int boLike;
 	private byte[] boAttachdata;
 	private MultipartFile boAttach;
-=======
-	private int biCd;
-	private int boLike;
->>>>>>> branch 'master' of https://github.com/GIM-YOUNG-JOO/codebrew.git
+
 
 }

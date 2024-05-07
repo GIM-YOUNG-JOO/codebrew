@@ -37,11 +37,22 @@ public class BoardService {
 	}
 	
 	public List<Board> getDate() {
-		List<Board> dateList = boardDao.selectByDate();
+		List<Board> sortedDateList = boardDao.selectByDate();
 		
-		return dateList;
+		return sortedDateList;
+	}
+	
+	public List<Board> getHitcount() {
+		List<Board> sortedHitcountList = boardDao.selectByHitcount();
+		
+		return sortedHitcountList;
 	}
 
+	public List<Board> getLike() {
+		List<Board> sortedLikeList = boardDao.selectByLike();
+		
+		return sortedLikeList;
+	}
 	
 	
 }

@@ -1,6 +1,9 @@
 package com.mycompany.codebrew.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.Pager;
@@ -106,12 +110,14 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}
 	
-	// Ajax를 위한 컨트롤러
-	@GetMapping(value ="/sortByDate", produces = "application/json; charset=UTF-8")
-	public String sortByDate(Model model) {
-		log.info("sortByDate 실행1");
+	// AJAX - 최신순으로 게시판 Body 수정하는 컨트롤
+	@PostMapping(value ="/sortByDate", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String sortByDate() {
+		
 		JSONArray jsonArray = new JSONArray();
 		List<Board> dateList = boardService.getDate();
+		
 		for(Board board : dateList) {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("boId", board.getBoId());
@@ -122,15 +128,60 @@ public class BoardController {
 			jsonObject.put("boNewdate", board.getBoNewdate());
 			jsonObject.put("boHitcount", board.getBoHitcount());
 			jsonObject.put("bcId", board.getBcId());
-			jsonObject.put("boAttachdata", board.getBoAttachdata());
 			jsonObject.put("boLike", board.getBoLike());
 			
 			jsonArray.put(jsonObject);
 		}
-		log.info("sortByDate 실행2");
 		return jsonArray.toString();
 	}
 	
+	@GetMapping(value ="/sortByHitcount", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String sortByHitcount() {
+		
+		JSONArray jsonArray = new JSONArray();
+		List<Board> sortedDateList = boardService.getHitcount();
+		
+		for(Board board : sortedDateList) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("boId", board.getBoId());
+			jsonObject.put("acId", board.getAcId());
+			jsonObject.put("boTitle", board.getBoTitle());
+			jsonObject.put("boContent", board.getBoContent());
+			jsonObject.put("boDate", board.getBoDate());
+			jsonObject.put("boNewdate", board.getBoNewdate());
+			jsonObject.put("boHitcount", board.getBoHitcount());
+			jsonObject.put("bcId", board.getBcId());
+			jsonObject.put("boLike", board.getBoLike());
+			
+			jsonArray.put(jsonObject);
+		}
+		return jsonArray.toString();
+	}
+	
+	@GetMapping(value ="/sortByLike", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String sortByLike() {
+		
+		JSONArray jsonArray = new JSONArray();
+		List<Board> sortedDateList = boardService.getLike();
+		
+		for(Board board : sortedDateList) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("boId", board.getBoId());
+			jsonObject.put("acId", board.getAcId());
+			jsonObject.put("boTitle", board.getBoTitle());
+			jsonObject.put("boContent", board.getBoContent());
+			jsonObject.put("boDate", board.getBoDate());
+			jsonObject.put("boNewdate", board.getBoNewdate());
+			jsonObject.put("boHitcount", board.getBoHitcount());
+			jsonObject.put("bcId", board.getBcId());
+			jsonObject.put("boLike", board.getBoLike());
+			
+			jsonArray.put(jsonObject);
+		}
+		return jsonArray.toString();
+	}
 	
 
 	

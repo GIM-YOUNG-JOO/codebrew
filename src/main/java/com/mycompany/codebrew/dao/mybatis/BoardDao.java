@@ -18,4 +18,8 @@ public interface BoardDao {
 	public List<Board> selectByPage(Pager pager);
 
 	public List<Board> selectByDate();
+
+	public List<Board> selectByHitcount();
+
+	public List<Board> selectByLike();
 }

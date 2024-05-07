@@ -42,8 +42,21 @@
 	</select>
 	
 	<select id="selectByDate" resultType="Board">
-		select * from board
+		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike 
+		from board
 		order by bonewdate desc
+	</select>
+	
+	<select id="selectByHitcount" resultType="Board">
+		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike 
+		from board
+		order by bohitcount desc
+	</select>
+	
+	<select id="selectByLike" resultType="Board">
+		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike 
+		from board
+		order by boLike desc
 	</select>
 	 
 </mapper>

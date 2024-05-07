@@ -7,16 +7,16 @@
 .nav_bar{
     height: 46px;
     padding: 2px;
-    min-width: 800px;
+    min-width: 750px;
     border-bottom: 2px solid #dee2e6;
     margin-bottom: 20px;
 }
 
 .button_tags{
+	
     height: 100%;
     border:none;
     text-align: center;
-    line-height: 46px;
     background-color: #fff;
     padding: 0 20px 0 20px;
     
@@ -35,10 +35,10 @@
     display: flex;
     width: 100%;
     height: 40px;
-    background-color: rgb(229, 249, 241);
+    background-color: #2C4E80;
     border-radius: 10px;
     margin-bottom: 1.25rem;
-    color: rgb(55, 136, 102);
+    color: #fff;
 }
 
 .info_left_box{
@@ -138,6 +138,8 @@
 .bottom_button{
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+   
 }
 
 .cancel_button{
@@ -145,14 +147,24 @@
     height: 50px;
     background-color: #fff;
     border: 1px solid #ced4da;
+    
+    display: flex;
+  	justify-content: center; /* 수평 가운데 정렬 */
+  	align-items: center; /* 수직 가운데 정렬 */
 }
 
 .register_button{
     width: 100px;
     height: 50px;
-    background-color: #00c471;
+    background-color: #2C4E80;
     color: #fff;
     
+}
+
+.insert_button{
+    width: 120px;
+    height: 50px;
+    border: 1px solid #ced4da;
 }
 
 .main_text_div{
@@ -165,3 +177,8 @@
     height: 100%;
     display: block;
 }
+
+/* .ss{
+    border: 1px solid black;
+} 
+ */

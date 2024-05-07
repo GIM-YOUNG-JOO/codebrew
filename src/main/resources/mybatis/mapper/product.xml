@@ -17,11 +17,11 @@
 	
 	<select id="selectByPage" parameterType="Pager" resultType="Product">
 		<![CDATA[
-		select rnum, prId, prName, pcId, prPrice
+		select rnum, prId, prName, pcId, prPrice, prImage as prImgData
 		from (
-		    select rownum as rnum, prId, prName, pcId, prPrice
+		    select rownum as rnum, prId, prName, pcId, prPrice, prImage
 		    from (
-		        select prId, prName, pcId, prPrice
+		        select prId, prName, pcId, prPrice, prImage
 		        from product
 		        order by prId desc
 		    )
@@ -30,4 +30,39 @@
 		where rnum >= #{startRowNo}
 		]]>
 	</select>
+	
+<<<<<<< HEAD
+	<select id="selectByPrId" parameterType="int" resultType="Product">
+		select prId, prName, pcId, prPrice, prInfo, prMemo, prImage as prImgData
+		from product
+		where prId=#{prId}
+	</select>
+	
+	<update id="update" parameterType="Product">
+		update product set
+			prName=#{prName},
+			pcId=#{pcId},
+			prPrice=#{prPrice},
+			prInfo=#{prInfo},
+			prMemo=#{prMemo}
+		<if test="prImage != null">
+			,prImage=#{prImgData}
+		</if>
+		where prId=#{prId}
+	</update>
+	
+	<delete id="deleteByprId" parameterType="int">
+		delete
+		from product
+		where prId=#{prId}
+	</delete>
+=======
+	<insert id="insertProductDetail" parameterType="ProductDetail">
+		<selectKey keyProperty="pdId" order="BEFORE" resultType="int">
+			select pdid_seq.nextval from dual
+		</selectKey>
+		insert into productDetail(pdId, prId, bopId, sopId, topId, pdShotCount)
+		values(#{pdId}, #{prId}, #{bopId}, #{sopId}, #{topId}, #{pdShotCount})
+	</insert>
+>>>>>>> refs/remotes/origin/master
 </mapper>

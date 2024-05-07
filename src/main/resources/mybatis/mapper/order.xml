@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.mycompany.codebrew.dao.mybatis.OrderDao">
+
+	<select id="selectByCoffee" resultType="Product">
+		select prId, prName, pcId, prPrice, prImage as prImgData
+		from product
+		where pcId = 1
+	</select>
+		<select id="selectByBeveridge" resultType="Product">
+		select prId, prName, pcId, prPrice, prImage as prImgData
+		from product
+		where pcId = 2
+	</select>
+		<select id="selectByBean" resultType="Product">
+		select prId, prName, pcId, prPrice, prImage as prImgData
+		from product
+		where pcId = 3
+	</select>
+		<select id="selectByMerchandise" resultType="Product">
+		select prId, prName, pcId, prPrice, prImage as prImgData
+		from product
+		where pcId = 4
+	</select>
+	
+</mapper>

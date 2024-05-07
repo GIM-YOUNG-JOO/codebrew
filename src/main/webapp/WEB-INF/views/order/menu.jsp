@@ -30,18 +30,27 @@
         </div>
         <div class="row">
             <div class="col">
-                <a href="${pageContext.request.contextPath}/menu/detailPage">
-                    <img src="resources/image/cut/Americano.jpg" style="width:122px; height:122px; border-radius: 50%;">
+                <a href="${pageContext.request.contextPath}/order/detailPage">
+                    <img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" style="width:122px; height:122px; border-radius: 50%;">
                     Americano
                 </a>
             </div>
             <div class="col">
-                <a href="${pageContext.request.contextPath}/menu/detailPage">
-                    <img src="resources/image/cut/Espresso_Single.png" style="width:122px; height:122px; border-radius: 50%;">
+                <a href="${pageContext.request.contextPath}/order/detailPage">
+                    <img src="${pageContext.request.contextPath}/resources/image/cut/Espresso_Single.png" style="width:122px; height:122px; border-radius: 50%;">
                     Espresso
                 </a>
             </div>
+            <c:forEach var="coffee" items="${coffee}">
+				<div class="col">
+                <a href="${pageContext.request.contextPath}/order/detailPage?prId=${coffee.prId}">
+                    <img src="data:image/jpeg;base64,${coffee.prImageOut}" style="width:122px; height:122px; border-radius: 50%;">
+                    ${coffee.prName}
+                </a>
+            	</div>
+			</c:forEach>
         </div>
+        
         <div class="row">
             <div class="col">
                 <a>

@@ -19,6 +19,6 @@ public class Board {
 	private Date boNewdate;
 	private int boHitcount;
 	private int biCd;
-	private int bLike;
+	private int boLike;
 
 }

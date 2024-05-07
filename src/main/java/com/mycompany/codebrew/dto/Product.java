@@ -14,9 +14,5 @@ public class Product {
 	private String prMemo;
 	private byte[] prImgData;
 	private String prImageOut;
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'master' of https://github.com/GIM-YOUNG-JOO/codebrew.git
 	private MultipartFile prImage;
 }

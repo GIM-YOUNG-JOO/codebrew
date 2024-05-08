@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.mycompany.codebrew.dao.BoardCommentDao;
 import com.mycompany.codebrew.dao.BoardDao;
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.Pager;
@@ -18,6 +19,9 @@ public class BoardService {
 	
 	@Resource
 	BoardDao boardDao;
+	
+	@Resource
+	BoardCommentDao boardCommentDao;
 	
 	public void writeBoard(Board board) {
 		int rowNum = boardDao.insert(board);
@@ -74,11 +78,5 @@ public class BoardService {
 		return searchTitleList;
 	}
 
-	
-
-	
-
-	
-	
 	
 }

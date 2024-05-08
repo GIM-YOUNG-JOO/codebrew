@@ -32,8 +32,6 @@
 	    if (pAmount > 1) { // 값이 1보다 큰 경우에만 감소
 	        pAmount--; // 1 감소
 	        pAmountElement.innerText = pAmount; // 감소된 값 업데이트
-	    } else {
-	    	parent.parentNode.parentNode.remove()
 	    }
 	}
 </script>
@@ -50,38 +48,11 @@
 				<p class="h6 mt-3">말이 필요 없는 그냥 커피</p>
 				<div class="mt-4 d-flex align-items-center">
                     <i class="bi bi-pen text-muted cart-icon"></i>
-                    <i class="bi bi-plus-circle text-muted ms-5 me-3 cart-icon" onclick="increaseAmount(this)"></i>
+                    <i class="bi bi-plus-circle text-muted ms-5 me-3 cart-icon"  onclick="increaseAmount(this)"></i>
                     <span class="text-center" id="pAmount">1</span>
                     <i class="bi bi-dash-circle text-muted ms-3 cart-icon" onclick="decreaseAmount(this)"></i>
-                </div>
-			</div>
-		</div>
-		<div class="d-flex shadow rounded bg-white p-4 mt-4" style="width: 500px; height: 210px">
-			<img src="${pageContext.request.contextPath}/resources/image/cut/AppleJuice.png" style="width: 100px; height: 100px; border-radius: 50%;">
-			<div class="flex-grow-1 ms-4">
-				<p class="h3">Apple Juice</p>
-				<p class="h5 mt-3">Tall</p>
-				<p class="h6 mt-3">사과주스 마시고 싶다</p>
-				<div class="mt-4 d-flex align-items-center">
-                    <i class="bi bi-pen text-muted cart-icon"></i>
-                    <i class="bi bi-plus-circle text-muted ms-5 me-3 cart-icon" onclick="increaseAmount(this)"></i>
-                    <span class="text-center" id="pAmount">1</span>
-                    <i class="bi bi-dash-circle text-muted ms-3 cart-icon" onclick="decreaseAmount(this)"></i>
-                </div>
-			</div>
-		</div>
-		<div class="d-flex shadow rounded bg-white p-4 mt-4" style="width: 500px; height: 210px">
-			<img src="${pageContext.request.contextPath}/resources/image/cut/Reusable_ColdCup.png" style="width: 100px; height: 100px; border-radius: 50%;">
-			<div class="flex-grow-1 ms-4">
-				<p class="h3">Reusable ColdCup</p>
-				<p class="h5 mt-3">None</p>
-				<p class="h6 mt-3">종이컵도 여러번 쓰면 리유저블인데</p>
-				<div class="mt-4 d-flex align-items-center">
-                    <i class="bi bi-pen text-muted cart-icon"></i>
-                    <i class="bi bi-plus-circle text-muted ms-5 me-3 cart-icon" onclick="increaseAmount(this)"></i>
-                    <span class="text-center" id="pAmount">1</span>
-                    <i class="bi bi-dash-circle text-muted ms-3 cart-icon" onclick="decreaseAmount(this)"></i>
-                </div>
+                    <button type="button" style="margin-left: 60px; border-radius: 5px; border:2px solid gray; background-color: transparent;padding-top: 1px;">삭제</button>
+                </div>   	
 			</div>
 		</div>
 	</div>

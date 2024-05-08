@@ -47,9 +47,23 @@
 		order by bonewdate desc
 	</select>
 	
+	<select id="selectByDateWithTitle" parameterType="String" resultType="Board">
+		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike
+		from board
+		where botitle like '%' || #{searchText} || '%'
+		order by bonewdate desc
+	</select>
+	
 	<select id="selectByHitcount" resultType="Board">
 		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike 
 		from board
+		order by bohitcount desc
+	</select>
+	
+	<select id="selectByHitcountWithTitle" parameterType="String" resultType="Board">
+		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike
+		from board
+		where botitle like '%' || #{searchText} || '%'
 		order by bohitcount desc
 	</select>
 	
@@ -57,6 +71,19 @@
 		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike 
 		from board
 		order by boLike desc
+	</select>
+	
+	<select id="selectByLikeWithTitle" parameterType="String" resultType="Board">
+		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike
+		from board
+		where botitle like '%' || #{searchText} || '%'
+		order by bolike desc
+	</select>
+	
+	<select id="selectByTitle" parameterType="String" resultType="Board">
+		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike
+		from board
+		where botitle like '%' || #{searchText} || '%'
 	</select>
 	 
 </mapper>

@@ -17,17 +17,18 @@
 	
 	<select id="selectByPage" parameterType="Pager" resultType="Product">
 		<![CDATA[
-		select rnum, prId, prName, pcId, prPrice, prImage as prImgData
-		from (
-		    select rownum as rnum, prId, prName, pcId, prPrice, prImage
-		    from (
-		        select prId, prName, pcId, prPrice, prImage
-		        from product
-		        order by prId desc
+		SELECT rnum, prId, prName, pc.pcName AS pcName, prPrice, prImgData
+		FROM (
+		    SELECT rownum AS rnum, prId, prName, pcId, prPrice, prImage AS prImgData
+		    FROM (
+		        SELECT prId, prName, pcId, prPrice, prImage
+		        FROM product
+		        ORDER BY prId DESC
 		    )
-		    where rownum <= #{endRowNo}
-		)
-		where rnum >= #{startRowNo}
+		    WHERE rownum <= #{endRowNo}
+		) result
+		INNER JOIN productCategory pc ON result.pcId = pc.pcId
+		WHERE rnum >= #{startRowNo}
 		]]>
 	</select>
 	<select id="selectByPrId" parameterType="int" resultType="Product">
@@ -42,7 +43,7 @@
 			prPrice=#{prPrice},
 			prInfo=#{prInfo},
 			prMemo=#{prMemo}
-		<if test="prImage != null">
+		<if test="prImgData != null">
 			,prImage=#{prImgData}
 		</if>
 		where prId=#{prId}

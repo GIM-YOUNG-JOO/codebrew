@@ -48,7 +48,7 @@ public class AdminService {
 	}
 	
 	public void updateProduct(Product product) {
-		log.info("서비스로 넘어옴 : " + product.getPrName(), product.getPrId());
+		log.info("서비스로 넘어옴 : " + product.getPrName(), product.getPrImgData());
 		productDao.update(product);
 	}
 

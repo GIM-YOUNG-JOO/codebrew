@@ -3,6 +3,7 @@ package com.mycompany.codebrew.controller;
 
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -30,15 +31,29 @@ public class OrderController {
 		log.info("상품 목록 실행");
 
 		List<Product> coffeeList = service.getCoffeeList();
-		for (Product coffee : coffeeList) {
-            byte[] imageData = coffee.getPrImgData();
-            if(imageData != null)
-            {
-                String img = Base64.getEncoder().encodeToString(imageData);
-                coffee.setPrImageOut(img);
-            }
-        }
+		List<Product> beveridgeList = service.getBeveridgeList();
+		List<Product> beanList = service.getBeanList();
+		List<Product> merchandiseList = service.getMerchandiseList();
+		List<List<Product>> allLists = new ArrayList<>();
+		allLists.add(coffeeList);
+		allLists.add(beveridgeList);
+		allLists.add(beanList);
+		allLists.add(merchandiseList);
+
+		for(List<Product> list : allLists) {
+			for (Product coffee : list) {
+	            byte[] imageData = coffee.getPrImgData();
+	            if(imageData != null)
+	            {
+	                String img = Base64.getEncoder().encodeToString(imageData);
+	                coffee.setPrImageOut(img);
+	            }
+	        }
+		}
 		model.addAttribute("coffee", coffeeList);
+		model.addAttribute("beveridge", beveridgeList);
+		model.addAttribute("bean", beanList);
+		model.addAttribute("merchandise", merchandiseList);
 		
 		return "order/menu";
 	}

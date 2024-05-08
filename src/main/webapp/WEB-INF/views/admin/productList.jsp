@@ -52,7 +52,7 @@
 								<td>${product.prId}</td>
 								<td><img src="data:image/jpeg;base64,${product.prImageOut}" width="50px" alt="Product Image"></td>
 								<td>${product.prName}</td>
-								<td>${product.pcId}</td>
+								<td>${product.pcName}</td>
 								<td>${product.prPrice}</td>
 								<td><button class="btn btn-success btn-md rounded-pill border"
 								onclick="location.href = 'productEdit?prId=${product.prId}'">Edit</button></td>

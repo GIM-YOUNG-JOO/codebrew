@@ -23,7 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
@@ -109,7 +108,7 @@ public class AdminController {
 				
 			}
 		}
-		log.info("수정 로그 : " + product.getPrName());
+		log.info("수정 로그 : " + product.getPrImgData());
 		//비즈니스 로직 처리를 서비스로 위임
 		service.updateProduct(product);
 		

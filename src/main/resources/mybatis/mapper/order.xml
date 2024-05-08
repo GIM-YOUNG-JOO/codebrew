@@ -23,5 +23,17 @@
 		from product
 		where pcId = 4
 	</select>
+	<select id="selectCoffeeByPrId" parameterType="int" resultType="Product">
+		select prId, prName, pcId, prPrice, prImage as prImgData
+		from product
+		where prId = #{prId}
+	</select>
+	<insert id="insertCart" parameterType="Cart">
+		<selectKey keyProperty="caId" order="BEFORE" resultType="int">
+			select caid_seq.nextval from dual
+		</selectKey>
+		insert into cart(caId, acId, pdId)
+		values(#{caId}, #{acId}, #{pdId})
+	</insert>
 	
 </mapper>

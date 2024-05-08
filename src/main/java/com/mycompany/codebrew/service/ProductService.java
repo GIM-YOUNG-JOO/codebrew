@@ -18,9 +18,5 @@ public class ProductService {
 	@Autowired
 	private ProductDao productDao;
 	
-	public void registProductDetail(ProductDetail productDetail) {
-		int rowNum = productDao.insertProductDetail(productDetail);
-		log.info("rowNum: " + rowNum + ", prid: " + productDetail.getPrId());
-	}
 
 }

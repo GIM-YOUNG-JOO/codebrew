@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%String prId = request.getParameter("prId");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,25 +36,45 @@ function decreaseAmount(element) {
         document.getElementById('shotsInput').value = pAmount;
     }
 }
+function increaseAmount1(element) {
+    var parent = element.parentNode;
+    var pAmountElement = parent.querySelector("#pAmount1");
+    var pAmount = parseInt(pAmountElement.innerText); // 현재 값 가져오기
+    pAmount++; // 1 증가
+    pAmountElement.innerText = pAmount; // 증가된 값 업데이트
+    document.getElementById('shotsInput1').value = pAmount;
+}
+
+function decreaseAmount1(element) {
+    var parent = element.parentNode;
+    var pAmountElement = parent.querySelector("#pAmount1");
+    var pAmount = parseInt(pAmountElement.innerText); // 현재 값 가져오기
+    if (pAmount > 1) { // 값이 1보다 큰 경우에만 감소
+        pAmount--; // 1 감소
+        pAmountElement.innerText = pAmount; // 감소된 값 업데이트
+        document.getElementById('shotsInput1').value = pAmount;
+    }
+}
 </script>
 
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 		<div class="container-fluid product_first_container">
+        
         <div class=box_container>
             <div class="box box1">
-                <img class= "product_img" src="${pageContext.request.contextPath}/resources/image/cut/이미지.png">
+                <img class= "product_img" src="data:image/jpeg;base64,${coffee.prImageOut}">
             </div>
             <div class="box box2">
-                <img class="product_name" src="${pageContext.request.contextPath}/resources/image/cut/상품명.png">
+                <h1>${coffee.prName}</h1>
             </div>
-            
         </div>
+        
    </div>
 
    <div class="container-fluid product_second_container">
-    <form method="post" action="detailPage">
-    <input type="hidden" name="prId" value="10">
+    <form method="post" action="detailPagePost">
+    <input type="hidden" name="prId" value="<%= prId %>">
     <div class=box_container>
         <div class="box box1">
             <h2 class="h2_text">
@@ -129,7 +150,20 @@ function decreaseAmount(element) {
                       <button type="button" onclick="increaseAmount(this)">+</button>
                      </span>
                   </p>
-                  <input type="hidden" name="pdShotCount" id="shotsInput" value="0">
+                  <input type="hidden" name="pdShotCount" id="shotsInput" value="1">
+                </div>  
+            </div>
+            <div class="dust-class">
+              <label class="dts2"><span>* </span>coffee-Quantity</label>
+                <div class="shots-container">
+                  <p>Quantity
+                    <span>
+                      <button type="button" onclick="decreaseAmount1(this)">-</button>
+                      <i id="pAmount1">1</i>
+                      <button type="button" onclick="increaseAmount1(this)">+</button>
+                     </span>
+                  </p>
+                  <input type="hidden" name="pdCount" id="shotsInput1" value="1">
                 </div>  
             </div>
             <div class="dust-class">
@@ -139,7 +173,6 @@ function decreaseAmount(element) {
     </div>
     </form>
 </div>
-<div class="under_space"></div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

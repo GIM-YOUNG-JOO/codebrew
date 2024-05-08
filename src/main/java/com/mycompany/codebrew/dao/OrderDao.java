@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mycompany.codebrew.dto.Cart;
 import com.mycompany.codebrew.dto.Product;
 
 
@@ -13,4 +14,7 @@ public interface OrderDao {
 	public List<Product> selectByBeveridge();
 	public List<Product> selectByBean();
 	public List<Product> selectByMerchandise();
+	public Product selectCoffeeByPrId(int prId);
+	public void insertCart(Cart cart);
+	
 }

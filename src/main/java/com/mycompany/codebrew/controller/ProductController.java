@@ -27,22 +27,4 @@ public class ProductController {
 		return "order/menu";
 	}
 	
-	@RequestMapping("/cart")
-	public String cart() {
-		log.info("실행");
-		return "order/cart";
-	}
-	@GetMapping("/detailPage")
-	public String detailPageGet() {
-		log.info("실행");
-		return "order/detailPage";
-	}
-	@PostMapping("/detailPage")
-	public String detailPagePost(ProductDetail productDetail) {
-		log.info("실행");
-		log.info("productDetail" + productDetail);
-		//상품아이디와 원두옵션, 온도옵션, 사이즈옵션, 샷 수량을 받아서  카트테이블로 넘겨주기
-		service.registProductDetail(productDetail);
-		return "order/detailPage";
-	}
 }

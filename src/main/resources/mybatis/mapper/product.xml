@@ -58,7 +58,7 @@
 		<selectKey keyProperty="pdId" order="BEFORE" resultType="int">
 			select pdid_seq.nextval from dual
 		</selectKey>
-		insert into productDetail(pdId, prId, bopId, sopId, topId, pdShotCount)
-		values(#{pdId}, #{prId}, #{bopId}, #{sopId}, #{topId}, #{pdShotCount})
+		insert into productDetail(pdId, prId, bopId, sopId, topId, pdShotCount, pdCount)
+		values(#{pdId}, #{prId}, #{bopId}, #{sopId}, #{topId}, #{pdShotCount}, #{pdCount})
 	</insert>
 </mapper>

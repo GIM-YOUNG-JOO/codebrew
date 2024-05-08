@@ -2,10 +2,9 @@ package com.mycompany.codebrew.controller;
 
 
 
+import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderController {
 	@Autowired
 	private OrderService service;
-	
+
 	@GetMapping("/menu")
 	public String menu(Model model) {
 		//pageNo를 받지 못했을 경우, 세션에 저장되어있는지 확인
@@ -44,9 +43,9 @@ public class OrderController {
 		return "order/menu";
 	}
 	
-	@RequestMapping("/cart")
-	public String cart() {
-		log.info("실행");
+	@GetMapping("/cart")
+	public String cart(Principal principal) {
+		log.info(principal.getName());
 		return "order/cart";
 	}
 	@RequestMapping("/detailPage")

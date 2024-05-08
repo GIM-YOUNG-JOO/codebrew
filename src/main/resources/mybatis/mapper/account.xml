@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.mycompany.codebrew.dao.mybatis.AccountDao">
+<mapper namespace="com.mycompany.codebrew.dao.AccountDao">
 	<insert id="insert" parameterType="Account">
 		insert into account(acName, acId, acPassword, acTel, acEmail, acRole)
 		values(#{acName}, #{acId}, #{acPassword}, #{acTel}, #{acEmail}, 'ROLE_USER')
@@ -11,6 +11,10 @@
 		select acId, acName, acPassword, acTel, acEmail, acRole
 		from account
 		where acId=#{acId}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*) from account
 	</select>
 	
 	<select id="selectByPage" parameterType="Pager" resultType="Account">
@@ -38,4 +42,10 @@
 			acRole=#{acRole}
 		where acId=#{acId}
 	</update>
+	
+	<delete id="deleteByAcId" parameterType="String">
+		delete
+		from account
+		where acId=#{acId}
+	</delete>
 </mapper>

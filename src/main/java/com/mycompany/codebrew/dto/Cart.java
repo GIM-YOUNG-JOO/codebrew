@@ -11,5 +11,4 @@ public class Cart {
 	private int caId;
 	private int acId;
 	private int pdId;
-	private int caPdCount;
 }

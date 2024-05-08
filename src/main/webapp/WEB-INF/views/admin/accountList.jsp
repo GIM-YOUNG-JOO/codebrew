@@ -90,41 +90,15 @@
 											<div class="modal-footer">
 												<button type="submit" class="btn btn-light btn-md rounded-pill border" formtarget="accountEdit">Save</button>
 												<button type="button" class="btn btn-dark btn-md rounded-pill border" data-bs-dismiss="modal">Cancel</button>
+												<a href="accountDelete?acId=${account.acId}" class="btn btn-danger btn-md rounded-pill border">Delete</a>
 											</div>
 										</form>
 									</div>
 								</div>
 							</div>
 						</c:forEach>
-
 						<tr class="align-middle">
-							<td>admin</td>
-							<td>어드민</td>
-							<td>암호화 된 비밀번호가 와라라라락</td>
-							<td>admin@admin.admin</td>
-							<td>ROLE_ADMIN</td>
-							<td>
-								<button class="btn btn-success btn-md rounded-pill border" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
-							</td>
-						</tr>
-						<tr class="align-middle">
-							<!-- 상품 코드 -->
-							<td>2</td>
-							<!-- 상품명 -->
-							<td><img src="${pageContext.request.contextPath}/resources/image/cut/PineapplePassionfruitRefreshersLemonade.png" alt="Coffee"
-								width="50px"></td>
-							<td>Pineapple Passionfruit Refreshers Lemonade</td>
-							<!-- 카테고리 -->
-							<td>음료</td>
-							<!-- 가격 -->
-							<td>7000</td>
-							<!-- 관리 -->
-							<td>
-								<button class="btn btn-success btn-md rounded-pill border">Edit</button>
-							</td>
-						</tr>
-						<tr class="align-middle">
-							<td colspan="6" class="text-center">
+							<td colspan="7" class="text-center">
 								<div>
 									<a class="btn btn-outline-primary btn-sm" href="accountList?pageNo=1">처음</a>
 									<c:if test="${pager.groupNo>1}">

@@ -1,9 +1,6 @@
 package com.mycompany.codebrew.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.codebrew.dto.Board;
@@ -50,7 +48,7 @@ public class BoardController {
 		int intPageNo = Integer.parseInt(pageNo);
 		
 		// Pager 객체 생성
-		int rowsPagingTarget = boardService.getTotlaRow();
+		int rowsPagingTarget = boardService.getTotalRow();
 		log.info( "전체 갯수: " + rowsPagingTarget);
 		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 		//		     페이지당 행수, 한번에 보이는 페이징 수, 전체 행수, 원하는 페이지 넘버
@@ -113,10 +111,17 @@ public class BoardController {
 	// AJAX - 최신순으로 게시판 Body 수정하는 컨트롤
 	@PostMapping(value ="/sortByDate", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String sortByDate() {
-		
+	public String sortByDate(@RequestParam("searchText") String searchText) {
 		JSONArray jsonArray = new JSONArray();
-		List<Board> dateList = boardService.getDate();
+		List<Board> dateList;
+		
+		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
+			dateList = boardService.getDate();
+		} else {
+			dateList = boardService.getDateByTitle(searchText);
+		}
+		
+		
 		
 		for(Board board : dateList) {
 			JSONObject jsonObject = new JSONObject();
@@ -137,12 +142,18 @@ public class BoardController {
 	
 	@GetMapping(value ="/sortByHitcount", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String sortByHitcount() {
+	public String sortByHitcount(@RequestParam("searchText") String searchText) {
 		
 		JSONArray jsonArray = new JSONArray();
-		List<Board> sortedDateList = boardService.getHitcount();
+		List<Board> sortedDataList;
+		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
+			sortedDataList = boardService.getHitcount();
+		} else {
+			sortedDataList = boardService.getHitcountByTitle(searchText);
+		}
+		 
 		
-		for(Board board : sortedDateList) {
+		for(Board board : sortedDataList) {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("boId", board.getBoId());
 			jsonObject.put("acId", board.getAcId());
@@ -161,12 +172,17 @@ public class BoardController {
 	
 	@GetMapping(value ="/sortByLike", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String sortByLike() {
-		
+	public String sortByLike(@RequestParam("searchText") String searchText) {
+		List<Board> sortedDataList;
 		JSONArray jsonArray = new JSONArray();
-		List<Board> sortedDateList = boardService.getLike();
+		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
+			sortedDataList = boardService.getLike();
+		} else {
+			sortedDataList = boardService.getLikeByTitle(searchText);
+		}
 		
-		for(Board board : sortedDateList) {
+		
+		for(Board board : sortedDataList) {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("boId", board.getBoId());
 			jsonObject.put("acId", board.getAcId());
@@ -182,6 +198,32 @@ public class BoardController {
 		}
 		return jsonArray.toString();
 	}
+	
+	@GetMapping(value ="/searchTitle", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String searchTitle(@RequestParam("searchText") String searchText) {
+		
+		JSONArray jsonArray = new JSONArray();
+		List<Board> sortedDataList = boardService.getSearchTitle(searchText);
+		
+		for(Board board : sortedDataList) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("boId", board.getBoId());
+			jsonObject.put("acId", board.getAcId());
+			jsonObject.put("boTitle", board.getBoTitle());
+			jsonObject.put("boContent", board.getBoContent());
+			jsonObject.put("boDate", board.getBoDate());
+			jsonObject.put("boNewdate", board.getBoNewdate());
+			jsonObject.put("boHitcount", board.getBoHitcount());
+			jsonObject.put("bcId", board.getBcId());
+			jsonObject.put("boLike", board.getBoLike());
+			
+			jsonArray.put(jsonObject);
+		}
+		
+		return jsonArray.toString();
+	}
+	
 	
 
 	

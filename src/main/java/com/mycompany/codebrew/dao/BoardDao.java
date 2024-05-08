@@ -22,4 +22,12 @@ public interface BoardDao {
 	public List<Board> selectByHitcount();
 
 	public List<Board> selectByLike();
+
+	public List<Board> selectByTitle(String searchText);
+
+	public List<Board> selectByDateWithTitle(String searchText);
+
+	public List<Board> selectByHitcountWithTitle(String searchText);
+
+	public List<Board> selectByLikeWithTitle(String searchText);
 }

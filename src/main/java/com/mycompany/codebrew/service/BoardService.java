@@ -24,7 +24,7 @@ public class BoardService {
 		log.info("rowNum: " + rowNum + ", bno: " + board.getBoId());
 	}
 	
-	public int getTotlaRow() {
+	public int getTotalRow() {
 		// 전체 갯수를 받아옴
 		int totalRows = boardDao.count();
 		return totalRows;
@@ -41,8 +41,19 @@ public class BoardService {
 		return sortedDateList;
 	}
 	
+	public List<Board> getDateByTitle(String searchText) {
+		List<Board> sortedDateList = boardDao.selectByDateWithTitle(searchText);
+		return sortedDateList;
+	}
+	
 	public List<Board> getHitcount() {
 		List<Board> sortedHitcountList = boardDao.selectByHitcount();
+		
+		return sortedHitcountList;
+	}
+	
+	public List<Board> getHitcountByTitle(String searchText) {
+		List<Board> sortedHitcountList = boardDao.selectByHitcountWithTitle(searchText);
 		
 		return sortedHitcountList;
 	}
@@ -52,6 +63,22 @@ public class BoardService {
 		
 		return sortedLikeList;
 	}
+	public List<Board> getLikeByTitle(String searchText) {
+		List<Board> sortedLikeList = boardDao.selectByLikeWithTitle(searchText);
+		
+		return sortedLikeList;
+	}
+
+	public List<Board> getSearchTitle(String searchText) {
+		List<Board> searchTitleList = boardDao.selectByTitle(searchText);
+		return searchTitleList;
+	}
+
+	
+
+	
+
+	
 	
 	
 }

@@ -37,6 +37,7 @@
 	                    // 서버로부터 받은 데이터를 처리하여 결과를 동적으로 화면에 표시
 	                    $("#findIdResult").text("아이디는  \"" + data + "\" 입니다.");
 	                },
+	                
 	                error: function(xhr, status, error) {
 	                    // 에러가 발생한 경우에는 에러 메시지를 화면에 표시
 	                    $("#findIdResult").text("일치하는 정보가 없습니다.");

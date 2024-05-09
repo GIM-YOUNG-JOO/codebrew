@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,23 +59,26 @@ public class AccountController {
 	@InitBinder("account") //Account dto 객체 관련 유효성 검사는 joinNowValidator 객체로 진행
 	public void joinNowValidator(WebDataBinder binder) {
 		binder.setValidator(new JoinNowValidator());
+		
 		log.info("joinNowValidator()실행");
+		
 	}
 	
 	@RequestMapping ("/signUp")
-	public String signUp(@Valid Account account, Errors errors) {
+	public String signUp(@Valid Account account, Errors errors, Model model) {
 		log.info("회원등록 실행");
 		log.info(account.getAcName());
 		log.info("" + account.getAcId());
 		log.info(account.getAcPassword());
 		log.info(account.getAcTel());
 		log.info(account.getAcEmail());
-		jnservice.joinNow(account);
 		//유효성 검사 실패시 다시 회원가입 폼 보여주기
 		if(errors.hasErrors()) {  //유효성 검사 진행 시 에러가 존재할 경우 error에 저장하고 joinNow.jsp로 이동
 			return "signJoin/joinNow";
 		}
-		//회원가입 처리
+		// 회원 정보 등록
+		jnservice.joinNow(account);
+		// 회원 가입 후 홈으로 돌아가기
 		return "redirect:/"; 
 	}
 	

@@ -25,5 +25,6 @@
  		<typeAlias type="com.mycompany.codebrew.dto.TempOption" alias="TempOption"/>
  		<typeAlias type="com.mycompany.codebrew.dto.Pager" alias="Pager"/>
  		<typeAlias type="com.mycompany.codebrew.dto.Menu" alias="Menu"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.CartProductDetailProduct" alias="CartProductDetailProduct"/>
  	</typeAliases>
  </configuration>

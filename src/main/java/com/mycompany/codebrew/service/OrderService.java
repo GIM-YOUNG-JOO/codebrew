@@ -1,6 +1,7 @@
 package com.mycompany.codebrew.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.mycompany.codebrew.dao.OrderDao;
 import com.mycompany.codebrew.dao.ProductDao;
 import com.mycompany.codebrew.dto.Cart;
+import com.mycompany.codebrew.dto.CartProductDetailProduct;
 import com.mycompany.codebrew.dto.Product;
 import com.mycompany.codebrew.dto.ProductDetail;
 
@@ -44,5 +46,19 @@ public class OrderService {
 		orderDao.insertCart(cart);
 		
 	}
+	public List<CartProductDetailProduct> getCartList(String acId) {
+		return orderDao.selectCartList(acId);
+	}
+	public void updateProductDetail(ProductDetail productDetail) {
+		orderDao.updateProductDetail(productDetail);
+		
+	}
+	public void deleteCartItem(Cart formData) {
+		orderDao.deleteCart(formData);
+		orderDao.deleteProductDetail(formData);
+		
+	}
+	
+	
 	
 }

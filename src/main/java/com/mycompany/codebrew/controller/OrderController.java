@@ -6,15 +6,20 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.codebrew.dto.Cart;
+import com.mycompany.codebrew.dto.CartProductDetailProduct;
 import com.mycompany.codebrew.dto.Product;
 import com.mycompany.codebrew.dto.ProductDetail;
 import com.mycompany.codebrew.service.OrderService;
@@ -44,12 +49,12 @@ public class OrderController {
 		allLists.add(merchandiseList);
 
 		for(List<Product> list : allLists) {
-			for (Product coffee : list) {
-	            byte[] imageData = coffee.getPrImgData();
+			for (Product product : list) {
+	            byte[] imageData = product.getPrImgData();
 	            if(imageData != null)
 	            {
 	                String img = Base64.getEncoder().encodeToString(imageData);
-	                coffee.setPrImageOut(img);
+	                product.setPrImageOut(img);
 	            }
 	        }
 		}
@@ -61,24 +66,29 @@ public class OrderController {
 		return "order/menu";
 	}
 	
+	@Secured("isAuthenticated()")
 	@GetMapping("/cart")
 	public String cart(Principal principal, Model model) {
 		log.info(principal.getName());
 		//일단 유저가 로그인되어 있지 않으면 jsp에서 c:if를 통해서 장바구니 화면을 보여주지 않고 로그인해달라는 페이지로 만들기
-		
-		
 		if(principal.getName() != null) {
 		//유저의 아이디로 찾은 모든 카트를 프로덕트디테일, 프로덕트, 템프옵션, 사이즈옵션, 빈즈옵션 조인해서 가져오기(가져오기전에 필요한 컬럼들로만 구성된 DTO하나 만들어주기)
-			//카트 번호, 프로덕트디테일 번호, 프로덕트 번호, 프로덕트 네임, 프로덕트 인포, 프로덕트 
-		
+		List<CartProductDetailProduct> cartList = service.getCartList(principal.getName());
 		//모델을 통해 화면에 보여줄 수 있게 저장해주기
+		for(CartProductDetailProduct list : cartList) {
+			byte[] imageData = list.getPrImgData();
+			if (imageData != null) {
+				String img = Base64.getEncoder().encodeToString(imageData);
+				list.setPrImageOut(img);
+			}
 		}
-		
+		model.addAttribute("cartList", cartList);
+		}
 		return "order/cart";
 	}
-	@GetMapping("/detailPage")
-	public String detailPage(Model model, int prId) {
-		log.info("detailPage실행");
+	@GetMapping("/detailPageGet")
+	public String detailPageGet(Model model, int prId) {
+		log.info("detailPageGet실행");
 		Product coffee = service.getCoffee(prId);
 		byte[] imageData = coffee.getPrImgData();
 		if (imageData != null) {
@@ -99,5 +109,40 @@ public class OrderController {
 		cart.setPdId(productDetail.getPdId());
 		service.registCart(cart);
 		return "redirect:/order/menu";
+	}
+	@GetMapping("/detailPageUpdateGet")
+	public String detailPageUpdateGet(Model model, int prId) {
+		log.info("detailPageUpdateGet실행");
+		Product coffee = service.getCoffee(prId);
+		byte[] imageData = coffee.getPrImgData();
+		if (imageData != null) {
+			String img = Base64.getEncoder().encodeToString(imageData);
+			coffee.setPrImageOut(img);
+		}
+		model.addAttribute("coffee", coffee);
+		log.info("값" + prId);
+		model.addAttribute("prId",prId);
+		return "order/detailPageUpdate";
+	}
+	@PostMapping("/detailPageUpdatePost")
+	public String detailPageUpdatePost(ProductDetail productDetail) {
+		log.info("detailPageUpdatePost실행");
+		//pdid로 데이터를 찾고 productDetail 테이블 수정
+		log.info("객체 값" + productDetail);
+		service.updateProductDetail(productDetail);
+		// 카트테이블에 데이터를 수정해주기 >> 카트의 컬럼값이 변하지 않기 때문에 굳이 할 필요 없음
+		/*Cart cart = new Cart();
+		cart.setAcId(principal.getName());
+		cart.setPdId(productDetail.getPdId());
+		service.registCart(cart);*/
+		return "redirect:/order/cart";
+	}
+	@ResponseBody
+	@PostMapping(value="/cartItemDelete", produces="application/json; charset=UTF-8")
+	public void cartItemDelete(@RequestBody Cart formData) {
+		log.info("" + formData.getCaId());
+		log.info("" + formData.getPdId());
+		service.deleteCartItem(formData);
+		log.info("cart, productDetail 삭제완료");
 	}
 }

@@ -14,7 +14,7 @@
 	</insert> -->
 	<insert id="insert" parameterType="Board">
 		<selectKey keyProperty="boId" order="BEFORE" resultType="int">
-			select seq_boid.nextval from dual
+			select boid_seq.nextval from dual
 		</selectKey>
 		insert into board(boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bocommentcount)
 		values(#{boId}, #{acId}, #{boTitle}, #{boContent}, sysdate, sysdate, #{boHitcount}, #{bcId} ,#{boAttachdata}, #{boCommentCount})

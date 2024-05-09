@@ -153,6 +153,14 @@
 		    <version>5.8.12</version>
 		</dependency>
 		
+		<!-- Spring Security 설정을 위한 Library -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>5.8.12</version>
+		</dependency>
+		
 		<!-- Spring Security Taglibs Library -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
 		<dependency>

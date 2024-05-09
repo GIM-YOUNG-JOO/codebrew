@@ -8,6 +8,7 @@ import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,12 +45,12 @@ public class OrderController {
 		allLists.add(merchandiseList);
 
 		for(List<Product> list : allLists) {
-			for (Product coffee : list) {
-	            byte[] imageData = coffee.getPrImgData();
+			for (Product product : list) {
+	            byte[] imageData = product.getPrImgData();
 	            if(imageData != null)
 	            {
 	                String img = Base64.getEncoder().encodeToString(imageData);
-	                coffee.setPrImageOut(img);
+	                product.setPrImageOut(img);
 	            }
 	        }
 		}
@@ -61,6 +62,7 @@ public class OrderController {
 		return "order/menu";
 	}
 	
+	@Secured("isAuthenticated()")
 	@GetMapping("/cart")
 	public String cart(Principal principal, Model model) {
 		log.info(principal.getName());

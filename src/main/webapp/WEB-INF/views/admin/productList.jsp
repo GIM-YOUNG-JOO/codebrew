@@ -24,9 +24,6 @@
 </head>
 
 <style>
-.paging {
-	margin: auto;
-}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/common/adminHeader.jsp"%>

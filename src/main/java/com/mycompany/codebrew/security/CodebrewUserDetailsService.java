@@ -20,20 +20,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CodebrewUserDetailsService implements UserDetailsService {
 	@Autowired
-	private AccountDao memberDao;
+	private AccountDao accountDao;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		log.info("실행");
-		Account member = memberDao.selectByAcId(username);
-		if(member == null) {
+		Account account = accountDao.selectByAcId(username);
+		if(account == null) {
 			throw new UsernameNotFoundException("아이디가 존재하지 않습니다.");
 		}
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(member.getAcRole()));
+		authorities.add(new SimpleGrantedAuthority(account.getAcRole()));
 		
-		UserDetails userDetails = new CodebrewUserDetails(member, authorities);
+		UserDetails userDetails = new CodebrewUserDetails(account, authorities);
 		
 		return userDetails;
 	}

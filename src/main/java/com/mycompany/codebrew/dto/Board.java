@@ -18,6 +18,7 @@ public class Board {
 	private int boHitcount;
 	private int bcId;
 	private int boLike;
+	private int boCommentCount;
 	private byte[] boAttachdata;
 	private MultipartFile boAttach;
 

@@ -1,5 +1,6 @@
 package com.mycompany.codebrew.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -57,6 +58,7 @@ public class BoardController {
 		List<Board> boardList = boardService.getBoardList(pager);
 		
 		
+		
 		// JSP에서 사용하려면 값을 넘겨줘야함
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
@@ -79,7 +81,7 @@ public class BoardController {
 	}
 
 	@PostMapping("/boardRegister")
-	public String boardRegisterPost(Board board) {
+	public String boardRegisterPost(Principal principal, Board board) {
 		// 요청 데이터의 유효성 검사
 		log.info("original filename: " + board.getBoAttach().getOriginalFilename());
 		log.info("filetype: " + board.getBoAttach().getContentType());
@@ -96,12 +98,18 @@ public class BoardController {
 
 			}
 		}
-
-		// 로그인된 사용자 아이디 설정
-		// grade로 나중에 변경해야함 -> user or admin
-		board.setAcId("test");
-		// 이후에 공지사항인지, 리뷰인지 확인해서 받아 와야함
-		board.setBcId(1);
+		
+		// 로그인된 사용자 아이디 설정 - 로그인해야만 넣을 수 있음
+		// Security 사용시 principal에서 로그인된 id값 받아 올 수 있음
+		// 로그인 안하면 에러남
+		board.setAcId(principal.getName());
+		
+		// 이후에 공지사항인지, 리뷰인지 확인해서 받아 와야함 -> 현재 리뷰로 고정
+		board.setBcId(2);
+		
+		board.setBoCommentCount(0);
+		
+		
 
 		boardService.writeBoard(board);
 
@@ -121,8 +129,6 @@ public class BoardController {
 			dateList = boardService.getDateByTitle(searchText);
 		}
 		
-		
-		
 		for(Board board : dateList) {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("boId", board.getBoId());
@@ -134,6 +140,7 @@ public class BoardController {
 			jsonObject.put("boHitcount", board.getBoHitcount());
 			jsonObject.put("bcId", board.getBcId());
 			jsonObject.put("boLike", board.getBoLike());
+			jsonObject.put("boCommentCount", board.getBoCommentCount());
 			
 			jsonArray.put(jsonObject);
 		}
@@ -164,6 +171,7 @@ public class BoardController {
 			jsonObject.put("boHitcount", board.getBoHitcount());
 			jsonObject.put("bcId", board.getBcId());
 			jsonObject.put("boLike", board.getBoLike());
+			jsonObject.put("boCommentCount", board.getBoCommentCount());
 			
 			jsonArray.put(jsonObject);
 		}
@@ -193,12 +201,18 @@ public class BoardController {
 			jsonObject.put("boHitcount", board.getBoHitcount());
 			jsonObject.put("bcId", board.getBcId());
 			jsonObject.put("boLike", board.getBoLike());
+			jsonObject.put("boCommentCount", board.getBoCommentCount());
 			
 			jsonArray.put(jsonObject);
 		}
 		return jsonArray.toString();
 	}
 	
+	//TODO: 댓글로 정렬하는 로직
+	//
+	
+	
+	// 제목으로 검색하는 로직
 	@GetMapping(value ="/searchTitle", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public String searchTitle(@RequestParam("searchText") String searchText) {
@@ -217,12 +231,15 @@ public class BoardController {
 			jsonObject.put("boHitcount", board.getBoHitcount());
 			jsonObject.put("bcId", board.getBcId());
 			jsonObject.put("boLike", board.getBoLike());
+			jsonObject.put("boCommentCount", board.getBoCommentCount());
 			
 			jsonArray.put(jsonObject);
 		}
 		
 		return jsonArray.toString();
 	}
+	
+	
 	
 	
 

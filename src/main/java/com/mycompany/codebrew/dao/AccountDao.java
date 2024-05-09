@@ -1,6 +1,7 @@
 package com.mycompany.codebrew.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import com.mycompany.codebrew.dto.Account;
@@ -14,4 +15,5 @@ public interface AccountDao {
 	public List<Account> selectByPage(Pager pager);
 	public int deleteByAcId(String acId);
 	public int count();
+	public String selectAcIdByAcTel(Map<String, Object> params);
 }

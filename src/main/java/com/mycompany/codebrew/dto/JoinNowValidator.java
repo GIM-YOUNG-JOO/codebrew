@@ -21,8 +21,6 @@ public class JoinNowValidator implements Validator {
 		Account account = (Account) target; //위에서 어자이너블한 클래스 트루라는 것을 확인했으므로 강제타입 변환 가능
 		
 		//이름 검사 
-		// ###보완 필요### 유효성검사 에러메세지 생성 관련해서 추후에 보완(일단은 joinNow에서 스크립트로 에러 메세지 출력중)
-		// 제약조건 위반 오류 처리 방법 구현해야함 
 		String acName = account.getAcName();
 		String acNamePattern = "[가-힣]{2,5}";
 		if(acName == null || acName.equals("")) {

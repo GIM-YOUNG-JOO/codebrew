@@ -44,7 +44,7 @@
 
 							<div class="owl-item">
 								<div class="item">
-									<a href="${pageContext.request.contextPath}/order/detailPage?prId=${coffee.prId}">
+									<a href="${pageContext.request.contextPath}/order/detailPageGet?prId=${coffee.prId}">
 									<img src="data:image/jpeg;base64,${coffee.prImageOut}" class="rounded">
 									<p class="h3 text-center mt-2">${coffee.prName}</p>
 									</a>
@@ -68,7 +68,7 @@
 
 							<div class="owl-item">
 								<div class="item">
-									<a href="${pageContext.request.contextPath}/order/detailPage?prId=${beveridge.prId}">
+									<a href="${pageContext.request.contextPath}/order/detailPageGet?prId=${beveridge.prId}">
 									<img src="data:image/jpeg;base64,${beveridge.prImageOut}" class="rounded">
 									<p class="h3 text-center mt-2">${beveridge.prName}</p>
 									</a>
@@ -92,7 +92,7 @@
 
 							<div class="owl-item">
 								<div class="item">
-									<a href="${pageContext.request.contextPath}/order/detailPage?prId=${bean.prId}">
+									<a href="${pageContext.request.contextPath}/order/detailPageGet?prId=${bean.prId}">
 									<img src="data:image/jpeg;base64,${bean.prImageOut}" class="rounded">
 									<p class="h3 text-center mt-2">${bean.prName}</p>
 									</a>
@@ -116,7 +116,7 @@
 
 							<div class="owl-item">
 								<div class="item">
-									<a href="${pageContext.request.contextPath}/order/detailPage?prId=${merchandise.prId}">
+									<a href="${pageContext.request.contextPath}/order/detailPageGet?prId=${merchandise.prId}">
 									<img src="data:image/jpeg;base64,${merchandise.prImageOut}" class="rounded">
 									<p class="h3 text-center mt-2">${merchandise.prName}</p>
 									</a>

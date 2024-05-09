@@ -16,6 +16,9 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-start flex-grow-1 ms-3 mt-2 mb-2">
+                    	<li class="nav-item dropdown ms-2">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/admin/dashboard" role="button">Dashboard</a>
+                        </li>
                         <li class="nav-item dropdown ms-2">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">

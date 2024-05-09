@@ -59,7 +59,8 @@
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 						<%-- 사이트간 요청 위조 방지 설정이 비활성화되어 있을 경우: GET 방식으로도 요청 가능 --%>
-						<b class="text-white me-2"> <sec:authentication property="principal.username" />
+						<b class="text-black me-2">
+							<sec:authentication property="principal.username" />
 						</b>
 						<a href="${pageContext.request.contextPath}/logout" class="btn btn-danger rounded-pill border">Sign Out</a>
 					</sec:authorize>

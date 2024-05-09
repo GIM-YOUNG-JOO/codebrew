@@ -167,6 +167,14 @@
 		    <artifactId>spring-security-taglibs</artifactId>
 		    <version>5.8.12</version>
 		</dependency>
+		
+		<!-- 시큐리티 어노테이션 사용 -->
+		<dependency>
+	      <groupId>org.aspectj</groupId>
+	      <artifactId>aspectjweaver</artifactId>
+	      <version>1.9.19</version>
+	      <scope>runtime</scope>
+	   </dependency>
 
 	</dependencies>
 

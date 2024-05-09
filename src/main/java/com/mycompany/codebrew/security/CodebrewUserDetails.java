@@ -8,19 +8,19 @@ import org.springframework.security.core.userdetails.User;
 import com.mycompany.codebrew.dto.Account;
 
 public class CodebrewUserDetails extends User {
-	private Account member;
+	private Account account;
 	
-	public CodebrewUserDetails(Account member, List<GrantedAuthority> authorities) {
-		super(member.getAcId(), member.getAcPassword(), true, true, true, true, authorities);
-		this.member = member;
+	public CodebrewUserDetails(Account account, List<GrantedAuthority> authorities) {
+		super(account.getAcName(), account.getAcPassword(), true, true, true, true, authorities);
+		this.account = account;
 	}
 
-	public Account getMember() {
-		return member;
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setMember(Account member) {
-		this.member = member;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 }

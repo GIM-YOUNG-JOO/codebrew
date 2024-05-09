@@ -12,5 +12,5 @@
 		values(#{bocId}, #{boId}, #{boContent}, sysdate, sysdate)
 		
 	</insert> -->
-
+	
 </mapper>

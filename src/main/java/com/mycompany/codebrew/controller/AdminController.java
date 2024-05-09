@@ -28,6 +28,13 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 	
+	
+	@GetMapping("/dashboard")
+	public String dashboard() {
+		log.info("대시보드 실행");
+		return "admin/dashboard";
+	}
+	
 	@GetMapping("/productList")
 	public String productList(String pageNo, Model model, HttpSession session) {
 		//pageNo를 받지 못했을 경우, 세션에 저장되어있는지 확인

@@ -19,6 +19,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
 	integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"
 	referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 <!-- <style>
 .row {
@@ -37,7 +38,7 @@
 			<hr/>
 		</div>
 		<div class="row">
-			<div class="owl-carousel owl-loaded owl-drag">
+			<div class="d-relative owl-carousel owl-loaded owl-drag">
 				<div class="owl-stage-outer">
 					<div class="owl-stage d-flex">
 						<c:forEach var="coffee" items="${coffee}">
@@ -54,6 +55,9 @@
 						</c:forEach>
 					</div>
 				</div>
+				<lottie-player class="position-absolute top-50 start-100" src="https://lottie.host/0fa29ef6-622c-4a8b-8a8f-ea5678a8f94c/YRAlseS1K4.json" background="##FFFFFF"
+		        speed="1" style="width: 100px; height: 100px" loop autoplay direction="1"
+		        mode="normal"></lottie-player>
 			</div>
 		</div>
 		<div class="text-start mt-5">

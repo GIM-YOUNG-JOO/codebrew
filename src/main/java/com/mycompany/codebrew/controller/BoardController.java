@@ -71,9 +71,9 @@ public class BoardController {
 		return "board/boardList";
 	}
 
-	@RequestMapping("/boardDetail")
-	public String boardDetail() {
-		log.info("실행");
+	@GetMapping("/boardDetail")
+	public String boardDetail(int boId, Model model) {
+		Board board = boardService.getBoard(boId);
 		return "board/boardDetail";
 	}
 
@@ -302,6 +302,7 @@ public class BoardController {
 		
 		return jsonArray.toString();
 	}
+	
 	
 	
 	

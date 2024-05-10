@@ -30,4 +30,6 @@ public interface BoardDao {
 	public List<Board> selectByHitcountWithTitle(String searchText);
 
 	public List<Board> selectByLikeWithTitle(String searchText);
+
+	public Board selectBoardByNum(int boId);
 }

@@ -4,15 +4,20 @@ package com.mycompany.codebrew.controller;
 
 
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mycompany.codebrew.dto.Account;
+import com.mycompany.codebrew.dto.Board;
+import com.mycompany.codebrew.dto.Pager;
 import com.mycompany.codebrew.service.AccountService;
+import com.mycompany.codebrew.service.MyPageService;
 
 import lombok.extern.slf4j.Slf4j;
 

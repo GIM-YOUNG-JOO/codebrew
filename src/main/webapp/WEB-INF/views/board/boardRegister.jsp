@@ -68,7 +68,8 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
-    <div class="container ss">
+	
+    <div class="container ss mt-5">
         <div class="nav_bar ss">
             <button class="button_tags hover_grey button">공지사항</button>
             <button class="button_tags hover_grey button">Review</button>
@@ -112,6 +113,7 @@
 			</div>
 		</form>
 	</div>
+
     
     <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>

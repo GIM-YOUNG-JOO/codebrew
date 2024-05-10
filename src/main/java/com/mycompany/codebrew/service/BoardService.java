@@ -39,14 +39,14 @@ public class BoardService {
 		return boardList;
 	}
 	
-	public List<Board> getDate() {
-		List<Board> sortedDateList = boardDao.selectByDate();
+	public List<Board> getDate(Pager pager) {
+		List<Board> sortedDateList = boardDao.selectByDate(pager);
 		
 		return sortedDateList;
 	}
 	
-	public List<Board> getDateByTitle(String searchText) {
-		List<Board> sortedDateList = boardDao.selectByDateWithTitle(searchText);
+	public List<Board> getDateByTitle(Pager pager) {
+		List<Board> sortedDateList = boardDao.selectByDateWithTitle(pager);
 		return sortedDateList;
 	}
 	
@@ -73,9 +73,13 @@ public class BoardService {
 		return sortedLikeList;
 	}
 
-	public List<Board> getSearchTitle(String searchText) {
-		List<Board> searchTitleList = boardDao.selectByTitle(searchText);
+	public List<Board> getSearchTitle(Pager pager) {
+		List<Board> searchTitleList = boardDao.selectByTitle(pager);
 		return searchTitleList;
+	}
+
+	public Board getBoard(int boId) {
+		return boardDao.selectBoardByNum(boId);
 	}
 
 	

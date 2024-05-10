@@ -38,21 +38,51 @@
 			where rownum <= #{endRowNo}
 		)
 	where rnum >= #{startRowNo}
+	
 	]]>
 	</select>
 	
-	<select id="selectByDate" resultType="Board">
-		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount 
-		from board
-		order by bonewdate desc
+	<select id="selectByDate" parameterType="Pager" resultType="Board">
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bocommentcount
+				from board
+				order by bonewdate desc
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
 	</select>
 	
-	<select id="selectByDateWithTitle" parameterType="String" resultType="Board">
+	<select id="selectByDateWithTitle" parameterType="Pager" resultType="Board">
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+				from board
+				where botitle like '%' || #{searchText} || '%'
+				order by bonewdate desc
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
+	</select>
+	
+	<!-- <select id="selectByDateWithTitle" parameterType="String" resultType="Board">
 		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 		from board
 		where botitle like '%' || #{searchText} || '%'
 		order by bonewdate desc
-	</select>
+	</select> -->
 	
 	<select id="selectByHitcount" resultType="Board">
 		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
@@ -80,10 +110,21 @@
 		order by bolike desc
 	</select>
 	
-	<select id="selectByTitle" parameterType="String" resultType="Board">
-		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
-		from board
-		where botitle like '%' || #{searchText} || '%'
+	<select id="selectByTitle" parameterType="Pager" resultType="Board">
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+				from board
+				where botitle like '%' || #{searchText} || '%'
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
 	</select>
 	 
 </mapper>

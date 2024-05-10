@@ -8,6 +8,7 @@
 		pcId, prPrice, prImage as prImgData
 		from product
 		where pcId = 1
+		order by prId desc
 	</select>
 	<select id="selectByBeveridge" resultType="Product">
 		select prId, prName,

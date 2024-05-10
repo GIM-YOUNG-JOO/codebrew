@@ -67,7 +67,7 @@
 	<div class="container-fluid h-100 bg-white rounded-4"
 		style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
 		<div class="row h-100">
-			<div class="d-flex col flex-column flex-shrink-0 p-3 text-white bg-dark h-100 rounded-4"
+			<div class="d-flex col flex-column flex-shrink-0 p-3 text-white bg-dark h-100 rounded-start-4"
 				style="max-width: 280px; box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
 				<a href="/" class="d-flex justify-content-center align-items-center text-white text-decoration-none"> <span class="fs-4">Code Brew</span>
 				</a>
@@ -161,6 +161,10 @@
 	</div>
 
 	<script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
+	<script>
+		window.addEventListener('resize', adjustLeftPosition);
+		window.addEventListener('DOMContentLoaded', adjustLeftPosition);
+	</script>
 </body>
 
 </html>

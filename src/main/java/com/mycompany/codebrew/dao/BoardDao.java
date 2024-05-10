@@ -34,4 +34,8 @@ public interface BoardDao {
 
 	public Board selectBoardByNum(int boId);
 
+	public List<Board> selectByComment(Pager pager);
+
+	public List<Board> selectByCommentWithTitle(Pager pager);
+
 }

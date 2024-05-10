@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.mycompany.codebrew.dto.Board;
+import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.Pager;
 
 @Mapper
@@ -32,4 +33,5 @@ public interface BoardDao {
 	public List<Board> selectByLikeWithTitle(String searchText);
 
 	public Board selectBoardByNum(int boId);
+
 }

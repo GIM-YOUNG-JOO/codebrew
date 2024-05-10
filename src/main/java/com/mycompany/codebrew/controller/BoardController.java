@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.codebrew.dto.Board;
+import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.Pager;
 import com.mycompany.codebrew.service.BoardService;
 
@@ -73,7 +74,13 @@ public class BoardController {
 
 	@GetMapping("/boardDetail")
 	public String boardDetail(int boId, Model model) {
+		//boid를 통해 게시물 상세내용 가져와주기
 		Board board = boardService.getBoard(boId);
+		//상세내용을 화면에 넘겨주기
+		model.addAttribute("board", board);
+		//board와 관련된 comment 모두 찾아와서 list로 넘겨주기
+		List<BoardComment> commentList = boardService.getCommentList(boId);
+		model.addAttribute("boardCommentList", commentList);
 		return "board/boardDetail";
 	}
 

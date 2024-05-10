@@ -39,7 +39,7 @@
 			}
 
             #signInBtn {
-                float: right;
+           
             }
 
             #signInPage {
@@ -79,28 +79,27 @@
    
     <div id="signInPage" class="d-flex flex-column py-3 px-5 mx-5">
         <div class="">
-            <div id="signInMent" class="m-1 p-1 text-center" ><h2 class="mt-3">Sign in or create an account</h2></div>
+            <div id="signInMent" class="m-1 p-1 text-center" ><h2 class="mt-3">Change Your Password</h2></div>
         </div>
         <div class="border border-secondar rounded m-5 p-3" style="background: #F0F0F0">
             <!-- 로그인폼 -->
             <form id="signInForm" method="post" action="${pageContext.request.contextPath}/login">
                 <div class="m-2 p-2 text-start"><span class="star">* </span> indicates required field</div>
-                	<!-- 아이디바/패스워드바 -->
-                    <div class="d-flex"><input id="acId" name="acId" type="text" class="flex-grow-1 border rounded m-3 px-3 py-2"  placeholder="*id"></div>
-                    <div class="d-flex"><input id="acPassword" name="acPassword" type="text" class="flex-grow-1 border rounded m-3 px-3 py-2" placeholder="*password"></div>
-                
-                <!-- 로그인 정보 저장 -->
-                <div class="m-2 p-2 text-start">
-                    <input id="singInSave" type="checkbox"> Keep me signed in.
-                </div>
-                <!-- 아이디찾기/패스워드찾기 -->
-                <div class="text-start m-2 p-2">
-                    <div><a class="m-2" href="${pageContext.request.contextPath}/signJoin/findId" target="_self">Forgot your username?</a></div>
-                    <div><a class="m-2" href="${pageContext.request.contextPath}/signJoin/changePassword" target="_self">Forgot your password?</a></div>
-                </div>
+                <!-- 아이디바/패스워드바 -->
+				<div class="my-3">
+				    <label for="acName" class="form-lable px-4">* Name</label>
+				    <div class="d-flex"><input id="acName" name="acName" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder="ex) 홍길동"></div>
+			    </div>
+				<div class="my-3">
+				    <label for="acTel" class="form-lable px-4">* PhoneNumber</label>
+				    <div class="d-flex"><input id="acTel" name="acTel" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder="ex) 010-123-1234"></div>		
+			    </div>         
+                	
+             
+             
                 <!-- 로그인 제출 버튼 -->
-                <div>
-                    <button id="signInBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" type="submit" style="background: #2C4E80; color: white;">Sign In</button>
+                <div class="text-center">
+                    <button id="signInBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" type="submit" style="background: #2C4E80; color: white;">Edit</button>
                 </div>
             </form>
         </div>

@@ -78,5 +78,9 @@ public class BoardService {
 		return searchTitleList;
 	}
 
+	public Board getBoard(int boId) {
+		return boardDao.selectBoardByNum(boId);
+	}
+
 	
 }

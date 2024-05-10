@@ -66,7 +66,7 @@ public class OrderController {
 		return "order/menu";
 	}
 	
-	@Secured("isAuthenticated()")
+	@Secured("ROLE_USER")
 	@GetMapping("/cart")
 	public String cart(Principal principal, Model model) {
 		log.info(principal.getName());

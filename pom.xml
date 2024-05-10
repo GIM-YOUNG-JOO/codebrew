@@ -160,6 +160,7 @@
 		    <artifactId>spring-security-config</artifactId>
 		    <version>5.8.12</version>
 		</dependency>
+		
 		<!-- Spring Security Taglibs Library -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
 		<dependency>
@@ -167,7 +168,6 @@
 		    <artifactId>spring-security-taglibs</artifactId>
 		    <version>5.8.12</version>
 		</dependency>
-		
 
 		<!-- 자바 객체를 JSON으로 파싱하기 위한 구글의 gson 라이브러리 -->
 		<dependency>
@@ -183,8 +183,6 @@
 	      <version>1.9.19</version>
 	      <scope>runtime</scope>
 	   </dependency>
-
-
 	</dependencies>
 
 

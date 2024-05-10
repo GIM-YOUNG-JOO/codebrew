@@ -1,5 +1,8 @@
 package com.mycompany.codebrew.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +21,12 @@ public class AccountService {
 		accountDao.update(account);
 	}
 	
+    public String findAccountIdByTel(String acName, String acTel) {
+        // 매개변수를 Map으로 변환하여 전달
+        Map<String, Object> params = new HashMap<>();
+        params.put("acName", acName);
+        params.put("acTel", acTel);
+        // DAO를 통해 아이디 조회 후 리턴
+        return accountDao.selectAcIdByAcTel(params);
+    }
 }

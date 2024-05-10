@@ -21,13 +21,12 @@ public class JoinNowValidator implements Validator {
 		Account account = (Account) target; //위에서 어자이너블한 클래스 트루라는 것을 확인했으므로 강제타입 변환 가능
 		
 		//이름 검사 
-		// ###보완 필요### 유효성검사 에러메세지 생성 관련해서 추후에 보완(일단은 joinNow에서 스크립트로 에러 메세지 출력중)
 		String acName = account.getAcName();
 		String acNamePattern = "[가-힣]{2,5}";
 		if(acName == null || acName.equals("")) {
 			errors.rejectValue("acName", null, "이름은 반드시 입력해야합니다.");
 		} else if(acName.length() < 2 || acName.length() > 5) {
-			errors.rejectValue("acId", null, "이름은 2자 이상 5자 이하로 입력해야합니다.");
+			errors.rejectValue("acName", null, "이름은 2자 이상 5자 이하로 입력해야합니다.");
 		} else if(!Pattern.matches(acNamePattern, acName)) {
 			errors.rejectValue("acName", null, "한글 이름을 2~5자 이내로 입력해주세요.");
 		}
@@ -40,7 +39,7 @@ public class JoinNowValidator implements Validator {
 		} else if(acId.length() < 6 || acId.length() > 12) {
 			errors.rejectValue("acId", null, "아이디는 6자 이상 12자 이하로 입력해야합니다.");
 		} else if(!Pattern.matches(acIdPattern, acId)) {
-			errors.rejectValue("acPassword", null, "아이디는 알파벳 대소문자 및 숫자를 포함해야합니다.");
+			errors.rejectValue("acId", null, "아이디는 알파벳 대소문자 및 숫자를 포함해야합니다.");
 		}
 		
 		//비밀번호 검사

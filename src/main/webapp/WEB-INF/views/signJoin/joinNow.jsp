@@ -22,7 +22,7 @@
 		
 		<!-- 사용자 정의 자바스크립트 -->
         <script>
-        
+/*         
         //회원가입 유효성 검사 함수
 		function handleCheckData() {
 			console.log("입력 데이터를 검사합니다.");
@@ -110,7 +110,7 @@
 				//제이쿼리에는 서밋과 비슷한 메소드 없음
 				//제이쿼리 객체의 인덱스를 통해 엘리먼트의 메소드를 사용해줌
 			}
-		}
+		} */
         </script>
         
         <style>
@@ -157,35 +157,35 @@
                 	<label for="acName" class="form-lable px-4">* Name</label>
                     <div class="d-flex"><input id="acName" name="acName" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder="ex) 홍길동"></div>
                     <span id="acNameSpan" class="form-text px-4">한글 이름 2~4자 이내</span>
-                    <%-- <form:errors path="account.acName"/> --%>
+                    <form:errors path="account.acName"/>
                 	</div>
                 	
                 	<div class="my-3">
                 	<label for="acId" class="form-lable px-4">* Id</label>
                     <div class="d-flex"><input id="acId" name="acId" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2"  placeholder=""></div>
                     <span id="acIdSpan" class="form-text px-4">알파벳 대소문자, 숫자를 혼용해서 6자 이상 10장 이하</span>
-                    <%-- <form:errors path="account.acId"/> --%>
+                    <form:errors path="account.acId"/>
                 	</div>
                 	
                 	<div class="my-3">
                 	<label for="acPassword" class="form-lable px-4">* Password</label>
                     <div class="d-flex"><input id="acPassword" name="acPassword" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder=""></div>
                     <span id="acPasswordSpan" class="form-text px-4">알파벳 대소문자, 숫자를 혼용해서 8자 이상 15장 이하</span>
-                    <%-- <form:errors path="account.acPassword"/> --%>
+                    <form:errors path="account.acPassword"/>
                 	</div>
                 	
                 	<div class="my-3">
                 	<label for="acTel" class="form-lable px-4">* PhoneNumber</label>
                     <div class="d-flex"><input id="acTel" name="acTel" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder="ex) 010-123-1234"></div>
                     <span id="acTelSpan" class="form-text px-4">'-'를 넣어서 작성해주세요</span>
-                    <%-- <form:errors path="account.acTel"/> --%>
+                    <form:errors path="account.acTel"/>
                 	</div>
                 	
                 	<div class="my-3">
                 	<label for="acEmail" class="form-lable px-4">* E-mail</label>
                     <div class="d-flex"><input id="acEmail" name="acEmail" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder="ex) abc123@naver.com"></div>
                     <span id="acEmailSpan" class="form-text px-4">'@'를 넣어서 작성해주세요</span>
-                    <%-- <form:errors path="account.acEmail"/> --%>
+                    <form:errors path="account.acEmail"/>
                 	</div>
                 	
                 <!-- 제출 버튼 -->

@@ -8,6 +8,7 @@
 		pcId, prPrice, prImage as prImgData
 		from product
 		where pcId = 1
+		order by prId desc
 	</select>
 	<select id="selectByBeveridge" resultType="Product">
 		select prId, prName,
@@ -27,8 +28,7 @@
 		from product
 		where pcId = 4
 	</select>
-	<select id="selectCoffeeByPrId" parameterType="int"
-		resultType="Product">
+	<select id="selectCoffeeByPrId" parameterType="int" resultType="Product">
 		select prId, prName, pcId, prPrice, prImage as prImgData
 		from product
 		where prId = #{prId}
@@ -66,6 +66,13 @@
 			pdCount=#{pdCount}
 		where pdId=#{pdId}
 	</update>
+	<select id="selectProductDetail" parameterType="int" resultType="ProductDetail">
+		select pd.pdId as pdId, pd.pdShotCount as pdShotCount, pd.pdCount as pdCount,
+		pd.sopId as sopId, pd.bopId as bopId, pd.topId as topId, pr.prName as prName, pr.prImage as prImgData
+		from PRODUCTDETAIL pd
+		INNER JOIN product pr ON pd.prid = pr.prid
+		where pdId = #{pdId}
+	</select>
 	<delete id="deleteCart" parameterType="Cart">
 		delete
 		from cart

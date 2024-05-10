@@ -40,42 +40,53 @@ public class BoardService {
 		return boardList;
 	}
 	
-	public List<Board> getDate() {
-		List<Board> sortedDateList = boardDao.selectByDate();
+	public List<Board> getDate(Pager pager) {
+		List<Board> sortedDateList = boardDao.selectByDate(pager);
 		
 		return sortedDateList;
 	}
 	
-	public List<Board> getDateByTitle(String searchText) {
-		List<Board> sortedDateList = boardDao.selectByDateWithTitle(searchText);
+	public List<Board> getDateByTitle(Pager pager) {
+		List<Board> sortedDateList = boardDao.selectByDateWithTitle(pager);
 		return sortedDateList;
 	}
 	
-	public List<Board> getHitcount() {
-		List<Board> sortedHitcountList = boardDao.selectByHitcount();
+	public List<Board> getHitcount(Pager pager) {
+		List<Board> sortedHitcountList = boardDao.selectByHitcount(pager);
 		
 		return sortedHitcountList;
 	}
 	
-	public List<Board> getHitcountByTitle(String searchText) {
-		List<Board> sortedHitcountList = boardDao.selectByHitcountWithTitle(searchText);
+	public List<Board> getHitcountByTitle(Pager pager) {
+		List<Board> sortedHitcountList = boardDao.selectByHitcountWithTitle(pager);
 		
 		return sortedHitcountList;
 	}
 
-	public List<Board> getLike() {
-		List<Board> sortedLikeList = boardDao.selectByLike();
+	public List<Board> getLike(Pager pager) {
+		List<Board> sortedLikeList = boardDao.selectByLike(pager);
 		
 		return sortedLikeList;
 	}
-	public List<Board> getLikeByTitle(String searchText) {
-		List<Board> sortedLikeList = boardDao.selectByLikeWithTitle(searchText);
+	public List<Board> getLikeByTitle(Pager pager) {
+		List<Board> sortedLikeList = boardDao.selectByLikeWithTitle(pager);
 		
 		return sortedLikeList;
+	}
+	public List<Board> getComment(Pager pager) {
+		List<Board> sortedCommentList = boardDao.selectByComment(pager);
+		
+		return sortedCommentList;
+	}
+	
+	public List<Board> getCommentByTitle(Pager pager) {
+		List<Board> sortedCommentList = boardDao.selectByCommentWithTitle(pager);
+		
+		return sortedCommentList;
 	}
 
-	public List<Board> getSearchTitle(String searchText) {
-		List<Board> searchTitleList = boardDao.selectByTitle(searchText);
+	public List<Board> getSearchTitle(Pager pager) {
+		List<Board> searchTitleList = boardDao.selectByTitle(pager);
 		return searchTitleList;
 	}
 

@@ -16,8 +16,8 @@
 		<selectKey keyProperty="boId" order="BEFORE" resultType="int">
 			select boid_seq.nextval from dual
 		</selectKey>
-		insert into board(boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bocommentcount)
-		values(#{boId}, #{acId}, #{boTitle}, #{boContent}, sysdate, sysdate, #{boHitcount}, #{bcId} ,#{boAttachdata}, #{boCommentCount})
+		insert into board(boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bolike, bocommentcount)
+		values(#{boId}, #{acId}, #{boTitle}, #{boContent}, sysdate, sysdate, #{boHitcount}, #{bcId} ,#{boAttachdata}, #{bolike},#{boCommentCount})
 	</insert>
 	
 	<select id="count" resultType="int">
@@ -27,63 +27,184 @@
 	<select id="selectByPage" parameterType="Pager" resultType="Board">
 	<!-- parameterType은 전달되는 매개변수를 말함, 한 행에 대한 resultType을 적어야함 -->
 	<![CDATA[
-	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bocommentcount
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 		from(
-			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bocommentcount
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike,bocommentcount
 			from(
-				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bocommentcount
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				order by boid desc
 			)
 			where rownum <= #{endRowNo}
 		)
 	where rnum >= #{startRowNo}
+	
 	]]>
 	</select>
 	
-	<select id="selectByDate" resultType="Board">
-		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount 
-		from board
-		order by bonewdate desc
+	<select id="selectByDate" parameterType="Pager" resultType="Board">
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+				from board
+				order by bonewdate desc
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
 	</select>
 	
-	<select id="selectByDateWithTitle" parameterType="String" resultType="Board">
+	<select id="selectByDateWithTitle" parameterType="Pager" resultType="Board">
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+				from board
+				where botitle like '%' || #{searchText} || '%'
+				order by bonewdate desc
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
+	</select>
+	
+	<!-- <select id="selectByDateWithTitle" parameterType="String" resultType="Board">
 		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 		from board
 		where botitle like '%' || #{searchText} || '%'
 		order by bonewdate desc
-	</select>
+	</select> -->
 	
 	<select id="selectByHitcount" resultType="Board">
-		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
-		from board
-		order by bohitcount desc
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+				from board
+				order by bohitcount desc
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
 	</select>
 	
 	<select id="selectByHitcountWithTitle" parameterType="String" resultType="Board">
-		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
-		from board
-		where botitle like '%' || #{searchText} || '%'
-		order by bohitcount desc
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bolike, bocommentcount
+				from board
+				where botitle like '%' || #{searchText} || '%'
+				order by bohitcount desc
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
 	</select>
 	
 	<select id="selectByLike" resultType="Board">
-		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount 
-		from board
-		order by boLike desc
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid,  bolike, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+				from board
+				order by bolike desc
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
 	</select>
 	
 	<select id="selectByLikeWithTitle" parameterType="String" resultType="Board">
-		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
-		from board
-		where botitle like '%' || #{searchText} || '%'
-		order by bolike desc
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bolike, bocommentcount
+				from board
+				where botitle like '%' || #{searchText} || '%'
+				order by bolike desc
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
 	</select>
 	
-	<select id="selectByTitle" parameterType="String" resultType="Board">
-		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
-		from board
-		where botitle like '%' || #{searchText} || '%'
+	<select id="selectByComment" resultType="Board">
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid,  bolike, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+				from board
+				order by bocommentcount desc
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
+	</select>
+	
+	<select id="selectByCommentWithTitle" parameterType="String" resultType="Board">
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bolike, bocommentcount
+				from board
+				where botitle like '%' || #{searchText} || '%'
+				order by bocommentcount desc
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
+	</select>
+	
+	
+	<select id="selectByTitle" parameterType="Pager" resultType="Board">
+	<![CDATA[
+	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+		from(
+			select rownum as rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
+			from(
+				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bolike, bocommentcount
+				from board
+				where botitle like '%' || #{searchText} || '%'
+			)
+			where rownum <= #{endRowNo}
+			
+		)
+	where rnum >= #{startRowNo}
+	]]>
 	</select>
 	<select id="selectBoardByNum" parameterType="int" resultType="Board">
 		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bolike, bocommentcount

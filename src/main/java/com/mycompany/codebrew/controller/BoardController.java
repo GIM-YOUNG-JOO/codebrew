@@ -2,7 +2,6 @@ package com.mycompany.codebrew.controller;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,21 +52,21 @@ public class BoardController {
 		
 		// Pager 객체 생성
 		int rowsPagingTarget = boardService.getTotalRow();
-		log.info( "전체 갯수: " + rowsPagingTarget);
 		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 		//		     페이지당 행수, 한번에 보이는 페이징 수, 전체 행수, 원하는 페이지 넘버
-		
 		// 페이징 처리
 		List<Board> boardList = boardService.getBoardList(pager);
 		
-		
+		for(Board board : boardList) {
+			log.info("" + board.getBoLike());
+		}
 		
 		// JSP에서 사용하려면 값을 넘겨줘야함
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		
 		
-		log.info("실행");
+		
 		return "board/boardList";
 	}
 
@@ -95,7 +93,7 @@ public class BoardController {
 		// 요청 데이터의 유효성 검사
 		log.info("original filename: " + board.getBoAttach().getOriginalFilename());
 		log.info("filetype: " + board.getBoAttach().getContentType());
-
+		log.info("acid: " + principal.getName());
 		if (board.getBoAttach() != null & !board.getBoAttach().isEmpty()) {
 			// DTO 추가 설정 -> 이후에 이름, 타입 필요하면 추가 예정
 //					board.setBattachoname(board.getBattach().getOriginalFilename());
@@ -113,207 +111,180 @@ public class BoardController {
 		// Security 사용시 principal에서 로그인된 id값 받아 올 수 있음
 		// 로그인 안하면 에러남
 		board.setAcId(principal.getName());
-		
+		log.info("acid: " + principal.getName());
+		// 1번 공지사항, 2번 리뷰
 		// 이후에 공지사항인지, 리뷰인지 확인해서 받아 와야함 -> 현재 리뷰로 고정
 		board.setBcId(2);
-		
 		board.setBoCommentCount(0);
-		
 		boardService.writeBoard(board);
 
 		return "redirect:/board/boardList";
 	}
 	
-	// AJAX - 최신순으로 게시판 Body 수정하는 컨트롤
-	@PostMapping(value ="/sortByDate", produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public String sortByDate(@RequestBody Map<String, Object> sendJson) {
-		JSONArray jsonArray = new JSONArray();
-		List<Board> dateList;
+	// 날짜별 정렬 및 제목 정렬
+	@GetMapping(value ="/sortByDate", produces = "application/json; charset=UTF-8")
+	public String sortByDate(String pageNo, String searchText, Model model, HttpSession session) {
+		if(pageNo == null) {
+			pageNo = (String) session.getAttribute("pageNo");
+			if(pageNo == null) {
+				pageNo = "1";
+			}
+		}
 		
-		// 제목에 있는 타이틀을 받아옴
-		String searchText = (String) sendJson.get("searchInput");
-		System.out.println("searchText: " + searchText);
+		// 세션에 pageNo 변환
+		session.setAttribute("pageNo", pageNo);
 		
-		// Pager 내용 받아옴
-	    Map<String, Object> pager = (Map<String, Object>) sendJson.get("pager");
-	    int startPageNo = (int) pager.get("startPageNo");
-	    int endPageNo = (int) pager.get("endPageNo");
-	    int pageNo = (int) pager.get("pageNo");
-	    int totalPageNo = (int) pager.get("totalPageNo");
-	    
-	    System.out.println("startPageNo: " +startPageNo);
-	    System.out.println("endPageNo: " +endPageNo);
-	    System.out.println("pageNo: " +pageNo);
-	    System.out.println("totalPageNo: " +totalPageNo);
-	    
+		// 문자열로 받은 pageNo를 정수로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		int rowsPagingTarget = boardService.getTotalRow();
+		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
+		
+		List<Board> boardList;
+		
 	    // 제목 없을 경우 실행되는 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
-			dateList = boardService.getDate();
-		// 제목 있을 경우 실행되는 정렬
+			boardList = boardService.getDate(pager);
 		} else {
-			dateList = boardService.getDateByTitle(searchText);
-		}
-		
-		// Board의 내용 필드에 저장
-		for(Board board : dateList) {
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("boId", board.getBoId());
-			jsonObject.put("acId", board.getAcId());
-			jsonObject.put("boTitle", board.getBoTitle());
-			jsonObject.put("boContent", board.getBoContent());
-			jsonObject.put("boDate", board.getBoDate());
-			jsonObject.put("boNewdate", board.getBoNewdate());
-			jsonObject.put("boHitcount", board.getBoHitcount());
-			jsonObject.put("bcId", board.getBcId());
-			jsonObject.put("boLike", board.getBoLike());
-			jsonObject.put("boCommentCount", board.getBoCommentCount());
+			// 제목 있을 경우 실행되는 정렬
+			pager.setSearchText(searchText);
+			boardList = boardService.getDateByTitle(pager);
 			
-			jsonArray.put(jsonObject);
 		}
 		
-		JSONObject jsonObject1 = new JSONObject();
-		jsonObject1.put("startPageNo", startPageNo);
-		jsonObject1.put("endPageNo", endPageNo);
-		jsonObject1.put("pageNo", pageNo);
-		jsonObject1.put("totalPageNo", totalPageNo);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pager", pager);
 		
-//		jsonArray.put(jsonObject1);
-		
-		JSONObject result = new JSONObject();
-	    result.put("boards", jsonArray); // 게시물 데이터를 "boards"라는 키로 설정
-	    result.put("pager", jsonObject1); // 페이저 데이터를 "pager"라는 키로 설정
-	    
-		return result.toString();
+		return "board/boardListAjaxByDate";
 	}
-	
-//	// AJAX - 최신순으로 게시판 Body 수정하는 컨트롤
-//	@PostMapping(value ="/sortByDate", produces = "application/json; charset=UTF-8")
-//	@ResponseBody
-//	public String sortByDate(@RequestParam("searchText") String searchText) {
-//		JSONArray jsonArray = new JSONArray();
-//		List<Board> dateList;
-//		
-//		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
-//			dateList = boardService.getDate();
-//		} else {
-//			dateList = boardService.getDateByTitle(searchText);
-//		}
-//		
-//		for(Board board : dateList) {
-//			JSONObject jsonObject = new JSONObject();
-//			jsonObject.put("boId", board.getBoId());
-//			jsonObject.put("acId", board.getAcId());
-//			jsonObject.put("boTitle", board.getBoTitle());
-//			jsonObject.put("boContent", board.getBoContent());
-//			jsonObject.put("boDate", board.getBoDate());
-//			jsonObject.put("boNewdate", board.getBoNewdate());
-//			jsonObject.put("boHitcount", board.getBoHitcount());
-//			jsonObject.put("bcId", board.getBcId());
-//			jsonObject.put("boLike", board.getBoLike());
-//			jsonObject.put("boCommentCount", board.getBoCommentCount());
-//			
-//			jsonArray.put(jsonObject);
-//		}
-//		return jsonArray.toString();
-//	}
-	
+	// 조회수 정렬 및 제목 정렬
 	@GetMapping(value ="/sortByHitcount", produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public String sortByHitcount(@RequestParam("searchText") String searchText) {
+	public String sortByHitcount(String pageNo, String searchText, Model model, HttpSession session) {
+		if(pageNo == null) {
+			pageNo = (String) session.getAttribute("pageNo");
+			if(pageNo == null) {
+				pageNo = "1";
+			}
+		}
 		
-		JSONArray jsonArray = new JSONArray();
-		List<Board> sortedDataList;
+		// 세션에 pageNo 변환
+		session.setAttribute("pageNo", pageNo);
+		
+		// 문자열로 받은 pageNo를 정수로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		int rowsPagingTarget = boardService.getTotalRow();
+		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
+		
+		List<Board> boardList;
+		
+	    // 제목 없을 경우 실행되는 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
-			sortedDataList = boardService.getHitcount();
+			boardList = boardService.getHitcount(pager);
 		} else {
-			sortedDataList = boardService.getHitcountByTitle(searchText);
+			// 제목 있을 경우 실행되는 정렬
+			pager.setSearchText(searchText);
+			boardList = boardService.getHitcountByTitle(pager);
 		}
-		 
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pager", pager);
 		
-		for(Board board : sortedDataList) {
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("boId", board.getBoId());
-			jsonObject.put("acId", board.getAcId());
-			jsonObject.put("boTitle", board.getBoTitle());
-			jsonObject.put("boContent", board.getBoContent());
-			jsonObject.put("boDate", board.getBoDate());
-			jsonObject.put("boNewdate", board.getBoNewdate());
-			jsonObject.put("boHitcount", board.getBoHitcount());
-			jsonObject.put("bcId", board.getBcId());
-			jsonObject.put("boLike", board.getBoLike());
-			jsonObject.put("boCommentCount", board.getBoCommentCount());
-			
-			jsonArray.put(jsonObject);
-		}
-		return jsonArray.toString();
+		return "board/boardListAjaxByHitcount";
 	}
 	
+	// 좋아요 정렬 및 제목 정렬
 	@GetMapping(value ="/sortByLike", produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public String sortByLike(@RequestParam("searchText") String searchText) {
-		List<Board> sortedDataList;
-		JSONArray jsonArray = new JSONArray();
+	public String sortByLike(String pageNo, String searchText, Model model, HttpSession session) {
+		if(pageNo == null) {
+			pageNo = (String) session.getAttribute("pageNo");
+			if(pageNo == null) {
+				pageNo = "1";
+			}
+		}
+		
+		// 세션에 pageNo 변환
+		session.setAttribute("pageNo", pageNo);
+		
+		// 문자열로 받은 pageNo를 정수로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		int rowsPagingTarget = boardService.getTotalRow();
+		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
+		
+		List<Board> boardList;
+		
+	    // 제목 없을 경우 실행되는 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
-			sortedDataList = boardService.getLike();
+			boardList = boardService.getLike(pager);
 		} else {
-			sortedDataList = boardService.getLikeByTitle(searchText);
+			// 제목 있을 경우 실행되는 정렬
+			pager.setSearchText(searchText);
+			boardList = boardService.getLikeByTitle(pager);
 		}
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pager", pager);
 		
-		
-		for(Board board : sortedDataList) {
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("boId", board.getBoId());
-			jsonObject.put("acId", board.getAcId());
-			jsonObject.put("boTitle", board.getBoTitle());
-			jsonObject.put("boContent", board.getBoContent());
-			jsonObject.put("boDate", board.getBoDate());
-			jsonObject.put("boNewdate", board.getBoNewdate());
-			jsonObject.put("boHitcount", board.getBoHitcount());
-			jsonObject.put("bcId", board.getBcId());
-			jsonObject.put("boLike", board.getBoLike());
-			jsonObject.put("boCommentCount", board.getBoCommentCount());
-			
-			jsonArray.put(jsonObject);
-		}
-		return jsonArray.toString();
+		return "board/boardListAjaxByLike";
 	}
 	
-	//TODO: 댓글로 정렬하는 로직
-	//
+	// TODO: 댓글로 정렬하는 로직
+	@GetMapping(value ="/sortByComment", produces = "application/json; charset=UTF-8")
+	public String sortByComment(String pageNo, String searchText, Model model, HttpSession session) {
+		if(pageNo == null) {
+			pageNo = (String) session.getAttribute("pageNo");
+			if(pageNo == null) {
+				pageNo = "1";
+			}
+		}
+		
+		// 세션에 pageNo 변환
+		session.setAttribute("pageNo", pageNo);
+		
+		// 문자열로 받은 pageNo를 정수로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		int rowsPagingTarget = boardService.getTotalRow();
+		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
+		
+		List<Board> boardList;
+		
+	    // 제목 없을 경우 실행되는 정렬
+		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
+			boardList = boardService.getComment(pager);
+		} else {
+			// 제목 있을 경우 실행되는 정렬
+			pager.setSearchText(searchText);
+			boardList = boardService.getCommentByTitle(pager);
+		}
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pager", pager);
+		
+		return "board/boardListAjaxByLike";
+	}
 	
 	
-	// 제목으로 검색하는 로직
+	// 제목으로 검색시 AJAX
 	@GetMapping(value ="/searchTitle", produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public String searchTitle(@RequestParam("searchText") String searchText) {
-		
-		JSONArray jsonArray = new JSONArray();
-		List<Board> sortedDataList = boardService.getSearchTitle(searchText);
-		
-		for(Board board : sortedDataList) {
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("boId", board.getBoId());
-			jsonObject.put("acId", board.getAcId());
-			jsonObject.put("boTitle", board.getBoTitle());
-			jsonObject.put("boContent", board.getBoContent());
-			jsonObject.put("boDate", board.getBoDate());
-			jsonObject.put("boNewdate", board.getBoNewdate());
-			jsonObject.put("boHitcount", board.getBoHitcount());
-			jsonObject.put("bcId", board.getBcId());
-			jsonObject.put("boLike", board.getBoLike());
-			jsonObject.put("boCommentCount", board.getBoCommentCount());
-			
-			jsonArray.put(jsonObject);
+	public String searchTitle(String pageNo, String searchText, Model model, HttpSession session) {
+		if(pageNo == null) {
+			pageNo = (String) session.getAttribute("pageNo");
+			if(pageNo == null) {
+				pageNo = "1";
+			}
 		}
-		
-		return jsonArray.toString();
-	}
-	
-	
-	
-	
-	
 
+		// 세션에 pageNo 변환
+		session.setAttribute("pageNo", pageNo);
+		
+		// 문자열로 받은 pageNo를 정수로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		int rowsPagingTarget = boardService.getTotalRow();
+		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
+		
+		List<Board> boardList;
+		pager.setSearchText(searchText);
+		boardList = boardService.getSearchTitle(pager);
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pager", pager);
+		
+		return "board/boardListAjaxByTitle";
+	}
 	
 }

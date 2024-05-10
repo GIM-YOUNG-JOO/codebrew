@@ -26,7 +26,7 @@
 
 
      <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boardRegister.css">
-
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -67,7 +67,9 @@
 
 </head>
 <body>
-    <div class="container ss">
+	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	
+    <div class="container ss mt-5">
         <div class="nav_bar ss">
             <button class="button_tags hover_grey button">공지사항</button>
             <button class="button_tags hover_grey button">Review</button>
@@ -111,6 +113,8 @@
 			</div>
 		</form>
 	</div>
+
     
+    <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

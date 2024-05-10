@@ -18,19 +18,19 @@ public interface BoardDao {
 
 	public List<Board> selectByPage(Pager pager);
 
-	public List<Board> selectByDate();
+	public List<Board> selectByDate(Pager pager);
 
-	public List<Board> selectByHitcount();
+	public List<Board> selectByHitcount(Pager pager);
 
-	public List<Board> selectByLike();
+	public List<Board> selectByLike(Pager pager);
 
-	public List<Board> selectByTitle(String searchText);
+	public List<Board> selectByTitle(Pager pager);
 
-	public List<Board> selectByDateWithTitle(String searchText);
+	public List<Board> selectByDateWithTitle(Pager pager);
 
-	public List<Board> selectByHitcountWithTitle(String searchText);
+	public List<Board> selectByHitcountWithTitle(Pager pager);
 
-	public List<Board> selectByLikeWithTitle(String searchText);
+	public List<Board> selectByLikeWithTitle(Pager pager);
 
 	public Board selectBoardByNum(int boId);
 

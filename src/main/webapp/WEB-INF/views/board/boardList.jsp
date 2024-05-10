@@ -242,11 +242,11 @@
 		 });
       }
       
-         function sortByDate(pageNo=1) {
+         function sortByLike(pageNo=1) {
              var searchInput = $("#searchInput").val();
                  	
      		 $.ajax({
-     			url: 'sortByDate',
+     			url: 'sortByLike',
      			type: 'get',
      			data: { searchText: searchInput, pageNo: pageNo},
      			success: function(response){

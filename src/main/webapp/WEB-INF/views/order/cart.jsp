@@ -71,7 +71,7 @@
 				<p class="h5 mt-3">coffee-Size : ${cart.sopName}</p>
 				<p class="h6 mt-3">shot-Quantity : ${cart.pdShotCount}</p>
 				<div class="mt-4 d-flex align-items-center">
-                    <a href="${pageContext.request.contextPath}/order/detailPageUpdateGet?prId=${cart.prId}&pdId=${cart.pdId}"><i class="bi bi-pen text-muted cart-icon"></i></a>
+                    <a href="${pageContext.request.contextPath}/order/detailPageUpdateGet?&pdId=${cart.pdId}"><i class="bi bi-pen text-muted cart-icon"></i></a>
                     <i class="bi bi-plus-circle text-muted ms-5 me-3 cart-icon"  onclick="increaseAmount(this)"></i>
                     <span class="text-center" id="pAmount">${cart.pdCount}</span>
                     <i class="bi bi-dash-circle text-muted ms-3 cart-icon" onclick="decreaseAmount(this)"></i>

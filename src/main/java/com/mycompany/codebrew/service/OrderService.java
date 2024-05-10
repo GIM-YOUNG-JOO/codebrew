@@ -58,6 +58,9 @@ public class OrderService {
 		orderDao.deleteProductDetail(formData);
 		
 	}
+	public ProductDetail getProductDetail(int pdId) {
+		return orderDao.selectProductDetail(pdId);
+	}
 	
 	
 	

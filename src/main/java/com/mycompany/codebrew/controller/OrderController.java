@@ -110,20 +110,20 @@ public class OrderController {
 		service.registCart(cart);
 		return "redirect:/order/menu";
 	}
+	
 	@GetMapping("/detailPageUpdateGet")
-	public String detailPageUpdateGet(Model model, int prId) {
+	public String detailPageUpdateGet(Model model, int pdId) {
 		log.info("detailPageUpdateGet실행");
-		Product coffee = service.getCoffee(prId);
-		byte[] imageData = coffee.getPrImgData();
+		ProductDetail pd = service.getProductDetail(pdId);
+		byte[] imageData = pd.getPrImgData();
 		if (imageData != null) {
 			String img = Base64.getEncoder().encodeToString(imageData);
-			coffee.setPrImageOut(img);
+			pd.setPrImageOut(img);
 		}
-		model.addAttribute("coffee", coffee);
-		log.info("값" + prId);
-		model.addAttribute("prId",prId);
+		model.addAttribute("pd", pd);
 		return "order/detailPageUpdate";
 	}
+	
 	@PostMapping("/detailPageUpdatePost")
 	public String detailPageUpdatePost(ProductDetail productDetail) {
 		log.info("detailPageUpdatePost실행");

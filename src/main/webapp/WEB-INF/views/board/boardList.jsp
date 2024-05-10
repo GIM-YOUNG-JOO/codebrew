@@ -205,46 +205,59 @@
 			}
 		 });
      }
-        
+     
         // 조회순으로 정렬하는 함수
-         function sortByHitcount() {
-         var searchInput = $("#searchInput").val();
-             	
-		 $.ajax({
-			url: 'sortByHitcount',
-			type: 'get',
-			dataType: 'json',
-			data: { searchText: searchInput },
-			success: function(response){
-				
-				console.log(response);
-				drawBoardBody(response);
-			},
-			error: function(xhr, status, error){
-				console.error(xhr.responseText);
-			}
-		 });
-      }
+        function sortByHitcount(pageNo=1) {
+            var searchInput = $("#searchInput").val();
+                	
+    		 $.ajax({
+    			url: 'sortByHitcount',
+    			type: 'get',
+    			data: { searchText: searchInput, pageNo: pageNo},
+    			success: function(response){
+    				
+    				$("#boardContainer").html(response);
+    			},
+    			error: function(xhr, status, error){
+    				console.error(xhr.responseText);
+    			}
+    		 });
+         }
         
-      // 좋아요순으로 정렬하는 함수
-         function sortByLike() {
+     	// 댓글순으로 정렬하는 함수
+         function sortByComment(pageNo=1) { 
          var searchInput = $("#searchInput").val();
       
 		 $.ajax({
-			url: 'sortByLike',
+			url: 'sortByComment',
 			type: 'get',
-			dataType: 'json',
-			data: { searchText: searchInput },
+			data: { searchText: searchInput, pageNo: pageNo},
 			success: function(response){
 				
-				console.log(response);
-				drawBoardBody(response);
+				$("#boardContainer").html(response);
 			},
 			error: function(xhr, status, error){
 				console.error(xhr.responseText);
 			}
 		 });
       }
+      
+         function sortByLike(pageNo=1) {
+             var searchInput = $("#searchInput").val();
+                 	
+     		 $.ajax({
+     			url: 'sortByLike',
+     			type: 'get',
+     			data: { searchText: searchInput, pageNo: pageNo},
+     			success: function(response){
+     				
+     				$("#boardContainer").html(response);
+     			},
+     			error: function(xhr, status, error){
+     				console.error(xhr.responseText);
+     			}
+     		 });
+          }
         
         
         function enterKeyTitle(event){

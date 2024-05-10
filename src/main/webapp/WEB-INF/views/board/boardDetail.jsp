@@ -24,7 +24,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
         <div class="d-flex">
-            <div class="p-5 d-flex flex-column position-sticky top-0 vh-100" style="width:50%;">
+            <div class="border p-5 d-flex flex-column position-sticky top-0 vh-100" style="width:50%;">
                 <div class="d-flex">
                     <div class="h1">
                     	글 제목
@@ -36,9 +36,12 @@
                     </div>
                 </div>
                 <hr />
-                <div class="p-5 border shadow-lg flex-grow-1" style="width:100%;">
-                    <p>글 내용을 적자<br>
-                        왕창 적자</p>
+                <div class="p-4 border shadow flex-grow-1 mb-5" style="width:100%;">
+                    <p>글 내용을 적자<br>왕창 적자</p>
+                </div>
+                <div class="input-group shadow" style="width:100%; height: 15%;">
+                    <textarea class="form-control" aria-label="With textarea" style="background-color: white;"></textarea>
+                    <button class="btn btn-dark">댓글 등록</button>
                 </div>
             </div>
             <div style="width:50%">

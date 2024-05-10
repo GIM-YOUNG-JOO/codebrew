@@ -17,15 +17,15 @@ public interface BoardDao {
 
 	public List<Board> selectByPage(Pager pager);
 
-	public List<Board> selectByDate();
+	public List<Board> selectByDate(Pager pager);
 
 	public List<Board> selectByHitcount();
 
 	public List<Board> selectByLike();
 
-	public List<Board> selectByTitle(String searchText);
+	public List<Board> selectByTitle(Pager pager);
 
-	public List<Board> selectByDateWithTitle(String searchText);
+	public List<Board> selectByDateWithTitle(Pager pager);
 
 	public List<Board> selectByHitcountWithTitle(String searchText);
 

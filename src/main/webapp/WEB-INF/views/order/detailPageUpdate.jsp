@@ -65,10 +65,10 @@ function decreaseAmount1(element) {
         
         <div class=box_container>
             <div class="box box1">
-                <img class= "product_img" src="data:image/jpeg;base64,${coffee.prImageOut}">
+                <img class= "product_img" src="data:image/jpeg;base64,${pd.prImageOut}">
             </div>
             <div class="box box2">
-                <h1>${coffee.prName}</h1>
+                <h1>${pd.prName}</h1>
             </div>
         </div>
         
@@ -76,7 +76,6 @@ function decreaseAmount1(element) {
 
    <div class="container-fluid product_second_container">
     <form method="post" action="detailPageUpdatePost">
-    <input type="hidden" name="prId" value="<%= prId %>">
     <input type="hidden" name="pdId" value="<%= pdId %>">
     <div class=box_container>
         <div class="box box1">
@@ -87,7 +86,7 @@ function decreaseAmount1(element) {
             </h2>
                 <div class="image-selector">
                   <div class="option_one">
-                    <input type="radio" id="image1" name="sopId" value="1">
+                    <input type="radio" id="image1" name="sopId" value="1" ${pd.sopId == 1 ? 'checked' : ''}>
                     <label for="image1">
                       <img src="${pageContext.request.contextPath}/resources/image/cut/1.svg" alt="Image 1">
                       <div>Short</div>
@@ -95,7 +94,7 @@ function decreaseAmount1(element) {
                     </label>
                   </div>
                   <div class="option_one">
-                    <input type="radio" id="image2" name="sopId" value="2">
+                    <input type="radio" id="image2" name="sopId" value="2" ${pd.sopId == 2 ? 'checked' : ''}>
                     <label for="image2">
                       <img src="${pageContext.request.contextPath}/resources/image/cut/2.svg" alt="Image 2">
                       <div>tall</div>
@@ -103,7 +102,7 @@ function decreaseAmount1(element) {
                     </label>
                   </div>
                   <div class="option_one">
-                    <input type="radio" id="image3" name="sopId" value="3">
+                    <input type="radio" id="image3" name="sopId" value="3" ${pd.sopId == 3 ? 'checked' : ''}>
                     <label for="image3">
                       <img src="${pageContext.request.contextPath}/resources/image/cut/3.svg" alt="Image 3">
                       <div>Grande</div>
@@ -111,7 +110,7 @@ function decreaseAmount1(element) {
                     </label>
                   </div>
                   <div class="option_one">
-                    <input type="radio" id="image4" name="sopId" value="4">
+                    <input type="radio" id="image4" name="sopId" value="4" ${pd.sopId == 4 ? 'checked' : ''}>
                     <label for="image4">
                       <img src="${pageContext.request.contextPath}/resources/image/cut/4.svg" alt="Image 4">
                       <div>Venti</div>
@@ -129,18 +128,16 @@ function decreaseAmount1(element) {
             <div class="dust-class">
               <label class="dts"><span>* </span>coffee-beans-Options</label>
                 <select class= "" name="bopId">
-                  <option selected>Open this select menu</option>
-                  <option value="1">beans-options1</option>
-                  <option value="2">beans-options2</option>
-                  <option value="3">beans-options3</option>
+                  <option value="1" ${pd.bopId == 1 ? 'selected' : ''}>beans-options1</option>
+                  <option value="2" ${pd.bopId == 2 ? 'selected' : ''}>beans-options2</option>
+                  <option value="3" ${pd.bopId == 3 ? 'selected' : ''}>beans-options3</option>
                 </select>
             </div>
             <div class="dust-class">
               <label class="dts"><span>* </span>temperature-Options</label>
                 <select class= "" name="topId">
-                  <option selected>Open this select menu</option>
-                  <option value="1">ice</option>
-                  <option value="2">hot</option>
+                  <option value="1" ${pd.topId == 1 ? 'selected' : ''}>ice</option>
+                  <option value="2" ${pd.topId == 2 ? 'selected' : ''}>hot</option>
                 </select>
             </div>
             <div class="dust-class">
@@ -149,7 +146,7 @@ function decreaseAmount1(element) {
                   <p>Shots
                     <span>
                       <button type="button" onclick="decreaseAmount(this)">-</button>
-                      <i id="pAmount">1</i>
+                      <i id="pAmount">${pd.pdShotCount}</i>
                       <button type="button" onclick="increaseAmount(this)">+</button>
                      </span>
                   </p>
@@ -162,7 +159,7 @@ function decreaseAmount1(element) {
                   <p>Quantity
                     <span>
                       <button type="button" onclick="decreaseAmount1(this)">-</button>
-                      <i id="pAmount1">1</i>
+                      <i id="pAmount1">${pd.pdCount}</i>
                       <button type="button" onclick="increaseAmount1(this)">+</button>
                      </span>
                   </p>

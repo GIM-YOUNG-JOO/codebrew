@@ -242,7 +242,7 @@
 		 });
       }
       
-         function sortByLike(pageNo=1) {
+         function sortByLike(pageNo=1) { 
              var searchInput = $("#searchInput").val();
                  	
      		 $.ajax({

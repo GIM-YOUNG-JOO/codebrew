@@ -1,5 +1,9 @@
 package com.mycompany.codebrew.controller;
 
+
+
+
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.Pager;
+import com.mycompany.codebrew.service.AccountService;
 import com.mycompany.codebrew.service.MyPageService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +28,31 @@ public class MyPageController {
 	@Autowired
 	MyPageService myPageService;
 	
-	@GetMapping("/myInfo")
-	public String myInfo() {
+	
+	@Autowired //myInfo 주입용
+	private AccountService acservice;
+	
+/*	@GetMapping("/myInfo")
+	public String myInfoDetail(Authentication authentication, Model model) {
 		log.info("마이페이지 내 정보 실행");
+		String acId = authentication.getName();
+		Account account = acservice.getAccount(acId);
+		model.addAttribute("account", account);
 		return "mypage/myInfo";
-	}
+	}*/
+	
+/*	@GetMapping("/myInfo")
+	public String myInfoDetail(Authentication authentication) {
+		log.info("실행");
+		//사용자 아이디 얻기
+		String acId = authentication.getName();
+		      
+		//사용자 아이디 및 이메일 얻기
+		CodebrewUserDtails codebrewUserDtails = (CodebrewUserDtails) authentication.getPrincipal();
+		Account account = codebrewUserDtailsO
+		String mname = member.getMname();
+		String memail = member.getMemail();
+	}*/
 	
 	@GetMapping(value ="/sortByLike", produces = "application/json; charset=UTF-8")
 	public String sortByLike(String pageNo, String searchText, Model model, HttpSession session) {

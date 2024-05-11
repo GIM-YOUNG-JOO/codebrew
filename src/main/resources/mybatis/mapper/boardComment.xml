@@ -13,4 +13,10 @@
 		
 	</insert> -->
 	
+	<select id="selectCommentList" parameterType="int" resultType="BoardComment">
+		select bocId, boId, bocContents, bocDate, bocNewdate, bocLike, acId
+		from BoardComment
+		where boId = #{boId}
+	</select>
+	
 </mapper>

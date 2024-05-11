@@ -29,4 +29,10 @@ public class AccountService {
         // DAO를 통해 아이디 조회 후 리턴
         return accountDao.selectAcIdByAcTel(params);
     }
+
+	public Account getAccount(String acId) {
+		Account account = accountDao.selectByAcId(acId);
+		return account;
+	}
+    
 }

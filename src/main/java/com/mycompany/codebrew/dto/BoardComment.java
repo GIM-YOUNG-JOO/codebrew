@@ -18,4 +18,5 @@ public class BoardComment {
 	private Date bocDate;
 	private Date bocNewdate;
 	private int bocLike;
+	private String acId;
 }

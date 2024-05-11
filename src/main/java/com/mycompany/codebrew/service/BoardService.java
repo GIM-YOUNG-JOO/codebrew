@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.mycompany.codebrew.dao.BoardCommentDao;
 import com.mycompany.codebrew.dao.BoardDao;
 import com.mycompany.codebrew.dto.Board;
+import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.Pager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -91,6 +92,11 @@ public class BoardService {
 
 	public Board getBoard(int boId) {
 		return boardDao.selectBoardByNum(boId);
+	}
+
+	public List<BoardComment> getCommentList(int boId) {
+		
+		return boardCommentDao.selectCommentList(boId);
 	}
 
 	

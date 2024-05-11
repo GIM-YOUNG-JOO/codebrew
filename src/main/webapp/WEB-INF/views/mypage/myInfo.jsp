@@ -98,10 +98,10 @@
 				<div class="p-5 d-flex align-items-center">
 					<div id="hovershadow" class="p-5 rounded-4 d-flex flex-column align-items-center" style="background-color: #F0F0F0;">
 						<img src="${pageContext.request.contextPath}/resources/image/cut/PineapplePassionfruitRefreshersLemonade.png" width="200px" class="rounded-4 mt-5 ms-5 me-5" />
-						<div class="row h5 text-secondary mb-5 pfont">admin</div>
-						<div class="row h1 text-dark pfont">김이박</div>
-						<div class="row h5 text-info mb-5 pfont">email@ema.il</div>
-						<div class="row h3 text-dark pfont">010-1234-5678</div>
+						<div class="row h5 text-secondary mb-5 pfont">${account.acRole}</div>
+						<div class="row h1 text-dark pfont">${account.acName}</div>
+						<div class="row h5 text-info mb-5 pfont">${account.acEmail}</div>
+						<div class="row h3 text-dark pfont">${account.acTel}</div>
 					</div>
 				</div>
 				<div class="p-5 flex-grow-1 d-flex align-items-center">

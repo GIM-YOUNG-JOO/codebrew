@@ -206,5 +206,11 @@
 	where rnum >= #{startRowNo}
 	]]>
 	</select>
+	<select id="selectBoardByNum" parameterType="int" resultType="Board">
+		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bolike, bocommentcount
+		from board
+		where boid = #{boId}
+	</select>
+	
 	 
 </mapper>

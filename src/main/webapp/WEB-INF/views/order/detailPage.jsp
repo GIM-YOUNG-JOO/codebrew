@@ -86,7 +86,7 @@
 						<div class="option_one">
 							<input type="radio" id="image1" name="sopId" value="1" checked> <label for="image1"> <img
 								src="${pageContext.request.contextPath}/resources/image/cut/1.svg" alt="Image 1">
-								<div>Short</div>
+								<div>Short<br>(default)</div>
 								<div>8 fl oz</div>
 							</label>
 						</div>
@@ -119,16 +119,14 @@
 					</h2>
 					<div class="dust-class">
 						<label class="dts"><span>* </span>coffee-beans-Options</label> <select class="" name="bopId">
-							<option value="1" selected>Open this select menu</option>
-							<option value="1">beans-options1</option>
+							<option value="1" selected>beans-options1(default)</option>
 							<option value="2">beans-options2</option>
 							<option value="3">beans-options3</option>
 						</select>
 					</div>
 					<div class="dust-class">
 						<label class="dts"><span>* </span>temperature-Options</label> <select class="" name="topId">
-							<option value="1" selected>Open this select menu</option>
-							<option value="1">ice</option>
+							<option value="1" selected>ice(default)</option>
 							<option value="2">hot</option>
 						</select>
 					</div>

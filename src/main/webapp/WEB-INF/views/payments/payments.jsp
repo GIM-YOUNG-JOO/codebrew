@@ -81,7 +81,8 @@
 			justify-content: flex-end;
 		}
 		
-		.h5{
+		/*  폰트 적용시 특수문자 원 표기가 안됨 */
+		.h5, .h6 {
 			font-family: "Do Hyeon", sans-serif;
 			font-style: normal;
 		}
@@ -158,8 +159,9 @@
 		                            <span class="optionDetail">\${topName} 온도</span>
 		                            <span class="optionDetail">\${pdShotCount} 샷</span>
 	                            </div>
-	                            <span class="flex-grow-1 text-start">\${pdCount} x1</span>
-	                            <span class="flex-grow-1">\${prPrice} 4500\</span>
+	                            <span class="h6 flex-grow-1 text-start">\${pdCount} x1</span>
+	                            <!-- 폰트 적용시 특수문자 원 표기가 안됨-->
+	                            <span class="h6 flex-grow-1">\${prPrice} 4500\</span>
 	                        </div>
 	                        <div class="d-flex my-3">
 	                            <img id="img2" class="rounded-circle" src="/codebrew/resources/image/cut/AppleJuice.png" width="50" height="50"/>
@@ -170,8 +172,8 @@
 		                            <span class="optionDetail">\${topName} 온도</span>
 		                            <span class="optionDetail">\${pdShotCount} 샷</span>
 	                            </div>
-	                            <span class="flex-grow-1">x3</span>
-	                            <span class="flex-grow-1">4500\</span>
+	                            <span class="h6 flex-grow-1">x3</span>
+	                            <span class="h6 flex-grow-1">4500원</span>
 	                        </div>
 	                        <div class="d-flex my-3">
 	                            <img id="img3" class="rounded-circle" src="/codebrew/resources/image/cut/CaffeLatte.png" width="50" height="50"/>
@@ -182,8 +184,8 @@
 		                            <span class="optionDetail">\${topName} 온도</span>
 		                            <span class="optionDetail">\${pdShotCount} 샷</span>
 	                            </div>
-	                            <span class="flex-grow-1">x2</span>
-	                            <span class="flex-grow-1">10000\</span>
+	                            <span class="h6 flex-grow-1">x2</span>
+	                            <span class="h6 flex-grow-1">10000\</span>
 	                        </div>
 	                        <div class="d-flex my-3">
 	                            <img id="img4" class="rounded-circle" src="/codebrew/resources/image/cut/CaramelMacchiato.png" width="50" height="50"/>
@@ -194,8 +196,8 @@
 		                            <span class="optionDetail">\${topName} 온도</span>
 		                            <span class="optionDetail">\${pdShotCount} 샷</span>
 	                            </div>
-	                            <span class="flex-grow-1">x1</span>
-	                            <span class="flex-grow-1">5000\</span>
+	                            <span class="h6 flex-grow-1">x1</span>
+	                            <span class="h6 flex-grow-1">5000\</span>
 	                        </div>
 	                    
 	                       

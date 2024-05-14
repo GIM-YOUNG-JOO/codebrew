@@ -4,13 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boardList.css">
 	
-			<div id="innerContainer">
+			<div id="innerContainer" class="flex-grow-1">
 			    <table class="table table-sm table-bordered">
 			        <c:forEach var="board" items="${boardList}">
-			        
 			            <ul class="question_list">
 			                <li class="li mb-3">
-			                    <a class="" href="detailBoard?boId=${board.boId}">
+			                    <a class="" href="boardDetail?boId=${board.boId}">
 			                        <div class="question_info">
 			                            <h6 class="title_text">${board.boTitle}</h6>
 			                        </div>
@@ -51,4 +50,28 @@
 			          <hr/>
 			        </c:forEach>
 			    </table>
+			
+
+				<table class="table text-center">
+				    <tr>
+				        <td colspan="4">
+				            <div>
+				                <a class="btn btn-sm" href="javascript:myWriteBoardHistory(1)">처음</a>
+				
+				                <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+				                    <c:if test="${pager.pageNo != i}">
+				                        <a class="btn btn-sm" href="javascript:myWriteBoardHistory(${i})">${i}</a>
+				                    </c:if>
+				                    
+				                    <c:if test="${pager.pageNo == i}">
+				                        <a class="btn btn-outline-primary btn-sm" href="javascript:myWriteBoardHistory(${i})">${i}</a>
+				                    </c:if>
+				                </c:forEach>
+				                
+				                <a class="btn btn-sm" href="javascript:myWriteBoardHistory(${pager.totalPageNo})">맨끝</a>
+				            </div>
+				        </td>
+				    </tr>
+				</table>
+			</div>
 			

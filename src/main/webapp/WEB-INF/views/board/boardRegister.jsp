@@ -25,7 +25,7 @@
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
 
-     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boardRegister.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boardRegister.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,9 +38,7 @@
         menubar: false,
         toolbar: '| bold aligncenter alignjustify alignleft alignright alignnone'
       });
-    </script>
-    
-    <script>
+      
     function imageAddAndBlock(event){
     	
     	event.preventDefault();
@@ -62,17 +60,54 @@
         const fileName = fileInput.files[0].name;
         fileNameDisplay.textContent = fileName;
     }
+    
+    
+    function clickedNoticeButton() {
+    	event.preventDefault();
+    	// 버튼 클릭시 category 값 변경
+        document.getElementById("category").value = 1;
+        
+    	// 클릭시 색상 변경
+        document.getElementById("noticeButton").style.backgroundColor = "#2C4E80";
+        document.getElementById("noticeButton").style.color = "#fff";
+        
+        
+        document.getElementById("reviewButton").style.backgroundColor = "";
+        document.getElementById("reviewButton").style.color = "#000";
+        
+    }
+    
+    function clickedReviewButton() {
+    	event.preventDefault();
+    	// 버튼 클릭시 category 값 변경
+        document.getElementById("category").value = 2; 
+        
+    	 // 클릭시 색상 변경
+        document.getElementById("reviewButton").style.backgroundColor = "#2C4E80";
+        document.getElementById("reviewButton").style.color = "#fff";
+        
+
+        document.getElementById("noticeButton").style.backgroundColor = "";
+        document.getElementById("noticeButton").style.color = "#000";
+        
+    }
+
     </script>
     
-
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	
     <div class="container ss mt-5">
+    <!-- action의 이름으로 컨트롤러 이동 -->
+    <form id="boardRegister" method="post" action="boardRegister" enctype="multipart/form-data">
         <div class="nav_bar ss">
-            <button class="button_tags hover_grey button">공지사항</button>
-            <button class="button_tags hover_grey button">Review</button>
+        
+        	<c:if test="${account.acRole == 'ROLE_ADMIN' }">
+        		<button id="noticeButton" class="button_tags hover_grey button register_btn rounded-1" value="1" onclick="clickedNoticeButton()">공지사항</button>
+        	</c:if>
+        	
+            <button id="reviewButton" class="button_tags hover_grey button register_btn rounded-1" value="2" onclick="clickedReviewButton()" style="background-color:#2C4E80; color:#FFFFFF;">Review</button>
         </div>
 
         <div class="info_box ss">
@@ -83,9 +118,10 @@
                 <span>이미지는 최대 1장까지만 넣을 수 있습니다.</span>
             </div>
         </div>
-        <!-- action의 이름으로 컨트롤러 이동 -->
-		<form id="boardRegister" method="post" action="boardRegister"
-			enctype="multipart/form-data">
+        
+        <!-- input hidden으로 값 전달 -->
+        <input type="hidden" id="category" name="category" value="2">
+        
 			<div class="title_box ss">
 				<!-- 제목 -->
 				<input id="btitle" type="text" name="boTitle"

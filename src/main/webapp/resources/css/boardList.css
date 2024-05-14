@@ -51,6 +51,7 @@ a{
 }
 
 .side_bar_first_box{
+	list-style-type: none;
     padding: .5rem .5rem;
     width: 120px;
 }
@@ -158,16 +159,16 @@ ul{
 }
 
 h6{
-font-weight: bold;
+	font-weight: bold;
 }
 
 p{  
-/* 텍스트 바디 한줄로 표시하는 css*/
-display: -webkit-box; /* 웹킷 기반 브라우저에서 다음 속성을 사용하기 위한 설정 */
--webkit-line-clamp: 1; /* 원하는 줄 수 지정 */
--webkit-box-orient: vertical; /* 수직으로 텍스트를 표시 */
-overflow: hidden; /* 넘치는 부분을 숨김 */
-text-overflow: ellipsis; /* 넘치는 부분을 "..."으로 표시 */
+	/* 텍스트 바디 한줄로 표시하는 css*/
+	display: -webkit-box; /* 웹킷 기반 브라우저에서 다음 속성을 사용하기 위한 설정 */
+	-webkit-line-clamp: 1; /* 원하는 줄 수 지정 */
+	-webkit-box-orient: vertical; /* 수직으로 텍스트를 표시 */
+	overflow: hidden; /* 넘치는 부분을 숨김 */
+	text-overflow: ellipsis; /* 넘치는 부분을 "..."으로 표시 */
 }
 
 
@@ -211,6 +212,3 @@ button:hover{
 	border: 1px solid black;
 }  */
 
-.btn{
-	
-}

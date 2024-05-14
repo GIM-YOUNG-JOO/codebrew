@@ -14,7 +14,7 @@ public class CodebrewUserDetails extends User {
 		super(account.getAcId(), account.getAcPassword(), true, true, true, true, authorities);
 		this.account = account;
 	}
-
+ 
 	public Account getAccount() {
 		return account;
 	}

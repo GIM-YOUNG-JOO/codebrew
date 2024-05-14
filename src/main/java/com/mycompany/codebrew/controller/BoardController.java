@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.Pager;
@@ -30,9 +28,6 @@ public class BoardController {
 
 	@Autowired
 	BoardService boardService;
-
-//	@Autowired
-//	AccountService accountSerivce;
 
 	@RequestMapping("/boardList")
 	public String boardList(String pageNo, Model model, HttpSession session) {
@@ -65,8 +60,6 @@ public class BoardController {
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		
-		
-		
 		return "board/boardList";
 	}
 
@@ -81,15 +74,21 @@ public class BoardController {
 		model.addAttribute("boardCommentList", commentList);
 		return "board/boardDetail";
 	}
-
+	
+	//
 	@GetMapping("/boardRegister")
-	public String boardRegisterGet() {
-		log.info("실행");
+	public String boardRegisterGet(Model model,Principal principal) {
+		Account account = boardService.getAccountRole(principal.getName());
+		log.info("role 이름: " + account.getAcRole());
+		model.addAttribute("account", account);
+		log.info("accountRole 넘기고 실행" + account);
+		
 		return "board/boardRegister";
 	}
 
 	@PostMapping("/boardRegister")
-	public String boardRegisterPost(Principal principal, Board board) {
+	public String boardRegisterPost(Principal principal, Board board, @RequestParam ("category") int category) {
+		log.info("category 로그 확인: " + category);
 		// 요청 데이터의 유효성 검사
 		log.info("original filename: " + board.getBoAttach().getOriginalFilename());
 		log.info("filetype: " + board.getBoAttach().getContentType());
@@ -112,10 +111,14 @@ public class BoardController {
 		// 로그인 안하면 에러남
 		board.setAcId(principal.getName());
 		log.info("acid: " + principal.getName());
-		// 1번 공지사항, 2번 리뷰
-		// 이후에 공지사항인지, 리뷰인지 확인해서 받아 와야함 -> 현재 리뷰로 고정
-		board.setBcId(2);
+		
+		// 카테고리 값 (공지사항 = 1, 리뷰 = 2) 받아와서 넣어줌
+		board.setBcId(category);
+		// 최초 댓글 0으로 초기화
 		board.setBoCommentCount(0);
+		// 최초 좋아요 0으로 초기화
+		board.setBoLike(0);
+		
 		boardService.writeBoard(board);
 
 		return "redirect:/board/boardList";

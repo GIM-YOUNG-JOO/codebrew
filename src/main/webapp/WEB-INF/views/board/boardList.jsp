@@ -51,18 +51,17 @@
 
 	<div class="main">
 		<div class="left_box ss">
-			<ul class="ul_no_point mt-4 ss">
-				<li class="side_bar_first_box ss">
-				    <a href="#">
-				        <div class="mb-1">공지 사항</div>
-				    </a>
-				</li>
+			<li class="side_bar_first_box ss">
+			    <a href="#" id="noticeLink" onclick="clickedNoticeButton()">
+			        <div class="mb-1" >공지 사항</div>
+			    </a>
+			</li>
 
-				<li class="side_bar_first_box ss"><a href="#">
-						<div class="mb-1">Review</div>
-				</a></li>
-
-			</ul>
+			<li class="side_bar_first_box ss">
+				<a href="#" id="reviewLink" onclick="clickedReviewButton()">
+					<div class="mb-1" >Review</div>
+				</a>
+			</li>
 		</div>
 
 		<div class="main_text_box ss mb-3">
@@ -160,9 +159,12 @@
 
 				<table class="table text-center">
 				    <tr>
-				        <td colspan="4">
+				        <td colspan="4" class="text-center">
 				            <div>
 				                <a class="btn btn-sm" href="boardList?pageNo=1">처음</a>
+				                <c:if test="${pager.groupNo>1}">
+			                     	<a class="btn btn-sm" href="boardList?pageNo=${pager.startPageNo-1}">이전</a>
+			                	</c:if>
 				
 				                <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 				                    <c:if test="${pager.pageNo != i}">
@@ -173,8 +175,10 @@
 				                        <a class="btn btn-outline-primary btn-sm" href="boardList?pageNo=${i}">${i}</a>
 				                    </c:if>
 				                </c:forEach>
-				                
-				                <a class="btn btn-sm" href="boardList?pageNo=${pager.totalPageNo}">맨끝</a>
+				                <c:if test="${pager.groupNo<pager.totalGroupNo}">
+			                     	<a class="btn btn-sm" href="boardList?pageNo=${pager.endPageNo+1}">다음</a> <!-- 마지막 그룹에서는 다음이 없어야함 -->
+				                </c:if>
+				                  <a class="btn btn-sm" href="boardList?pageNo=${pager.totalPageNo}">맨끝</a>
 				            </div>
 				        </td>
 				    </tr>
@@ -183,15 +187,43 @@
 			
 		</div>
 	</div>
-	
 
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
+	function clickedNoticeButton() {
+    	event.preventDefault();
+    	// 버튼 클릭시 category 값 변경
+        document.getElementById("category").value = 1;
         
-     // 최신순으로 정렬하는 함수
-        function sortByDate(pageNo=1) {
-        var searchInput = $("#searchInput").val();
-            	
+    	// 클릭시 색상 변경
+        document.getElementById("noticeButton").style.backgroundColor = "#2C4E80";
+        document.getElementById("noticeButton").style.color = "#fff";
+        document.getElementById("noticeButton").style.borderRadius = "5px";
+        
+        document.getElementById("reviewButton").style.backgroundColor = "";
+        document.getElementById("reviewButton").style.color = "#000";
+        document.getElementById("reviewButton").style.borderRadius = "";
+    }
+    
+    function clickedReviewButton() {
+    	event.preventDefault();
+    	// 버튼 클릭시 category 값 변경
+        document.getElementById("category").value = 2; 
+        
+    	 // 클릭시 색상 변경
+        document.getElementById("reviewButton").style.backgroundColor = "#2C4E80";
+        document.getElementById("reviewButton").style.color = "#fff";
+        document.getElementById("reviewButton").style.borderRadius = "5px";
+
+        document.getElementById("noticeButton").style.backgroundColor = "";
+        document.getElementById("noticeButton").style.color = "#000";
+        document.getElementById("noticeButton").style.borderRadius = "";
+    }
+	
+    	// 최신순으로 정렬하는 함수
+       function sortByDate(pageNo=1) {
+       var searchInput = $("#searchInput").val();
+           	
 		 $.ajax({
 			url: 'sortByDate',
 			type: 'get',
@@ -204,30 +236,30 @@
 				console.error(xhr.responseText);
 			}
 		 });
-     }
+    }
+    
+       // 조회순으로 정렬하는 함수
+       function sortByHitcount(pageNo=1) {
+       var searchInput = $("#searchInput").val();
+               	
+   		 $.ajax({
+   			url: 'sortByHitcount',
+   			type: 'get',
+   			data: { searchText: searchInput, pageNo: pageNo},
+   			success: function(response){
+   				
+   				$("#boardContainer").html(response);
+   			},
+   			error: function(xhr, status, error){
+   				console.error(xhr.responseText);
+   			}
+   		 });
+        }
+       
+    	// 댓글순으로 정렬하는 함수
+        function sortByComment(pageNo=1) { 
+        var searchInput = $("#searchInput").val();
      
-        // 조회순으로 정렬하는 함수
-        function sortByHitcount(pageNo=1) {
-            var searchInput = $("#searchInput").val();
-                	
-    		 $.ajax({
-    			url: 'sortByHitcount',
-    			type: 'get',
-    			data: { searchText: searchInput, pageNo: pageNo},
-    			success: function(response){
-    				
-    				$("#boardContainer").html(response);
-    			},
-    			error: function(xhr, status, error){
-    				console.error(xhr.responseText);
-    			}
-    		 });
-         }
-        
-     	// 댓글순으로 정렬하는 함수
-         function sortByComment(pageNo=1) { 
-         var searchInput = $("#searchInput").val();
-      
 		 $.ajax({
 			url: 'sortByComment',
 			type: 'get',
@@ -240,48 +272,48 @@
 				console.error(xhr.responseText);
 			}
 		 });
-      }
-      
-         function sortByLike(pageNo=1) { 
-             var searchInput = $("#searchInput").val();
-                 	
-     		 $.ajax({
-     			url: 'sortByLike',
-     			type: 'get',
-     			data: { searchText: searchInput, pageNo: pageNo},
-     			success: function(response){
-     				
-     				$("#boardContainer").html(response);
-     			},
-     			error: function(xhr, status, error){
-     				console.error(xhr.responseText);
-     			}
-     		 });
-          }
-        
-        
-        function enterKeyTitle(event){
-        	if(event.key === "Enter"){
-        		searchTitle();
-        	}
-        }
-        
-        function searchTitle() {
-        	var searchInput = $("#searchInput").val();
-        	
-        	$.ajax({
-        		url: "searchTitle",
-        		type: "get",
-        		data: { searchText: searchInput },
-        		success: function(response) {
-        			
-        			$("#boardContainer").html(response);
-        		},
-        		error: function(xhr, status, error){
-        			console.error(error);
-        		}
-        	})
-        }
+     }
+     
+        function sortByLike(pageNo=1) { 
+        var searchInput = $("#searchInput").val();
+                	
+    		 $.ajax({
+    			url: 'sortByLike',
+    			type: 'get',
+    			data: { searchText: searchInput, pageNo: pageNo},
+    			success: function(response){
+    				
+    				$("#boardContainer").html(response);
+    			},
+    			error: function(xhr, status, error){
+    				console.error(xhr.responseText);
+    			}
+    		 });
+         }
+       
+       
+       function enterKeyTitle(event){
+       	if(event.key === "Enter"){
+       		searchTitle();
+       	}
+       }
+       
+       function searchTitle() {
+       var searchInput = $("#searchInput").val();
+       	
+       	$.ajax({
+       		url: "searchTitle",
+       		type: "get",
+       		data: { searchText: searchInput },
+       		success: function(response) {
+       			
+       			$("#boardContainer").html(response);
+       		},
+       		error: function(xhr, status, error){
+       			console.error(error);
+       		}
+       	});
+       }
         
     </script>
 </body>

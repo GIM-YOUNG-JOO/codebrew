@@ -26,9 +26,11 @@
 		        ORDER BY prId DESC
 		    )
 		    WHERE rownum <= #{endRowNo}
+		    ORDER BY prId DESC
 		) result
 		INNER JOIN productCategory pc ON result.pcId = pc.pcId
 		WHERE rnum >= #{startRowNo}
+		ORDER BY prId DESC
 		]]>
 	</select>
 	<select id="selectByPrId" parameterType="int" resultType="Product">

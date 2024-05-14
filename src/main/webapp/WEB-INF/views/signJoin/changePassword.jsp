@@ -38,38 +38,15 @@
 			    font-style: normal;
 			}
 
-            #signInBtn {
-           
-            }
-
-            #signInPage {
+            #changePasswordPage {
                 justify-content: center;
                 align-items: center;
             }
             
-            #signInForm {
+            #changePasswordForm {
             	min-width: 500px;  
             }
             
-         
-           
-            
-           /*  a {
-				text-decoration: none;
-			}
-		
-			a:hover {
-				text-decoration: underline;
-				color: black;
-			}
-				
-			a:active {
-				color: black;
-			}
-			
-			a:visited {
-				color: black;
-			} */
 
         </style>
 </head>
@@ -77,15 +54,19 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
    
-    <div id="signInPage" class="d-flex flex-column py-3 px-5 mx-5">
+    <div id="changePasswordPage" class="d-flex flex-column py-3 px-5 mx-5">
         <div class="">
-            <div id="signInMent" class="m-1 p-1 text-center" ><h2 class="mt-3">Change Your Password</h2></div>
+            <div id="changePasswordMent" class="m-1 p-1 text-center" ><h2 class="mt-3">Change Your Password</h2></div>
         </div>
         <div class="border border-secondar rounded m-5 p-3" style="background: #F0F0F0">
-            <!-- 로그인폼 -->
-            <form id="signInForm" method="post" action="${pageContext.request.contextPath}/login">
+            <!-- 비밀번호 찾기 폼 -->
+            <form id="changePasswordForm" method="post" action="${pageContext.request.contextPath}/login">
                 <div class="m-2 p-2 text-start"><span class="star">* </span> indicates required field</div>
-                <!-- 아이디바/패스워드바 -->
+                <!-- 아이디/이름/번호 입력 폼 -->
+				<div class="my-3">
+				    <label for="acId" class="form-lable px-4">* Id</label>
+				    <div class="d-flex"><input id="acId" name="acId" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder="ex) user123"></div>
+			    </div>
 				<div class="my-3">
 				    <label for="acName" class="form-lable px-4">* Name</label>
 				    <div class="d-flex"><input id="acName" name="acName" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder="ex) 홍길동"></div>
@@ -95,16 +76,15 @@
 				    <div class="d-flex"><input id="acTel" name="acTel" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder="ex) 010-123-1234"></div>		
 			    </div>         
                 	
-             
-             
-                <!-- 로그인 제출 버튼 -->
+                <!-- 비밀번호 찾기 폼 제출 버튼 -->
                 <div class="text-center">
-                    <button id="signInBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" type="submit" style="background: #2C4E80; color: white;">Edit</button>
+                    <button id="changePasswordBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" type="submit" style="background: #2C4E80; color: white;">Edit</button>
                 </div>
             </form>
         </div>
 
-
+		<!---------------------------------------------------------------------------------------------------->
+		
         <!-- 회원가입 이동-->
         <div class="text-center m-3 p-3" style="min-width: 450px;  max-width: 900px;">
             <div id="joinNowMent">

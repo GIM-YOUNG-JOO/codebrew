@@ -16,18 +16,22 @@
 <!-- 폰트설정  -->
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 
-<!-- css 따로 빼면 적용 안되는 설정들 있음 -->
-<style>
 
+<style>
 input::placeholder {
 	color: #d9d9d9
-}
+	}
 
 #hovershadow {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 	transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 	background: #F0F0F0;
-}
+
+span {
+	/* display: flex; */
+	justify-content: flex-end;
+	align-items: center;
+	}
 
 #hovershadow:hover {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px

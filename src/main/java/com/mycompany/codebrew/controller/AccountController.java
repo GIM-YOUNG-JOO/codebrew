@@ -1,5 +1,8 @@
 package com.mycompany.codebrew.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.JoinNowValidator;
@@ -35,7 +39,7 @@ public class AccountController {
 	@GetMapping("/signIn")
 	public String signIn() {
 		log.info("실행");
-		return "signJoin/signIn";	
+		return "signJoin/signIn";
 	}
 	
 	@GetMapping("/joinNow")
@@ -111,4 +115,55 @@ public class AccountController {
 		log.info("비밀번호수정실행");
 		return "signJoin/changePassword";	
 	}
+	
+	/*@PostMapping("/findPwByIdAndTel") 
+	public String findPw(Account account) {
+		log.info("실행");
+		log.info("id: "+account.getAcId());
+		log.info("name: "+account.getAcName());
+		log.info("Tel: "+account.getAcTel());
+		Account accountSaved = acservice.findAccountPwByIdAndTelAndEmail(account.getAcId(), account.getAcName(), account.getAcEmail());
+		
+		log.info("saved 내용" + accountSaved);
+		
+		if( accountSaved == null) {
+			
+		} else {
+			
+		}
+		
+		
+		return " ";
+	}*/
+	@ResponseBody
+	@GetMapping("/findPassword")
+	public Map<String ,Integer> findPassword(Account account) {
+		Map<String,Integer> map = new HashMap<>();
+		
+		log.info("acId: " + account.getAcId());
+		log.info("acName: " + account.getAcName());
+		log.info("acTel: " + account.getAcTel());
+		Account accountSaved = acservice.findAccountPwByIdAndTelAndEmail(account);
+		
+		if(accountSaved == null) {
+			map.put("result", 0);
+		} else {
+			map.put("result", 1);
+//			map.put("acId", account.getAcId());
+		}
+		/*log.info("acId: " + accountSaved.getAcId());
+		log.info("acName: " + accountSaved.getAcName());
+		log.info("acTel: " + accountSaved.getAcTel());*/
+		return map;
+		}
+	
+	@PostMapping("/updatePassword")
+	public String updatePassword(Account account) {
+		log.info("acPassword: " + account.getAcPassword());
+		log.info("acId: " + account.getAcId());
+		acservice.updatePassword(account);
+		return "redirect:/signJoin/signIn";
+	}
+		
 }
+

@@ -60,7 +60,8 @@
         </div>
         <div class="border border-secondar rounded m-5 p-3" style="background: #F0F0F0">
             <!-- 비밀번호 찾기 폼 -->
-            <form id="changePasswordForm" method="post" action="${pageContext.request.contextPath}/login">
+				<!--<form id="changePasswordForm" method="post" action="findPwByIdAndTel"> -->
+			<div style="min-width: 500px;">
                 <div class="m-2 p-2 text-start"><span class="star">* </span> indicates required field</div>
                 <!-- 아이디/이름/번호 입력 폼 -->
 				<div class="my-3">
@@ -78,10 +79,48 @@
                 	
                 <!-- 비밀번호 찾기 폼 제출 버튼 -->
                 <div class="text-center">
-                    <button id="changePasswordBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" type="submit" style="background: #2C4E80; color: white;">Edit</button>
+                    <button id="changePasswordBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" onclick="findPassword()" style="background: #2C4E80; color: white;">submit</button>
                 </div>
-            </form>
+                <div id="hiddenDiv" style="display: none;"></div>
+               <!--  <div style="margin-top: 10px; font-size: 30px; color: #2C4E80; text-align: center;">정확한 정보를 입력하세요</div> -->
+            <!-- </form> -->
+            
+            <!-- 모달 창 생성 하는 html -->
+            <!-- 모달 창 -->
+		<div class="modal" id="myModal">
+		    <div class="modal-dialog">
+			    <form id="updatePw" method="post" action="updatePassword">
+			        <div class="modal-content">
+			            <!-- 모달 헤더 -->
+			            <div class="modal-header">
+			                <h4 class="modal-title">비밀 번호를 수정해주세요</h4>
+			                
+			            </div>
+			            <!-- 모달 본문 -->
+			            <div class="modal-body">
+			             <!-- hidden input을 사용하여 아이디 값을 전달 -->
+                  		 <input type="hidden" id="modalAcId" name="acId">
+			                <div class="my-3">
+							    <label for="acId" class="form-lable px-4"> 수정할 비밀번호</label>
+							    <div class="d-flex">
+							    	<input id="acPassword" name="acPassword" type="password" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder="">
+							    </div>
+							    <span id="acPasswordSpan" class="form-text px-4">알파벳 대소문자, 숫자를 혼용해서 8자 이상 15장 이하</span>
+			  	  			</div>
+			            </div>
+			            <!-- 모달 푸터 -->
+			            <div class="modal-footer">
+			                <button type="button" class="btn btn-secondary" onclick="closeModal()">취소</button>
+			                <button type="submit" class="btn btn-secondary" onclick="submitModalForm()">수정</button>
+			            </div>
+			        </div>
+		     	 </form>
+		    </div>
+		</div>
+           
+            
         </div>
+      </div>
 
 		<!---------------------------------------------------------------------------------------------------->
 		
@@ -99,6 +138,83 @@
         </div>
     </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+
+<script>
+	//최신순으로 정렬하는 함수
+	function findPassword() {
+	var acId = $("#acId").val();
+	var acName = $("#acName").val();
+	var acTel = $("#acTel").val();
+	
+	var account = {
+			acId,
+			acName,
+			acTel
+	}
+	    	
+		 $.ajax({
+			url: 'findPassword',
+			type: 'get',
+			data: account,
+			success: function(response){
+				console.log(response.result);
+				if(response.result == 0){
+					var failedHtml = '<div style="margin-top: 10px; font-size: 30px; color: #2C4E80; text-align: center;">' + '정확한 정보를 입력하세요' + '</div>';
+					$("#hiddenDiv").html(failedHtml);
+					$("#hiddenDiv").show();
+				} else {
+					console.info("실행")
+					console.info("acId: " + acId);
+					$('#modalAcId').val(acId);
+					$("#myModal").modal('show');
+				}
+				
+			},
+			error: function(xhr, status, error){
+				
+			}
+		 }); 
+	}
+	
+	function closeModal() {
+		$('#myModal').modal('hide');
+	}
+	
+	function submitModalForm() {
+
+		//유효성 검사를 통과하지 못했을 경우 form 태그의 action 기능을 수행하지 않도록 함
+		event.preventDefault();
+		
+		//각 입력 양식의 데이터 검사
+		var totalResult = true;
+		
+		//3)Password 검사 -------------------------------------------------------
+		var acPasswordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
+		var acPasswordResult = acPasswordPattern.test($("#acPassword").val());
+		var el_acPassword_span = document.querySelector("#acPasswordSpan");
+		if(acPasswordResult) {
+			$("#acPasswordSpan").removeClass("text-danger");
+			$("#acPassword").removeClass("border-danger");
+		} else {
+			$("#acTelSpan").text("비밀번호 형식이 아닙니다");
+			$("#acPasswordSpan").addClass("text-danger");
+			$("#acPassword").addClass("border-danger");
+			totalResult = false;
+		}
+		
+		
+		if(totalResult) {
+			
+			$('#updatePw')[0].submit();
+			//$("#joinForm").submit("#joinForm");
+			//submit()은 엘리먼트의 메소드이기 때문에 제이쿼리 객체로 사용은 불가능
+			//제이쿼리에는 서밋과 비슷한 메소드 없음
+			//제이쿼리 객체의 인덱스를 통해 엘리먼트의 메소드를 사용해줌
+		}
+		
+	}
+
+</script>
 </body>
 
 </html>

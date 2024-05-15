@@ -14,33 +14,14 @@
 		<!-- jQuery 외부 라이브러리 설정 -->
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
-		<!-- 폰트설정  -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 		
-		<!-- 사용자 정의 자바스크립트 -->
-		<script>
-		</script>
-        <script>
-
-        </script>
         <style>
         	* {
 			  font-family: "Do Hyeon", sans-serif;
 			  font-weight: 400;
 			  font-style: normal;
 			}
-			
-			button {
-				font-family: "Do Hyeon", sans-serif;
-			    font-weight: 400;
-			    font-style: normal;
-			}
-
-            #signInBtn {
-                float: right;
-            }
 
             #signInPage {
                 justify-content: center;
@@ -50,26 +31,6 @@
             #signInForm {
             	min-width: 500px;  
             }
-            
-         
-           
-            
-           /*  a {
-				text-decoration: none;
-			}
-		
-			a:hover {
-				text-decoration: underline;
-				color: black;
-			}
-				
-			a:active {
-				color: black;
-			}
-			
-			a:visited {
-				color: black;
-			} */
 
         </style>
 </head>
@@ -85,22 +46,21 @@
             <!-- 로그인폼 -->
             <form id="signInForm" method="post" action="${pageContext.request.contextPath}/login">
                 <div class="m-2 p-2 text-start"><span class="star">* </span> indicates required field</div>
-                <!-- 아이디바/패스워드바 -->
-                
+                	<!-- 아이디바/패스워드바 -->
                     <div class="d-flex"><input id="acId" name="acId" type="text" class="flex-grow-1 border rounded m-3 px-3 py-2"  placeholder="*id"></div>
-                    <div class="d-flex"><input id="acPassword" name="acPassword" type="text" class="flex-grow-1 border rounded m-3 px-3 py-2" placeholder="*password"></div>
+                    <div class="d-flex"><input id="acPassword" name="acPassword" type="password" class="flex-grow-1 border rounded m-3 px-3 py-2" placeholder="*password"></div>
                 
                 <!-- 로그인 정보 저장 -->
                 <div class="m-2 p-2 text-start">
                     <input id="singInSave" type="checkbox"> Keep me signed in.
                 </div>
                 <!-- 아이디찾기/패스워드찾기 -->
-                <!-- <div class="text-start m-2 p-2">
-                    <div><a class="m-2" href="" target="_self">Forgot your username?</a></div>
-                    <div><a class="m-2" href="" target="_self">Forgot your password?</a></div>
-                </div>    -->
+                <div class="text-start m-2 p-2">
+                    <div><a class="m-2" href="${pageContext.request.contextPath}/signJoin/findId" target="_self">Forgot your username?</a></div>
+                    <div><a class="m-2" href="${pageContext.request.contextPath}/signJoin/changePassword" target="_self">Forgot your password?</a></div>
+                </div>
                 <!-- 로그인 제출 버튼 -->
-                <div>
+                <div class="text-end me-4">
                     <button id="signInBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" type="submit" style="background: #2C4E80; color: white;">Sign In</button>
                 </div>
             </form>

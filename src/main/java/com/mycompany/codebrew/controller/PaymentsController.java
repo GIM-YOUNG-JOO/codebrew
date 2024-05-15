@@ -10,10 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/payments")
 public class PaymentsController {
 	@RequestMapping("")
-	public String menuIndex() {
-		log.info("실행");
+	public String payments() {
+		log.info("결제창 실행");
+		
 		return "payments/payments";
 	}
-	
-
 }

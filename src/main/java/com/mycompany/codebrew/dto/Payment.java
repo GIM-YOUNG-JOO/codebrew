@@ -7,12 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Payment {
 	
-	private int paId;
-	private int acId;
+	private int paId; // 결제코드
+	private int acId; // 계정코드
 	private int pdId;
 	private int paPdCount;
 	private String paName;

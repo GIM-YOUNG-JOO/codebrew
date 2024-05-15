@@ -1,0 +1,27 @@
+.item {
+	position: absolute;
+	width: 20%;
+	height: 90%;
+	text-align: center;
+	margin-top: 20px;
+	padding: 20px;
+	transition: 0.5s;
+	left: calc(50% - 150px);
+	top: 0;
+	z-index: 100;
+	background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+#next {
+	position: absolute;
+	right: 7%;
+	top: 47%;
+}
+
+#prev {
+	position: absolute;
+	left: 7%;
+	top: 47%;
+}

@@ -17,7 +17,9 @@ public class Pager {
    private int startRowIndex;   //페이지의 시작 행 인덱스(0, ..., n-1) for mysql
    private int endRowNo;      //페이지의 마지막 행 번호
    private int endRowIndex;   //페이지의 마지막 행 인덱스
-
+   private String searchText; //Board 검색어 -> xml 파일 매개변수 1개만 넘기기 위해서 여기에 필드 추가함
+   private String acId; 	  // 마이페이지에서 acId를 사용해서 자기 자신의 게시글 목록 조회 하려고
+   
    public Pager(int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo) {
       this.rowsPerPage = rowsPerPage;
       this.pagesPerGroup = pagesPerGroup;

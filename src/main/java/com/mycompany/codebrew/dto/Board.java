@@ -1,23 +1,26 @@
 package com.mycompany.codebrew.dto;
 
-import java.sql.Clob;
-import java.sql.Date;
+import java.util.Date;
 
-import lombok.AllArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Board {
 	
 	private int boId;
-	private int acId;
+	private String acId;
 	private String boTitle;
-	private Clob boContent;
+	private String boContent;
+	private Date boDate;
 	private Date boNewdate;
 	private int boHitcount;
-	private int biCd;
+	private int bcId;
+	private int boLike;
+	private int boCommentCount;
+	private byte[] boAttachdata;
+	private MultipartFile boAttach;
+
 
 }

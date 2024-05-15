@@ -52,10 +52,10 @@
 						</div>
 					</div>
 					<div class="d-flex flex-column flex-grow-1 h-100">
-						<div class="input-group flex-grow-1 p-2">
+<!-- 						<div class="input-group flex-grow-1 p-2">
 							<span class="input-group-text">상품 번호</span> <input type="text" class="form-control" id="prId" name="prId" placeholder="Product No"
 								aria-label="Username" aria-describedby="basic-addon1">
-						</div>
+						</div> -->
 						<div class="input-group flex-grow-1 p-2">
 							<span class="input-group-text text-center">상품명</span> <input type="text" class="form-control" id="prName" name="prName" placeholder="Menu Name"
 								aria-label="Username" aria-describedby="basic-addon1">

@@ -16,6 +16,9 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-start flex-grow-1 ms-3 mt-2 mb-2">
+                    	<li class="nav-item dropdown ms-2">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/admin/dashboard" role="button">Dashboard</a>
+                        </li>
                         <li class="nav-item dropdown ms-2">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -24,12 +27,12 @@
                             <ul class="dropdown-menu">
 
                                 <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/productList">상품 목록</a></li>
-                                <li><a class="dropdown-item" href="#">재고 관리</a></li>
+                                <li><a class="dropdown-item" href="#">재고 관리(미구현)</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/productRegistration">상품 등록</a></li>
-                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/productDelete">상품 삭제</a></li>
+                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/productDelete">상품 삭제(edit에 구현)</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -42,7 +45,7 @@
                                 Account
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">고객 관리</a></li>
+                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/accountList">고객 관리</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

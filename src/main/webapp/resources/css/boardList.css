@@ -2,7 +2,7 @@
 .first_box{
     display: flex;
     align-items: center;
-    background-color: #1e3932;
+    background-color: #00215E;
     height: 100px;
     margin-bottom: 60px;
 }
@@ -14,8 +14,7 @@
     padding-left: 18%;
 }
 
-a{
-    color: black;
+a{	
     text-decoration: none;
 }
 
@@ -24,6 +23,7 @@ a{
     margin: 0 auto;
     padding: 0 32px;
     max-width: 1200px;
+    min-width: 800px;
 }
 
 .left_box{
@@ -51,6 +51,7 @@ a{
 }
 
 .side_bar_first_box{
+	list-style-type: none;
     padding: .5rem .5rem;
     width: 120px;
 }
@@ -71,7 +72,7 @@ a{
 
 .search_input_box{
     width: 100%;
-    height: 48;
+    height: 48px;
     margin-right: 15px;
     border: none;
 }
@@ -82,7 +83,7 @@ a{
 }
 
 .search_button{
-    background-color: #00c471;
+    background-color: #2C4E80;
     color: #fff;
     min-width: 100px;
     height: 48px;
@@ -106,9 +107,15 @@ a{
     border-radius: 5px;
 }
 
+
 .select_box{
     display: flex;
     width: 100%;
+    align-items: center;
+}
+
+ul{
+    margin: 0px;
 }
 
 .select_box_button{
@@ -130,28 +137,38 @@ a{
     text-align: center;
 }
 
-.edit_button{
-    background-color: #b2b8be;
-    min-width: 100px;
-    color: #fff;
-    border: none;
+.edit_box{
+	align-items: center;
+	min-width: 700px;
 }
+
+.edit_button{
+    background-color: #2C4E80;
+    min-width: 100px;
+    height: 48px;
+    border: none;
+    display: flex;
+  	justify-content: center; /* 수평 가운데 정렬 */
+  	align-items: center; /* 수직 가운데 정렬 */
+  	color: #fff;
+}
+
 
 .question_list{
     list-style-type: none;
 }
 
 h6{
-font-weight: bold;
+	font-weight: bold;
 }
 
 p{  
-/* 텍스트 바디 한줄로 표시하는 css*/
-display: -webkit-box; /* 웹킷 기반 브라우저에서 다음 속성을 사용하기 위한 설정 */
--webkit-line-clamp: 1; /* 원하는 줄 수 지정 */
--webkit-box-orient: vertical; /* 수직으로 텍스트를 표시 */
-overflow: hidden; /* 넘치는 부분을 숨김 */
-text-overflow: ellipsis; /* 넘치는 부분을 "..."으로 표시 */
+	/* 텍스트 바디 한줄로 표시하는 css*/
+	display: -webkit-box; /* 웹킷 기반 브라우저에서 다음 속성을 사용하기 위한 설정 */
+	-webkit-line-clamp: 1; /* 원하는 줄 수 지정 */
+	-webkit-box-orient: vertical; /* 수직으로 텍스트를 표시 */
+	overflow: hidden; /* 넘치는 부분을 숨김 */
+	text-overflow: ellipsis; /* 넘치는 부분을 "..."으로 표시 */
 }
 
 
@@ -165,10 +182,18 @@ li:hover{
     background-color: #dee2e6;
 }
 
+button:hover{
+	background-color: #dee2e6;
+}
+
 .tag_box{
     background-color: #f1f3f5;
     border-radius: 4px;
     padding: 4px 8px;
+}
+
+.id_date_info{
+	
 }
 
 .question_info_footer{
@@ -181,4 +206,9 @@ li:hover{
 .footer_icon{
     width: 15px;
 }
+
+
+/* .ss{
+	border: 1px solid black;
+}  */
 

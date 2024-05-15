@@ -30,8 +30,8 @@
 			</div>
 			<div class="offcanvas-body">
 				<ul class="navbar-nav justify-content-start flex-grow-1 ms-3 mt-2 mb-2">
-					<li class="nav-item ms-2"><a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/menu">Menu</a></li>
-					<li class="nav-item ms-2"><a class="nav-link" href="${pageContext.request.contextPath}/menu/cart">Cart</a></li>
+					<li class="nav-item ms-2"><a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/order/menu">Menu</a></li>
+					<li class="nav-item ms-2"><a class="nav-link" href="${pageContext.request.contextPath}/order/cart">Cart</a></li>
 					<li class="nav-item ms-2"><a class="nav-link" href="${pageContext.request.contextPath}/board/boardList">Board</a></li>
 					<!-- 드롭다운 메뉴 쓸 경우를 대비해 유지
                              <li class="nav-item dropdown">
@@ -59,7 +59,8 @@
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 						<%-- 사이트간 요청 위조 방지 설정이 비활성화되어 있을 경우: GET 방식으로도 요청 가능 --%>
-						<b class="text-white me-2"> <sec:authentication property="principal.username" />
+						<b class="text-black me-2">
+							<sec:authentication property="principal.username" />
 						</b>
 						<a href="${pageContext.request.contextPath}/logout" class="btn btn-danger rounded-pill border">Sign Out</a>
 					</sec:authorize>

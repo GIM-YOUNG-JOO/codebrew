@@ -1,8 +1,0 @@
-package com.mycompany.codebrew.dao.mybatis;
-
-import org.apache.ibatis.annotations.Mapper;
-
-@Mapper
-public interface TempOptionDao {
-
-}

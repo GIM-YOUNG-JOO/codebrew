@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.mycompany.codebrew.dao.OrderDao">
+
+	<select id="selectByCoffee" resultType="Product">
+		select prId, prName,
+		pcId, prPrice, prImage as prImgData
+		from product
+		where pcId = 1
+		order by prId desc
+	</select>
+	<select id="selectByBeveridge" resultType="Product">
+		select prId, prName,
+		pcId, prPrice, prImage as prImgData
+		from product
+		where pcId = 2
+	</select>
+	<select id="selectByBean" resultType="Product">
+		select prId, prName, pcId,
+		prPrice, prImage as prImgData
+		from product
+		where pcId = 3
+	</select>
+	<select id="selectByMerchandise" resultType="Product">
+		select prId, prName,
+		pcId, prPrice, prImage as prImgData
+		from product
+		where pcId = 4
+	</select>
+	<select id="selectCoffeeByPrId" parameterType="int" resultType="Product">
+		select prId, prName, pcId, prPrice, prImage as prImgData
+		from product
+		where prId = #{prId}
+	</select>
+	<insert id="insertCart" parameterType="Cart">
+		<selectKey keyProperty="caId" order="BEFORE"
+			resultType="int">
+			select caid_seq.nextval from dual
+		</selectKey>
+		insert into cart(caId, acId, pdId)
+		values(#{caId}, #{acId}, #{pdId})
+	</insert>
+	<select id="selectCartList" parameterType="String" resultType="CartProductDetailProduct">
+		select c.caid as caId, pd.pdid as pdId, pd.pdshotcount as
+		pdShotCount, pd.pdcount as pdCount, p.prid as prId, p.prname as
+		prName, p.prprice as prPrice,
+		p.primage as prImgData, p.prinfo as prInfo, b.bopname as bopName, s.sopname
+		as sopName, t.topname as topName
+		from cart c, productdetail pd, product p, beansoption b, tempoption t,
+		sizeoption s
+		where c.pdid = pd.pdid
+		and pd.prid = p.prid
+		and pd.bopid = b.bopid
+		and pd.sopid = s.sopid
+		and pd.topid = t.topid
+		and acid = #{acId}
+		order by caid asc
+	</select>
+	<update id="updateProductDetail" parameterType="ProductDetail">
+		update productDetail set
+			bopId=#{bopId},
+			sopId=#{sopId},
+			topId=#{topId},
+			pdShotCount=#{pdShotCount},
+			pdCount=#{pdCount}
+		where pdId=#{pdId}
+	</update>
+	<select id="selectProductDetail" parameterType="int" resultType="ProductDetail">
+		select pd.pdId as pdId, pd.pdShotCount as pdShotCount, pd.pdCount as pdCount,
+		pd.sopId as sopId, pd.bopId as bopId, pd.topId as topId, pr.prName as prName, pr.prImage as prImgData
+		from PRODUCTDETAIL pd
+		INNER JOIN product pr ON pd.prid = pr.prid
+		where pdId = #{pdId}
+	</select>
+	<delete id="deleteCart" parameterType="Cart">
+		delete
+		from cart
+		where caId=#{caId}
+	</delete>
+	<delete id="deleteProductDetail" parameterType="Cart">
+		delete
+		from productDetail
+		where pdId=#{pdId}
+	</delete>
+
+</mapper>

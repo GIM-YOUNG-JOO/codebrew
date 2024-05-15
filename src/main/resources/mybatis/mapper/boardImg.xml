@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mycompany.springframework.dao.mybatis.BoardImgDao" >
+<mapper namespace="com.mycompany.codebrew.dao.BoardImgDao" >
 	
 	<!-- <insert id="insert" parameterType="BoardImg">
 			<selectKey keyProperty="biid" order="BEFORE" resultType="int">

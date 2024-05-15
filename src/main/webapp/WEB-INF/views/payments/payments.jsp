@@ -100,7 +100,7 @@ span {
 							<div class="col-2">
 							<img id="img2" class="rounded-circle" src="/codebrew/resources/image/cut/AppleJuice.png" width="50" height="50" />
 							</div>
-							<div class="col-6">
+							<div class="col-5">
 							Americano
 								<span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
 									data-bs-trigger="hover" data-bs-content="Vanila / Grande / Ice / 3Shots">
@@ -108,7 +108,7 @@ span {
 								</span>
 							</div>
 							<div class="col-2">3 Cups</div>
-							<div class="col-2">￦ 4500</div>
+							<div class="col-3">￦ 4500</div>
 						</div>
 						<div class="d-flex justify-content-around mt-3">
 							<button class="btn btn-outline-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal">\${sum} 결제</button>

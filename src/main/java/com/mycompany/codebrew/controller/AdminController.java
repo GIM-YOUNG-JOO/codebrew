@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.codebrew.dto.Account;
+import com.mycompany.codebrew.dto.Dashboard;
 import com.mycompany.codebrew.dto.Pager;
 import com.mycompany.codebrew.dto.Product;
 import com.mycompany.codebrew.service.AdminService;
@@ -29,8 +30,11 @@ public class AdminController {
 	private AdminService service;
 
 	@GetMapping("/dashboard")
-	public String dashboard() {
+	public String dashboard(Model model) {
 		log.info("대시보드 실행");
+		
+		Dashboard dashboard = service.getDashboardInfo();
+		model.addAttribute(dashboard);
 		return "admin/dashboard";
 	}
 

@@ -8,8 +8,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.codebrew.dao.AccountDao;
+import com.mycompany.codebrew.dao.DashboardDao;
 import com.mycompany.codebrew.dao.ProductDao;
 import com.mycompany.codebrew.dto.Account;
+import com.mycompany.codebrew.dto.Dashboard;
 import com.mycompany.codebrew.dto.Pager;
 import com.mycompany.codebrew.dto.Product;
 
@@ -22,6 +24,8 @@ public class AdminService {
 	private ProductDao productDao;
 	@Autowired
 	private AccountDao accountDao;
+	@Autowired
+	private DashboardDao dashboardDao;
 	
 	public void registComplete(Product product) {
 		//Business Logic
@@ -73,5 +77,14 @@ public class AdminService {
 
 	public void removeAccount(String acId) {
 		accountDao.deleteByAcId(acId);
+	}
+
+	public Dashboard getDashboardInfo() {
+		Dashboard dashboard = new Dashboard();
+		dashboard.setUserCount(dashboardDao.countUser());
+		dashboard.setMenuCount(dashboardDao.countMenu());
+		dashboard.setTotalSalesCount(100); // 결제 기능 완료 후 dashboardDao.totalSalesCount()
+		dashboard.setTotalSalesRevenue(500000); // dashboardDao.totalSalesRevenue()
+		return dashboard;
 	}
 }

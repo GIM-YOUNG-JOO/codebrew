@@ -96,22 +96,24 @@ span {
 					<div class="row text-center">
 						<h1 class="pfont">주문 내역</h1>
 					</div>
+					<c:forEach var="cart" items="${cartList}">
 						<div class="row d-flex align-items-center my-3">
 							<div class="col-2">
-							<img id="img2" class="rounded-circle" src="/codebrew/resources/image/cut/AppleJuice.png" width="50" height="50" />
+							<img id="img2" class="rounded-circle" src="data:image/jpeg;base64,${cart.prImageOut}" width="50" height="50" />
 							</div>
 							<div class="col-5">
-							Americano
+							${cart.prName}
 								<span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-									data-bs-trigger="hover" data-bs-content="Vanila / Grande / Ice / 3Shots">
+									data-bs-trigger="hover" data-bs-content="${cart.bopName} / ${cart.sopName} / ${cart.topName} / ${cart.pdShotCount}">
 									<button class="btn btn-sm btn-primary" type="button" disabled>detail</button>
 								</span>
 							</div>
-							<div class="col-2">3 Cups</div>
-							<div class="col-3">￦ 4500</div>
+							<div class="col-2">${cart.pdCount}shots</div>
+							<div class="col-3">￦${cart.prPrice}</div>
 						</div>
+					</c:forEach>
 						<div class="d-flex justify-content-around mt-3">
-							<button class="btn btn-outline-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal">\${sum} 결제</button>
+							<button class="btn btn-outline-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal">\${sum}￦ 결제</button>
 							<button class="btn btn-outline-secondary btn-lg">돌아가기</button>
 						</div>
 

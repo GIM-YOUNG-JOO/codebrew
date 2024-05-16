@@ -23,4 +23,11 @@ public class CodebrewUserDetails extends User {
 		this.account = account;
 	}
 	
+	public String getAcId() {
+		return account.getAcId();
+	}
+	
+	public String getAcRole() {
+		return account.getAcRole();
+	}
 }

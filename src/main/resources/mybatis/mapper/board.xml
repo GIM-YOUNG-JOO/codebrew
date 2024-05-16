@@ -218,6 +218,7 @@
 		from board
 		where boid = #{boId}
 	</select>
+	
 	<update id="updateHitCount" parameterType="int">
 		update board set
 			boHitCount = boHitCount + 1
@@ -255,5 +256,6 @@
 			boLike = boLike - 2
 			where boId = #{boId}
 	</update>
+	
 	 
 </mapper>

@@ -5,7 +5,9 @@ package com.mycompany.codebrew.controller;
 
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +16,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Board;
@@ -32,12 +37,11 @@ public class MyPageController {
 	@Autowired
 	MyPageService myPageService;
 	
-	
+	//MyPageService myPageService; 로 주입할 수 있도록 service단 수정해야함
 	@Autowired //myInfo 주입용
 	private AccountService acservice;
 
 	@GetMapping("/myInfo")
-
 	public String myInfoDetail(Authentication authentication, Model model) {
 		log.info("실행");
     
@@ -47,6 +51,43 @@ public class MyPageController {
 		model.addAttribute("account", account);
 		return "mypage/myInfo";
 	}
+	
+	@PostMapping("/myInfoChange")
+	public String myInfoChange(@RequestBody Map<String, String> accountChange, Authentication authentication, Model model) {
+		log.info("첫번째 값" + accountChange);
+	    // input으로 들어온 값을 변수에 저장
+		String acName = accountChange.get("acNameN");
+	    String acEmail = accountChange.get("acEmailE");
+	    String acTel = accountChange.get("acTelT");
+	    String acPassword = accountChange.get("acPasswordP");
+	    String acPasswordCheck = accountChange.get("acPasswordPP");
+	    CodebrewUserDetails codebrewUserDetails = (CodebrewUserDetails)authentication.getPrincipal();
+	    
+	    //받아온 값으로 계정의 정보를 업데이트 해주는 코드(전달)
+	    Account account = new Account();
+	    account.setAcId(codebrewUserDetails.getAcId());
+	    account.setAcName(acName);
+	    account.setAcEmail(acEmail);
+	    account.setAcTel(acTel);
+	    account.setAcPassword(acPassword);
+	    account.setAcPasswordCheck(acPasswordCheck);
+	    account.setAcRole(codebrewUserDetails.getAcRole());
+	    log.info("account" + account);
+	    
+	    myPageService.ChangeAccount(account);
+	    log.info("계정정보 업데이트 실행");
+		
+		// ----------------------------------------
+		// 업데이트한 계정의 정보를 불러오는 코드(받아오기)
+	    String acId = codebrewUserDetails.getAcId();
+	    Account accountChanged = myPageService.getAccount(acId);
+	    log.info("accountChanged" + accountChanged);
+		// 업데이트 된 계정의 정보를 모델을 통해 저장해주는 코드
+		model.addAttribute("accountChanged", accountChanged);
+		// 업데이트 된 정보를 에이젝스로 보여줌
+		return "mypage/myInfoAjax";
+	}
+	
 
 	
 	// 좋아요 정렬 및 제목 정렬

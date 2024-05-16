@@ -33,13 +33,13 @@ public class JoinNowValidator implements Validator {
 		
 		//아이디 검사
 		String acId = account.getAcId();
-		String acIdPattern = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}";
+		String acIdPattern = "(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{6,10}";
 		if(acId == null || acId.equals("")) {
 			errors.rejectValue("acId", null, "아이디는 반드시 입력해야합니다.");
-		} else if(acId.length() < 6 || acId.length() > 12) {
-			errors.rejectValue("acId", null, "아이디는 6자 이상 12자 이하로 입력해야합니다.");
+		} else if(acId.length() < 6 || acId.length() > 10) {
+			errors.rejectValue("acId", null, "아이디는 6자 이상 10자 이하로 입력해야합니다.");
 		} else if(!Pattern.matches(acIdPattern, acId)) {
-			errors.rejectValue("acId", null, "아이디는 알파벳 대소문자 및 숫자를 포함해야합니다.");
+			errors.rejectValue("acId", null, "아이디는 알파벳과 숫자를 포함해야합니다.");
 		}
 		
 		//비밀번호 검사

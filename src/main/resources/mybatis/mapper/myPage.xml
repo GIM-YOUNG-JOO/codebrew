@@ -28,4 +28,13 @@
 		where acid = #{acId}
 	</select> 
 	
+	<update id="updateAccount" parameterType="Account">
+		update account set
+			acName=#{acName},
+			acPassword=#{acPassword},
+			acTel=#{acTel},
+			acEmail=#{acEmail},
+			acRole=#{acRole}
+		where acId=#{acId}
+	</update>
 </mapper>

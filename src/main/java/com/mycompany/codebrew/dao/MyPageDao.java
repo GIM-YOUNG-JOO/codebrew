@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.Pager;
 
@@ -14,4 +15,5 @@ public interface MyPageDao {
 
 	public int count(String acId);
 
+	public void updateAccount(Account account);
 }

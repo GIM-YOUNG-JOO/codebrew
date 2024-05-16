@@ -44,24 +44,10 @@ public class AccountController {
 		return "signJoin/joinNow";
 	}
 	
-	/*@PostMapping("/signUp")
-	public String signUp(Account account) {
-		log.info("회원등록 실행");
-		log.info(account.getAcName());
-		log.info("" + account.getAcId());
-		log.info(account.getAcPassword());
-		log.info(account.getAcTel());
-		log.info(account.getAcEmail());
-		jnservice.joinNow(account);
-		return "redirect:/";
-	}*/
-	
 	@InitBinder("account") //Account dto 객체 관련 유효성 검사는 joinNowValidator 객체로 진행
 	public void joinNowValidator(WebDataBinder binder) {
 		binder.setValidator(new JoinNowValidator());
-		
-		log.info("joinNowValidator()실행");
-		
+		log.info("joinNowValidator()실행");	
 	}
 	
 	@RequestMapping ("/signUp")

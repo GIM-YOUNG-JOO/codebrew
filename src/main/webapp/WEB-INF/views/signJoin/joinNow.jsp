@@ -45,7 +45,7 @@
 			}
 			
 			//2)ID 검사 -------------------------------------------------------
-			var acIdPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;			
+			var acIdPattern = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,10}$/;			
 			var acIdResult = acIdPattern.test($("#acId").val());
 			var el_acId_span = document.querySelector("#acIdSpan");
 			if(acIdResult) {
@@ -161,7 +161,7 @@
                 	<div class="my-3">
                 	<label for="acId" class="form-lable px-4">* Id</label>
                     <div class="d-flex"><input id="acId" name="acId" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2"  placeholder=""></div>
-                    <span id="acIdSpan" class="form-text px-4">알파벳 대소문자, 숫자를 혼용해서 6자 이상 10장 이하</span>
+                    <span id="acIdSpan" class="form-text px-4">알파벳과 숫자를 혼용해서 6자 이상 10장 이하</span>
                     <%-- <form:errors path="account.acId"/> --%>
                 	</div>
                 	

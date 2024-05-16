@@ -20,8 +20,9 @@ public class Board {
 	private int boLike;
 	private int boCommentCount;
 	private byte[] boAttachdata;
-	private String boImageOut;
 	private int boUpdateCheck;
+	
+	private String boImageOut;
 	private MultipartFile boAttach;
 
 

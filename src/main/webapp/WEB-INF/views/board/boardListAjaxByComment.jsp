@@ -10,7 +10,7 @@
 			        
 			            <ul class="question_list">
 			                <li class="li mb-3">
-			                    <a class="" href="detailBoard?boId=${board.boId}">
+			                    <a class="" href="boardDetail?boId=${board.boId}">
 			                        <div class="question_info">
 			                            <h6 class="title_text">${board.boTitle}</h6>
 			                        </div>

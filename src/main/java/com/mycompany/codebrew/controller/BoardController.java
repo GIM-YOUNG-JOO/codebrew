@@ -100,7 +100,7 @@ public class BoardController {
 		return "board/boardDetail";
 	}
 	
-
+	
 	@PostMapping("/boardCommentAjax")
 	public String boardCommentRegister(Authentication authentication, @RequestBody BoardComment formData, Model model) {
 		//댓글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
@@ -115,6 +115,30 @@ public class BoardController {
 		model.addAttribute("boardCommentList", commentList);
 		return "board/boardDetailAjax";
 	}
+	
+	@PostMapping("/boardCommentDelete")
+	public String boardCommentDelete(Authentication authentication, @RequestBody BoardComment boardComment, Model model) {
+		//댓글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		String user = codebrewUserDetail.getAccount().getAcId();
+		model.addAttribute("user", user);
+		//받아온 댓글을 지워주자
+		log.info("보드커맨트 아이디 : " + boardComment.getBocId());
+		log.info("보드 아이디 : " + boardComment.getBoId());
+		boardService.deleteComment(boardComment.getBocId());
+		
+		List<BoardComment> commentList = boardService.getCommentList(boardComment.getBoId());
+		model.addAttribute("boardCommentList", commentList);
+		return "board/boardDetailAjax";
+	}
+	
+	@PostMapping("/boardDelete")
+	public String boardDelete(Board board) {
+		//게시물 삭제
+		boardService.boardDelete(board.getBoId());
+		return "redirect:/board/boardList";
+	}
+	
 	@ResponseBody
 	@PostMapping("/boardLike")
 	public Map<String, Integer> boardLike(Authentication authentication,@RequestBody BoLike boLike) {
@@ -425,7 +449,7 @@ public class BoardController {
 	public String updateRegisterGet(Board board, Model model) {
 		
 		// boId 초기화
-		board.setBoId(66);
+		board.setBoId(board.getBoId());
 		log.info("board 확인중: " + board.getBoId());
 		// 게시판을 수정하기 위해서 서버에서 값 받아옴
 		Board boardSaved = boardService.getBoardByboId(board);
@@ -442,7 +466,12 @@ public class BoardController {
 	
 	@PostMapping("/updateRegister")
 	public String updateRegisterPost(Board board) {
+		log.info("boId: " + board.getBoId());
+		log.info("boContent: " + board.getBoContent());
+		log.info("boTitle: " + board.getBoTitle());
 		log.info("updateChecker: " + board.getBoUpdateCheck());
+		boardService.updateBoard(board);
+		
 		return "redirect:/board/boardList";
 	}
 	

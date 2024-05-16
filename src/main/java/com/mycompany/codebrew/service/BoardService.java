@@ -37,7 +37,6 @@ public class BoardService {
 	public void writeBoard(Board board) {
 		int rowNum = boardDao.insert(board);
 		log.info("rowNum: " + rowNum + ", bno: " + board.getBoId());
-		
 	}
 	
 	public int getTotalRow() {
@@ -211,10 +210,6 @@ public class BoardService {
 		
 	}
 
-	
-
-	
-
 
 	public Account getAccountRole(String acId) {
 		return accountDao.selectByAcId(acId);
@@ -223,6 +218,31 @@ public class BoardService {
 	public Board getBoardByboId(Board board) {
 		Board boardSaved = boardDao.selectBoardByNum(board.getBoId());
 		 return boardSaved;
+	}
+
+
+	public void boardDelete(int boId) {
+		int result = boardDao.deleteBoardByBoId(boId);
+		
+	}
+
+	public void deleteComment(int bocId) {
+		int result = boardCommentDao.deleteBoardCommentByBocId(bocId);
+	}
+	public void updateBoard(Board board) {
+		// boUpdateCheck가 1일 경우 수정시 사진이 변경됨
+		if(board.getBoUpdateCheck() == 1) {
+			boardDao.updateBoardWith1();
+			// boUpdateCheck가 -1일 경우 사진이 삭제되어 DB에 사진 저장 X
+		} else if(board.getBoUpdateCheck() == -1 ) {
+			boardDao.updateBoardWithMinus1();
+			// boUpdateCheck가 0일 경우 기존에 사진 그대로 저장
+		} else {
+			boardDao.updateBoardWith0();
+			
+		}
+
+		
 	}
 
 	

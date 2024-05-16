@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.codebrew.dao.BoardCommentDao;
 import com.mycompany.codebrew.dao.BoardDao;
+import com.mycompany.codebrew.dto.BoLike;
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.BoardComment;
+import com.mycompany.codebrew.dto.BocLike;
 import com.mycompany.codebrew.dto.Pager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,7 @@ public class BoardService {
 	public void writeBoard(Board board) {
 		int rowNum = boardDao.insert(board);
 		log.info("rowNum: " + rowNum + ", bno: " + board.getBoId());
+		
 	}
 	
 	public int getTotalRow() {
@@ -91,6 +94,7 @@ public class BoardService {
 	}
 
 	public Board getBoard(int boId) {
+		int hitCount = boardDao.updateHitCount(boId);
 		return boardDao.selectBoardByNum(boId);
 	}
 
@@ -98,6 +102,109 @@ public class BoardService {
 		
 		return boardCommentDao.selectCommentList(boId);
 	}
+
+	public void writeBoardComment(BoardComment formData) {
+		boardCommentDao.insertComment(formData);
+		
+		
+	}
+
+	public BoLike getBoardLike(BoLike boLike) {
+		BoLike db = boardDao.selectBoardLike(boLike);
+		if(db == null) {
+			int result = boardDao.insertBoardLike(boLike);
+		}
+		return boardDao.selectBoardLike(boLike);
+	}
+	public BocLike getBoardCommentLike(BocLike bocLike) {
+		BocLike db = boardCommentDao.selectBoardCommentLike(bocLike);
+		if(db == null) {
+			int result = boardCommentDao.insertBoardCommentLike(bocLike);
+		}
+		return boardCommentDao.selectBoardCommentLike(bocLike);
+		
+	}
+
+	public void getIncreaseLike(BoLike boLike) {
+		int result1 = boardDao.updateLikeUp(boLike.getBoId());
+		int result2 = boardDao.updateLikeState(boLike);
+	}
+	public void getIncreaseCommentLike(BocLike bocLike) {
+		int result1 = boardCommentDao.updateCommentLikeUp(bocLike.getBocId());
+		int result2 = boardCommentDao.updateCommentLikeState(bocLike);
+		
+	}
+
+	public void getDecreaseLike(BoLike boLike) {
+		int result1 = boardDao.updateLikeDown(boLike.getBoId());
+		int result2 = boardDao.updateLikeState(boLike);
+	}
+	
+	public void getDecreaseCommentLike(BocLike bocLike) {
+		int result1 = boardCommentDao.updateCommentLikeDown(bocLike.getBocId());
+		int result2 = boardCommentDao.updateCommentLikeState(bocLike);
+		
+	}
+	
+	
+
+	public void restoreBoardLike(BoLike boLike) {
+		if(boLike.getBolState() == 1) {
+			int result1 = boardDao.updateLikeDown(boLike.getBoId());
+			boLike.setBolState(0);
+			int result2 = boardDao.updateLikeState(boLike);
+		}else if(boLike.getBolState() == -1) {
+			int result1 = boardDao.updateLikeUp(boLike.getBoId());
+			boLike.setBolState(0);
+			int result2 = boardDao.updateLikeState(boLike);
+		}
+		
+	}
+	public void restoreBoardCommentLike(BocLike bocLike) {
+		if(bocLike.getBoclState() == 1) {
+			int result1 = boardCommentDao.updateCommentLikeDown(bocLike.getBocId());
+			bocLike.setBoclState(0);
+			int result2 = boardCommentDao.updateCommentLikeState(bocLike);
+		}else if(bocLike.getBoclState() == -1) {
+			int result1 = boardCommentDao.updateCommentLikeUp(bocLike.getBocId());
+			bocLike.setBoclState(0);
+			int result2 = boardCommentDao.updateCommentLikeState(bocLike);
+		}
+		
+	}
+
+	public void getDoubleIncreaseLike(BoLike boLike) {
+		//상태변경
+		int result1 = boardDao.updateLikeState(boLike);
+		//좋아요  값 수정
+		int result2 = boardDao.updatedoubleLikeUp(boLike.getBoId());
+	}
+	public void getDoubleIncreaseCommnetLike(BocLike bocLike) {
+		//상태변경
+		int result1 = boardCommentDao.updateCommentLikeState(bocLike);
+		//좋아요  값 수정
+		int result2 = boardCommentDao.updateCommentdoubleLikeUp(bocLike.getBocId());
+		
+	}
+
+	public void getDoubleDecreaseLike(BoLike boLike) {
+		//상태변경
+		int result1 = boardDao.updateLikeState(boLike);
+		//좋아요 값 수정
+		int result2 = boardDao.updatedoubleLikeDown(boLike.getBoId());
+	}
+	
+	public void getDoubleDecreaseCommentLike(BocLike bocLike) {
+		//상태변경
+		int result1 = boardCommentDao.updateCommentLikeState(bocLike);
+		//좋아요 값 수정
+		int result2 = boardCommentDao.updateCommentdoubleLikeDown(bocLike.getBocId());
+		
+	}
+
+	
+
+	
 
 	
 }

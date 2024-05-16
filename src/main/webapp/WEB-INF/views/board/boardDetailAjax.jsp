@@ -36,6 +36,10 @@
 					<i class="bi bi-hand-thumbs-down like_button" onclick="boardCommentLike('${boardComment.bocId}',-1)"></i>
 					<input type="hidden" id="container${boardComment.bocId}" value="${boardComment.bocLike}">
 				</div>
+				<c:if test="${boardComment.acId eq user}">
+				<div style="width: 100%; height: 30px;"></div>
+				<button type="button" class="btn btn-dark" style="float:right;" onclick="">삭제</button>
+				</c:if>
 			</div>
 		</div>
 	</c:forEach>

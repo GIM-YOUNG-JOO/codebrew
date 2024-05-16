@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -151,6 +153,14 @@ function boardCommentLike(bocId, boclState){
 				<div class="p-4 border shadow flex-grow-1 mb-5" style="width: 100%;">
 					<p>${board.boContent}</p>
 				</div>
+				<c:if test="${board.acId eq user}">
+				<div style="margin-left:420px; margin-bottom:40px;">
+				<a href="${pageContext.request.contextPath}/board/updateRegister?&boId=${board.boId}">
+					<button class="btn btn-dark" type="button">수정</button>
+				</a>
+					<button class="btn btn-dark" type="button" onclick="">삭제</button>
+				</div>
+				</c:if>
 				<div class="input-group shadow" style="width: 100%; height: 15%;">
 					<textarea class="form-control" Id="bocContents" aria-label="With textarea"
 						style="background-color: white;"></textarea>
@@ -176,6 +186,10 @@ function boardCommentLike(bocId, boclState){
 									<i class="bi bi-hand-thumbs-down like_button" onclick="boardCommentLike('${boardComment.bocId}',-1)"></i>
 									<input type="hidden" id="container${boardComment.bocId}" value="${boardComment.bocLike}">
 								</div>
+								<c:if test="${boardComment.acId eq user}">
+								<div style="width: 100%; height: 30px;"></div>
+								<button type="button" class="btn btn-dark" style="float:right;" onclick="">삭제</button>
+								</c:if>
 							</div>
 						</div>
 					</c:forEach>

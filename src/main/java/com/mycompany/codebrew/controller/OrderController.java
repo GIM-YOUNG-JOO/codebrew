@@ -30,12 +30,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@Secured("ROLE_USER")
 @RequestMapping("/order")
 public class OrderController {
 	@Autowired
 	private OrderService service;
 
+	
 	@GetMapping("/menu")
 	public String menu(Model model) {
 		//pageNo를 받지 못했을 경우, 세션에 저장되어있는지 확인
@@ -69,6 +69,7 @@ public class OrderController {
 		return "order/menu";
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/cart")
 	public String cart(Model model,Authentication authentication) {
 		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
@@ -90,6 +91,7 @@ public class OrderController {
 		}
 		return "order/cart";
 	}
+	
 	@GetMapping("/detailPageGet")
 	public String detailPageGet(Model model, int prId) {
 		log.info("detailPageGet실행");
@@ -102,6 +104,8 @@ public class OrderController {
 		model.addAttribute("coffee", coffee);
 		return "order/detailPage";
 	}
+	
+	@Secured("ROLE_USER")
 	@PostMapping("/detailPagePost")
 	public String detailPagePost(ProductDetail productDetail, Principal principal) {
 		log.info("detailPagePost실행");
@@ -115,6 +119,7 @@ public class OrderController {
 		return "redirect:/order/menu";
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/detailPageUpdateGet")
 	public String detailPageUpdateGet(Model model, int pdId) {
 		log.info("detailPageUpdateGet실행");
@@ -128,6 +133,7 @@ public class OrderController {
 		return "order/detailPageUpdate";
 	}
 	
+	@Secured("ROLE_USER")
 	@PostMapping("/detailPageUpdatePost")
 	public String detailPageUpdatePost(ProductDetail productDetail) {
 		log.info("detailPageUpdatePost실행");
@@ -141,7 +147,9 @@ public class OrderController {
 		service.registCart(cart);*/
 		return "redirect:/order/cart";
 	}
+	
 	@ResponseBody
+	@Secured("ROLE_USER")
 	@PostMapping(value="/cartItemDelete", produces="application/json; charset=UTF-8")
 	public void cartItemDelete(@RequestBody Cart formData) {
 		log.info("" + formData.getCaId());

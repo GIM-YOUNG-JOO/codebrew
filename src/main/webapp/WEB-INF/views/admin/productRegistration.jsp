@@ -80,7 +80,7 @@
 
 					<div class="overflow-hidden card rounded-4" id="hovershadow">
 						<div class="overflow-hidden card table-nowrap rounded-4">
-							<div class="card-header bg-black text-white">Product
+							<div class="card-header bg-dark text-white">Product
 								Registration</div>
 							<div class="card-body d-flex flex-column p-0">
 								<div class="d-flex">

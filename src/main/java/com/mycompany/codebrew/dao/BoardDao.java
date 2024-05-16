@@ -55,11 +55,14 @@ public interface BoardDao {
 
 	public int updatedoubleLikeDown(int boId);
 
+	public int deleteBoardByBoId(int boId);
+	
 	public void updateBoardWith1(Board board);
 
 	public void updateBoardWithMinus1(Board board);
 
 	public void updateBoardWith0(Board board);
+
 
 
 

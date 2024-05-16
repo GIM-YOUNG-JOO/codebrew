@@ -31,5 +31,7 @@ public interface BoardCommentDao {
 
 	public int updateCommentdoubleLikeDown(int bocId);
 
+	public int deleteBoardCommentByBocId(int bocId);
+
 	
 }

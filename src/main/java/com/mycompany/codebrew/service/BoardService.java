@@ -220,6 +220,15 @@ public class BoardService {
 		return boardSaved;
 	}
 
+
+	public void boardDelete(int boId) {
+		int result = boardDao.deleteBoardByBoId(boId);
+		
+	}
+
+	public void deleteComment(int bocId) {
+		int result = boardCommentDao.deleteBoardCommentByBocId(bocId);
+	}
 	public void updateBoard(Board board) {
 		// boUpdateCheck가 1일 경우 수정시 사진이 변경됨
 		log.info("boattachdata1: " + board.getBoAttachdata());
@@ -236,6 +245,7 @@ public class BoardService {
 			boardDao.updateBoardWith0(board);
 			
 		}
+
 		
 	}
 

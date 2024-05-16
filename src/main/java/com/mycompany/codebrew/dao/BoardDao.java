@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mycompany.codebrew.dto.BoLike;
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.Pager;
@@ -37,5 +38,24 @@ public interface BoardDao {
 	public List<Board> selectByComment(Pager pager);
 
 	public List<Board> selectByCommentWithTitle(Pager pager);
+
+	public int updateHitCount(int boId);
+
+	public int insertBoardLike(BoLike boLike);
+
+	public BoLike selectBoardLike(BoLike boLike);
+
+	public int updateLikeUp(int boId);
+
+	public int updateLikeDown(int boId);
+
+	public int updateLikeState(BoLike boLike);
+
+	public int updatedoubleLikeUp(int boId);
+
+	public int updatedoubleLikeDown(int boId);
+
+
+
 
 }

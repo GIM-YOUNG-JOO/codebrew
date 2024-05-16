@@ -1,22 +1,35 @@
 package com.mycompany.codebrew.controller;
 
 import java.security.Principal;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
+
+import com.mycompany.codebrew.dto.BoLike;
+
 import com.mycompany.codebrew.dto.Account;
+
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.BoardComment;
+import com.mycompany.codebrew.dto.BocLike;
 import com.mycompany.codebrew.dto.Pager;
+import com.mycompany.codebrew.security.CodebrewUserDetails;
 import com.mycompany.codebrew.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -64,9 +77,21 @@ public class BoardController {
 	}
 
 	@GetMapping("/boardDetail")
-	public String boardDetail(int boId, Model model) {
+	public String boardDetail(int boId, Model model, Authentication authentication) {
+		//게시글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		String user = codebrewUserDetail.getAccount().getAcId();
+		model.addAttribute("user", user);
 		//boid를 통해 게시물 상세내용 가져와주기
 		Board board = boardService.getBoard(boId);
+		//조회수를 올려주는 기능을 처리하자
+		
+		
+		byte[] imageData = board.getBoAttachdata();
+		if (imageData != null) {
+			String img = Base64.getEncoder().encodeToString(imageData);
+			board.setBoImageOut(img);
+		}
 		//상세내용을 화면에 넘겨주기
 		model.addAttribute("board", board);
 		//board와 관련된 comment 모두 찾아와서 list로 넘겨주기
@@ -75,7 +100,112 @@ public class BoardController {
 		return "board/boardDetail";
 	}
 	
-	//
+
+	@PostMapping("/boardCommentAjax")
+	public String boardCommentRegister(Authentication authentication, @RequestBody BoardComment formData, Model model) {
+		//댓글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		String user = codebrewUserDetail.getAccount().getAcId();
+		model.addAttribute("user", user);
+		formData.setAcId(user);
+		//받아왔으니 insert를 통해 등록해주자
+		boardService.writeBoardComment(formData);
+		//등록해줬으니 commentList를 다시 불러와서 model을 통해 다시 저장해주고 뿌려주자
+		List<BoardComment> commentList = boardService.getCommentList(formData.getBoId());
+		model.addAttribute("boardCommentList", commentList);
+		return "board/boardDetailAjax";
+	}
+	@ResponseBody
+	@PostMapping("/boardLike")
+	public Map<String, Integer> boardLike(Authentication authentication,@RequestBody BoLike boLike) {
+		log.info("보드라이크 boid : " + boLike.getBoId());
+		log.info("보드라이크 bolState : " + boLike.getBolState());
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		String acId = codebrewUserDetail.getAccount().getAcId();
+		boLike.setAcId(acId);
+		//좋아요 여부를 확인하고 좋아요를 한 적 없으면 좋아요 해주고 이미 좋아요 했다면 할 수 없다고 알려주자.
+		//좋아요 테이블을 불러와주자
+		BoLike boLikeDb = boardService.getBoardLike(boLike);
+		int state = boLikeDb.getBolState();
+		log.info("좋아요 상태 : "  + state);
+		int result = 0;
+		if(boLike.getBolState() != state && boLike.getBolState() == 1) {
+			//boLiKe의 상태를  1로 바꿔주고 board의 좋아요를 1 증가시켜주자
+			if(boLikeDb.getBolState() != -1) {
+				boardService.getIncreaseLike(boLike);
+			}else if(boLikeDb.getBolState() == -1) {
+				boardService.getDoubleIncreaseLike(boLike);
+			}
+			result = 1;
+		}else if(boLike.getBolState() != state && boLike.getBolState() == -1) {
+			//boLike의 상태를 -1로 바꿔주고 board의 좋아요를  1 감소시켜주자
+			if(boLikeDb.getBolState() != 1) {
+				boardService.getDecreaseLike(boLike);
+			}else if(boLikeDb.getBolState() == 1) {
+				boardService.getDoubleDecreaseLike(boLike);
+			}
+			
+			result = 2;
+		}else if(boLike.getBolState() == state && boLike.getBolState() == 1) {
+			//좋아요를 취소해주자 bolState를 0으로 업데이
+			boardService.restoreBoardLike(boLike);
+			result = 3;
+		}else if(boLike.getBolState() == state && boLike.getBolState() == -1) {
+			//싫어요를 취소해주자 bolaState를 0으로 업데이트
+			boardService.restoreBoardLike(boLike);
+			result = 4;
+		}
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("Num", result);
+		return map;
+	}
+	@ResponseBody
+	@PostMapping("/boardCommentLike")
+	public Map<String, Integer> boardCommentLike(Authentication authentication,@RequestBody BocLike bocLike) {
+		log.info("보드커맨트라이크 boid : " + bocLike.getBocId());
+		log.info("보드커맨트라이크 bolState : " + bocLike.getBoclState());
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		String acId = codebrewUserDetail.getAccount().getAcId();
+		bocLike.setAcId(acId);
+		//좋아요 여부를 확인하고 좋아요를 한 적 없으면 좋아요 해주고 이미 좋아요 했다면 할 수 없다고 알려주자.
+		//좋아요 테이블을 불러와주자
+		BocLike bocLikeDb = boardService.getBoardCommentLike(bocLike);
+		int state = bocLikeDb.getBoclState();
+		log.info("좋아요 상태 : "  + state);
+		int result = 0;
+		if(bocLike.getBoclState() != state && bocLike.getBoclState() == 1) {
+			//boLiKe의 상태를  1로 바꿔주고 board의 좋아요를 1 증가시켜주자
+			if(bocLikeDb.getBoclState() != -1) {
+				boardService.getIncreaseCommentLike(bocLike);
+			}else if(bocLikeDb.getBoclState() == -1) {
+				boardService.getDoubleIncreaseCommnetLike(bocLike);
+			}
+			result = 1;
+		}else if(bocLike.getBoclState() != state && bocLike.getBoclState() == -1) {
+			//boLike의 상태를 -1로 바꿔주고 board의 좋아요를  1 감소시켜주자
+			if(bocLikeDb.getBoclState() != 1) {
+				boardService.getDecreaseCommentLike(bocLike);
+			}else if(bocLikeDb.getBoclState() == 1) {
+				boardService.getDoubleDecreaseCommentLike(bocLike);
+			}
+			
+			result = 2;
+		}else if(bocLike.getBoclState() == state && bocLike.getBoclState() == 1) {
+			//좋아요를 취소해주자 bolState를 0으로 업데이
+			boardService.restoreBoardCommentLike(bocLike);
+			result = 3;
+		}else if(bocLike.getBoclState() == state && bocLike.getBoclState() == -1) {
+			//싫어요를 취소해주자 bolaState를 0으로 업데이트
+			boardService.restoreBoardCommentLike(bocLike);
+			result = 4;
+		}
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("Num", result);
+		return map;
+	}
+	
+
+
 	@GetMapping("/boardRegister")
 	public String boardRegisterGet(Model model,Principal principal) {
 		Account account = boardService.getAccountRole(principal.getName());
@@ -288,6 +418,32 @@ public class BoardController {
 		model.addAttribute("pager", pager);
 		
 		return "board/boardListAjaxByTitle";
+	}
+	
+	// Board 수정 버튼 클릭시 연결하는 컨트롤러
+	@GetMapping("/updateRegister")
+	public String updateRegisterGet(Board board, Model model) {
+		
+		// boId 초기화
+		board.setBoId(66);
+		log.info("board 확인중: " + board.getBoId());
+		// 게시판을 수정하기 위해서 서버에서 값 받아옴
+		Board boardSaved = boardService.getBoardByboId(board);
+		
+		log.info(boardSaved.getAcId());
+		log.info(boardSaved.getBoContent());
+		log.info(boardSaved.getBoTitle());
+		
+		
+		model.addAttribute("board", boardSaved);
+		
+		return "board/boardUpdateRegister";
+	}
+	
+	@PostMapping("/updateRegister")
+	public String updateRegisterPost(Board board) {
+		log.info("updateChecker: " + board.getBoUpdateCheck());
+		return "redirect:/board/boardList";
 	}
 	
 }

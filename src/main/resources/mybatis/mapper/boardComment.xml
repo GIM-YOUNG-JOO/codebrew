@@ -17,6 +17,53 @@
 		select bocId, boId, bocContents, bocDate, bocNewdate, bocLike, acId
 		from BoardComment
 		where boId = #{boId}
+		order by bocNewdate desc
 	</select>
+	<insert id="insertComment" parameterType="BoardComment">
+		<selectKey keyProperty="bocId" order="BEFORE" resultType="int">
+			select bocid_seq.nextval from dual
+		</selectKey>
+		insert into boardComment(bocId, boId, bocContents, bocDate, bocNewDate, acId)
+		values(#{bocId}, #{boId}, #{bocContents}, sysdate, sysdate, #{acId})
+	</insert>
+	<insert id="insertCommentLike" parameterType="BocLike">
+	 insert into bocLike(bocId, acId)
+	 values(#{bocId},#{acId})
+	</insert>
+	<select id="selectBoardCommentLike" parameterType="BocLike" resultType="BocLike">
+		select * from bocLike
+		where bocId = #{bocId}
+		and acid = #{acId}
+	</select>
+	<insert id="insertBoardCommentLike" parameterType="BocLike">
+		insert into bocLike(bocId, acId)
+		values(#{bocId},#{acId})
+	</insert>
+	<update id="updateCommentLikeUp" parameterType="int">
+		update boardComment set
+			bocLike = bocLike + 1
+			where bocId = #{bocId}
+	</update>
+	<update id="updateCommentLikeState" parameterType="BocLike">
+		update bocLike set
+		boclState = #{boclState}
+		where bocId = #{bocId}
+		and acId = #{acId}
+	</update>
+	<update id="updateCommentLikeDown" parameterType="int">
+		update boardComment set
+			bocLike = bocLike - 1
+			where bocId = #{bocId}
+	</update>
+	<update id="updateCommentdoubleLikeUp" parameterType="int">
+		update boardComment set
+			bocLike = bocLike + 2
+			where bocId = #{bocId}
+	</update>
+	<update id="updateCommentdoubleLikeDown" parameterType="int">
+		update boardComment set
+			bocLike = bocLike - 2
+			where bocId = #{bocId}
+	</update>
 	
 </mapper>

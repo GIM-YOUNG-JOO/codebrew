@@ -6,10 +6,10 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Cart;
 import com.mycompany.codebrew.dto.CartProductDetailProduct;
 import com.mycompany.codebrew.dto.Product;
 import com.mycompany.codebrew.dto.ProductDetail;
+import com.mycompany.codebrew.security.CodebrewUserDetails;
 import com.mycompany.codebrew.service.OrderService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -68,12 +70,14 @@ public class OrderController {
 	}
 	
 	@GetMapping("/cart")
-	public String cart(Principal principal, Model model) {
-		log.info(principal.getName());
+	public String cart(Model model,Authentication authentication) {
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		Account account = codebrewUserDetail.getAccount();
+		log.info("멤버정보 :" + account);
 		//일단 유저가 로그인되어 있지 않으면 jsp에서 c:if를 통해서 장바구니 화면을 보여주지 않고 로그인해달라는 페이지로 만들기
-		if(principal.getName() != null) {
+		if(account.getAcId() != null) {
 		//유저의 아이디로 찾은 모든 카트를 프로덕트디테일, 프로덕트, 템프옵션, 사이즈옵션, 빈즈옵션 조인해서 가져오기(가져오기전에 필요한 컬럼들로만 구성된 DTO하나 만들어주기)
-		List<CartProductDetailProduct> cartList = service.getCartList(principal.getName());
+		List<CartProductDetailProduct> cartList = service.getCartList(account.getAcId());
 		//모델을 통해 화면에 보여줄 수 있게 저장해주기
 		for(CartProductDetailProduct list : cartList) {
 			byte[] imageData = list.getPrImgData();

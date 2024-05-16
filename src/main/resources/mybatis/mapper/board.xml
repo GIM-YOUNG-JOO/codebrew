@@ -18,6 +18,12 @@
 		</selectKey>
 		insert into board(boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bolike, bocommentcount)
 		values(#{boId}, #{acId}, #{boTitle}, #{boContent}, sysdate, sysdate, #{boHitcount}, #{bcId} ,#{boAttachdata}, #{boLike},#{boCommentCount})
+
+	</insert>
+	<insert id="insertBoardLike" parameterType="BoLike">
+		insert into boLike(boid, acid)
+		values(#{boId},#{acId})
+
 	</insert>
 	
 	<select id="count" resultType="int">
@@ -212,6 +218,44 @@
 		from board
 		where boid = #{boId}
 	</select>
+	
+	<update id="updateHitCount" parameterType="int">
+		update board set
+			boHitCount = boHitCount + 1
+			where boId = #{boId}
+	</update>
+	
+	<select id="selectBoardLike" parameterType="BoLike" resultType="BoLike">
+		select * from boLike
+		where boid = #{boId}
+		and acid = #{acId}
+	</select>
+	<update id="updateLikeUp" parameterType="int">
+		update board set
+			boLike = boLike + 1
+			where boId = #{boId}
+	</update>
+	<update id="updateLikeDown" parameterType="int">
+		update board set
+			boLike = boLike - 1
+			where boId = #{boId}
+	</update>
+	<update id="updateLikeState" parameterType="BoLike">
+		update boLike set
+		bolState = #{bolState}
+		where boId = #{boId}
+		and acId = #{acId}
+	</update>
+	<update id="updatedoubleLikeUp" parameterType="int">
+		update board set
+			boLike = boLike + 2
+			where boId = #{boId}
+	</update>
+	<update id="updatedoubleLikeDown" parameterType="int">
+		update board set
+			boLike = boLike - 2
+			where boId = #{boId}
+	</update>
 	
 	 
 </mapper>

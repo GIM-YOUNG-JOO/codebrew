@@ -14,7 +14,7 @@ public class BoardComment {
 
 	private int bocId;
 	private int boId;
-	private Clob bocContents;
+	private String bocContents;
 	private Date bocDate;
 	private Date bocNewdate;
 	private int bocLike;

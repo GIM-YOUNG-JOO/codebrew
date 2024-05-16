@@ -26,5 +26,7 @@
  		<typeAlias type="com.mycompany.codebrew.dto.Pager" alias="Pager"/>
  		<typeAlias type="com.mycompany.codebrew.dto.Menu" alias="Menu"/>
  		<typeAlias type="com.mycompany.codebrew.dto.CartProductDetailProduct" alias="CartProductDetailProduct"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.BoLike" alias="BoLike"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.BocLike" alias="BocLike"/>
  	</typeAliases>
  </configuration>

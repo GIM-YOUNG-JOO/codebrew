@@ -414,4 +414,30 @@ public class BoardController {
 		return "board/boardListAjaxByTitle";
 	}
 	
+	// Board 수정 버튼 클릭시 연결하는 컨트롤러
+	@GetMapping("/updateRegister")
+	public String updateRegisterGet(Board board, Model model) {
+		
+		// boId 초기화
+		board.setBoId(66);
+		log.info("board 확인중: " + board.getBoId());
+		// 게시판을 수정하기 위해서 서버에서 값 받아옴
+		Board boardSaved = boardService.getBoardByboId(board);
+		
+		log.info(boardSaved.getAcId());
+		log.info(boardSaved.getBoContent());
+		log.info(boardSaved.getBoTitle());
+		
+		
+		model.addAttribute("board", boardSaved);
+		
+		return "board/boardUpdateRegister";
+	}
+	
+	@PostMapping("/updateRegister")
+	public String updateRegisterPost(Board board) {
+		log.info("updateChecker: " + board.getBoUpdateCheck());
+		return "redirect:/board/boardList";
+	}
+	
 }

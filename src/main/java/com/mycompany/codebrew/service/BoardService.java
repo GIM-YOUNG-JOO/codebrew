@@ -220,5 +220,10 @@ public class BoardService {
 		return accountDao.selectByAcId(acId);
 	}
 
+	public Board getBoardByboId(Board board) {
+		Board boardSaved = boardDao.selectBoardByNum(board.getBoId());
+		 return boardSaved;
+	}
+
 	
 }

@@ -21,6 +21,7 @@ public class Board {
 	private int boCommentCount;
 	private byte[] boAttachdata;
 	private String boImageOut;
+	private int boUpdateCheck;
 	private MultipartFile boAttach;
 
 

@@ -64,7 +64,7 @@ public class MyPageController {
 		
 		// 문자열로 받은 pageNo를 정수로 변환
 		int intPageNo = Integer.parseInt(pageNo);
-		int rowsPagingTarget = myPageService.getTotalRow(principal.getName());
+		int rowsPagingTarget = myPageService.getBoardTotalRow(principal.getName());
 		log.info("" + rowsPagingTarget);
 		Pager pager = new Pager(3, 3, rowsPagingTarget, intPageNo);
 		

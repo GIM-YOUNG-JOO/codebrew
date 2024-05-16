@@ -16,4 +16,9 @@ public interface AccountDao {
 	public int deleteByAcId(String acId);
 	public int count();
 	public String selectAcIdByAcTel(Map<String, Object> params);
+	
+	// 게시판 user, admin 확인 용 DAO
+	public String selectRole(String acId);
+	public Account selectByAcIdAndAcNameAndAcEmail(Account account);
+	public void updatePassword(Account account);
 }

@@ -178,7 +178,10 @@
     display: block;
 }
 
-/* .ss{
-    border: 1px solid black;
-} 
- */
+#noticeButton{
+	border-radius: 10px;
+}
+
+#reviewButton{
+	border-radius: 10px;
+}

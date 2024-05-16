@@ -19,7 +19,7 @@
 .pfont {
 	font-family: "Do Hyeon", sans-serif;
 	font-style: normal;
-	font-size: 2em;
+	font-size: 2vmax;
 }
 
 /* #prev,
@@ -48,90 +48,42 @@
 	<div class="container-fluid h-100 bg-white rounded-4"
 		style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
 		<div class="row h-100">
-			<div class="d-flex col flex-column flex-shrink-0 p-3 text-white bg-dark h-100 rounded-start-4"
-				style="max-width: 280px; box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
-				<a href="/" class="d-flex justify-content-center align-items-center text-white text-decoration-none"> <span class="fs-4">Code Brew</span>
-				</a>
-				<hr>
-				<ul class="nav nav-pills flex-column mb-auto">
-					<li><a href="#" class="nav-link text-white"> <i class="bi bi-speedometer me-2"></i> Dashboard
-					</a></li>
-					<li><a href="#" class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false"> <i
-							class="bi bi-box me-2"></i> Product
-					</a>
-						<div class="collapse" id="dashboard-collapse">
-							<ul class="ms-2">
-								<li><a href="#" class="text-white text-decoration-none">상품 목록</a></li>
-								<li><a href="#" class="text-white text-decoration-none">상품 등록</a></li>
-								<li><a href="#" class="text-white text-decoration-none">상품 관리</a></li>
-								<li><a href="#" class="text-white text-decoration-none">상품 삭제</a></li>
-							</ul>
-						</div></li>
-					<li><a href="#" class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false"> <i
-							class="bi bi-person-video2 me-2"></i> Account
-					</a>
-						<div class="collapse" id="account-collapse">
-							<ul class="ms-2">
-								<li><a href="#" class="text-white text-decoration-none">계정 목록</a></li>
-								<li><a href="#" class="text-white text-decoration-none">계정 등록</a></li>
-								<li><a href="#" class="text-white text-decoration-none">계정 관리</a></li>
-								<li><a href="#" class="text-white text-decoration-none">계정 삭제</a></li>
-							</ul>
-						</div></li>
-					<li><a href="#" class="nav-link text-white"> <i class="bi bi-cpu me-2"></i> Guitar
-					</a></li>
-				</ul>
-				<hr>
-				<div class="dropdown">
-					<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown"
-						aria-expanded="false"> <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2"> <strong><sec:authentication property="principal.username"/></strong>
-					</a>
-					<ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" href="#">New project...</a></li>
-						<li><a class="dropdown-item" href="#">Settings</a></li>
-						<li><a class="dropdown-item" href="#">Profile</a></li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-						<li><a class="dropdown-item" href="#">Sign out</a></li>
-					</ul>
-				</div>
-			</div>
+			<%@ include file="/WEB-INF/views/admin/adminNavbar.jsp"%>
 			<div class="col p-4 z-0">
 				<div class="slider position-relative w-100 z-1 bg-dark rounded-4 overflow-hidden" style="height: 60%; box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
 					<div class="card item">
-						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img-top rounded-3" alt="...">
-						<div class="card-body">
+						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img rounded-3" alt="...">
+						<div class="card-body p-0">
 							<p class="card-title pfont text-white">500 명</p>
 							<p class="card-text pfont text-white">총 회원 수</p>
 						</div>
 					</div>
 					<div class="card item">
-						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
+						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
+						<div class="card-body p-0">
 							<p class="card-title pfont text-white">4082108 잔</p>
 							<p class="card-text pfont text-white">총 판매량</p>
 						</div>
 					</div>
 					<div class="card item">
-						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
+						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
+						<div class="card-body p-0">
 							<p class="card-title pfont text-white">15,000,000 원</p>
 							<p class="card-text pfont text-white">총 수익</p>
 						</div>
 					</div>
 					<div class="card item">
-						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
+						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
+						<div class="card-body p-0">
 							<p class="card-title pfont text-white">200 개</p>
 							<p class="card-text pfont text-white">메뉴 개수</p>
 						</div>
 					</div>
 					<div class="card item">
-						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
+						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
+						<div class="card-body p-0">
 							<p class="card-title pfont text-white">4 명</p>
-							<p class="card-text pfont text-white">프로젝트 제작 인원</p>
+							<p class="card-text pfont text-white">제작 인원</p>
 						</div>
 					</div>
 					<button class="btn btn-dark" id="next" style="font-size: xx-large;">>></button>
@@ -147,5 +99,4 @@
 		window.addEventListener('DOMContentLoaded', adjustLeftPosition);
 	</script>
 </body>
-
 </html>

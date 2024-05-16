@@ -6,9 +6,14 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.mycompany.codebrew.dao.AccountDao;
 import com.mycompany.codebrew.dao.BoardCommentDao;
 import com.mycompany.codebrew.dao.BoardDao;
+
 import com.mycompany.codebrew.dto.BoLike;
+
+import com.mycompany.codebrew.dto.Account;
+
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.BocLike;
@@ -25,6 +30,9 @@ public class BoardService {
 	
 	@Resource
 	BoardCommentDao boardCommentDao;
+	
+	@Resource
+	AccountDao accountDao;
 	
 	public void writeBoard(Board board) {
 		int rowNum = boardDao.insert(board);
@@ -102,6 +110,7 @@ public class BoardService {
 		
 		return boardCommentDao.selectCommentList(boId);
 	}
+
 
 	public void writeBoardComment(BoardComment formData) {
 		boardCommentDao.insertComment(formData);
@@ -205,6 +214,11 @@ public class BoardService {
 	
 
 	
+
+
+	public Account getAccountRole(String acId) {
+		return accountDao.selectByAcId(acId);
+	}
 
 	
 }

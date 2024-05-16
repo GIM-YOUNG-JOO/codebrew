@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- DataSource(Connection Pool) 설정 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	
+		<!-- Setter 주입 -->
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@kosa164.iptime.org:1521:orcl"/>
+		<property name="username" value="user_mini_team6"/>
+		<property name="password" value="oracle"/>
+	
+		<!-- 커넥션 유지 관리 설정 -->
+		<property name="initialSize" value="2"/>
+		<property name="maxTotal" value="8"/>
+		<property name="maxIdle" value="2"/>
+	</bean>
+</beans>

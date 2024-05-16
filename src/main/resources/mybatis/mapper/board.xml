@@ -18,10 +18,12 @@
 		</selectKey>
 		insert into board(boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bolike, bocommentcount)
 		values(#{boId}, #{acId}, #{boTitle}, #{boContent}, sysdate, sysdate, #{boHitcount}, #{bcId} ,#{boAttachdata}, #{boLike},#{boCommentCount})
+
 	</insert>
 	<insert id="insertBoardLike" parameterType="BoLike">
 		insert into boLike(boid, acid)
 		values(#{boId},#{acId})
+
 	</insert>
 	
 	<select id="count" resultType="int">
@@ -210,6 +212,7 @@
 	where rnum >= #{startRowNo}
 	]]>
 	</select>
+	
 	<select id="selectBoardByNum" parameterType="int" resultType="Board">
 		select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, boattachdata, bolike, bocommentcount
 		from board

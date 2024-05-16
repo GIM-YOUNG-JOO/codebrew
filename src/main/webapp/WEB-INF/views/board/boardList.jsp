@@ -44,8 +44,8 @@
 	<br>
 	<div class="first_box ss">
 		<div class="first_in_box ss">
-			<div class="mb-3 ss">질문 게시판</div>
-			<div>여러분의 질문을 받아요</div>
+			<div class="mb-3 ss">자유 게시판</div>
+			<div>리뷰를 남겨주세요</div>
 		</div>
 	</div>
 

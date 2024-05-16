@@ -26,7 +26,109 @@
 .card {
 	margin-top: 10px;
 }
+.like_button:hover {
+	cursor: pointer;
+}
 </style>
+<script type="text/javascript">
+function commentRegist(boId) {
+	console.log("commentRegist() 실행");
+	var bocContents = $('#bocContents').val();
+	var formData = { 
+			boId, 
+			bocContents					
+	} 
+	$.ajax({
+		url : "boardCommentAjax",
+		type : "post",
+		contentType: "application/json",
+		data : JSON.stringify(formData),
+		success: function(response){
+			console.log("보내기 성공");
+			console.log(response);
+			$("#boardCommentContainer").html(response);
+			
+			$('#bocContents').val('');
+		}
+	});
+	}
+function boardLike(boId, bolState){
+	var boId = boId;
+	var bolState = bolState;
+	var account = ${board.boLike};
+	var like_container = document.getElementById('board_like_account');
+	var boLike = {
+			boId,
+			bolState	
+	}
+	
+	$.ajax({
+		url : "boardLike",
+		type : "post",
+		contentType: "application/json",
+		data : JSON.stringify(boLike),
+		success: function(response){
+			if(response.Num == 1){
+				alert("게시물을 추천했습니다.");
+				account = account + 1;
+				like_container.textContent = account;
+			}else if(response.Num == 2){
+				alert("게시물을 비추천했습니다.");
+				account = account - 1;
+				like_container.textContent = account;
+			}else if(response.Num == 3){
+				alert("게시물 추천을 취소했습니다.");
+				account = account
+				like_container.textContent = account;
+			}else if(response.Num == 4){
+				alert("게시물 비추천을 취소했습니다.");
+				account = account
+				like_container.textContent = account;
+			}
+			
+		}
+	});
+}
+function boardCommentLike(bocId, boclState){
+	var bocId = bocId;
+	var boclState = boclState;
+	var account = $('#container'+bocId).val();
+	var like_container = document.getElementById('board_like_account'+bocId);
+	var bocLike = {
+			bocId,
+			boclState	
+	}
+	
+	$.ajax({
+		url : "boardCommentLike",
+		type : "post",
+		contentType: "application/json",
+		data : JSON.stringify(bocLike),
+		success: function(response){
+			if(response.Num == 1){
+				alert("댓글을 추천했습니다.");
+				account = +account + 1;
+				like_container.textContent = account;
+			}else if(response.Num == 2){
+				alert("댓글을 비추천했습니다.");
+				account = +account - 1;
+				like_container.textContent = account;
+			}else if(response.Num == 3){
+				alert("댓글 추천을 취소했습니다.");
+				account = +account
+				like_container.textContent = account;
+			}else if(response.Num == 4){
+				alert("댓글 비추천을 취소했습니다.");
+				account = +account
+				like_container.textContent = account;
+			}
+			
+		}
+	});
+}
+
+
+</script>
 </head>
 
 <body>
@@ -40,9 +142,9 @@
 					<div class="h1">${board.boTitle}</div>
 					<div
 						class="d-flex justify-content-end align-items-center flex-grow-1">
-						<button class="btn btn-lg bi bi-hand-thumbs-up"></button>
-						<span class="h5 m-1">${board.boLike}</span>
-						<button class="btn btn-lg bi bi-hand-thumbs-down"></button>
+						<button class="btn btn-lg bi bi-hand-thumbs-up" onclick="boardLike('${board.boId}',1)"></button>
+						<span class="h5 m-1" id="board_like_account">${board.boLike}</span>
+						<button class="btn btn-lg bi bi-hand-thumbs-down" onclick="boardLike('${board.boId}',-1)"></button>
 					</div>
 				</div>
 				<hr />
@@ -50,18 +152,18 @@
 					<p>${board.boContent}</p>
 				</div>
 				<div class="input-group shadow" style="width: 100%; height: 15%;">
-					<textarea class="form-control" aria-label="With textarea"
+					<textarea class="form-control" Id="bocContents" aria-label="With textarea"
 						style="background-color: white;"></textarea>
-					<button class="btn btn-dark">댓글 등록</button>
+					<button class="btn btn-dark" onclick="commentRegist('${board.boId}')">댓글 등록</button>
 				</div>
 			</div>
 			<div style="width: 50%">
 				<div class="d-flex justify-content-center p-5">
 					<img
-						src="${pageContext.request.contextPath}/resources/image/cut/AppleJuice.png"
+						src="data:image/jpeg;base64,${board.boImageOut}"
 						alt="" width="auto" height="300px">
 				</div>
-				<div class="d-flex align-items-center flex-column">
+				<div class="d-flex flex-grow-1 align-items-center flex-column" id="boardCommentContainer">
 					<div class="h1">Comment</div>
 					<c:forEach var="boardComment" items="${boardCommentList}">
 						<div class="card" style="width: 80%;">
@@ -70,8 +172,9 @@
 								<h6 class="card-subtitle mb-2 text-body-secondary">${boardComment.bocNewdate}</h6>
 								<p class="card-text">${boardComment.bocContents}</p>
 								<div class="card-link text-end">
-									<i class="bi bi-hand-thumbs-up"></i> <span class="ms-2 me-2">${boardComment.bocLike}</span>
-									<i class="bi bi-hand-thumbs-down"></i>
+									<i class="bi bi-hand-thumbs-up like_button" onclick="boardCommentLike('${boardComment.bocId}',1)"></i> <span class="ms-2 me-2" id="board_like_account${boardComment.bocId}">${boardComment.bocLike}</span>
+									<i class="bi bi-hand-thumbs-down like_button" onclick="boardCommentLike('${boardComment.bocId}',-1)"></i>
+									<input type="hidden" id="container${boardComment.bocId}" value="${boardComment.bocLike}">
 								</div>
 							</div>
 						</div>

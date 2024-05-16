@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.codebrew.dao.AccountDao;
@@ -33,6 +35,26 @@ public class AccountService {
 	public Account getAccount(String acId) {
 		Account account = accountDao.selectByAcId(acId);
 		return account;
+	}
+
+	public Account findAccountPwByIdAndTelAndEmail(Account account) {
+		
+		// 여러개의 매개변수 전달을 위해 Map으로 변환
+//		Map<String, Object> params = new HashMap<>();
+//		params.put("acId", acId);
+//		params.put("acName", acName);
+//		params.put("acEmail", acEmail);
+		
+		// 변환된 Map을 파라미터로 전달
+		Account accountSaved = accountDao.selectByAcIdAndAcNameAndAcEmail(account);
+		return accountSaved;
+	}
+
+	public void updatePassword(Account account) {
+		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		account.setAcPassword(passwordEncoder.encode(account.getAcPassword()));	
+		
+		accountDao.updatePassword(account);
 	}
     
 }

@@ -24,7 +24,7 @@
 		</div>
 	</div>
 
-	<form id="changeMyInfoForm" name="changeMyInfoForm" method="post"
+<%-- 	<form id="changeMyInfoForm" name="changeMyInfoForm" method="post"
 		action="myInfoChange">
 		<div class="p-5 flex-grow-1 d-flex align-items-center">
 			<div id="hovershadow"
@@ -79,6 +79,6 @@
 				</div>
 			</div>
 		</div>
-	</form>
+	</form> --%>
 </div>
 

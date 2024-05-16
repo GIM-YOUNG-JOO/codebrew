@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -53,8 +54,8 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/myInfoChange")
-	public String myInfoChange(@RequestBody Map<String, String> accountChange, Authentication authentication, Model model) {
-		log.info("첫번째 값" + accountChange);
+	public String myInfoChange(@Valid @RequestBody Map<String, String> accountChange, Authentication authentication, Model model) {
+		log.info("1 수정할 값 전달하기" + accountChange);
 	    // input으로 들어온 값을 변수에 저장
 		String acName = accountChange.get("acNameN");
 	    String acEmail = accountChange.get("acEmailE");
@@ -72,16 +73,16 @@ public class MyPageController {
 	    account.setAcPassword(acPassword);
 	    account.setAcPasswordCheck(acPasswordCheck);
 	    account.setAcRole(codebrewUserDetails.getAcRole());
-	    log.info("account" + account);
+	    log.info("2 account에 저장 : " + account);
 	    
 	    myPageService.ChangeAccount(account);
-	    log.info("계정정보 업데이트 실행");
+	    log.info("3 account로 계정정보 업데이트 실행");
 		
 		// ----------------------------------------
 		// 업데이트한 계정의 정보를 불러오는 코드(받아오기)
 	    String acId = codebrewUserDetails.getAcId();
 	    Account accountChanged = myPageService.getAccount(acId);
-	    log.info("accountChanged" + accountChanged);
+	    log.info("4 수정된 값 불러오기" + accountChanged);
 		// 업데이트 된 계정의 정보를 모델을 통해 저장해주는 코드
 		model.addAttribute("accountChanged", accountChanged);
 		// 업데이트 된 정보를 에이젝스로 보여줌

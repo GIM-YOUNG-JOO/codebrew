@@ -139,7 +139,7 @@
 				<!-- AJAX로 변경하는 시작점 -->
 				<div id="innerContainer"
 					class="p-5 d-flex flex-grow-1 align-items-center">
-					<div class="p-5 d-flex align-items-center">
+					<div id="myInfoDetailBox" class="p-5 d-flex align-items-center">
 						<div id="hovershadow"
 							class="p-5 rounded-4 d-flex flex-column align-items-center"
 							style="background-color: #F0F0F0;">
@@ -177,14 +177,20 @@
 										<div class="row">
 											<label class="form-label h4 text-light pfont align-text-bottom">Name</label>
 											<input class="form-control" list="datalistOptions" id="acName" name="acName" value="${account.acName}">
+											<!-- <h6 id="acNameAlarm" class="form-text px-4">한글 이름 2~4자 이내</h6> -->
+											<form:errors path="account.acName"/>
 										</div>
 										<div class="row">
 											<label class="form-label h4 text-light pfont">E-Mail</label>
 											<input class="form-control" id="acEmail" name="acEmail" value="${account.acEmail}">
+											<!-- <h6 id="acEmailAlarm" class="form-text px-4">'@'를 넣어서 작성해주세요</h6> -->
+											<form:errors path="account.acEmail"/>
 										</div>
 										<div class="row">
 											<label class="form-label h4 text-light pfont">Tel</label> 
 											<input class="form-control" id="acTel" name="acTel" value="${account.acTel}">
+											<!-- <h6 id="acTelAlarm" class="form-text px-4">'-'를 넣어서 작성해주세요</h6> -->
+											<form:errors path="account.acTel"/>
 										</div>
 									</div>
 								</div>
@@ -193,6 +199,8 @@
 									<div class="col">
 										<label class="form-label h4 text-light pfont">PW</label> 
 										<input class="form-control" list="datalistOptions" type="password" id="acPassword" name="acPassword" value="">										
+										<!-- <h6 id="acPasswordAlarm" class="form-text px-4">알파벳 대소문자, 숫자를 혼용해서 8자 이상 15장 이하</h6> -->
+										<form:errors path="account.acPassword"/>
 									</div>
 									<div class="col">
 										<label class="form-label h4 text-light pfont">ConfirmPW</label> 
@@ -258,7 +266,7 @@
 			contentType: "application/json",
 			data : JSON.stringify(accountChange),
 			success: function(response){
-			$('#innerContainer').html(response);
+			$('#myInfoDetailBox').html(response);
 				         
 			}
 		});  

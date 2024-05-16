@@ -46,14 +46,9 @@ public class MyPageService {
 		}
 
 	public void ChangeAccount(Account account) {
-		myPageDao.updateAccount(account);
-	}
-	
-	public void myInfoChange(Account account) {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		account.setAcPassword(passwordEncoder.encode(account.getAcPassword()));		
-		accountDao.insert(account);
-		log.info("prid: " + account.getAcId());
-		log.info("acPassword: " + account.getAcPassword());
+		myPageDao.updateAccount(account);
+		log.info("myPageService에서 비밀번호 인코딩 후 계정 정보 수정");
 	}
 }

@@ -442,13 +442,39 @@ public class BoardController {
 	
 	@PostMapping("/updateRegister")
 	public String updateRegisterPost(Board board) {
-		log.info("boId: " + board.getBoId());
-		log.info("boContent: " + board.getBoContent());
-		log.info("boTitle: " + board.getBoTitle());
-		log.info("updateChecker: " + board.getBoUpdateCheck());
-		boardService.updateBoard(board);
 		
-		return "redirect:/board/boardList";
+		log.info("updateCheck: "+board.getBoUpdateCheck());
+		log.info("BoAttach: "+board.getBoAttach());
+		log.info("BoAttachdata: "+board.getBoAttachdata());
+		
+		
+		
+		log.info("BoAttachdata: "+ board.getBoAttachdata());
+		// 기존의 값 DB에서 받아옴
+		Board boardSaved = boardService.getBoardByboId(board);
+		
+		if (board.getBoAttach() != null & !board.getBoAttach().isEmpty()) {
+			// DTO 추가 설정 -> 이후에 이름, 타입 필요하면 추가 예정
+//					board.setBattachoname(board.getBattach().getOriginalFilename());
+//					board.setBattachtype(board.getBattach().getContentType());
+			try {
+				board.setBoAttachdata(board.getBoAttach().getBytes());
+				log.info("사진 바이트: " + board.getBoAttachdata());
+				// multipartFile에서 바이트 -> 파일 정보 받아옴
+			} catch (Exception e) {
+
+			}
+		}
+		
+		// 변경된 내용들 넣어줌
+		boardSaved.setBoTitle(board.getBoTitle());
+		boardSaved.setBoContent(board.getBoContent());
+		boardSaved.setBoUpdateCheck(board.getBoUpdateCheck());
+		boardSaved.setBoAttachdata(board.getBoAttachdata());
+		
+		boardService.updateBoard(boardSaved);
+		
+		return "redirect:/board/boardDetail?boId="+board.getBoId();
 	}
 	
 }

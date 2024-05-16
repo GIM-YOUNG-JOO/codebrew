@@ -217,19 +217,23 @@ public class BoardService {
 
 	public Board getBoardByboId(Board board) {
 		Board boardSaved = boardDao.selectBoardByNum(board.getBoId());
-		 return boardSaved;
+		return boardSaved;
 	}
 
 	public void updateBoard(Board board) {
 		// boUpdateCheck가 1일 경우 수정시 사진이 변경됨
+		log.info("boattachdata1: " + board.getBoAttachdata());
+		
+		Board boardSaved;
 		if(board.getBoUpdateCheck() == 1) {
-			boardDao.updateBoardWith1();
+			boardDao.updateBoardWith1(board);
+			log.info("boattachdata2: " + board.getBoAttachdata());
 			// boUpdateCheck가 -1일 경우 사진이 삭제되어 DB에 사진 저장 X
 		} else if(board.getBoUpdateCheck() == -1 ) {
-			boardDao.updateBoardWithMinus1();
+			boardDao.updateBoardWithMinus1(board);
 			// boUpdateCheck가 0일 경우 기존에 사진 그대로 저장
 		} else {
-			boardDao.updateBoardWith0();
+			boardDao.updateBoardWith0(board);
 			
 		}
 		

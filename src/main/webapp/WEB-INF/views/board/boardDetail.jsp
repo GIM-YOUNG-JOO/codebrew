@@ -54,6 +54,32 @@ function commentRegist(boId) {
 		}
 	});
 	}
+function deleteTag(element){
+	var parent = element.parentNode;
+	parent.parentNode.remove()
+}	
+	
+function boardCommentDelete(bocId, boId, element) {
+	console.log("boardDelete() 실행", boId);
+	
+	var boardComment = {
+			bocId,
+			boId
+	}
+			 
+	$.ajax({
+		url : "boardCommentDelete",
+		type : "post",
+		contentType: "application/json",
+		data : JSON.stringify(boardComment),
+		success: function(response){
+			console.log("보드커맨트 삭제 성공");
+			console.log(response);
+			
+		}
+	});
+	deleteTag(element);
+	}
 function boardLike(boId, bolState){
 	var boId = boId;
 	var bolState = bolState;
@@ -158,7 +184,10 @@ function boardCommentLike(bocId, boclState){
 				<a href="${pageContext.request.contextPath}/board/updateRegister?&boId=${board.boId}">
 					<button class="btn btn-dark" type="button">수정</button>
 				</a>
-					<button class="btn btn-dark" type="button" onclick="">삭제</button>
+					<form method="post" action="boardDelete" style="display: inline-block;">
+						<input type="hidden" name=boId value="${board.boId}">
+						<button class="btn btn-dark" name="boId">삭제</button>
+					</form>
 				</div>
 				</c:if>
 				<div class="input-group shadow" style="width: 100%; height: 15%;">
@@ -188,7 +217,7 @@ function boardCommentLike(bocId, boclState){
 								</div>
 								<c:if test="${boardComment.acId eq user}">
 								<div style="width: 100%; height: 30px;"></div>
-								<button type="button" class="btn btn-dark" style="float:right;" onclick="">삭제</button>
+								<button type="button" class="btn btn-dark" style="float:right;" onclick="boardCommentDelete('${boardComment.bocId}','${boardComment.boId}',this)">삭제</button>
 								</c:if>
 							</div>
 						</div>

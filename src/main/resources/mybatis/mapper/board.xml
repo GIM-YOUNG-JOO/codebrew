@@ -256,6 +256,11 @@
 			boLike = boLike - 2
 			where boId = #{boId}
 	</update>
+	<delete id="deleteBoardByBoId" parameterType="int">
+		delete
+		from board
+		where boId=#{boId}
+	</delete>
 	
 	 
 </mapper>

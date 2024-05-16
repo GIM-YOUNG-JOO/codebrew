@@ -225,5 +225,15 @@ public class BoardService {
 		 return boardSaved;
 	}
 
+	public void boardDelete(int boId) {
+		int result = boardDao.deleteBoardByBoId(boId);
+		
+	}
+
+	public void deleteComment(int bocId) {
+		int result = boardCommentDao.deleteBoardCommentByBocId(bocId);
+		
+	}
+
 	
 }

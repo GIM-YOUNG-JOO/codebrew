@@ -38,7 +38,7 @@
 				</div>
 				<c:if test="${boardComment.acId eq user}">
 				<div style="width: 100%; height: 30px;"></div>
-				<button type="button" class="btn btn-dark" style="float:right;" onclick="">삭제</button>
+				<button type="button" class="btn btn-dark" style="float:right;" onclick="boardCommentDelete('${boardComment.bocId}','${boardComment.boId}',this)">삭제</button>
 				</c:if>
 			</div>
 		</div>

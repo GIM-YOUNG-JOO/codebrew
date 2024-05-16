@@ -77,7 +77,11 @@ public class BoardController {
 	}
 
 	@GetMapping("/boardDetail")
-	public String boardDetail(int boId, Model model) {
+	public String boardDetail(int boId, Model model, Authentication authentication) {
+		//게시글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		String user = codebrewUserDetail.getAccount().getAcId();
+		model.addAttribute("user", user);
 		//boid를 통해 게시물 상세내용 가져와주기
 		Board board = boardService.getBoard(boId);
 		//조회수를 올려주는 기능을 처리하자
@@ -98,10 +102,12 @@ public class BoardController {
 	
 
 	@PostMapping("/boardCommentAjax")
-	public String boardCommentRegister(Principal principal,@RequestBody BoardComment formData, Model model) {
-		log.info("" + formData.getBoId());
-		log.info("" + formData.getBocContents());
-		formData.setAcId(principal.getName());
+	public String boardCommentRegister(Authentication authentication, @RequestBody BoardComment formData, Model model) {
+		//댓글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		String user = codebrewUserDetail.getAccount().getAcId();
+		model.addAttribute("user", user);
+		formData.setAcId(user);
 		//받아왔으니 insert를 통해 등록해주자
 		boardService.writeBoardComment(formData);
 		//등록해줬으니 commentList를 다시 불러와서 model을 통해 다시 저장해주고 뿌려주자
@@ -412,6 +418,32 @@ public class BoardController {
 		model.addAttribute("pager", pager);
 		
 		return "board/boardListAjaxByTitle";
+	}
+	
+	// Board 수정 버튼 클릭시 연결하는 컨트롤러
+	@GetMapping("/updateRegister")
+	public String updateRegisterGet(Board board, Model model) {
+		
+		// boId 초기화
+		board.setBoId(66);
+		log.info("board 확인중: " + board.getBoId());
+		// 게시판을 수정하기 위해서 서버에서 값 받아옴
+		Board boardSaved = boardService.getBoardByboId(board);
+		
+		log.info(boardSaved.getAcId());
+		log.info(boardSaved.getBoContent());
+		log.info(boardSaved.getBoTitle());
+		
+		
+		model.addAttribute("board", boardSaved);
+		
+		return "board/boardUpdateRegister";
+	}
+	
+	@PostMapping("/updateRegister")
+	public String updateRegisterPost(Board board) {
+		log.info("updateChecker: " + board.getBoUpdateCheck());
+		return "redirect:/board/boardList";
 	}
 	
 }

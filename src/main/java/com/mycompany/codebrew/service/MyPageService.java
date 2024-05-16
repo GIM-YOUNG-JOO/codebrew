@@ -24,12 +24,12 @@ public class MyPageService {
 	
 	@Autowired
 	private MyPageDao myPageDao;
-	
+
 	@Autowired
 	private AccountDao accountDao;
 	
 	
-	public int getTotalRow(String acId) {
+	public int getBoardTotalRow(String acId) {
 		int totalRows = myPageDao.count(acId);
 		return totalRows;
 	}

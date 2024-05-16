@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +43,7 @@ public class MyPageController {
 	@Autowired //myInfo 주입용
 	private AccountService acservice;
 
+	@Secured("ROLE_USER")
 	@GetMapping("/myInfo")
 	public String myInfoDetail(Authentication authentication, Model model) {
 		log.info("실행");
@@ -106,7 +108,7 @@ public class MyPageController {
 		
 		// 문자열로 받은 pageNo를 정수로 변환
 		int intPageNo = Integer.parseInt(pageNo);
-		int rowsPagingTarget = myPageService.getTotalRow(principal.getName());
+		int rowsPagingTarget = myPageService.getBoardTotalRow(principal.getName());
 		log.info("" + rowsPagingTarget);
 		Pager pager = new Pager(3, 3, rowsPagingTarget, intPageNo);
 		

@@ -54,35 +54,35 @@
 					<div class="card item">
 						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img rounded-3" alt="...">
 						<div class="card-body p-0">
-							<p class="card-title pfont text-white">500 명</p>
+							<p class="card-title pfont text-white">${dashboard.userCount}명</p>
 							<p class="card-text pfont text-white">총 회원 수</p>
 						</div>
 					</div>
 					<div class="card item">
 						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
 						<div class="card-body p-0">
-							<p class="card-title pfont text-white">4082108 잔</p>
+							<p class="card-title pfont text-white">${dashboard.totalSalesCount}잔</p>
 							<p class="card-text pfont text-white">총 판매량</p>
 						</div>
 					</div>
 					<div class="card item">
 						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
 						<div class="card-body p-0">
-							<p class="card-title pfont text-white">15,000,000 원</p>
+							<p class="card-title pfont text-white">${dashboard.totalSalesRevenue}원</p>
 							<p class="card-text pfont text-white">총 수익</p>
 						</div>
 					</div>
 					<div class="card item">
 						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
 						<div class="card-body p-0">
-							<p class="card-title pfont text-white">200 개</p>
+							<p class="card-title pfont text-white">${dashboard.menuCount}개</p>
 							<p class="card-text pfont text-white">메뉴 개수</p>
 						</div>
 					</div>
 					<div class="card item">
 						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
 						<div class="card-body p-0">
-							<p class="card-title pfont text-white">4 명</p>
+							<p class="card-title pfont text-white">${dashboard.maker}명</p>
 							<p class="card-text pfont text-white">제작 인원</p>
 						</div>
 					</div>

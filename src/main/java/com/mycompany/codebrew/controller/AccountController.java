@@ -122,6 +122,7 @@ public class AccountController {
 		
 		return " ";
 	}*/
+	
 	@ResponseBody
 	@GetMapping("/findPassword")
 	public Map<String ,Integer> findPassword(Account account) {

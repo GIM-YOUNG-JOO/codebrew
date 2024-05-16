@@ -101,6 +101,13 @@ public class AdminController {
 	public String productEdit(int prId, Model model) {
 		log.info("상품 수정  실행");
 		Product product = service.getProduct(prId);
+		
+		byte[] imageData = product.getPrImgData();
+		if (product.getPrImgData() != null) {
+			String img = Base64.getEncoder().encodeToString(imageData);
+			product.setPrImageOut(img);
+		}
+		
 		model.addAttribute("product", product);
 		return "admin/productEdit";
 	}
@@ -116,6 +123,7 @@ public class AdminController {
 
 			}
 		}
+		log.info("이게 문젠가 : " + product.getPrId());
 		log.info("수정 로그 : " + product.getPrImgData());
 		// 비즈니스 로직 처리를 서비스로 위임
 		service.updateProduct(product);

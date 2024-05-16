@@ -17,9 +17,9 @@
 			</div>
 		</li>
 		<li class="list-group-item"><a href="${pageContext.request.contextPath}/menu/cart">Cart</a></li>
-		<li class="list-group-item"><a href="#">Board</a></li>
-		<li class="list-group-item"><a href="${pageContext.request.contextPath}/admin/productList">Admin Page</a></li>
-		<li class="list-group-item"><a href="#">Developers</a></li>
+		<li class="list-group-item"><a href="${pageContext.request.contextPath}/board/boardList">Board</a></li>
+		<li class="list-group-item"><a href="${pageContext.request.contextPath}/admin/dashboard">Admin Page</a></li>
+		<li class="list-group-item"><a href="https://github.com/GIM-YOUNG-JOO/codebrew">Developers</a></li>
 		<li class="list-group-item">
 			<p class="text-muted" style="font-family: 'Gothic'; font-size: 0.7rem;">© 2024 CodeBrew is Starbucks Copycat. All rights not reserved.</p>
 		</li>

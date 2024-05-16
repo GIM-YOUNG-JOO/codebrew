@@ -69,7 +69,9 @@
 			<div class="flex-grow-1 ms-4">
 				<p class="h3">${cart.prName}</p>
 				<p class="h5 mt-3">coffee-Size : ${cart.sopName}</p>
+				<c:if test="${cart.pdShotCount != 0}"> 
 				<p class="h6 mt-3">shot-Quantity : ${cart.pdShotCount}</p>
+				</c:if>
 				<div class="mt-4 d-flex align-items-center">
                     <a href="${pageContext.request.contextPath}/order/detailPageUpdateGet?&pdId=${cart.pdId}"><i class="bi bi-pen text-muted cart-icon"></i></a>
                     <i class="bi bi-plus-circle text-muted ms-5 me-3 cart-icon"  onclick="increaseAmount(this)"></i>

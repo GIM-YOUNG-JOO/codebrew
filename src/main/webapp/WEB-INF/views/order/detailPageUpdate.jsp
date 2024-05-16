@@ -125,12 +125,13 @@ function decreaseAmount1(element) {
                     What's included
                 </span>
             </h2>
+            <c:if test="${pd.pcId eq '1'}"> 
             <div class="dust-class">
               <label class="dts"><span>* </span>coffee-beans-Options</label>
                 <select class= "" name="bopId">
-                  <option value="1" ${pd.bopId == 1 ? 'selected' : ''}>beans-options1</option>
-                  <option value="2" ${pd.bopId == 2 ? 'selected' : ''}>beans-options2</option>
-                  <option value="3" ${pd.bopId == 3 ? 'selected' : ''}>beans-options3</option>
+                  <option value="1" ${pd.bopId == 1 ? 'selected' : ''}>Arabica</option>
+                  <option value="2" ${pd.bopId == 2 ? 'selected' : ''}>Robusta</option>
+                  <option value="3" ${pd.bopId == 3 ? 'selected' : ''}>Liberica</option>
                 </select>
             </div>
             <div class="dust-class">
@@ -153,8 +154,9 @@ function decreaseAmount1(element) {
                   <input type="hidden" name="pdShotCount" id="shotsInput" value="1">
                 </div>  
             </div>
+            </c:if>
             <div class="dust-class">
-              <label class="dts2"><span>* </span>coffee-Quantity</label>
+              <label class="dts2"><span>* </span>Quantity</label>
                 <div class="shots-container">
                   <p>Quantity
                     <span>

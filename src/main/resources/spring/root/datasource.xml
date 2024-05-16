@@ -8,7 +8,7 @@
 	
 		<!-- Setter 주입 -->
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@kosa164.iptime.org:1521:orcl"/>
+		<property name="url" value="jdbc:oracle:thin:@kosa163.iptime.org:1521:orcl"/>
 		<property name="username" value="user_mini_team6"/>
 		<property name="password" value="oracle"/>
 	

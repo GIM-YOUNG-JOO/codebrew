@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.mycompany.codebrew.dao.PaymentDao">
-	<insert id="insert" parameterType="Payment">
-	
-	</insert>
+<mapper namespace="com.mycompany.codebrew.dao.PaymentsDao">
+
+	<select id="selectCartList" parameterType="String" resultType="CartProductDetailProduct">
+		SELECT c.caid AS caId,
+		pd.pdid AS pdId,
+		pd.pdshotcount AS pdShotCount,
+		pd.pdcount AS pdCount,
+		p.prid AS prId,
+		p.prname AS prName,
+		p.prprice AS prPrice,
+		p.primage AS prImgData,
+		p.prinfo AS prInfo,
+		b.bopname AS bopName,
+		s.sopname AS sopName,
+		t.topname AS topName
+		FROM cart c
+		JOIN productDetail pd ON c.pdid = pd.pdid
+		JOIN product p ON pd.prid = p.prid
+		JOIN beansOption b ON pd.bopid = b.bopid
+		JOIN tempOption t ON pd.topid = t.topid
+		JOIN sizeOption s ON pd.sopid = s.sopid
+		WHERE c.acid = #{acId}
+		ORDER BY caId ASC
+	</select>
+
 </mapper>

@@ -28,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@Secured("ROLE_USER")
 @RequestMapping("/order")
 public class OrderController {
 	@Autowired
@@ -66,7 +67,6 @@ public class OrderController {
 		return "order/menu";
 	}
 	
-	@Secured("ROLE_USER")
 	@GetMapping("/cart")
 	public String cart(Principal principal, Model model) {
 		log.info(principal.getName());

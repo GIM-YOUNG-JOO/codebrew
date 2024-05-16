@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +37,8 @@ public class MyPageController {
 	@Autowired //myInfo 주입용
 	private AccountService acservice;
 
+	@Secured("ROLE_USER")
 	@GetMapping("/myInfo")
-
 	public String myInfoDetail(Authentication authentication, Model model) {
 		log.info("실행");
     

@@ -17,6 +17,7 @@ public class ProductDetail {
 	private String prName;
 	private byte[] prImgData;
 	private String prImageOut;
+	private int pcId;
 	
 	private int bopId;
 	private int sopId;

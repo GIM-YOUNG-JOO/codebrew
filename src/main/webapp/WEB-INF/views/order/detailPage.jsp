@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String prId = request.getParameter("prId");
 %>
@@ -117,33 +118,35 @@
 					<h2 class="h2_text">
 						<span class="text_container"> What's included </span>
 					</h2>
-					<div class="dust-class">
-						<label class="dts"><span>* </span>coffee-beans-Options</label> <select class="" name="bopId">
-							<option value="1" selected>beans-options1(default)</option>
-							<option value="2">beans-options2</option>
-							<option value="3">beans-options3</option>
-						</select>
-					</div>
-					<div class="dust-class">
-						<label class="dts"><span>* </span>temperature-Options</label> <select class="" name="topId">
-							<option value="1" selected>ice(default)</option>
-							<option value="2">hot</option>
-						</select>
-					</div>
-					<div class="dust-class">
-						<label class="dts2"><span>* </span>coffee-shot-Quantity</label>
-						<div class="shots-container">
-							<p>
-								Shots <span>
-									<button type="button" onclick="decreaseAmount(this)">-</button> <i id="pAmount">1</i>
-									<button type="button" onclick="increaseAmount(this)">+</button>
-								</span>
-							</p>
-							<input type="hidden" name="pdShotCount" id="shotsInput" value="1">
+					<c:if test="${coffee.pcId eq '1'}"> 
+						<div class="dust-class">
+							<label class="dts"><span>* </span>coffee-beans-Options</label> <select class="" name="bopId">
+								<option value="1" selected>Arabica(default)</option>
+								<option value="2">Robusta</option>
+								<option value="3">Liberica</option>
+							</select>
 						</div>
-					</div>
+						<div class="dust-class">
+							<label class="dts"><span>* </span>temperature-Options</label> <select class="" name="topId">
+								<option value="1" selected>ice(default)</option>
+								<option value="2">hot</option>
+							</select>
+						</div>
+						<div class="dust-class">
+							<label class="dts2"><span>* </span>coffee-shot-Quantity</label>
+							<div class="shots-container">
+								<p>
+									Shots <span>
+										<button type="button" onclick="decreaseAmount(this)">-</button> <i id="pAmount">1</i>
+										<button type="button" onclick="increaseAmount(this)">+</button>
+									</span>
+								</p>
+								<input type="hidden" name="pdShotCount" id="shotsInput" value="1">
+							</div>
+						</div>
+					</c:if>
 					<div class="dust-class">
-						<label class="dts2"><span>* </span>coffee-Quantity</label>
+						<label class="dts2"><span>* </span>Quantity</label>
 						<div class="shots-container">
 							<p>
 								Quantity <span>

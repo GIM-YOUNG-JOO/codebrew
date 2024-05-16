@@ -425,7 +425,7 @@ public class BoardController {
 	public String updateRegisterGet(Board board, Model model) {
 		
 		// boId 초기화
-		board.setBoId(66);
+		board.setBoId(board.getBoId());
 		log.info("board 확인중: " + board.getBoId());
 		// 게시판을 수정하기 위해서 서버에서 값 받아옴
 		Board boardSaved = boardService.getBoardByboId(board);
@@ -442,7 +442,12 @@ public class BoardController {
 	
 	@PostMapping("/updateRegister")
 	public String updateRegisterPost(Board board) {
+		log.info("boId: " + board.getBoId());
+		log.info("boContent: " + board.getBoContent());
+		log.info("boTitle: " + board.getBoTitle());
 		log.info("updateChecker: " + board.getBoUpdateCheck());
+		boardService.updateBoard(board);
+		
 		return "redirect:/board/boardList";
 	}
 	

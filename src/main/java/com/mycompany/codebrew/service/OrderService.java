@@ -35,9 +35,22 @@ public class OrderService {
 	public List<Product> getMerchandiseList() {
 		return orderDao.selectByMerchandise();
 	}
-	public void registProductDetail(ProductDetail productDetail) {
-		int rowNum = productDao.insertProductDetail(productDetail);
-		log.info("rowNum: " + rowNum + ", prid: " + productDetail.getPrId());
+	public boolean registProductDetail(ProductDetail productDetail) {
+		ProductDetail result = productDao.selectProductDetail(productDetail);
+		log.info("result 결과 1: " +result );
+		if(result == null) {
+			int rowNum = productDao.insertProductDetail(productDetail);
+			log.info("rowNum: " + rowNum + ", prid: " + productDetail.getPrId());
+			return true;
+			
+		}else if(result != null) {
+			result.setPdCount(result.getPdCount() + 1);
+			//프로덕트 다오에서 업데이트 
+			log.info("result 결과 2: " + result);
+			int num = productDao.updateProductDetail(result);
+			return false;
+		}
+		return true;
 	}
 	public Product getCoffee(int prId) {
 		return orderDao.selectCoffeeByPrId(prId);

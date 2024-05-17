@@ -63,6 +63,8 @@ public interface BoardDao {
 
 	public void updateBoardWith0(Board board);
 
+	public int countBySearchText(String searchText);
+
 
 
 

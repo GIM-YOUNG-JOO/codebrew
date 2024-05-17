@@ -175,9 +175,9 @@
 				                        <a class="btn btn-outline-primary btn-sm" href="boardList?pageNo=${i}">${i}</a>
 				                    </c:if>
 				                </c:forEach>
-				                <c:if test="${pager.groupNo<pager.totalGroupNo}">
-			                     	<a class="btn btn-sm" href="boardList?pageNo=${pager.endPageNo+1}">다음</a> <!-- 마지막 그룹에서는 다음이 없어야함 -->
-				                </c:if>
+				               <c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<a class="btn btn-sm" href="boardList?pageNo=${pager.endPageNo+1}">다음</a>
+			                	</c:if>
 				                  <a class="btn btn-sm" href="boardList?pageNo=${pager.totalPageNo}">맨끝</a>
 				            </div>
 				        </td>

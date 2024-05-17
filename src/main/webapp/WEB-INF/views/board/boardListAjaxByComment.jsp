@@ -58,6 +58,9 @@
 				        <td colspan="4">
 				            <div>
 				                <a class="btn btn-sm" href="javascript:sortByComment(1)">처음</a>
+				                <c:if test="${pager.groupNo>1}">
+			                     	<a class="btn btn-sm" href="javascript:sortByComment(${pager.startPageNo-1})">이전</a>
+			                	</c:if>
 				
 				                <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 				                    <c:if test="${pager.pageNo != i}">
@@ -68,6 +71,9 @@
 				                        <a class="btn btn-outline-primary btn-sm" href="javascript:sortByComment(${i})">${i}</a>
 				                    </c:if>
 				                </c:forEach>
+				                 <c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<a class="btn btn-sm" href="avascript:sortByComment(${pager.endPageNo+1})">다음</a>
+			                	</c:if>
 				                
 				                <a class="btn btn-sm" href="javascript:sortByComment(${pager.totalPageNo})">맨끝</a>
 				            </div>

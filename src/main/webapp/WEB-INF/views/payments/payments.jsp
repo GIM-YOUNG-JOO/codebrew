@@ -137,7 +137,7 @@ span {
 
 									<!-- Modal footer -->
 									<div class="modal-footer">
-										<button type="button" class="btn rounded-pill" data-bs-dismiss="modal">Close</button>
+										<button type="submit" class="btn rounded-pill" data-bs-dismiss="modal" form="payment">Close</button>
 									</div>
 								</div>
 							</div>a

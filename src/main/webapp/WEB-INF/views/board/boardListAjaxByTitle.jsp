@@ -68,7 +68,9 @@
 				                        <a class="btn btn-outline-primary btn-sm" href="javascript:searchTitle(${i})">${i}</a>
 				                    </c:if>
 				                </c:forEach>
-				                
+				                <c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<a class="btn btn-sm" href="javascript:searchTitle(${pager.endPageNo+1})">다음</a>
+			                	</c:if>
 				                <a class="btn btn-sm" href="javascript:searchTitle(${pager.totalPageNo})">맨끝</a>
 				            </div>
 				        </td>

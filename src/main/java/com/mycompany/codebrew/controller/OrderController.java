@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.codebrew.dto.Account;
+import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.Cart;
 import com.mycompany.codebrew.dto.CartProductDetailProduct;
 import com.mycompany.codebrew.dto.Product;
@@ -90,6 +91,12 @@ public class OrderController {
 		model.addAttribute("cartList", cartList);
 		}
 		return "order/cart";
+	}
+	@PostMapping("/updateCartItemQuantity")
+	public void cartItemUpdateQuantity(@RequestBody CartProductDetailProduct cartItem) {
+		//카트아이템에서 pdId와 pdCount 받아와서 업데이트 쳐주기
+		log.info("보내준 카트의 정보 :" + cartItem);
+		service.updateCartItemQuantity(cartItem);
 	}
 	
 	@GetMapping("/detailPageGet")

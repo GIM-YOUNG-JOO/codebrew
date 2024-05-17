@@ -61,6 +61,10 @@ public class OrderService {
 	public ProductDetail getProductDetail(int pdId) {
 		return orderDao.selectProductDetail(pdId);
 	}
+	public void updateCartItemQuantity(CartProductDetailProduct cartItem) {
+		int result = orderDao.updateQuantityByPdid(cartItem);
+		
+	}
 	
 	
 	

@@ -44,19 +44,11 @@ public class PaymentsController {
 		return "payments/payments";
 	}
 	
-	@PostMapping("/paymentWithBranch")
-	public String paymentWithBranch(Payment payment, Authentication authentication) {
+	@PostMapping("/paymentsComplete")
+	public String paymentsComplete(Principal principal, Payment payment) {
+		payment.setAcId(principal.getName());
+		service.paymentComplete(payment);
 		
-		// 사용자 정보 Security에서 얻기
-		CodebrewUserDetails codebrewUserDetails = (CodebrewUserDetails)authentication.getPrincipal();
-		Account account = codebrewUserDetails.getAccount();
-		log.info("로그인한 accout 정보: " + account);
-		log.info("payment 내용: " + payment);
-		/*Payment paymentSaved = service.getAcId(account.getAcId());*/
-		
-		
-		
-		return null;
+		return "redirect:/admin/productList";
 	}
-	
 }

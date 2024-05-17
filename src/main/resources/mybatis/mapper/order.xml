@@ -83,5 +83,10 @@
 		from productDetail
 		where pdId=#{pdId}
 	</delete>
+	<update id="updateQuantityByPdid" parameterType="CartProductDetailProduct">
+		update productDetail set
+			pdCount=#{pdCount}
+		where pdId=#{pdId}
+	</update>
 
 </mapper>

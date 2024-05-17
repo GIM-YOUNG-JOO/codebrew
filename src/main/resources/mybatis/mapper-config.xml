@@ -28,5 +28,6 @@
  		<typeAlias type="com.mycompany.codebrew.dto.CartProductDetailProduct" alias="CartProductDetailProduct"/>
  		<typeAlias type="com.mycompany.codebrew.dto.BoLike" alias="BoLike"/>
  		<typeAlias type="com.mycompany.codebrew.dto.BocLike" alias="BocLike"/>
+ 		<typeAlias type="com.mycompany.codebrew.dto.Payment" alias="Payment"/>
  	</typeAliases>
  </configuration>

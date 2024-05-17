@@ -57,6 +57,7 @@ span {
 	<div class="px-5 mx-5">
 		<div class="d-flex flex-row">
 			<form id="branchSubmit" method="post" class="p-3 m-5 w-50 d-flex align-items-center" action="paymentWithBranch">
+			<div class="p-3 m-5 w-50 d-flex align-items-center">
 				<div id="hovershadow" class="d-grid gap-4 p-5 rounded-4 w-100">
 					<div class="row text-center">
 						<h1 class="pfont">지점 선택</h1>

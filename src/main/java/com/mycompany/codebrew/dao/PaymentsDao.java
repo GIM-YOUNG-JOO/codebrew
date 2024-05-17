@@ -13,6 +13,9 @@ public interface PaymentsDao {
 
 	List<CartProductDetailProduct> selectCartList(String acId);
 
-	Payment selectByAcId(String acId);
+	void insertPayment(Payment payment);
 	
+	void insertPaymentDetail(@Param("paId")int paId,  @Param("pdId")int pdId);
+
+	void deleteCartList(String acId);
 }

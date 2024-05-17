@@ -1,34 +1,26 @@
 package com.mycompany.codebrew.controller;
 
-
-
-
-
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Board;
+import com.mycompany.codebrew.dto.MyInfoChangeValidator;
 import com.mycompany.codebrew.dto.Pager;
 import com.mycompany.codebrew.security.CodebrewUserDetails;
-import com.mycompany.codebrew.service.AccountService;
 import com.mycompany.codebrew.service.MyPageService;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -39,9 +31,10 @@ public class MyPageController {
 	MyPageService myPageService;
 	
 	//MyPageService myPageService; 로 주입할 수 있도록 service단 수정해야함
-	@Autowired //myInfo 주입용
-	private AccountService acservice;
 
+/*    @Autowired
+    private MyInfoChangeValidator myInfoChangeValidator ; // 새로운 Validator 주입
+*/    
 	@Secured("ROLE_USER")
 	@GetMapping("/myInfo")
 	public String myInfoDetail(Authentication authentication, Model model) {
@@ -54,44 +47,56 @@ public class MyPageController {
 		return "mypage/myInfo";
 	}
 	
+/*	@InitBinder("account") // "account" 모델 객체에 대한 Validator 바인딩
+    public void myInfoValidator(WebDataBinder binder) {
+        binder.addValidators(myInfoChangeValidator);
+        log.info("유효성검사실행");
+    }*/
+	
 	@PostMapping("/myInfoChange")
-	public String myInfoChange(@RequestBody Map<String, String> accountChange, Authentication authentication, Model model) {
-		log.info("첫번째 값" + accountChange);
+	public String myInfoChange(@Validated Account account, Authentication authentication, Errors errors, Model model) {
+		log.info("1 수정할 값 전달하기" + account);
+		
 	    // input으로 들어온 값을 변수에 저장
-		String acName = accountChange.get("acNameN");
-	    String acEmail = accountChange.get("acEmailE");
-	    String acTel = accountChange.get("acTelT");
-	    String acPassword = accountChange.get("acPasswordP");
-	    String acPasswordCheck = accountChange.get("acPasswordPP");
+	    String acName = account.getAcName();
+	    String acEmail = account.getAcEmail();
+	    String acTel = account.getAcTel();
+	    String acPassword = account.getAcPassword();
+	    String acPasswordCheck = account.getAcPasswordCheck();
 	    CodebrewUserDetails codebrewUserDetails = (CodebrewUserDetails)authentication.getPrincipal();
 	    
-	    //받아온 값으로 계정의 정보를 업데이트 해주는 코드(전달)
-	    Account account = new Account();
-	    account.setAcId(codebrewUserDetails.getAcId());
-	    account.setAcName(acName);
-	    account.setAcEmail(acEmail);
-	    account.setAcTel(acTel);
-	    account.setAcPassword(acPassword);
-	    account.setAcPasswordCheck(acPasswordCheck);
-	    account.setAcRole(codebrewUserDetails.getAcRole());
-	    log.info("account" + account);
+	    //유효성 검사 진행 시 에러가 존재할 경우 error에 저장하고 myInfo.jsp로 이동
+	    if(errors.hasErrors()) {  
+			model.addAttribute("errors", errors);
+	    	return "mypage/myInfo";
+		}
 	    
-	    myPageService.ChangeAccount(account);
-	    log.info("계정정보 업데이트 실행");
+	    //받아온 값으로 계정의 정보를 업데이트 해주는 코드(전달)
+	    Account ac = new Account();
+	    ac.setAcId(codebrewUserDetails.getAcId());
+	    ac.setAcName(acName);
+	    ac.setAcEmail(acEmail);
+	    ac.setAcTel(acTel);
+	    ac.setAcPassword(acPassword);
+	    ac.setAcPasswordCheck(acPasswordCheck);
+	    ac.setAcRole(codebrewUserDetails.getAcRole());
+	    log.info("2 account에 저장 : " + ac);
+	    
+	    myPageService.ChangeAccount(ac);
+	    log.info("3 account로 계정정보 업데이트 실행");
 		
 		// ----------------------------------------
+	    
 		// 업데이트한 계정의 정보를 불러오는 코드(받아오기)
 	    String acId = codebrewUserDetails.getAcId();
 	    Account accountChanged = myPageService.getAccount(acId);
-	    log.info("accountChanged" + accountChanged);
+	    log.info("4 수정된 값 불러오기" + accountChanged);
 		// 업데이트 된 계정의 정보를 모델을 통해 저장해주는 코드
 		model.addAttribute("accountChanged", accountChanged);
 		// 업데이트 된 정보를 에이젝스로 보여줌
 		return "mypage/myInfoAjax";
 	}
-	
 
-	
 	// 좋아요 정렬 및 제목 정렬
 	@GetMapping(value ="/myWriteBoardHistory", produces = "application/json; charset=UTF-8")
 	public String myWriteBoardHistory(String pageNo, Model model, HttpSession session, Principal principal) {

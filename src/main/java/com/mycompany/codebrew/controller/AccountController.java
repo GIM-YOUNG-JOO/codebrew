@@ -65,6 +65,7 @@ public class AccountController {
 		log.info(account.getAcEmail());
 		//유효성 검사 실패시 다시 회원가입 폼 보여주기
 		if(errors.hasErrors()) {  //유효성 검사 진행 시 에러가 존재할 경우 error에 저장하고 joinNow.jsp로 이동
+			log.info("유효성 검사 통과 못함");
 			return "signJoin/joinNow";
 		}
 		// 회원 정보 등록

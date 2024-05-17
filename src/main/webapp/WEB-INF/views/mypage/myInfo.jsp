@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 
@@ -139,7 +140,7 @@
 				<!-- AJAX로 변경하는 시작점 -->
 				<div id="innerContainer"
 					class="p-5 d-flex flex-grow-1 align-items-center">
-					<div class="p-5 d-flex align-items-center">
+					<div id="myInfoDetailBox" class="p-5 d-flex align-items-center">
 						<div id="hovershadow"
 							class="p-5 rounded-4 d-flex flex-column align-items-center"
 							style="background-color: #F0F0F0;">
@@ -157,7 +158,9 @@
 						id="changeMyInfoForm" 
 						name="changeMyInfoForm" 
 						method="post"
-						action="myInfoChange">
+						action="myInfoChange"
+						onsubmit="changeMyInfo()"
+						novalidate>
 						<div class="p-5 flex-grow-1 d-flex align-items-center">
 							<div id="hovershadow"
 								class="d-grid gap-4 p-5 bg-dark rounded-4 w-100">
@@ -177,14 +180,20 @@
 										<div class="row">
 											<label class="form-label h4 text-light pfont align-text-bottom">Name</label>
 											<input class="form-control" list="datalistOptions" id="acName" name="acName" value="${account.acName}">
+											<h6 id="acNameAlarm" class="form-text p-1 text-light">한글 이름 2~5자</h6>
+											<%--<form:errors path="acName" class="text-light"/>--%>
 										</div>
 										<div class="row">
 											<label class="form-label h4 text-light pfont">E-Mail</label>
 											<input class="form-control" id="acEmail" name="acEmail" value="${account.acEmail}">
+											<h6 id="acEmailAlarm" class="form-text p-1 text-light">'@'를 넣어서 작성해주세요</h6>
+											<%-- <form:errors path="acEmail" class="text-light"/> --%>
 										</div>
 										<div class="row">
 											<label class="form-label h4 text-light pfont">Tel</label> 
 											<input class="form-control" id="acTel" name="acTel" value="${account.acTel}">
+											<h6 id="acTelAlarm" class="form-text p-1 text-light">'-'를 넣어서 작성해주세요</h6>
+											<%-- <form:errors path="acTel" class="text-light"/> --%>
 										</div>
 									</div>
 								</div>
@@ -193,18 +202,21 @@
 									<div class="col">
 										<label class="form-label h4 text-light pfont">PW</label> 
 										<input class="form-control" list="datalistOptions" type="password" id="acPassword" name="acPassword" value="">										
+										<h6 id="acPasswordAlarm" class="form-text p-1 text-light">알파벳 대소문자와 숫자를 혼용해서 8~15자</h6>
+										<%-- <form:errors path="acPassword" class="text-light"/>--%>
 									</div>
 									<div class="col">
 										<label class="form-label h4 text-light pfont">ConfirmPW</label> 
 										<input class="form-control" list="datalistOptions" type="password" id="acPasswordCheck" name="acPasswordCheck" value="">
+										<h6 id="acPasswordCheckAlarm" class="form-text p-1 text-light">비밀번호를 한 번 더 입력해주세요</h6>
 									</div>
 									<div class="row">
 										<h6 id="changeMyInfoAlarm" class="text-light m-3">※ 개인 정보 수정은 비밀번호를 반드시 입력해야합니다.</h6>
 									</div>
 								</div>
 								<div class="d-flex justify-content-around">
-									<button type="button" onclick="changeMyInfo()" class="btn btn-outline-info btn-lg">저장</button>
-									<button class="btn btn-outline-secondary btn-lg" onclick="">비우기</button>
+									<button id="changeMyInfoBtn" class="btn btn-outline-info btn-lg" >저장</button>
+									<button id="deleteMyInfoBtn" class="btn btn-outline-secondary btn-lg" >비우기</button>
 								</div>
 							</div>
 						</div>
@@ -219,66 +231,125 @@
 
 	<script>
 	
-	
 	function changeMyInfo(){
 		var acName = $('#acName').val();
 		var acEmail = $('#acEmail').val();
 		var acTel = $('#acTel').val();
 		var acPassword = $('#acPassword').val();
 		var acPasswordCheck = $('#acPasswordCheck').val();
-		if(acPassword == null || acPassword == '' || acPasswordCheck == null || acPasswordCheck == '') {
-			$("#changeMyInfoAlarm").text("비밀번호를 입력해주세요");
-			//$("#changeMyInfoAlarm").addClass("text-danger");
+		console.info("acName" + acName);
+		console.info("acEmail" + acEmail);
+		
+		event.preventDefault();
+		
+		var totalResult = true;
+		
+		//1)Name 검사 -------------------------------------------------------
+		var acNamePattern = /^[가-힣]{2,5}$/;			
+		var acNameResult = acNamePattern.test(acName);
+		var el_acName_alarm = document.querySelector("#acNameAlarm");
+		if(acNameResult) {
+			$("#acNameAlarm").removeClass("text-danger");
+			$("#acNameAlarm").addClass("text-light");
+		} else {
+			$("#acNameAlarm").addClass("text-danger");
+			$("#acNameAlarm").removeClass("text-light");
+			totalResult = false; 
+		}
+		
+		//2)Email 검사 -------------------------------------------------------
+		var acEmailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+		var acEmailResult = acEmailPattern.test(acEmail);
+		var el_acEmail_alarm = document.querySelector("#acEmailAlarm");
+		if(acEmailResult) {
+			$("#acEmailAlarm").removeClass("text-danger");
+			$("#acEmailAlarm").addClass("text-light");
+		} else {
+			$("#acEmailAlarm").text("이메일 형식이 아닙니다.");
+			$("#acEmailAlarm").removeClass("text-light");
+			$("#acEmailAlarm").addClass("text-danger");
+			totalResult = false;
+		}
+		
+		//3)Tel 검사 -------------------------------------------------------
+		
+		var acTelPattern = /^(010|011)-\d{3,4}-\d{4}$/;
+		var acTelResult = acTelPattern.test(acTel);
+		var el_acTel_alarm = document.querySelector("#acTelAlarm");
+		if(acTelResult) {
+			$("#acTelAlarm").removeClass("text-danger");
+			$("#acTelAlarm").addClass("text-light");
+		} else {
+			$("#acTelAlarm").text("전화번호 형식이 아닙니다.");
+			$("#acTelAlarm").addClass("text-danger");
+			$("#acTelAlarm").removeClass("text-light");
+			totalResult = false;
+		}
+		
+		//4)Password 검사 -------------------------------------------------------
+		
+		var acPasswordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
+		var acPasswordResult = acPasswordPattern.test(acPassword);
+		var el_acPassword_alarm = document.querySelector("#acPasswordAlarm");
+		if(acPasswordResult) {
+			$("#acPasswordAlarm").removeClass("text-danger");
+			$("#acPasswordAlarm").addClass("text-light");
+		} else {
+			$("#acPasswordAlarm").addClass("text-danger");
+			$("#acPasswordAlarm").removeClass("text-light");
+			totalResult = false;
+		}
+		
+		//4)PasswordCheck 검사(비밀번호 일치) -------------------------------------------------------
+		
+		if(acPasswordCheck == null || acPasswordCheck == '') {
+			$("#acPasswordCheckAlarm").removeClass("text-light");
+			$("#acPasswordCheckAlarm").addClass("text-danger");
 		} else {
 			if(acPassword == acPasswordCheck) {
-				//$("#changeMyInfoAlarm").removeClass("text-danger");
-				var accountChange = {
-					acNameN : acName,
-					acEmailE : acEmail,
-					acTelT : acTel,
-					acPasswordP : acPassword,
-					acPasswordPP : acPasswordCheck
-				}
+				$("#acPasswordCheckAlarm").removeClass("text-danger");
+				$("#acPasswordCheckAlarm").addClass("text-light");
 			} else if(acPassword!=acPasswordCheck) {
-				$("#changeMyInfoAlarm").text("입력한 비밀번호가 일치하지 않습니다.");
+				$("#acPasswordCheckAlarm").text("입력한 비밀번호가 일치하지 않습니다.");
+				totalResult = false;
 			}
 		}
 		
-		/* var accountChange = {
-			acName,
-			acEmail,
-			acTel,
-			acPassword,
-			acPasswordCheck
-		} */
-		   
-	  $.ajax({
-			url : "myInfoChange",
-			type : "post",
-			contentType: "application/json",
-			data : JSON.stringify(accountChange),
-			success: function(response){
-			$('#innerContainer').html(response);
-				         
-			}
-		});  
-	} 
-	
-	/* 
-	$(document).ready(function(){
-		$('#changeMyInfoBtn').click(function(){   //changeMyInfoBtn 버튼을 클릭하였을 때
-			let sendData = "username="+$('input[name=username]').val();   //폼의 이름 값을 변수 안에 담아줌
+		//5)비밀번호 not null 검사  --------------------------------------------------
+		if(acPassword == null || acPassword == '' || acPasswordCheck == null || acPasswordCheck == '') {
+			$("#changeMyInfoAlarm").removeClass("text-light");
+			$("#changeMyInfoAlarm").addClass("text-danger");
+			totalResult = false;
+		} else {
+			$("#changeMyInfoAlarm").addClass("text-light");
+			$("#changeMyInfoAlarm").removeClass("text-danger");
+		}	
+		
+		//6)전체 유효성 검사 결과가 true일 경우  --------------------------------------------------
+		if(totalResult) {
+			var account = {
+					acName, 
+					acEmail,
+					acTel,
+					acPassword,
+					acPasswordCheck						
+			}	
+			
 			$.ajax({
-				type:'post',   //post 방식으로 전송
-				url:'jQueryAjax02_data.jsp',   //데이터를 주고받을 파일 주소
-				data:sendData,   //위의 변수에 담긴 데이터를 전송해준다.
-				dataType:'html',   //html 파일 형식으로 값을 담아온다.
-				success : function(data){   //파일 주고받기가 성공했을 경우. data 변수 안에 값을 담아온다.
-					$('#message').html(data);  //현재 화면 위 id="message" 영역 안에 data안에 담긴 html 코드를 넣어준다. 
-				}
-			});
-		});
-	}); */
+					url : "myInfoChange",
+					type : "post",
+					data : account,
+					success: function(response){
+						console.info("요청 성공");
+						$('#myInfoDetailBox').html(response);
+							         
+						},
+			  		error: function(xhr, status, error){
+			  			console.info("요청 안됨");
+			  		}
+			});  	
+		} 		
+	} 
 	
 	// 마이페이지 내가 쓴 글 띄우는 AJAX
 	function myWriteBoardHistory(pageNo=1) {

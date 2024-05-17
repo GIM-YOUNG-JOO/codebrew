@@ -25,5 +25,25 @@
 		WHERE c.acid = #{acId}
 		ORDER BY caId ASC
 	</select>
-
+	
+	<insert id="insertPayment" parameterType="Payment">
+		<selectKey keyProperty="paId" order="BEFORE" resultType="int">
+			select paId_seq.nextval from dual
+		</selectKey>
+		INSERT INTO PAYMENT(paId, paDate, acId, paName, paTel, brId, paRequest, paPay)
+		VALUES (#{paId}, SYSDATE, #{acId}, #{paName}, #{paTel}, #{brId}, #{paRequest}, #{paPay})
+	</insert>
+	
+	<insert id="insertPaymentDetail" parameterType="int">
+		<selectKey keyProperty="padId" order="BEFORE" resultType="int">
+			select padId_seq.nextval from dual
+		</selectKey>
+		INSERT INTO PAYMENTDETAIL(padId, paId, pdId)
+		VALUES (#{padId}, #{paId}, #{pdId})
+	</insert>
+	
+	<delete id="deleteCartList" parameterType="String">
+		DELETE FROM cart
+		WHERE acid = #{acId}
+	</delete>
 </mapper>

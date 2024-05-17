@@ -166,7 +166,7 @@ span {
 	        var price = parseInt(priceElements[i].innerText);
 	
 	        // count와 price를 곱하여 총 가격에 더합니다.
-	        totalPrice += count * price;
+	        totalPrice += count*price;
 	    }
 	
 		var paymentBtn = document.getElementById("paymentBtn");

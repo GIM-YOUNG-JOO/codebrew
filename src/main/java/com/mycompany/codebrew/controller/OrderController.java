@@ -119,7 +119,8 @@ public class OrderController {
 		Account account = codebrewUserDetail.getAccount();
 		log.info("detailPagePost실행");
 		//상품아이디와 원두옵션, 온도옵션, 사이즈옵션, 샷 수량을 받아서  상품디테일 테이블로 넘겨주기
-		
+		log.info("상품디테일 정보" + productDetail);
+		productDetail.setAcId(account.getAcId());
 		boolean result = service.registProductDetail(productDetail);
 		//카트테이블에 데이터를 넣어주기
 		if(result) {

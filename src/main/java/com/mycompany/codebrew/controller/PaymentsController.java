@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.codebrew.dto.CartProductDetailProduct;
+import com.mycompany.codebrew.dto.Payment;
+import com.mycompany.codebrew.dto.PaymentDetail;
 import com.mycompany.codebrew.dto.Product;
+import com.mycompany.codebrew.dto.ProductDetail;
 import com.mycompany.codebrew.service.PaymentsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,4 +44,11 @@ public class PaymentsController {
 		return "payments/payments";
 	}
 	
+	@PostMapping("/paymentsComplete")
+	public String paymentsComplete(Principal principal, Payment payment) {
+		payment.setAcId(principal.getName());
+		service.paymentComplete(payment);
+		
+		return "redirect:/admin/productList";
+	}
 }

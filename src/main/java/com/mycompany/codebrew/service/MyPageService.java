@@ -1,8 +1,8 @@
 package com.mycompany.codebrew.service;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -14,7 +14,7 @@ import com.mycompany.codebrew.dao.MyPageDao;
 import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.Pager;
-import com.mycompany.codebrew.dto.Product;
+
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -154,7 +154,7 @@
                 	<div class="my-3">
                 	<label for="acName" class="form-lable px-4">* Name</label>
                     <div class="d-flex"><input id="acName" name="acName" type="text" class="flex-grow-1 border rounded mx-3 px-3 py-2" placeholder="ex) 홍길동"></div>
-                    <span id="acNameSpan" class="form-text px-4">한글 이름 2~4자 이내</span>
+                    <span id="acNameSpan" class="form-text px-4">한글 이름 2~5자 이내</span>
                     <%-- <form:errors path="account.acName"/> --%>
                 	</div>
                 	

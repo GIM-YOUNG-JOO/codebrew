@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.codebrew.dao.PaymentsDao;
 import com.mycompany.codebrew.dto.CartProductDetailProduct;
+import com.mycompany.codebrew.dto.Payment;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +19,11 @@ public class PaymentsService {
 
 	public List<CartProductDetailProduct> getCartList(String acId) {
 		return paymentsDao.selectCartList(acId);
+	}
+
+	public Payment getAcId(String acId) {
+		Payment payment = paymentsDao.selectByAcId(acId);
+		return payment;
 	}
 	
 }

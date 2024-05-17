@@ -56,7 +56,7 @@ span {
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="px-5 mx-5">
 		<div class="d-flex flex-row">
-			<form class="p-3 m-5 w-50 d-flex align-items-center">
+			<form id="branchSubmit" method="post" class="p-3 m-5 w-50 d-flex align-items-center" action="paymentWithBranch">
 				<div id="hovershadow" class="d-grid gap-4 p-5 rounded-4 w-100">
 					<div class="row text-center">
 						<h1 class="pfont">지점 선택</h1>
@@ -65,24 +65,26 @@ span {
 
 						<div class="col-8 flex-column flex-grow-1 d-grid gap-4 mx-2">
 							<div class="row flex-grow-1">
-								<label class="form-label h4 pfont align-text-bottom">이름</label> <input class="form-control flex-grow-1" id="nameForm">
+								<label class="form-label h4 pfont align-text-bottom">이름</label> <input class="form-control flex-grow-1" id="nameForm" name="paName">
 							</div>
 							<div class="row">
 								<label class="form-label h4 pfont">연락처</label>
-								<input class="form-control" placeholder="ex) 000-1234-5678">
+								<input class="form-control" placeholder="ex) 000-1234-5678" name="paTel">
 							</div>
 							<div class="row">
-								<label class="form-label h4 pfont align-text-bottom">지점 선택</label> <select class="form-select form-control">
+								<label class="form-label h4 pfont align-text-bottom">지점 선택</label> 
+								<select class="form-select form-control" name="brId">
 									<option selected>주문한 제품을 픽업할 지점을 선택해주세요</option>
 									<option value="1">경찰병원역 지점</option>
 									<option value="2">가락시장역 지점</option>
 									<option value="3">IT타워 지점</option>
 								</select>
 							</div>
-
+								
 							<div class="row">
-								<label class="form-label h4 pfont">요청사항</label> <input class="form-control" placeholder="ex) 부재시 문앞에 놓아주세요">
+								<label class="form-label h4 pfont">요청사항</label> <input class="form-control" placeholder="ex) 부재시 문앞에 놓아주세요" name="paRequest">
 							</div>
+								<input name="paPay" type="hidden" value="${totlaPrice}"> 
 						</div>
 					</div>
 				</div>
@@ -96,6 +98,9 @@ span {
 					<div class="row text-center">
 						<h1 class="pfont">주문 내역</h1>
 					</div>
+					<!-- cart.prPrice 합 구하기 위해 사용 -->
+			
+				<c:set var="totalPrice" value="1"/>
 					<c:forEach var="cart" items="${cartList}">
 						<div class="row d-flex align-items-center my-3">
 							<div class="col-2">
@@ -110,10 +115,16 @@ span {
 							</div>
 							<div class="col-2">${cart.pdCount}shots</div>
 							<div class="col-3">￦${cart.prPrice}</div>
+							<c:if test="not empty cart.prPrice">
+								<!-- 여기서 cart.prPrice 값을 더해서 구함 -->
+								<c:set var="totalPrice" value="${totalPrice + cart.prPrice}"/>
+							</c:if>
+							
 						</div>
 					</c:forEach>
+				
 						<div class="d-flex justify-content-around mt-3">
-							<button class="btn btn-outline-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal">\${sum}￦ 결제</button>
+							<button class="btn btn-outline-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal">"${totalPrice}"￦ 결제</button>
 							<button class="btn btn-outline-secondary btn-lg">돌아가기</button>
 						</div>
 
@@ -133,7 +144,7 @@ span {
 
 									<!-- Modal footer -->
 									<div class="modal-footer">
-										<button type="button" class="btn rounded-pill" data-bs-dismiss="modal">Close</button>
+										<button type="button" class="btn rounded-pill" data-bs-dismiss="modal" onclick="formSubmit()">Close</button>
 									</div>
 								</div>
 							</div>
@@ -148,6 +159,16 @@ span {
 	<script>
 		const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 		const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+	
+		
+		function formSubmit() {
+			
+			console.info("formSubmit 실행")
+			$('#branchSubmit')[0].submit();
+			
+		}
+	
+		
 	</script>
 </body>
 </html>

@@ -216,7 +216,7 @@
 								</div>
 								<div class="d-flex justify-content-around">
 									<button id="changeMyInfoBtn" class="btn btn-outline-info btn-lg" >저장</button>
-									<button class="btn btn-outline-secondary btn-lg" >비우기</button>
+									<button id="deleteMyInfoBtn" class="btn btn-outline-secondary btn-lg" >비우기</button>
 								</div>
 							</div>
 						</div>

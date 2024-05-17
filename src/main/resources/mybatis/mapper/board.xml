@@ -72,6 +72,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bonewdate desc
 			)
 			where rownum <= #{endRowNo}
@@ -114,6 +115,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bohitcount desc
 			)
 			where rownum <= #{endRowNo}
@@ -149,6 +151,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bolike desc
 			)
 			where rownum <= #{endRowNo}
@@ -184,6 +187,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bocommentcount desc
 			)
 			where rownum <= #{endRowNo}
@@ -203,6 +207,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 			)
 			where rownum <= #{endRowNo}
 			

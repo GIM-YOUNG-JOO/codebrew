@@ -100,7 +100,7 @@ public class BoardController {
 		return "board/boardDetail";
 	}
 	
-
+	
 	@PostMapping("/boardCommentAjax")
 	public String boardCommentRegister(Authentication authentication, @RequestBody BoardComment formData, Model model) {
 		//댓글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
@@ -115,6 +115,30 @@ public class BoardController {
 		model.addAttribute("boardCommentList", commentList);
 		return "board/boardDetailAjax";
 	}
+	
+	@PostMapping("/boardCommentDelete")
+	public String boardCommentDelete(Authentication authentication, @RequestBody BoardComment boardComment, Model model) {
+		//댓글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		String user = codebrewUserDetail.getAccount().getAcId();
+		model.addAttribute("user", user);
+		//받아온 댓글을 지워주자
+		log.info("보드커맨트 아이디 : " + boardComment.getBocId());
+		log.info("보드 아이디 : " + boardComment.getBoId());
+		boardService.deleteComment(boardComment.getBocId());
+		
+		List<BoardComment> commentList = boardService.getCommentList(boardComment.getBoId());
+		model.addAttribute("boardCommentList", commentList);
+		return "board/boardDetailAjax";
+	}
+	
+	@PostMapping("/boardDelete")
+	public String boardDelete(Board board) {
+		//게시물 삭제
+		boardService.boardDelete(board.getBoId());
+		return "redirect:/board/boardList";
+	}
+	
 	@ResponseBody
 	@PostMapping("/boardLike")
 	public Map<String, Integer> boardLike(Authentication authentication,@RequestBody BoLike boLike) {
@@ -425,7 +449,7 @@ public class BoardController {
 	public String updateRegisterGet(Board board, Model model) {
 		
 		// boId 초기화
-		board.setBoId(66);
+		board.setBoId(board.getBoId());
 		log.info("board 확인중: " + board.getBoId());
 		// 게시판을 수정하기 위해서 서버에서 값 받아옴
 		Board boardSaved = boardService.getBoardByboId(board);
@@ -442,8 +466,39 @@ public class BoardController {
 	
 	@PostMapping("/updateRegister")
 	public String updateRegisterPost(Board board) {
-		log.info("updateChecker: " + board.getBoUpdateCheck());
-		return "redirect:/board/boardList";
+		
+		log.info("updateCheck: "+board.getBoUpdateCheck());
+		log.info("BoAttach: "+board.getBoAttach());
+		log.info("BoAttachdata: "+board.getBoAttachdata());
+		
+		
+		
+		log.info("BoAttachdata: "+ board.getBoAttachdata());
+		// 기존의 값 DB에서 받아옴
+		Board boardSaved = boardService.getBoardByboId(board);
+		
+		if (board.getBoAttach() != null & !board.getBoAttach().isEmpty()) {
+			// DTO 추가 설정 -> 이후에 이름, 타입 필요하면 추가 예정
+//					board.setBattachoname(board.getBattach().getOriginalFilename());
+//					board.setBattachtype(board.getBattach().getContentType());
+			try {
+				board.setBoAttachdata(board.getBoAttach().getBytes());
+				log.info("사진 바이트: " + board.getBoAttachdata());
+				// multipartFile에서 바이트 -> 파일 정보 받아옴
+			} catch (Exception e) {
+
+			}
+		}
+		
+		// 변경된 내용들 넣어줌
+		boardSaved.setBoTitle(board.getBoTitle());
+		boardSaved.setBoContent(board.getBoContent());
+		boardSaved.setBoUpdateCheck(board.getBoUpdateCheck());
+		boardSaved.setBoAttachdata(board.getBoAttachdata());
+		
+		boardService.updateBoard(boardSaved);
+		
+		return "redirect:/board/boardDetail?boId="+board.getBoId();
 	}
 	
 }

@@ -124,7 +124,7 @@
         <!-- input hidden으로 값 전달 -->
         <input type="hidden" id="category" name="category" value="2">
         <input type="hidden" id="updateCheck" name="boUpdateCheck" value="0">
-        
+        <input type="hidden" id="boId" name="boId" value="${board.boId}">
 			<div class="title_box ss">
 				<!-- 제목 -->
 				<input id="btitle" type="text" name="boTitle"
@@ -145,7 +145,9 @@
 
 				<!-- 이미지 추가 버튼 클릭시 파일 선택 -->
 				<button class="insert_button round_box ss btn btn-md me-4"
-					onclick="imageAddAndBlock(event);">이미지 추가</button>
+					onclick="imageAddAndBlock(event);">이미지 수정</button>
+				<!-- <button class="insert_button round_box ss btn btn-md me-4"
+					onclick="imageAddAndBlock(event);">이미지 삭제</button> -->
 				<a class="cancel_button round_box ss btn btn-md me-4"
 					href="boardList">취소</a>
 				<button type="submit"

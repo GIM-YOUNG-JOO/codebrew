@@ -65,5 +65,9 @@
 			bocLike = bocLike - 2
 			where bocId = #{bocId}
 	</update>
-	
+	<delete id="deleteBoardCommentByBocId" parameterType="int">
+		delete
+		from boardComment
+		where bocId=#{bocId}
+	</delete>
 </mapper>

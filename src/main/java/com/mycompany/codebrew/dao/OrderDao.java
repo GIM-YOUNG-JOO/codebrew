@@ -24,4 +24,5 @@ public interface OrderDao {
 	public void updateProductDetail(ProductDetail productDetail);
 	public void deleteCart(Cart formData);
 	public void deleteProductDetail(Cart formData);
+	public int updateQuantityByPdid(CartProductDetailProduct cartItem);
 }

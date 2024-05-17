@@ -17,24 +17,61 @@
 
 <!-- 사용자 정의 JavaScript -->
 <script type="text/javascript">
-	function increaseAmount(element) {
+	function increaseAmount(pdId,element) {
 	    var parent = element.parentNode;
 	    var pAmountElement = parent.querySelector("#pAmount");
 	    var pAmount = parseInt(pAmountElement.innerText); // 현재 값 가져오기
 	    pAmount++; // 1 증가
 	    pAmountElement.innerText = pAmount; // 증가된 값 업데이트
+	    
+	    var pdId = pdId;
+	    var pdCount = pAmount;
+	    var cartItem = {
+	    		pdId,
+	    		pdCount
+	    }
+	    
+	    $.ajax({
+			url : "updateCartItemQuantity",
+			type : "post",
+			contentType: "application/json",
+			data : JSON.stringify(cartItem),
+			success: function(response){
+				console.log("보내기 성공");
+				
+				
+			}
+		});
 	}
 	
-	function decreaseAmount(element) {
+	function decreaseAmount(pdId, element) {
 	    var parent = element.parentNode;
 	    var pAmountElement = parent.querySelector("#pAmount");
 	    var pAmount = parseInt(pAmountElement.innerText); // 현재 값 가져오기
 	    if (pAmount > 1) { // 값이 1보다 큰 경우에만 감소
 	        pAmount--; // 1 감소
 	        pAmountElement.innerText = pAmount; // 감소된 값 업데이트
-	    }/* else {
-	    	parent.parentNode.parentNode.remove()
- 	    } */
+	    }
+	    
+	    var pdId = pdId;
+	    var pdCount = pAmount;
+	    var cartItem = {
+	    		pdId,
+	    		pdCount
+	    }
+	    
+	    $.ajax({
+			url : "updateCartItemQuantity",
+			type : "post",
+			contentType: "application/json",
+			data : JSON.stringify(cartItem),
+			success: function(response){
+				console.log("보내기 성공");
+				
+				
+			}
+		});
+	    
 	}
 	function deleteTag(element){
 		var parent = element.parentNode;
@@ -74,9 +111,9 @@
 				</c:if>
 				<div class="mt-4 d-flex align-items-center">
                     <a href="${pageContext.request.contextPath}/order/detailPageUpdateGet?&pdId=${cart.pdId}"><i class="bi bi-pen text-muted cart-icon"></i></a>
-                    <i class="bi bi-plus-circle text-muted ms-5 me-3 cart-icon"  onclick="increaseAmount(this)"></i>
+                    <i class="bi bi-plus-circle text-muted ms-5 me-3 cart-icon"  onclick="increaseAmount('${cart.pdId}',this)"></i>
                     <span class="text-center" id="pAmount">${cart.pdCount}</span>
-                    <i class="bi bi-dash-circle text-muted ms-3 cart-icon" onclick="decreaseAmount(this)"></i>
+                    <i class="bi bi-dash-circle text-muted ms-3 cart-icon" onclick="decreaseAmount('${cart.pdId}',this)"></i>
                     <button type="button" onclick="cartItemDelete('${cart.caId}', '${cart.pdId}',this)" style="margin-left: 60px; border-radius: 5px; border:2px solid gray; background-color: transparent;padding-top: 1px;">삭제</button>
                 </div>   	
 			</div>

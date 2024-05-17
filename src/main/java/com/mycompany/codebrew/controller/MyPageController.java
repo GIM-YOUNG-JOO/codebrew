@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Board;
+import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.MyInfoChangeValidator;
 import com.mycompany.codebrew.dto.Pager;
 import com.mycompany.codebrew.security.CodebrewUserDetails;
@@ -97,7 +98,7 @@ public class MyPageController {
 		return "mypage/myInfoAjax";
 	}
 
-	// 좋아요 정렬 및 제목 정렬
+	
 	@GetMapping(value ="/myWriteBoardHistory", produces = "application/json; charset=UTF-8")
 	public String myWriteBoardHistory(String pageNo, Model model, HttpSession session, Principal principal) {
 		if(pageNo == null) {
@@ -126,6 +127,36 @@ public class MyPageController {
 		log.info("" + pageNo);
 		
 		return "mypage/myWriteBoardHistory";
+	}
+	@PostMapping(value ="/myWriteBoardCommentHistory", produces = "application/json; charset=UTF-8")
+	public String myWriteBoardCommentHistory(String pageNo, Model model, HttpSession session, Authentication authentication) {
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		Account account = codebrewUserDetail.getAccount();
+		if(pageNo == null) {
+			pageNo = (String) session.getAttribute("pageNo");
+			if(pageNo == null) {
+				pageNo = "1";
+			}
+		}
+		
+		// 세션에 pageNo 변환
+		session.setAttribute("pageNo", pageNo);
+		
+		// 문자열로 받은 pageNo를 정수로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		int rowsPagingTarget = myPageService.getBoardCommentTotalRow(account.getAcId());
+		log.info("" + rowsPagingTarget);
+		Pager pager = new Pager(3, 3, rowsPagingTarget, intPageNo);
+		
+		// springSecurity에서 acId값 받아서 pager에 넣어줌 xml에서 사용 위해서(나중에 map으로 변경예정)
+		pager.setAcId(account.getAcId());
+		List<BoardComment> boardCommentList = myPageService.getMyBoardComment(pager);
+		
+		model.addAttribute("boardCommentList", boardCommentList);
+		model.addAttribute("pager", pager);
+
+		
+		return "mypage/myWriteBoardCommentHistory";
 	}
 		
 	

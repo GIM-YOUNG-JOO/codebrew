@@ -110,8 +110,8 @@
 								<ul class="ms-2">
 									<li><a href="#" class="text-white text-decoration-none"
 										onclick="myWriteBoardHistory()">작성한 글</a></li>
-									<li><a href="#" class="text-white text-decoration-none">작성한
-											댓글</a></li>
+									<li><a href="#" class="text-white text-decoration-none"
+										onclick="myWriteBoardCommentHistory()">작성한 댓글</a></li>
 								</ul>
 							</div></li>
 					</ul>
@@ -367,9 +367,24 @@
 	
 	// 마이페이지 내가 쓴 글 띄우는 AJAX
 	function myWriteBoardHistory(pageNo=1) {
+		
 		$.ajax({
 			url: 'myWriteBoardHistory',
  			type: 'get',
+ 			data: {pageNo: pageNo},	
+ 			success: function(response){
+ 				$("#innerContainer").html(response);
+ 			}, 
+ 			error: function(xhr, status, error){
+ 				console.error(xhr.responseText);
+ 			}
+		});
+	}
+	function myWriteBoardCommentHistory(pageNo=1) {
+		
+		$.ajax({
+			url: 'myWriteBoardCommentHistory',
+ 			type: 'post',
  			data: {pageNo: pageNo},	
  			success: function(response){
  				$("#innerContainer").html(response);

@@ -294,16 +294,22 @@ public class BoardController {
 		session.setAttribute("pageNo", pageNo);
 		
 		// 문자열로 받은 pageNo를 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
-		int rowsPagingTarget = boardService.getTotalRow();
-		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 		
+		Pager pager;
 		List<Board> boardList;
 		
 	    // 제목 없을 경우 실행되는 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
+			int intPageNo = Integer.parseInt(pageNo);
+			int rowsPagingTarget = boardService.getTotalRow();
+			log.info("실행 확인 검색 미포함: " + rowsPagingTarget);
+			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 			boardList = boardService.getDate(pager);
 		} else {
+			int intPageNo = Integer.parseInt(pageNo);
+			int rowsPagingTarget = boardService.getRowBySearchText(searchText);
+			log.info("실행 확인 검색 포함: " + rowsPagingTarget);
+			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 			// 제목 있을 경우 실행되는 정렬
 			pager.setSearchText(searchText);
 			boardList = boardService.getDateByTitle(pager);
@@ -329,17 +335,22 @@ public class BoardController {
 		session.setAttribute("pageNo", pageNo);
 		
 		// 문자열로 받은 pageNo를 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
-		int rowsPagingTarget = boardService.getTotalRow();
-		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
-		
+		Pager pager;
 		List<Board> boardList;
 		
 	    // 제목 없을 경우 실행되는 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
+			int intPageNo = Integer.parseInt(pageNo);
+			int rowsPagingTarget = boardService.getTotalRow();
+			log.info("실행 확인 검색 미포함: " + rowsPagingTarget);
+			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 			boardList = boardService.getHitcount(pager);
 		} else {
 			// 제목 있을 경우 실행되는 정렬
+			int intPageNo = Integer.parseInt(pageNo);
+			int rowsPagingTarget = boardService.getRowBySearchText(searchText);
+			log.info("실행 확인 검색 포함: " + rowsPagingTarget);
+			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 			pager.setSearchText(searchText);
 			boardList = boardService.getHitcountByTitle(pager);
 		}
@@ -363,16 +374,22 @@ public class BoardController {
 		session.setAttribute("pageNo", pageNo);
 		
 		// 문자열로 받은 pageNo를 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
-		int rowsPagingTarget = boardService.getTotalRow();
-		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
-		
+		Pager pager;
 		List<Board> boardList;
 		
 	    // 제목 없을 경우 실행되는 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
+			int intPageNo = Integer.parseInt(pageNo);
+			int rowsPagingTarget = boardService.getTotalRow();
+			log.info("실행 확인 검색 미포함: " + rowsPagingTarget);
+			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 			boardList = boardService.getLike(pager);
 		} else {
+			// 제목 있을 경우 실행되는 정렬
+			int intPageNo = Integer.parseInt(pageNo);
+			int rowsPagingTarget = boardService.getRowBySearchText(searchText);
+			log.info("실행 확인 검색 포함: " + rowsPagingTarget);
+			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 			// 제목 있을 경우 실행되는 정렬
 			pager.setSearchText(searchText);
 			boardList = boardService.getLikeByTitle(pager);
@@ -397,16 +414,23 @@ public class BoardController {
 		session.setAttribute("pageNo", pageNo);
 		
 		// 문자열로 받은 pageNo를 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
-		int rowsPagingTarget = boardService.getTotalRow();
-		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 		
+		Pager pager;
 		List<Board> boardList;
 		
 	    // 제목 없을 경우 실행되는 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
+			int intPageNo = Integer.parseInt(pageNo);
+			int rowsPagingTarget = boardService.getTotalRow();
+			log.info("실행 확인 검색 미포함: " + rowsPagingTarget);
+			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 			boardList = boardService.getComment(pager);
 		} else {
+			// 제목 있을 경우 실행되는 정렬
+			int intPageNo = Integer.parseInt(pageNo);
+			int rowsPagingTarget = boardService.getRowBySearchText(searchText);
+			log.info("실행 확인 검색 포함: " + rowsPagingTarget);
+			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 			// 제목 있을 경우 실행되는 정렬
 			pager.setSearchText(searchText);
 			boardList = boardService.getCommentByTitle(pager);
@@ -433,7 +457,7 @@ public class BoardController {
 		
 		// 문자열로 받은 pageNo를 정수로 변환
 		int intPageNo = Integer.parseInt(pageNo);
-		int rowsPagingTarget = boardService.getTotalRow();
+		int rowsPagingTarget = boardService.getRowBySearchText(searchText);
 		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 		
 		List<Board> boardList;

@@ -13,6 +13,7 @@ import com.mycompany.codebrew.dao.AccountDao;
 import com.mycompany.codebrew.dao.MyPageDao;
 import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Board;
+import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.Pager;
 
 
@@ -33,11 +34,20 @@ public class MyPageService {
 		int totalRows = myPageDao.count(acId);
 		return totalRows;
 	}
+	public int getBoardCommentTotalRow(String acId) {
+		int totalRows = myPageDao.boardCommentCount(acId);
+		return totalRows;
+	}
 
 	public List<Board> getMyBoard(Pager pager) {
 	
 		List<Board> myBoardList = myPageDao.selectMyboard(pager);
 		return myBoardList;
+	}
+	public List<BoardComment> getMyBoardComment(Pager pager) {
+		
+		List<BoardComment> myBoardCommentList = myPageDao.selectMyboardComment(pager);
+		return myBoardCommentList;
 	}
 	
 	public Account getAccount(String acId) {

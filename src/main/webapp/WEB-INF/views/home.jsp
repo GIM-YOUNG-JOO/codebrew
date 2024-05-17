@@ -30,7 +30,7 @@
 		                    New Spicy Lemonade Refreshers® with real<br/> fruit and our three-pepper chili blend are<br/> coming in hot.</div>
 		                    
 		                <div class="button_div">
-		                    <button type="button" class="first_button btn btn-md">Order now</button>
+		                    <button type="button" class="first_button btn btn-md" onclick="location.href='${pageContext.request.contextPath}/order/menu'">Order now</button>
 		                </div>
 		            </div> 
 		        </div>
@@ -43,7 +43,7 @@
 		                    Your choice is a positive and responsible one—because<br/> bringing your clean reusable cup helps our planet.</div>
 		                    
 		                <div class="button_div">
-		                    <button type="button" class="first_button btn btn-md">Learn more</button>
+		                    <button type="button" class="first_button btn btn-md" onclick="location.href='${pageContext.request.contextPath}/order/menu'">Learn more</button>
 		                </div>
 		            </div>
 		
@@ -64,7 +64,7 @@
 		                    Join Starbucks® Rewards and earn 25 Stars when you<br/>order with a clean personal cup in stores, at the drive-<br/>thru or in the app.*</div>
 		                    
 		                <div class="button_div">
-		                    <button type="button" class="first_button btn btn-md">Join for free</button>
+		                    <button type="button" class="first_button btn btn-md" onclick="location.href='${pageContext.request.contextPath}/order/menu'">Join for free</button>
 		                </div>
 		                </div>
 		
@@ -78,7 +78,7 @@
 		                    Enjoy a super-smooth Chocolate Cream Cold<br/>Brew or Cinnamon Caramel Cream Cold Brew.<br/></div>
 		                    
 		                <div class="button_div">
-		                    <button type="button" class="first_button btn btn-md">Order now</button>
+		                    <button type="button" class="first_button btn btn-md" onclick="location.href='${pageContext.request.contextPath}/order/menu'">Order now</button>
 		                </div>
 		            </div>
 		            
@@ -100,7 +100,7 @@
 		                    Enjoy a super-smooth Chocolate Cream Cold<br/>Brew or Cinnamon Caramel Cream Cold Brew<br/></div>
 		                    
 		                <div class="button_div">
-		                    <button type="button" class="first_button btn btn-md">Order now</button>
+		                    <button type="button" class="first_button btn btn-md" onclick="location.href='${pageContext.request.contextPath}/order/menu'">Order now</button>
 		                </div>
 		            </div>
 		            
@@ -117,7 +117,7 @@
 		                    Enjoy a super-smooth Chocolate Cream Cold<br/>Brew or Cinnamon Caramel Cream Cold Brew.<br/></div>
 		                    
 		                <div class="button_div">
-		                    <button type="button" class="first_button btn btn-md">Order now</button>
+		                    <button type="button" class="first_button btn btn-md" onclick="location.href='${pageContext.request.contextPath}/order/menu'">Order now</button>
 		                </div>
 		            </div>
 		            

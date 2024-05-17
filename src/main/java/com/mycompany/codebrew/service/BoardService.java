@@ -249,5 +249,11 @@ public class BoardService {
 		
 	}
 
+	public int getRowBySearchText(String searchText) {
+		int totalRows = boardDao.countBySearchText(searchText);
+		return totalRows;
+		
+	}
+
 	
 }

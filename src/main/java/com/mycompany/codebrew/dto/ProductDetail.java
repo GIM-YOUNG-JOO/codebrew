@@ -22,4 +22,7 @@ public class ProductDetail {
 	private int bopId;
 	private int sopId;
 	private int topId;
+	
+	//카트아이템에 같은 옵션의 상품이 있는지를 검색하기 위해서 추가
+	private String acId;
 }

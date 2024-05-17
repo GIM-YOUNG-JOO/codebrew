@@ -49,6 +49,6 @@ public class PaymentsController {
 		payment.setAcId(principal.getName());
 		service.paymentComplete(payment);
 		
-		return "redirect:/admin/productList";
+		return "redirect:/";
 	}
 }

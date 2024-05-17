@@ -117,7 +117,7 @@ span {
 						</div>
 					</c:forEach>
 						<div class="d-flex justify-content-around mt-3">
-							<button class="btn btn-outline-info btn-lg" id="paymentBtn" type="submit" form="payment">\${sum}￦ 결제</button> <%--data-bs-toggle="modal" data-bs-target="#myModal"--%> 
+							<button class="btn btn-outline-info btn-lg" id="paymentBtn" data-bs-dismiss="modal">\${sum}￦ 결제</button> <%--data-bs-toggle="modal" data-bs-target="#myModal"--%> 
 							<button class="btn btn-outline-secondary btn-lg">돌아가기</button>
 						</div>
 
@@ -137,10 +137,10 @@ span {
 
 									<!-- Modal footer -->
 									<div class="modal-footer">
-										<button type="submit" class="btn rounded-pill" data-bs-dismiss="modal" form="payment">Close</button>
+										<button type="submit" class="btn rounded-pill" form="payment">Close</button>
 									</div>
 								</div>
-							</div>a
+							</div>
 						</div>
 				</div>
 			</div>
@@ -155,6 +155,12 @@ span {
 		
 		var countElements = document.querySelectorAll('[id="count"]');
 		var priceElements = document.querySelectorAll('[id="price"]');
+		
+		document.getElementById('paymentBtn').addEventListener('click', function() {
+	        // Show the modal
+	        var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+	        myModal.show();
+	    });
 		
 		// 가격을 저장할 변수를 초기화합니다.
 		var totalPrice = 0;
@@ -172,6 +178,16 @@ span {
 		var paymentBtn = document.getElementById("paymentBtn");
 		paymentBtn.innerText = "￦" + totalPrice + " 결제";
 		document.getElementById('paPay').value = totalPrice;
+		
+		// 모달 외부를 클릭하여 모달 닫기
+		window.onclick = function(event) {
+		  var modal = document.getElementById("myModal");
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		    // 모달이 닫힐 때 다른 페이지로 이동
+		    window.location.href = "/codebrew/";
+		  }
+		}
 	</script>
 </body>
 </html>

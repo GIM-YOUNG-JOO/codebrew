@@ -19,6 +19,8 @@
 <!-- jquery 외부 라이브러리 사용 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<!-- alert 레이아웃 외부 라이브러리 사용 설정  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
@@ -36,6 +38,16 @@
 function commentRegist(boId) {
 	console.log("commentRegist() 실행");
 	var bocContents = $('#bocContents').val();
+	
+	//댓글 미입력시 입력하라는 문구 출력
+	if (bocContents == null || bocContents == '') {
+		swal({
+		    title: "Error",
+		    text: "댓글을 입력해주세요",
+		    icon: "error" //"info,success,warning,error" 중 택1
+		});
+	}
+	
 	var formData = { 
 			boId, 
 			bocContents					
@@ -97,19 +109,35 @@ function boardLike(boId, bolState){
 		data : JSON.stringify(boLike),
 		success: function(response){
 			if(response.Num == 1){
-				alert("게시물을 추천했습니다.");
+				swal({
+				    title: "Information",
+				    text: "게시물을 추천했습니다.",
+				    icon: "info" //"info,success,warning,error" 중 택1
+				});
 				account = account + 1;
 				like_container.textContent = account;
 			}else if(response.Num == 2){
-				alert("게시물을 비추천했습니다.");
+				swal({
+				    title: "Information",
+				    text: "게시물을 비추천했습니다.",
+				    icon: "info" //"info,success,warning,error" 중 택1
+				});
 				account = account - 1;
 				like_container.textContent = account;
 			}else if(response.Num == 3){
-				alert("게시물 추천을 취소했습니다.");
+				swal({
+				    title: "Information",
+				    text: "게시물 추천을 취소했습니다.",
+				    icon: "info" //"info,success,warning,error" 중 택1
+				});
 				account = account
 				like_container.textContent = account;
 			}else if(response.Num == 4){
-				alert("게시물 비추천을 취소했습니다.");
+				swal({
+				    title: "Information",
+				    text: "게시물 비추천을 취소했습니다.",
+				    icon: "info" //"info,success,warning,error" 중 택1
+				});
 				account = account
 				like_container.textContent = account;
 			}
@@ -134,19 +162,35 @@ function boardCommentLike(bocId, boclState){
 		data : JSON.stringify(bocLike),
 		success: function(response){
 			if(response.Num == 1){
-				alert("댓글을 추천했습니다.");
+				swal({
+				    title: "Information",
+				    text: "댓글을 추천했습니다.",
+				    icon: "info" //"info,success,warning,error" 중 택1
+				});
 				account = +account + 1;
 				like_container.textContent = account;
 			}else if(response.Num == 2){
-				alert("댓글을 비추천했습니다.");
+				swal({
+				    title: "Information",
+				    text: "댓글을 비추천했습니다.",
+				    icon: "info" //"info,success,warning,error" 중 택1
+				});
 				account = +account - 1;
 				like_container.textContent = account;
 			}else if(response.Num == 3){
-				alert("댓글 추천을 취소했습니다.");
+				swal({
+				    title: "Information",
+				    text: "댓글 추천을 취소했습니다.",
+				    icon: "info" //"info,success,warning,error" 중 택1
+				});
 				account = +account
 				like_container.textContent = account;
 			}else if(response.Num == 4){
-				alert("댓글 비추천을 취소했습니다.");
+				swal({
+				    title: "Information",
+				    text: "댓글 비추천을 취소했습니다.",
+				    icon: "info" //"info,success,warning,error" 중 택1
+				});
 				account = +account
 				like_container.textContent = account;
 			}

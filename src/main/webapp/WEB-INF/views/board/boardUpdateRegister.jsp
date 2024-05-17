@@ -23,10 +23,12 @@
 
     <!-- 위지윅 HTML 에디터 cdn 추가 -->
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-
+	
+	<!-- alert 레이아웃 외부 라이브러리 사용 설정  -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boardRegister.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -40,10 +42,10 @@
       });
       
     function imageAddAndBlock(event){
-    	
-    	event.preventDefault();
-    	console.log("이미지 추가 실행");
-    	document.getElementById('battach').click();
+       
+       event.preventDefault();
+       console.log("이미지 추가 실행");
+       document.getElementById('battach').click();
     }
     
     function displayFileName() {
@@ -65,11 +67,11 @@
     
     
     function clickedNoticeButton() {
-    	event.preventDefault();
-    	// 버튼 클릭시 category 값 변경
+       event.preventDefault();
+       // 버튼 클릭시 category 값 변경
         document.getElementById("category").value = 1;
         
-    	// 클릭시 색상 변경
+       // 클릭시 색상 변경
         document.getElementById("noticeButton").style.backgroundColor = "#2C4E80";
         document.getElementById("noticeButton").style.color = "#fff";
         
@@ -80,11 +82,11 @@
     }
     
     function clickedReviewButton() {
-    	event.preventDefault();
-    	// 버튼 클릭시 category 값 변경
+       event.preventDefault();
+       // 버튼 클릭시 category 값 변경
         document.getElementById("category").value = 2; 
         
-    	 // 클릭시 색상 변경
+        // 클릭시 색상 변경
         document.getElementById("reviewButton").style.backgroundColor = "#2C4E80";
         document.getElementById("reviewButton").style.color = "#fff";
         
@@ -93,22 +95,53 @@
         document.getElementById("noticeButton").style.color = "#000";
         
     }
+    
+    // 게시판 수정 시 제목과 내용에 입력된 값이 없으면 alert를 리턴하는 함수
+    function boardUpdateRegist(event) {
+        event.preventDefault();
+        var boardUpdateRegistResult = true;
+
+     	// 제목을 입력 안했을 때
+        if($('#btitle').val() == null || $('#btitle').val() == '') {
+          swal({ 
+            title: "Error",
+            text: "제목을 입력해주세요.",
+            icon: "error"
+          });
+          boardUpdateRegistResult = false;
+        }
+        
+     	// 내용을 입력 안했을 때
+        if(tinymce.get('mytextarea').getContent() == '') {
+          swal({
+            title: "Error",
+            text: "내용을 입력해주세요.",
+            icon: "error"
+          });
+          boardUpdateRegistResult = false;
+        }
+        
+     	// 모두 입력 했을 때
+        if(boardUpdateRegistResult) {
+          $('#updateRegister').submit();
+        }
+     }
 
     </script>
     
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
-	
+   <%@ include file="/WEB-INF/views/common/header.jsp"%>
+   
     <div class="container ss mt-5">
     <!-- action의 이름으로 컨트롤러 이동 -->
     <form id="updateRegister" method="post" action="updateRegister" enctype="multipart/form-data">
         <div class="nav_bar ss">
         
-        	<c:if test="${account.acRole == 'ROLE_ADMIN'}">
-        		<button id="noticeButton" class="button_tags hover_grey button register_btn rounded-1" value="1" onclick="clickedNoticeButton()">공지사항</button>
-        	</c:if>
-        	
+           <c:if test="${account.acRole == 'ROLE_ADMIN'}">
+              <button id="noticeButton" class="button_tags hover_grey button register_btn rounded-1" value="1" onclick="clickedNoticeButton()">공지사항</button>
+           </c:if>
+           
             <button id="reviewButton" class="button_tags hover_grey button register_btn rounded-1" value="2" onclick="clickedReviewButton()" style="background-color:#2C4E80; color:#FFFFFF;">Review</button>
         </div>
 
@@ -125,43 +158,43 @@
         <input type="hidden" id="category" name="category" value="2">
         <input type="hidden" id="updateCheck" name="boUpdateCheck" value="0">
         <input type="hidden" id="boId" name="boId" value="${board.boId}">
-			<div class="title_box ss">
-				<!-- 제목 -->
-				<input id="btitle" type="text" name="boTitle"
-					class="title form-control" placeholder="제목을 입력해주세요" value="${board.boTitle}">
-			</div>
-			<!-- action을 통해서 Controller를 타고 가서 boardDetail로 변경해야함 -->
-			<!-- 내용 -->
-			<textarea id="mytextarea" name="boContent" placeholder="내용을 입력해주세요"></textarea>
-			<div class="mb-4"></div>
+         <div class="title_box ss">
+            <!-- 제목 -->
+            <input id="btitle" type="text" name="boTitle"
+               class="title form-control" placeholder="제목을 입력해주세요" value="${board.boTitle}">
+         </div>
+         <!-- action을 통해서 Controller를 타고 가서 boardDetail로 변경해야함 -->
+         <!-- 내용 -->
+         <textarea id="mytextarea" name="boContent" placeholder="내용을 입력해주세요"></textarea>
+         <div class="mb-4"></div>
 
-			<!-- 버튼 -->
-			<div class="bottom_button ss">
-				<div id="fileNameDisplay" class="me-5"></div>
-				
-				<!-- 이미지 변경시 이름 미리보기 설정 -->
-				<input type="file" id="battach" name="boAttach"
-					style="display: none;" onchange="displayFileName()" value="${board.boAttachdata}"/>
+         <!-- 버튼 -->
+         <div class="bottom_button ss">
+            <div id="fileNameDisplay" class="me-5"></div>
+            
+            <!-- 이미지 변경시 이름 미리보기 설정 -->
+            <input type="file" id="battach" name="boAttach"
+               style="display: none;" onchange="displayFileName()" value="${board.boAttachdata}"/>
 
-				<!-- 이미지 추가 버튼 클릭시 파일 선택 -->
-				<button class="insert_button round_box ss btn btn-md me-4"
-					onclick="imageAddAndBlock(event);">이미지 수정</button>
-				<!-- <button class="insert_button round_box ss btn btn-md me-4"
-					onclick="imageAddAndBlock(event);">이미지 삭제</button> -->
-				<a class="cancel_button round_box ss btn btn-md me-4"
-					href="boardList">취소</a>
-				<button type="submit"
-					class="register_button round_box ss btn btn-md">수정</button>
-			</div>
-		</form>
-	</div>
+            <!-- 이미지 추가 버튼 클릭시 파일 선택 -->
+            <button class="insert_button round_box ss btn btn-md me-4"
+               onclick="imageAddAndBlock(event);">이미지 수정</button>
+            <!-- <button class="insert_button round_box ss btn btn-md me-4"
+               onclick="imageAddAndBlock(event);">이미지 삭제</button> -->
+            <a class="cancel_button round_box ss btn btn-md me-4"
+               href="boardList">취소</a>
+            <button type="button"
+               class="register_button round_box ss btn btn-md" onclick="boardUpdateRegist(event);">수정</button>
+         </div>
+      </form>
+   </div>
 
     
     <%@ include file="/WEB-INF/views/common/footer.jsp"%>
     
     <!-- 수정시 원래 Content 받아오는 식 -->
     <script>
-  		  document.getElementById("mytextarea").value = "${board.boContent}";
+          document.getElementById("mytextarea").value = "${board.boContent}";
     </script>
     
 </body>

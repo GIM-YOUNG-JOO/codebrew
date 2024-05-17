@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +42,7 @@ public class BoardController {
 
 	@Autowired
 	BoardService boardService;
-
+	
 	@RequestMapping("/boardList")
 	public String boardList(String pageNo, Model model, HttpSession session) {
 		if(pageNo == null) {
@@ -76,6 +77,7 @@ public class BoardController {
 		return "board/boardList";
 	}
 
+	@Secured("ROLE_USER")
 	@GetMapping("/boardDetail")
 	public String boardDetail(int boId, Model model, Authentication authentication) {
 		//게시글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
@@ -239,7 +241,7 @@ public class BoardController {
 		
 		return "board/boardRegister";
 	}
-
+	
 	@PostMapping("/boardRegister")
 	public String boardRegisterPost(Principal principal, Board board, @RequestParam ("category") int category) {
 		log.info("category 로그 확인: " + category);

@@ -1,21 +1,20 @@
 package com.mycompany.codebrew.controller;
 
-import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.CartProductDetailProduct;
 import com.mycompany.codebrew.dto.Payment;
+import com.mycompany.codebrew.security.CodebrewUserDetails;
 import com.mycompany.codebrew.service.PaymentsService;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,10 +26,12 @@ public class PaymentsController {
 	private PaymentsService service;
 	
 	@GetMapping("")
-	public String payments(Principal principal, Model model) {
-		log.info("결제창 실행");
-		
-		List<CartProductDetailProduct> cartList = service.getCartList(principal.getName());
+	public String payments(Authentication authentication, Model model) {
+		log.info("PaymentsController - payments실행");
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		Account account = codebrewUserDetail.getAccount();
+		String acId = account.getAcId();
+		List<CartProductDetailProduct> cartList = service.getCartList(acId);
 		for (CartProductDetailProduct cpdp : cartList) {
 			byte[] imageData = cpdp.getPrImgData();
 			if (imageData != null) {
@@ -42,10 +43,13 @@ public class PaymentsController {
 	}
 	
 	@PostMapping("/paymentsComplete")
-	public String paymentsComplete(Principal principal, Payment payment) {
-		payment.setAcId(principal.getName());
+	public String paymentsComplete(Authentication authentication, Payment payment) {
+		log.info("PaymentsController - paymentsComplete실행");
+		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
+		Account account = codebrewUserDetail.getAccount();
+		String acId = account.getAcId();
+		payment.setAcId(acId);
 		service.paymentComplete(payment);
-		
 		return "redirect:/";
 	}
 }

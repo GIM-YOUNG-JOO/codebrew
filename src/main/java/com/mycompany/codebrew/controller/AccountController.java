@@ -56,7 +56,7 @@ public class AccountController {
 	}
 	
 	@RequestMapping ("/signUp")
-	public String signUp(@Valid Account account, Errors errors, Model model) {
+	public String signUp(@Valid Account account, Errors errors) {
 		log.info("회원등록 실행");
 		log.info(account.getAcName());
 		log.info("" + account.getAcId());

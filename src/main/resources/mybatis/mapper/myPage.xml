@@ -22,11 +22,36 @@
 	]]>
 	</select>
 	
+	<select id="selectMyboardComment" parameterType="Pager" resultType="BoardComment">
+	<!-- parameterType은 전달되는 매개변수를 말함, 한 행에 대한 resultType을 적어야함 -->
+	<![CDATA[
+	select rnum, bocid, boid, boccontents, bocdate, bocnewdate, boclike
+		from(
+			select rownum as rnum, bocid, boid, boccontents, bocdate, bocnewdate, boclike
+			from(
+				select bocid, boid, boccontents, bocdate, bocnewdate, boclike
+				from boardcomment
+				where acid = #{acId}
+				order by bocid desc
+			)
+			where rownum <= #{endRowNo}
+		)
+	where rnum >= #{startRowNo}
+	
+	]]>
+	</select>
+	
 	<select id="count" parameterType="String" resultType="int">
 		select count(*) 
 		from board
 		where acid = #{acId}
-	</select> 
+	</select>
+	
+	<select id="boardCommentCount" parameterType="String" resultType="int">
+		select count(*) 
+		from boardComment
+		where acid = #{acId}
+	</select>
 	
 	<update id="updateAccount" parameterType="Account">
 		update account set

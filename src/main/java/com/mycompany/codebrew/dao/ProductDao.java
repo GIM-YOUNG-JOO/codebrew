@@ -18,4 +18,6 @@ public interface ProductDao {
 	public int update(Product product);
 	public int deleteByPrId(int prId);
 	public int insertProductDetail(ProductDetail productDetail);
+	public ProductDetail selectProductDetail(ProductDetail productDetail);
+	public int updateProductDetail(ProductDetail result);
 }

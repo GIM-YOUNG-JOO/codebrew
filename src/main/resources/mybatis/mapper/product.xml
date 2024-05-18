@@ -64,4 +64,20 @@
 		insert into productDetail(pdId, prId, bopId, sopId, topId, pdShotCount, pdCount)
 		values(#{pdId}, #{prId}, #{bopId}, #{sopId}, #{topId}, #{pdShotCount}, #{pdCount})
 	</insert>
+	<select id="selectProductDetail" parameterType="ProductDetail" resultType="ProductDetail">
+		select pd.pdid as pdId, pd.pdcount as pdCount
+		from productDetail pd, cart c
+		where pd.pdid = c.pdid
+        and prId=#{prId}
+		and bopId=#{bopId}
+		and sopId=#{sopId}
+		and topId=#{topId}
+		and pdShotCount=#{pdShotCount}
+        and acId=#{acId}
+	</select>
+	<update id="updateProductDetail" parameterType="ProductDetail">
+		update productDetail set
+			pdCount=#{pdCount}
+		where pdId=#{pdId}
+	</update>
 </mapper>

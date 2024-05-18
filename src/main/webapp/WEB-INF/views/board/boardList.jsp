@@ -44,7 +44,7 @@
 	<br>
 	<div class="first_box ss">
 		<div class="first_in_box ss">
-			<div class="mb-3 ss">자유 게시판</div>
+			<h3 class="mb-3 ss">자유 게시판</h3>
 			<div>리뷰를 남겨주세요</div>
 		</div>
 	</div>
@@ -53,13 +53,13 @@
 		<div class="left_box ss">
 			<li class="side_bar_first_box ss">
 			    <a href="#" id="noticeLink" onclick="clickedNoticeButton()">
-			        <div class="mb-1" >공지 사항</div>
+			        <div class="side_bar mb-1" style="text-align: center;" >공지 사항</div>
 			    </a>
 			</li>
 
 			<li class="side_bar_first_box ss">
 				<a href="#" id="reviewLink" onclick="clickedReviewButton()">
-					<div class="mb-1" >Review</div>
+					<div class="side_bar mb-1" style="text-align: center;">Review</div>
 				</a>
 			</li>
 		</div>
@@ -175,9 +175,9 @@
 				                        <a class="btn btn-outline-primary btn-sm" href="boardList?pageNo=${i}">${i}</a>
 				                    </c:if>
 				                </c:forEach>
-				                <c:if test="${pager.groupNo<pager.totalGroupNo}">
-			                     	<a class="btn btn-sm" href="boardList?pageNo=${pager.endPageNo+1}">다음</a> <!-- 마지막 그룹에서는 다음이 없어야함 -->
-				                </c:if>
+				               <c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<a class="btn btn-sm" href="boardList?pageNo=${pager.endPageNo+1}">다음</a>
+			                	</c:if>
 				                  <a class="btn btn-sm" href="boardList?pageNo=${pager.totalPageNo}">맨끝</a>
 				            </div>
 				        </td>
@@ -298,13 +298,13 @@
        	}
        }
        
-       function searchTitle() {
+       function searchTitle(pageNo=1) {
        var searchInput = $("#searchInput").val();
        	
        	$.ajax({
        		url: "searchTitle",
        		type: "get",
-       		data: { searchText: searchInput },
+       		data: { searchText: searchInput, pageNo: pageNo },
        		success: function(response) {
        			
        			$("#boardContainer").html(response);

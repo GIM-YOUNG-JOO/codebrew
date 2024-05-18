@@ -110,8 +110,8 @@
 								<ul class="ms-2">
 									<li><a href="#" class="text-white text-decoration-none"
 										onclick="myWriteBoardHistory()">작성한 글</a></li>
-									<li><a href="#" class="text-white text-decoration-none">작성한
-											댓글</a></li>
+									<li><a href="#" class="text-white text-decoration-none"
+										onclick="myWriteBoardCommentHistory()">작성한 댓글</a></li>
 								</ul>
 							</div></li>
 					</ul>
@@ -215,8 +215,9 @@
 									</div>
 								</div>
 								<div class="d-flex justify-content-around">
+									<button id="emptyMyInfoFormBtn" class="btn btn-outline-secondary btn-lg" type="button" onclick="emptyMyInfoForm()">비우기</button>
+									<button id="bringMyInfoFormBtn" class="btn btn-outline-secondary btn-lg" type="button" onclick="bringMyInfoForm()">내정보 가져오기</button>
 									<button id="changeMyInfoBtn" class="btn btn-outline-info btn-lg" >저장</button>
-									<button id="deleteMyInfoBtn" class="btn btn-outline-secondary btn-lg" >비우기</button>
 								</div>
 							</div>
 						</div>
@@ -231,14 +232,26 @@
 
 	<script>
 	
+	// 저장되어 있는 내정보 폼으로 불러오기
+	function bringMyInfoForm() {
+	    $('#acName').val("${account.acName}"); 
+	    $('#acEmail').val("${account.acEmail}"); 
+	    $('#acTel').val("${account.acTel}");
+	}
+	
+	// 내정보 폼에 입력되어 있는 내용 비우기
+	function emptyMyInfoForm() {
+	    $('#acName').val('');
+	    $('#acEmail').val('');
+	    $('#acTel').val('');
+	}
+	
 	function changeMyInfo(){
 		var acName = $('#acName').val();
 		var acEmail = $('#acEmail').val();
 		var acTel = $('#acTel').val();
 		var acPassword = $('#acPassword').val();
 		var acPasswordCheck = $('#acPasswordCheck').val();
-		console.info("acName" + acName);
-		console.info("acEmail" + acEmail);
 		
 		event.preventDefault();
 		
@@ -335,6 +348,7 @@
 					acPasswordCheck						
 			}	
 			
+			//내정보 카드를 비동기 방식으로 변경해줌
 			$.ajax({
 					url : "myInfoChange",
 					type : "post",
@@ -353,9 +367,24 @@
 	
 	// 마이페이지 내가 쓴 글 띄우는 AJAX
 	function myWriteBoardHistory(pageNo=1) {
+		
 		$.ajax({
 			url: 'myWriteBoardHistory',
  			type: 'get',
+ 			data: {pageNo: pageNo},	
+ 			success: function(response){
+ 				$("#innerContainer").html(response);
+ 			}, 
+ 			error: function(xhr, status, error){
+ 				console.error(xhr.responseText);
+ 			}
+		});
+	}
+	function myWriteBoardCommentHistory(pageNo=1) {
+		
+		$.ajax({
+			url: 'myWriteBoardCommentHistory',
+ 			type: 'post',
  			data: {pageNo: pageNo},	
  			success: function(response){
  				$("#innerContainer").html(response);

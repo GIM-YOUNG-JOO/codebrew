@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,7 +76,7 @@ public class BoardController {
 		
 		return "board/boardList";
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/boardDetail")
 	public String boardDetail(int boId, Model model, Authentication authentication) {
 		//게시글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
@@ -125,7 +126,7 @@ public class BoardController {
 		//받아온 댓글을 지워주자
 		log.info("보드커맨트 아이디 : " + boardComment.getBocId());
 		log.info("보드 아이디 : " + boardComment.getBoId());
-		boardService.deleteComment(boardComment.getBocId());
+		boardService.deleteComment(boardComment.getBocId(),boardComment.getBoId());
 		
 		List<BoardComment> commentList = boardService.getCommentList(boardComment.getBoId());
 		model.addAttribute("boardCommentList", commentList);

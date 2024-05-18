@@ -9,9 +9,9 @@
 			        <c:forEach var="boardComment" items="${boardCommentList}">
 			            <ul class="question_list">
 			                <li class="li mb-3">
-			                    <a class="" href="boardDetail?boId=${boardComment.bocId}">
-			
-			                        <p class="question_body">${boardComment.bocContents}</p>
+			                    <a class="" href="${pageContext.request.contextPath}/board/boardDetail?boId=${boardComment.boId}">
+									<h3 style="margin-bottom: 20px;">게시글 번호 : ${boardComment.boId}</h1>
+			                        <p class="question_body" style="margin-left: 20px;">${boardComment.bocContents}</p>
 			
 			                        <div class="id_date_info d-flex ss">
 			                            <div class="me-3">${boardComment.acId}</div>
@@ -43,7 +43,9 @@
 				        <td colspan="4">
 				            <div>
 				                <a class="btn btn-sm" href="javascript:myWriteBoardCommentHistory(1)">처음</a>
-				
+								<c:if test="${pager.groupNo>1}">
+			                     	<a class="btn btn-sm" href="javascript:myWriteBoardCommentHistory(${pager.startPageNo-1})">이전</a>
+			                	</c:if>
 				                <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 				                    <c:if test="${pager.pageNo != i}">
 				                        <a class="btn btn-sm" href="javascript:myWriteBoardCommentHistory(${i})">${i}</a>
@@ -53,6 +55,9 @@
 				                        <a class="btn btn-outline-primary btn-sm" href="javascript:myWriteBoardCommentHistory(${i})">${i}</a>
 				                    </c:if>
 				                </c:forEach>
+				                <c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<a class="btn btn-sm" href="javascript:myWriteBoardCommentHistory(${pager.endPageNo+1})">다음</a>
+			                	</c:if>
 				                
 				                <a class="btn btn-sm" href="javascript:myWriteBoardCommentHistory(${pager.totalPageNo})">맨끝</a>
 				            </div>

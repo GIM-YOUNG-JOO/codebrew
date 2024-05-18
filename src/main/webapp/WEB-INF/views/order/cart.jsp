@@ -99,6 +99,12 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<c:if test="${empty cartList}">
+		<div class="first_image_box" style="width: 160px; heigt: 200px;">
+			<img class="image" src="./resources/image/cart/cart.jpg"/>
+		</div>
+	</c:if>
+	<c:if test="${not empty cartList}">
 	<div class="d-flex flex-column align-items-center">
 		<c:forEach var="cart" items="${cartList}">
 		<div class="d-flex shadow rounded bg-white p-4 mt-4" style="width: 500px; height: 210px">
@@ -121,6 +127,7 @@
 		</c:forEach>
 	</div>
 	<a href="${pageContext.request.contextPath}/payments"><button class="btn btn-success btn-lg rounded-pill border z-1 position-fixed bottom-0 end-0 m-5">Buy Now</button></a>
+	</c:if>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

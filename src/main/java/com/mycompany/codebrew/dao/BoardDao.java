@@ -63,7 +63,9 @@ public interface BoardDao {
 
 	public void updateBoardWith0(Board board);
 
+	public void updateBoardCommentIncrease(int boId);
 
+	public void updateBoardCommentDecrease(int boId);
 
 
 

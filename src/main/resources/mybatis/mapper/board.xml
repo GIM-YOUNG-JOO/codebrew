@@ -20,6 +20,14 @@
 		select count(*) from board
 	</select>
 	
+	<select id="countBySearchText" parameterType ="String" resultType="int">
+		select count(*) 
+		from board 
+		where botitle like '%' || #{searchText} || '%'
+	</select>
+	
+	
+	
 	<select id="selectByPage" parameterType="Pager" resultType="Board">
 	<!-- parameterType은 전달되는 매개변수를 말함, 한 행에 대한 resultType을 적어야함 -->
 	<![CDATA[
@@ -64,6 +72,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bonewdate desc
 			)
 			where rownum <= #{endRowNo}
@@ -97,7 +106,7 @@
 	]]>
 	</select>
 	
-	<select id="selectByHitcountWithTitle" parameterType="String" resultType="Board">
+	<select id="selectByHitcountWithTitle" parameterType="Pager" resultType="Board">
 	<![CDATA[
 	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 		from(
@@ -106,6 +115,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bohitcount desc
 			)
 			where rownum <= #{endRowNo}
@@ -132,7 +142,7 @@
 	]]>
 	</select>
 	
-	<select id="selectByLikeWithTitle" parameterType="String" resultType="Board">
+	<select id="selectByLikeWithTitle" parameterType="Pager" resultType="Board">
 	<![CDATA[
 	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 		from(
@@ -141,6 +151,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bolike desc
 			)
 			where rownum <= #{endRowNo}
@@ -167,7 +178,7 @@
 	]]>
 	</select>
 	
-	<select id="selectByCommentWithTitle" parameterType="String" resultType="Board">
+	<select id="selectByCommentWithTitle" parameterType="Pager" resultType="Board">
 	<![CDATA[
 	select rnum, boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 		from(
@@ -176,6 +187,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bocommentcount desc
 			)
 			where rownum <= #{endRowNo}
@@ -195,6 +207,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 			)
 			where rownum <= #{endRowNo}
 			

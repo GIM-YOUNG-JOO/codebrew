@@ -1,10 +1,9 @@
 package com.mycompany.codebrew.dto;
 
 import java.sql.Date;
+import java.util.List;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class Payment {
@@ -19,5 +18,6 @@ public class Payment {
 	private String paRequest;
 	private int paPay;
 	private int brId;
+	private List<PaymentDetail> paymentDetail;
 	
 }

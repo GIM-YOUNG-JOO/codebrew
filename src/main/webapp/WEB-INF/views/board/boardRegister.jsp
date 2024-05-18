@@ -24,6 +24,8 @@
     <!-- 위지윅 HTML 에디터 cdn 추가 -->
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
+	<!-- alert 레이아웃 외부 라이브러리 사용 설정  -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boardRegister.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
@@ -144,13 +146,49 @@
 					onclick="imageAddAndBlock(event);">이미지 추가</button>
 				<a class="cancel_button round_box ss btn btn-md me-4"
 					href="boardList">취소</a>
-				<button type="submit"
-					class="register_button round_box ss btn btn-md">등록</button>
+				<button type="button"
+					class="register_button round_box ss btn btn-md"
+					onclick="boardRegist(event)">등록</button>
 			</div>
 		</form>
 	</div>
 
     
     <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+    
+    <script type="text/javascript">
+    // 게시판 글 등록시 제목과 내용에 입력된 값이 없으면 alert를 리턴하는 함수
+    function boardRegist(event) {
+    	
+        event.preventDefault();
+        
+        var boardRegistResult = true;
+
+        // 제목을 입력 안했을 때
+        if($('#btitle').val() == null || $('#btitle').val() == '') {
+          swal({ 
+            title: "Error",
+            text: "제목을 입력해주세요.",
+            icon: "error"
+          });
+          boardRegistResult = false;
+        }
+        
+     	// 내용을 입력 안했을 때
+        if(tinymce.get('mytextarea').getContent() == '') {
+          swal({
+            title: "Error",
+            text: "내용을 입력해주세요.",
+            icon: "error"
+          });
+          boardRegistResult = false;
+        }
+        
+     	// 모두 입력 했을 때
+        if(boardRegistResult) {
+          $('#boardRegister').submit();
+        }
+     }    
+    </script>
 </body>
 </html>

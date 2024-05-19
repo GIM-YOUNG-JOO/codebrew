@@ -34,6 +34,7 @@ public class BoardService {
 	@Resource
 	AccountDao accountDao;
 	
+	// 게시판 인서트하는 서비스
 	public void writeBoard(Board board) {
 		int rowNum = boardDao.insert(board);
 		log.info("rowNum: " + rowNum + ", bno: " + board.getBoId());
@@ -44,57 +45,66 @@ public class BoardService {
 		int totalRows = boardDao.count();
 		return totalRows;
 	}
-
+	
+	// 전체 게시글을 받아옴
 	public List<Board> getBoardList(Pager pager) {
 		List<Board> boardList = boardDao.selectByPage(pager);
 		return boardList;
 	}
 	
+	// 최신순 정렬
 	public List<Board> getDate(Pager pager) {
 		List<Board> sortedDateList = boardDao.selectByDate(pager);
-		
 		return sortedDateList;
 	}
 	
+	// 검색 및 최신순
 	public List<Board> getDateByTitle(Pager pager) {
 		List<Board> sortedDateList = boardDao.selectByDateWithTitle(pager);
 		return sortedDateList;
 	}
 	
+	// 조회순 정렬
 	public List<Board> getHitcount(Pager pager) {
 		List<Board> sortedHitcountList = boardDao.selectByHitcount(pager);
-		
 		return sortedHitcountList;
 	}
 	
+	// 검색 및 정렬 순
 	public List<Board> getHitcountByTitle(Pager pager) {
 		List<Board> sortedHitcountList = boardDao.selectByHitcountWithTitle(pager);
 		
 		return sortedHitcountList;
 	}
 
+	// 좋아요 순
 	public List<Board> getLike(Pager pager) {
 		List<Board> sortedLikeList = boardDao.selectByLike(pager);
 		
 		return sortedLikeList;
 	}
+	
+	// 검색 및 좋아요 순
 	public List<Board> getLikeByTitle(Pager pager) {
 		List<Board> sortedLikeList = boardDao.selectByLikeWithTitle(pager);
 		
 		return sortedLikeList;
 	}
+	
+	// 댓글 순
 	public List<Board> getComment(Pager pager) {
 		List<Board> sortedCommentList = boardDao.selectByComment(pager);
 		
 		return sortedCommentList;
 	}
-	
+	// 검색 및 댓글 순
 	public List<Board> getCommentByTitle(Pager pager) {
 		List<Board> sortedCommentList = boardDao.selectByCommentWithTitle(pager);
 		
 		return sortedCommentList;
 	}
-
+	
+	// 검색으로 찾아온 값
 	public List<Board> getSearchTitle(Pager pager) {
 		List<Board> searchTitleList = boardDao.selectByTitle(pager);
 		return searchTitleList;
@@ -212,11 +222,12 @@ public class BoardService {
 		
 	}
 
-
+	// 유저의 권한을 받아옴
 	public Account getAccountRole(String acId) {
 		return accountDao.selectByAcId(acId);
 	}
-
+	
+	// 게시판의 게시물 번호를 받아옴
 	public Board getBoardByboId(Board board) {
 		Board boardSaved = boardDao.selectBoardByNum(board.getBoId());
 		return boardSaved;
@@ -232,11 +243,14 @@ public class BoardService {
 		int result = boardCommentDao.deleteBoardCommentByBocId(bocId);
 		boardDao.updateBoardCommentDecrease(boId);
 	}
+	
+	// 게시글 수정시 사진을 업데이트하는지
 	public void updateBoard(Board board) {
 		// boUpdateCheck가 1일 경우 수정시 사진이 변경됨
 		log.info("boattachdata1: " + board.getBoAttachdata());
 		
 		Board boardSaved;
+		// 사진이 변경되었을 시 1
 		if(board.getBoUpdateCheck() == 1) {
 			boardDao.updateBoardWithOne(board);
 			log.info("boattachdata2: " + board.getBoAttachdata());
@@ -251,7 +265,8 @@ public class BoardService {
 
 		
 	}
-
+	
+	// 검색 기능시 찾아온 게시글의 수를 리턴
 	public int getRowBySearchText(String searchText) {
 		int totalRows = boardDao.countBySearchText(searchText);
 		return totalRows;

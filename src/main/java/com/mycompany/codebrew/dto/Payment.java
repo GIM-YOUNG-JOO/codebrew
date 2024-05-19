@@ -18,6 +18,7 @@ public class Payment {
 	private String paRequest;
 	private int paPay;
 	private int brId;
+	private String brName;
 	private List<PaymentDetail> paymentDetail;
 	private int detailCount;
 }

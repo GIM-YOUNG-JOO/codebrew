@@ -35,7 +35,19 @@ public class PaymentsService {
 		paymentsDao.deleteCartList(payment.getAcId());
 	}
 	
-	public List<Payment> getPaymentsList(Payment payment){
-		return paymentsDao.selectPayments(payment);
+	public List<Payment> getPaymentsList() {
+		List<Payment> paymentList = paymentsDao.selectPayments();
+		for(Payment list : paymentList) {
+			list.setDetailCount(list.getPaymentDetail().size()+1);
+		}
+		return paymentList;
+	}
+
+	public List<Payment> getPaymentsListByAcId(String acId) {
+		List<Payment> paymentList = paymentsDao.selectPaymentsByAcId(acId);
+		for(Payment list : paymentList) {
+			list.setDetailCount(list.getPaymentDetail().size()+1);
+		}
+		return paymentList;
 	}
 }

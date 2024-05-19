@@ -20,5 +20,7 @@ public interface PaymentsDao {
 
 	void deleteCartList(String acId);
 	
-	List<Payment> selectPayments(Payment payment);
+	List<Payment> selectPayments();
+
+	List<Payment> selectPaymentsByAcId(String acId);
 }

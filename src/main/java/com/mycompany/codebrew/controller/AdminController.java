@@ -1,6 +1,7 @@
 package com.mycompany.codebrew.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Dashboard;
 import com.mycompany.codebrew.dto.Pager;
+import com.mycompany.codebrew.dto.Payment;
 import com.mycompany.codebrew.dto.Product;
 import com.mycompany.codebrew.service.AdminService;
 import com.mycompany.codebrew.service.PaymentsService;
@@ -24,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	@Autowired
 	private PaymentsService payService;
 
 	@GetMapping("/dashboard")
@@ -192,9 +195,12 @@ public class AdminController {
 		return "admin/orderManagement";
 	}
 
-	@GetMapping("/paymentsList")
-	public String paymentsList() {
+	@GetMapping("/paymentList")
+	public String paymentList(Model model) {
 		log.info("결제 내역 출력");
-		return "admin/paymentsList";
+		List<Payment> paymentList = payService.getPaymentsList();
+		log.info(paymentList.toString());
+		model.addAttribute("paymentList", paymentList);
+		return "admin/paymentList";
 	}
 }

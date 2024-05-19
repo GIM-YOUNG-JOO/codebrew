@@ -1,5 +1,6 @@
 package com.mycompany.codebrew.controller;
 
+import java.security.Principal;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,11 @@ import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.Pager;
+import com.mycompany.codebrew.dto.Payment;
 import com.mycompany.codebrew.security.CodebrewUserDetails;
 import com.mycompany.codebrew.service.MyPageService;
+import com.mycompany.codebrew.service.PaymentsService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -26,6 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageController {
 	@Autowired
 	MyPageService myPageService;
+	@Autowired
+	private PaymentsService payService;
+
+	
 	
 	//MyPageService myPageService; 로 주입할 수 있도록 service단 수정해야함
 
@@ -133,5 +141,14 @@ public class MyPageController {
 		model.addAttribute("boardCommentList", boardCommentList);
 		model.addAttribute("pager", pager);
 		return "mypage/myWriteBoardCommentHistory";
-	}	
+	}
+	
+	//결제 내역 출력
+	@GetMapping("/myPayment")
+	public String myPayment(Principal principal, Model model) {
+		List<Payment> paymentList = payService.getPaymentsListByAcId(principal.getName());
+		model.addAttribute("paymentList", paymentList);
+		return "mypage/myPayment";
+	}
+	
 }

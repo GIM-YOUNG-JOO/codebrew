@@ -184,8 +184,9 @@ span {
 		  var modal = document.getElementById("myModal");
 		  if (event.target == modal) {
 		    modal.style.display = "none";
-		    // 모달이 닫힐 때 다른 페이지로 이동
-		    window.location.href = "/codebrew/";
+		    // 모달이 닫힐 때 홈페이지로 이동
+		    document.getElementById("payment").submit();
+		    
 		  }
 		}
 	</script>

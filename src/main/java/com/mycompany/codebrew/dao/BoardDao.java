@@ -56,11 +56,11 @@ public interface BoardDao {
 
 	public int deleteBoardByBoId(int boId);
 	
-	public void updateBoardWith1(Board board);
+	public void updateBoardWithOne(Board board);
 
-	public void updateBoardWithMinus1(Board board);
+	public void updateBoardWithMinusOne(Board board);
 
-	public void updateBoardWith0(Board board);
+	public void updateBoardWithZero(Board board);
 
 	public void updateBoardCommentIncrease(int boId);
 

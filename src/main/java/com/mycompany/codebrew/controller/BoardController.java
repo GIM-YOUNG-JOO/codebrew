@@ -353,7 +353,6 @@ public class BoardController {
 		return "board/boardListAjaxByLike";
 	}
 	
-	// TODO: 댓글로 정렬하는 로직
 	@GetMapping(value ="/sortByComment", produces = "application/json; charset=UTF-8")
 	public String sortByComment(String pageNo, String searchText, Model model, HttpSession session) {
 		log.info("BoardController - sortByComment실행");

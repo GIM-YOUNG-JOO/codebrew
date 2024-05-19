@@ -275,19 +275,19 @@
 		where boId=#{boId}
 	</delete>
 	
-	<update id="updateBoardWith1" parameterType="Board" >
+	<update id="updateBoardWithOne" parameterType="Board" >
 		update board
 		set botitle = #{boTitle}, bocontent = #{boContent} , boupdatecheck = #{boUpdateCheck}, boattachdata = #{boAttachdata}
 		where boId = #{boId}
 	</update>
 	
-	<update id="updateBoardWith0" parameterType="Board">
+	<update id="updateBoardWithZero" parameterType="Board">
 		update board
 		set botitle = #{boTitle}, bocontent = #{boContent} , boupdatecheck = #{boUpdateCheck}
 		where boId = #{boId}
 	</update>
 	
-	<update id="updateBoardWithMinus1" parameterType="Board">
+	<update id="updateBoardWithMinusOne" parameterType="Board">
 		update board
 		set botitle = #{boTitle}, bocontent = #{boContent} , boupdatecheck = #{boUpdateCheck}, boattachdata = null
 		where boId = #{boId}

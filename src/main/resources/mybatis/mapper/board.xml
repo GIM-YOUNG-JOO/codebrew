@@ -24,6 +24,7 @@
 		select count(*) 
 		from board 
 		where botitle like '%' || #{searchText} || '%'
+		or bocontent like '%' || #{searchText} || '%'
 	</select>
 	
 	

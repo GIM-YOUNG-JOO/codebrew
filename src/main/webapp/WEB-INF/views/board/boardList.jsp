@@ -314,9 +314,9 @@ body {
        // 검색시 enter키 사용 가능을 위한 함수
        function enterKeyTitle(event){
        	if(event.key === "Enter"){
-       		searchTitle();
+       		searchTitle(pageNo=1);
        	}
-       }
+       } 
        
        // 검색 시 AJAX
        function searchTitle(pageNo=1) {

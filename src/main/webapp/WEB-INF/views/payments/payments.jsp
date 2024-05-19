@@ -109,7 +109,7 @@ span {
 							${cart.prName}
 								<span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
 									data-bs-trigger="hover" data-bs-content="${cart.bopName} / ${cart.sopName} / ${cart.topName} / ${cart.pdShotCount}shot">
-									<button class="btn btn-sm btn-primary" type="button" disabled>detail</button>
+									<button class="btn btn-sm btn-success" type="button" disabled>detail</button>
 								</span>
 							</div>
 							<div class="col-2">X<span id="count">${cart.pdCount}</span></div>

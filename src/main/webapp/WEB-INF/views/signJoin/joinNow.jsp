@@ -188,7 +188,7 @@
                 	
                 <!-- 제출 버튼 -->
                 <div>
-                    <button id="joinNowBtn" class="m-2 p-2 btn btn-lg btn-success rounded-pill border-secondary" type="submit" style="background: #2C4E80; color: white">Join Now</button>
+                    <button id="joinNowBtn" class="m-2 p-2 btn btn-lg btn-success rounded-pill border-secondary" type="submit" style="background: #1f3933; color: white">Join Now</button>
                 </div>
             </form>
         </div>

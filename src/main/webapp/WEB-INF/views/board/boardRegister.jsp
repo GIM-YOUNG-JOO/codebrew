@@ -108,7 +108,17 @@ body {
 	font-weight: 400;
 	font-style: normal;	
 }
+.button_tags.hover_grey.button.register_btn.rounded-1{
+	background:#1f3933 !important;	
+}
 
+.info_box{
+	background:#1f3933 !important;
+	border-radius: 5px !important;
+}
+.register_button.round_box.btn.btn-md{
+	background:#1f3933 !important;
+}
 </style>
 
 </head>

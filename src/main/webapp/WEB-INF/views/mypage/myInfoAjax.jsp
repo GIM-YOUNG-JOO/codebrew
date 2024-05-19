@@ -11,7 +11,7 @@
 
 <div id="hovershadow"
 	class="p-5 rounded-4 d-flex flex-column align-items-center"
-	style="background-color: #F0F0F0;">
+	style="background-color: #1f3933;">
 	<img
 		src="${pageContext.request.contextPath}/resources/image/cut/PineapplePassionfruitRefreshersLemonade.png"
 		width="200px" class="rounded-4 mt-5 ms-5 me-5" />

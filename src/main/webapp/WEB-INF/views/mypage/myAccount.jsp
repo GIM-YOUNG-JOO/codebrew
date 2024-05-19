@@ -8,7 +8,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>결제내역</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<style type="text/css">
+.btn-outline-info {
+    --bs-btn-color: #6c757d;
+    --bs-btn-border-color: #6c757d;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #1f3933;
+    --bs-btn-hover-border-color: #1f3933;
+    --bs-btn-focus-shadow-rgb: 13, 202, 240;
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #1f3933;
+    --bs-btn-active-border-color: #1f3933;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #0dcaf0;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #1f3933;
+    --bs-gradient: none;
+}
+</style>
 <body>
 	<div id="innerContainer"
 		class="px-5 d-flex flex-grow-1 align-items-center">
@@ -30,7 +50,7 @@
 			action="myInfoChange" onsubmit="changeMyInfo()" novalidate>
 			<div class="p-5 flex-grow-1 d-flex align-items-center">
 				<div id="hovershadow" class="d-grid gap-4 p-5 rounded-4 w-100"
-					style="background: #00215E;">
+					style="background: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;">
 					<div class="row text-center">
 						<h2 class="text-light pfont">개인정보 수정</h2>
 					</div>

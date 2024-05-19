@@ -140,9 +140,6 @@ div.row.h5.text-info.mb-5.pfont{
 							<img
 								src="${pageContext.request.contextPath}/resources/image/cut/PineapplePassionfruitRefreshersLemonade.png"
 								width="200px" class="rounded-4 mt-5 ms-5 me-5" />
-
-							<div class="row h1 text-dark pfont">${account.acName}</div>
-							<div class="row h5 text-secondary mb-5 pfont">${account.acRole}</div>
 							<div class="row h2 text-dark pfont">${account.acName}</div>
 							<div class="row h5 text-info mb-5 pfont">${account.acEmail}</div>
 							<div class="row h3 text-dark pfont">${account.acTel}</div>
@@ -158,7 +155,7 @@ div.row.h5.text-info.mb-5.pfont{
 						novalidate>
 						<div class="p-5 flex-grow-1 d-flex align-items-center">
 							<div id="hovershadow"
-								class="d-grid gap-4 p-5 rounded-4 w-100" style="background: #00215E;">
+								class="d-grid gap-4 p-5 rounded-4 w-100" style="background: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;">
 								<div class="row text-center">
 									<h2 class="text-light pfont">개인정보 수정</h2>
 								</div>

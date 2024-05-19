@@ -45,6 +45,11 @@
 	font-family: "Do Hyeon", sans-serif;
 	font-style: normal;
 }
+
+body {
+	font-family: "Do Hyeon", sans-serif;
+	font-style: normal;
+}
 </style>
 </head>
 

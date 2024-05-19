@@ -20,7 +20,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- moment.js 라이브러리 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-	
+
+<!-- 폰트 설정을 위한 링크 추가 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
 	rel="stylesheet">
@@ -33,12 +36,20 @@
 	function redirectToBoardList(){
 		window.location.href = "http://localhost:8080/codebrew/board/boardList"
 	}
-	
-	
+
 </script>
 
-</head>
 
+<style>
+body {
+	font-family: "Do Hyeon", sans-serif;
+	font-weight: 400;
+	font-style: normal;	
+}
+
+</style>
+
+</head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<br>
@@ -50,7 +61,8 @@
 	</div>
 
 	<div class="main">
-		<div class="left_box ss">
+	<!-- 이후에 공지사항이랑 리뷰로 나눠서 사용할 때 사용하시면 됩니다. -->
+		<!-- <div class="left_box ss">
 			<li class="side_bar_first_box ss">
 			    <a href="#" id="noticeLink" onclick="clickedNoticeButton()">
 			        <div class="side_bar mb-1" style="text-align: center;" >공지 사항</div>
@@ -62,7 +74,7 @@
 					<div class="side_bar mb-1" style="text-align: center;">Review</div>
 				</a>
 			</li>
-		</div>
+		</div> -->
 
 		<div class="main_text_box ss mb-3">
 			<div class="first_input_box mb-2 ss">
@@ -99,12 +111,12 @@
 					<li class="ss me-4"><button class="select_box_button" onclick="sortByComment()">댓글순</button></li>
 				</ul>
 
-				<a class="ss insert_button round_box ss btn btn-md edit_button round_box"
-					href="boardRegister" style="color: white;"><svg width="16"
+				<button class="insert_button round_box edit_button round_box"
+					onclick="window.location.href='boardRegister'" style="color: white;"><svg width="16"
 						height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
 						<path fill="#ffffff" fill-rule="evenodd"
 							d="M11.508 1.451c.456-.455 1.195-.455 1.65 0l1.724 1.724c.456.456.456 1.194 0 1.65L13.02 6.687l-.008.008-7.219 6.89c-.132.126-.291.22-.466.273l-3.681 1.12c-.177.054-.369.006-.5-.124-.13-.131-.178-.323-.124-.5l1.115-3.666c.059-.192.166-.365.311-.504L9.651 3.31l1.857-1.858zM9.992 4.366l-6.854 6.542c-.02.02-.036.044-.044.072l-.843 2.769 2.785-.848c.025-.007.048-.02.067-.039l6.848-6.537-1.96-1.96zm2.675 1.26l1.508-1.508c.065-.065.065-.17 0-.236l-1.724-1.724c-.065-.065-.17-.065-.236 0l-1.508 1.509 1.96 1.96z"
-							clip-rule="evenodd"></path></svg> 글쓰기</a>
+							clip-rule="evenodd"></path></svg> 글쓰기</button>
 			</div>
 			</ul>
 			<hr/>
@@ -116,7 +128,7 @@
 			                <li class="li mb-3">
 			                    <a class="" href="boardDetail?boId=${board.boId}">
 			                        <div class="question_info">
-			                            <h6 class="title_text">${board.boTitle}</h6>
+			                            <h4 class="title_text">${board.boTitle}</h4>
 			                        </div>
 			
 			                        <p class="question_body">${board.boContent}</p>

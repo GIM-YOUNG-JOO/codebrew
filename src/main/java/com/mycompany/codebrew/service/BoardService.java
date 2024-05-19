@@ -113,7 +113,7 @@ public class BoardService {
 
 	public void writeBoardComment(BoardComment formData) {
 		boardCommentDao.insertComment(formData);
-		
+		boardDao.updateBoardCommentIncrease(formData.getBoId());
 		
 	}
 
@@ -226,8 +226,9 @@ public class BoardService {
 		
 	}
 
-	public void deleteComment(int bocId) {
+	public void deleteComment(int bocId,int boId) {
 		int result = boardCommentDao.deleteBoardCommentByBocId(bocId);
+		boardDao.updateBoardCommentDecrease(boId);
 	}
 	public void updateBoard(Board board) {
 		// boUpdateCheck가 1일 경우 수정시 사진이 변경됨
@@ -235,14 +236,14 @@ public class BoardService {
 		
 		Board boardSaved;
 		if(board.getBoUpdateCheck() == 1) {
-			boardDao.updateBoardWith1(board);
+			boardDao.updateBoardWithOne(board);
 			log.info("boattachdata2: " + board.getBoAttachdata());
 			// boUpdateCheck가 -1일 경우 사진이 삭제되어 DB에 사진 저장 X
 		} else if(board.getBoUpdateCheck() == -1 ) {
-			boardDao.updateBoardWithMinus1(board);
+			boardDao.updateBoardWithMinusOne(board);
 			// boUpdateCheck가 0일 경우 기존에 사진 그대로 저장
 		} else {
-			boardDao.updateBoardWith0(board);
+			boardDao.updateBoardWithZero(board);
 			
 		}
 

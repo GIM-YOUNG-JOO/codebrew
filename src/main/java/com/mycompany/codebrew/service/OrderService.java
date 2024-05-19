@@ -44,7 +44,7 @@ public class OrderService {
 			return true;
 			
 		}else if(result != null) {
-			result.setPdCount(result.getPdCount() + 1);
+			result.setPdCount(result.getPdCount() + productDetail.getPdCount());
 			//프로덕트 다오에서 업데이트 
 			log.info("result 결과 2: " + result);
 			int num = productDao.updateProductDetail(result);

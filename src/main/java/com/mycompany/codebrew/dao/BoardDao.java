@@ -14,7 +14,6 @@ import com.mycompany.codebrew.dto.Pager;
 public interface BoardDao {
 	public int insert(Board board);
 	// 리턴 값은 void가 아니고 int로 변경하는 게 좋음
-
 	public int count();
 
 	public List<Board> selectByPage(Pager pager);
@@ -57,16 +56,16 @@ public interface BoardDao {
 
 	public int deleteBoardByBoId(int boId);
 	
-	public void updateBoardWith1(Board board);
+	public void updateBoardWithOne(Board board);
 
-	public void updateBoardWithMinus1(Board board);
+	public void updateBoardWithMinusOne(Board board);
 
-	public void updateBoardWith0(Board board);
+	public void updateBoardWithZero(Board board);
+
+	public void updateBoardCommentIncrease(int boId);
 
 	public int countBySearchText(String searchText);
 
-
-
-
+	public void updateBoardCommentDecrease(int boId);
 
 }

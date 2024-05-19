@@ -72,6 +72,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bonewdate desc
 			)
 			where rownum <= #{endRowNo}
@@ -114,6 +115,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bohitcount desc
 			)
 			where rownum <= #{endRowNo}
@@ -149,6 +151,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bolike desc
 			)
 			where rownum <= #{endRowNo}
@@ -184,6 +187,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 				order by bocommentcount desc
 			)
 			where rownum <= #{endRowNo}
@@ -203,6 +207,7 @@
 				select boid, acid, botitle, bocontent, bodate, bonewdate, bohitcount, bcid, bolike, bocommentcount
 				from board
 				where botitle like '%' || #{searchText} || '%'
+				or bocontent like '%' || #{searchText} || '%'
 			)
 			where rownum <= #{endRowNo}
 			
@@ -254,25 +259,35 @@
 			boLike = boLike - 2
 			where boId = #{boId}
 	</update>
+	<update id="updateBoardCommentIncrease" parameterType="int">
+		update board set
+			boCommentCount = boCommentCount + 1
+			where boId = #{boId}
+	</update>
+	<update id="updateBoardCommentDecrease" parameterType="int">
+		update board set
+			boCommentCount = boCommentCount - 1
+			where boId = #{boId}
+	</update>
 	<delete id="deleteBoardByBoId" parameterType="int">
 		delete
 		from board
 		where boId=#{boId}
 	</delete>
 	
-	<update id="updateBoardWith1" parameterType="Board" >
+	<update id="updateBoardWithOne" parameterType="Board" >
 		update board
 		set botitle = #{boTitle}, bocontent = #{boContent} , boupdatecheck = #{boUpdateCheck}, boattachdata = #{boAttachdata}
 		where boId = #{boId}
 	</update>
 	
-	<update id="updateBoardWith0" parameterType="Board">
+	<update id="updateBoardWithZero" parameterType="Board">
 		update board
 		set botitle = #{boTitle}, bocontent = #{boContent} , boupdatecheck = #{boUpdateCheck}
 		where boId = #{boId}
 	</update>
 	
-	<update id="updateBoardWithMinus1" parameterType="Board">
+	<update id="updateBoardWithMinusOne" parameterType="Board">
 		update board
 		set botitle = #{boTitle}, bocontent = #{boContent} , boupdatecheck = #{boUpdateCheck}, boattachdata = null
 		where boId = #{boId}

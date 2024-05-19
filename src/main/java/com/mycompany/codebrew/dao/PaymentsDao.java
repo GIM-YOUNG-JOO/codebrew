@@ -19,4 +19,6 @@ public interface PaymentsDao {
 	void insertPaymentDetail(@Param("paId")int paId,  @Param("pdId")int pdId);
 
 	void deleteCartList(String acId);
+	
+	List<Payment> selectPayments(Payment payment);
 }

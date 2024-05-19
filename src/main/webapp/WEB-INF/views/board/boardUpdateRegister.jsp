@@ -16,7 +16,8 @@
     <!-- jQuery -->
     <script
     src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-        
+    <!-- 폰트 설정을 위한 링크 추가 -->
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <!-- 아이콘 추가 링크 -->
     <!-- 초기화 아이콘 -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -129,11 +130,20 @@
 
     </script>
     
+    <style>
+body {
+	font-family: "Do Hyeon", sans-serif;
+	font-weight: 400;
+	font-style: normal;	
+}
+
+</style>
+    
 </head>
 <body>
    <%@ include file="/WEB-INF/views/common/header.jsp"%>
    
-    <div class="container ss mt-5">
+    <div class="container ss mt-3">
     <!-- action의 이름으로 컨트롤러 이동 -->
     <form id="updateRegister" method="post" action="updateRegister" enctype="multipart/form-data">
         <div class="nav_bar ss">

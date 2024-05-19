@@ -31,7 +31,7 @@
 		<security:intercept-url pattern="/**" access="permitAll" />
 
 		<!-- 권한 없음일 경우 보여줄 페이지 설정 -->
-		<security:access-denied-handler error-page="/common/error403"/>
+		<security:access-denied-handler error-page="/error403"/>
 	</security:http>
 
 	<!-- 로그인 성공했을 때 실행하는 핸들러 -->

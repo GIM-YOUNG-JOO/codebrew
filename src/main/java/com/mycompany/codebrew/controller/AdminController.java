@@ -29,6 +29,7 @@ public class AdminController {
 	@Autowired
 	private PaymentsService payService;
 
+	//대시보드 - 김영주
 	@GetMapping("/dashboard")
 	public String dashboard(Model model) {
 		log.info("AdminController - dashboard실행");
@@ -37,6 +38,7 @@ public class AdminController {
 		return "admin/dashboard";
 	}
 	
+	//메뉴 리스트
 	@GetMapping("/productList")
 	public String productList(String pageNo, Model model, HttpSession session) {
 		log.info("AdminController - productList");
@@ -199,7 +201,6 @@ public class AdminController {
 	public String paymentList(Model model) {
 		log.info("결제 내역 출력");
 		List<Payment> paymentList = payService.getPaymentsList();
-		log.info(paymentList.toString());
 		model.addAttribute("paymentList", paymentList);
 		return "admin/paymentList";
 	}

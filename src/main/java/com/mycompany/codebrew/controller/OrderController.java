@@ -29,6 +29,7 @@ public class OrderController {
 	@Autowired
 	private OrderService service;
 
+	//메뉴 출력 - 김영주
 	@GetMapping("/menu")
 	public String menu(Model model) {
 		log.info("OrderController - menu실행");

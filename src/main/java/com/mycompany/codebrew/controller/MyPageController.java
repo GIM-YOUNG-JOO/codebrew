@@ -28,8 +28,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
+	
 	@Autowired
 	MyPageService myPageService;
+	
 	@Autowired
 	private PaymentsService payService;
 
@@ -91,9 +93,10 @@ public class MyPageController {
 		// 업데이트 된 정보를 에이젝스로 보여줌
 		return "mypage/myInfoAjax";
 	}
-
+	
+	// 이경환
 	@GetMapping(value ="/myWriteBoardHistory", produces = "application/json; charset=UTF-8")
-	public String myWriteBoardHistory(String pageNo, Model model, HttpSession session,Authentication authentication) {
+	public String myWriteBoardHistory(String pageNo, Model model, HttpSession session, Authentication authentication) {
 		log.info("MyPageController - myWriteBoardHistory(Get)실행");
 		CodebrewUserDetails codebrewUserDetails = (CodebrewUserDetails)authentication.getPrincipal();
 		String acId = codebrewUserDetails.getAccount().getAcId();
@@ -143,12 +146,23 @@ public class MyPageController {
 		return "mypage/myWriteBoardCommentHistory";
 	}
 	
+	
 	//결제 내역 출력
-	@GetMapping("/myPayment")
+	@GetMapping(value ="/myPayment" , produces = "application/json; charset=UTF-8")
 	public String myPayment(Principal principal, Model model) {
+		log.info("개인정보 실행");
 		List<Payment> paymentList = payService.getPaymentsListByAcId(principal.getName());
 		model.addAttribute("paymentList", paymentList);
 		return "mypage/myPayment";
 	}
+	
+	// 개인 정보 재 출력
+		@GetMapping(value ="/myAccount" , produces = "application/json; charset=UTF-8")
+		public String myAccount(Authentication authentication, Model model) {
+			CodebrewUserDetails codebrewUserDetails = (CodebrewUserDetails)authentication.getPrincipal();
+			Account account = codebrewUserDetails.getAccount();
+			model.addAttribute("account", account);
+			return "mypage/myAccount";
+		}
 	
 }

@@ -72,12 +72,12 @@ body {
 					<ul class="nav nav-pills flex-column mb-auto">
 						<li><a href="#" class="nav-link text-white fs-3 pfont"
 							data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
-							aria-expanded="false"> <i class="bi bi-box me-2"></i> 주문 기록
+							aria-expanded="false" onclick="myPaymentHistory()"> <i class="bi bi-box me-2"></i> 주문 기록
 						</a>
 						</li>
 						<li><a href="#" class="nav-link text-white fs-3 pfont"
 							data-bs-toggle="collapse" data-bs-target="#account-collapse"
-							aria-expanded="false"> <i class="bi bi-person-video2 me-2"></i>
+							aria-expanded="false" onclick="myAccount()"> <i class="bi bi-person-video2 me-2"></i>
 								개인정보
 						</a>
 							</li>
@@ -97,13 +97,7 @@ body {
 					</ul>
 					<hr>
 					<div class="dropdown">
-						<a href="#"
-							class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-							id="dropdownUser1" data-bs-toggle="dropdown"
-							aria-expanded="false"> <img src="https://github.com/mdo.png"
-							alt="" width="32" height="32" class="rounded-circle me-2">
-							<strong>dd</strong>
-						</a>
+						
 						<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
 							aria-labelledby="dropdownUser1">
 							<li><a class="dropdown-item" href="#">New project...</a></li>
@@ -360,6 +354,7 @@ body {
  			}
 		});
 	}
+	
 	function myWriteBoardCommentHistory(pageNo=1) {
 		
 		$.ajax({
@@ -374,6 +369,35 @@ body {
  			}
 		});
 	}
+	
+	function myPaymentHistory() {
+		
+		$.ajax({
+			url: 'myPayment',
+ 			type: 'get',
+ 			success: function(response){
+ 				$("#innerContainer").html(response);
+ 			}, 
+ 			error: function(xhr, status, error){
+ 				console.error(xhr.responseText);
+ 			}
+		});
+	}
+	
+	function myAccount() {
+		console.log("개인정보 실행")
+		$.ajax({
+			url: 'myAccount',
+ 			type: 'get',
+ 			success: function(response){
+ 				$("#innerContainer").html(response);
+ 			}, 
+ 			error: function(xhr, status, error){
+ 				console.error(xhr.responseText);
+ 			}
+		});
+	}
+	
 	</script>
 </body>
 </html>

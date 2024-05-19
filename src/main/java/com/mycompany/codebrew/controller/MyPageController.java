@@ -28,10 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
-	
 	@Autowired
 	MyPageService myPageService;
-	
 	@Autowired
 	private PaymentsService payService;
 

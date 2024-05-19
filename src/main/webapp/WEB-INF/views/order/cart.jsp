@@ -16,6 +16,18 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cart.css">
 
 <!-- 사용자 정의 JavaScript -->
+
+<style type="text/css">
+.image_box{
+	width:100%; height:600px;
+}
+.image_box2{
+	width:100%; height:300px;	
+}
+.first_image_box{
+	width:50%; margin:auto;
+}
+</style>
 <script type="text/javascript">
 	function increaseAmount(pdId,element) {
 	    var parent = element.parentNode;
@@ -100,9 +112,15 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<c:if test="${empty cartList}">
-		<div class="first_image_box" style="width: 160px; heigt: 200px;">
-			<img class="image" src="./resources/image/cart/cart.jpg"/>
-		</div>
+		<%-- <div class="first_image_box" style="width: 100%; heigt: 200px;">
+			<img class="image_box" src="${pageContext.request.contextPath}/resources/image/cart/cart.jpg"/>
+		</div> --%>
+		<video class="image_box"  autoplay loop muted>
+        <source src="${pageContext.request.contextPath}/resources/image/cart/emptyCart.mp4" type="video/mp4">
+    	</video>
+    	<div class="first_image_box">
+    		<a href="${pageContext.request.contextPath}/order/menu"><img class="image_box2" src="${pageContext.request.contextPath}/resources/image/cart/addCart.jpg"/></a>
+    	</div>
 	</c:if>
 	<c:if test="${not empty cartList}">
 	<div class="d-flex flex-column align-items-center">

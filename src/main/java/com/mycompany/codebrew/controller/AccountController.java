@@ -84,7 +84,8 @@ public class AccountController {
         }
     }
 	
-	//비밀번호 찾기 페이지 이동
+    // 이경환
+	// 비밀번호 찾기 페이지 이동
 	@GetMapping("/changePassword")
 	public String changePassword() {
 		log.info("AccountController - changePassword실행");
@@ -105,6 +106,8 @@ public class AccountController {
 		return map;
 		}
 	
+	// 이경환
+	// 업데이트 시 post로 값을 넘기는 컨트롤러
 	@PostMapping("/updatePassword")
 	public String updatePassword(Account account) {
 		log.info("AccountController - updatePassword실행");

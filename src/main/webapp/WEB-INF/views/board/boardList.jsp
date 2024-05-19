@@ -205,6 +205,7 @@ body {
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
 	
+	// 게시글 등록 시 category가 1인지 2인지 확인
 	function clickedNoticeButton() {
     	event.preventDefault();
     	// 버튼 클릭시 category 값 변경
@@ -235,16 +236,20 @@ body {
         document.getElementById("noticeButton").style.borderRadius = "";
     }
 	
-    	// 최신순으로 정렬하는 함수
+    	// 최신순으로 정렬하는 AJAX
+    	// 정렬 이후에 페이지를 1을 디폴트로 사용해서 1페이지로 갈 수 있게 설정
+    	// 값이 들어오면 들어온 페이지로 감
        function sortByDate(pageNo=1) {
+    		// 검색어가 있을 경우 받아와 저장
        var searchInput = $("#searchInput").val();
            	
 		 $.ajax({
 			url: 'sortByDate',
 			type: 'get',
+			// 검색어와 페이지 값을 전달
 			data: { searchText: searchInput, pageNo: pageNo},
 			success: function(response){
-				
+				// html 조각을 변경하여 페이지를 변경시킴
 				$("#boardContainer").html(response);
 			},
 			error: function(xhr, status, error){
@@ -253,7 +258,7 @@ body {
 		 });
     }
     
-       // 조회순으로 정렬하는 함수
+       // 조회순으로 정렬하는 AJAX
        function sortByHitcount(pageNo=1) {
        var searchInput = $("#searchInput").val();
                	
@@ -271,7 +276,7 @@ body {
    		 });
         }
        
-    	// 댓글순으로 정렬하는 함수
+    	// 댓글순으로 정렬하는 AJAX
         function sortByComment(pageNo=1) { 
         var searchInput = $("#searchInput").val();
      
@@ -288,7 +293,7 @@ body {
 			}
 		 });
      }
-     
+     	// 좋아요 순으로 정렬하는 AJAX
         function sortByLike(pageNo=1) { 
         var searchInput = $("#searchInput").val();
                 	
@@ -306,13 +311,14 @@ body {
     		 });
          }
        
-       
+       // 검색시 enter키 사용 가능을 위한 함수
        function enterKeyTitle(event){
        	if(event.key === "Enter"){
        		searchTitle();
        	}
        }
        
+       // 검색 시 AJAX
        function searchTitle(pageNo=1) {
        var searchInput = $("#searchInput").val();
        	

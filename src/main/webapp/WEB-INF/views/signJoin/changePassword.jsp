@@ -160,7 +160,7 @@
 				console.log(response.result);
 				// 값이 다를 경우 result에 0를 넣어서 아래 내용을 출력하게 함
 				if(response.result == 0){
-					var failedHtml = '<div style="margin-top: 10px; font-size: 30px; color: #2C4E80; text-align: center;">' + '정확한 정보를 입력하세요' + '</div>';
+					var failedHtml = '<div style="margin-top: 10px; font-size: 30px; color: #1f3933; text-align: center;">' + '정확한 정보를 입력하세요' + '</div>';
 					$("#hiddenDiv").html(failedHtml);
 					$("#hiddenDiv").show();
 				} else {

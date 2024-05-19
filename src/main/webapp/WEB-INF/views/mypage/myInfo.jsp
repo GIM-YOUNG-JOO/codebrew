@@ -64,7 +64,7 @@ body {
 				<div
 					class="d-flex col flex-column flex-shrink-0 p-3 text-white bg-dark rounded-start-4"
 					style="max-width: 280px; min-width: 280px;">
-					<a href="/"
+					<a href="${pageContext.request.contextPath}"
 						class="d-flex justify-content-center align-items-center text-white text-decoration-none">
 						<span class="fs-4 pfont">마이 페이지</span>
 					</a>
@@ -100,12 +100,12 @@ body {
 						
 						<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
 							aria-labelledby="dropdownUser1">
-							<li><a class="dropdown-item" href="#">New project...</a></li>
+<!-- 							<li><a class="dropdown-item" href="#">New project...</a></li>
 							<li><a class="dropdown-item" href="#">Settings</a></li>
 							<li><a class="dropdown-item" href="#">Profile</a></li>
 							<li>
 								<hr class="dropdown-divider">
-							</li>
+							</li> -->
 							<li><a class="dropdown-item" href="#">Sign out</a></li>
 						</ul>
 					</div>

@@ -79,6 +79,7 @@ public class AdminService {
 		accountDao.deleteByAcId(acId);
 	}
 
+	//대시보드 출력 서비스 -김영주
 	public Dashboard getDashboardInfo() {
 		Dashboard dashboard = new Dashboard();
 		dashboard.setUserCount(dashboardDao.countUser());

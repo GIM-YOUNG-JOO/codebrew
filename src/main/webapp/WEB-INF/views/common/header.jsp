@@ -19,8 +19,8 @@
     </div> -->
 <nav class="navbar navbar-expand-lg shadow bg-body rounded" style="height: 100px">
 	<div class="container-fluid">
-		<a class="navbar-brand ms-5" href="${pageContext.request.contextPath}"><img
-			src="${pageContext.request.contextPath}/resources/image/codebrew.png" style="width: 50px"></a>
+		<a class="navbar-brand ms-5" href="${pageContext.request.contextPath}">
+		<img src="${pageContext.request.contextPath}/resources/image/codebrew.jpg" class="rounded-circle" style="width: 80px"></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>

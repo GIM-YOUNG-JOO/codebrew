@@ -20,6 +20,7 @@ import com.mycompany.codebrew.service.AdminService;
 import com.mycompany.codebrew.service.PaymentsService;
 import lombok.extern.slf4j.Slf4j;
 
+//관리자 페이지 - 김영주
 @Controller
 @Slf4j
 @RequestMapping("/admin")
@@ -29,7 +30,7 @@ public class AdminController {
 	@Autowired
 	private PaymentsService payService;
 
-	//대시보드 - 김영주
+	//대시보드
 	@GetMapping("/dashboard")
 	public String dashboard(Model model) {
 		log.info("AdminController - dashboard실행");
@@ -69,15 +70,14 @@ public class AdminController {
 		return "admin/productList";
 	}
 
+	//상품 등록
 	@GetMapping("/productRegistration")
 	public String productRegistration() {
-		log.info("AdminController - productRegistration실행");
 		return "admin/productRegistration";
 	}
 
 	@PostMapping("/registComplete")
 	public String registComplete(Product product) {
-		log.info("AdminController - registComplete실행");
 		if (product.getPrImage() != null && !product.getPrImage().isEmpty()) {
 			try {
 				product.setPrImgData(product.getPrImage().getBytes());
@@ -89,9 +89,9 @@ public class AdminController {
 		return "redirect:/admin/productList";
 	}
 	
+	//상품 수정
 	@GetMapping("/productEdit")
 	public String productEdit(int prId, Model model) {
-		log.info("AdminController - productEdit실행");
 		Product product = service.getProduct(prId);
 		byte[] imageData = product.getPrImgData();
 		if (product.getPrImgData() != null) {
@@ -104,7 +104,6 @@ public class AdminController {
 
 	@PostMapping("/productUpdate")
 	public String productUpdate(Product product) {
-		log.info("AdminController - productUpdate실행");
 		// 첨부 파일이 있는지 여부 조사
 		if (product.getPrImage() != null && !product.getPrImage().isEmpty()) {
 			try {
@@ -117,9 +116,9 @@ public class AdminController {
 		return "redirect:/admin/productList";
 	}
 
+	//상품 삭제
 	@GetMapping("/productDelete")
 	public String productDelete(String pageNo, Model model, HttpSession session) {
-		log.info("AdminController - productDelete실행");
 		// pageNo를 받지 못했을 경우, 세션에 저장되어있는지 확인
 		if (pageNo == null) {
 			pageNo = (String) session.getAttribute("productDeletePageNo");
@@ -154,6 +153,7 @@ public class AdminController {
 		return "redirect:/admin/productDelete";
 	}
 
+	//계정 목록 - 미사용
 	@GetMapping("/accountList")
 	public String accountList(String pageNo, Model model, HttpSession session) {
 		log.info("AdminController - accountList실행");
@@ -176,7 +176,7 @@ public class AdminController {
 		model.addAttribute("accountList", accountList);
 		return "admin/accountList";
 	}
-
+	
 	@PostMapping("/accountUpdate")
 	public String accountUpdate(Account account) {
 		log.info("AdminController - accountUpdate실행");
@@ -191,12 +191,14 @@ public class AdminController {
 		return "redirect:/admin/accountList";
 	}
 	
+	//주문 목록 - 미구현
 	@GetMapping("/orderManagement")
 	public String orderManagement() {
 		log.info("AdminController - orderManagement실행");
 		return "admin/orderManagement";
 	}
 
+	//판매 내역
 	@GetMapping("/paymentList")
 	public String paymentList(Model model) {
 		log.info("결제 내역 출력");

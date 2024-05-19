@@ -17,7 +17,7 @@
 				</div>
 			</div>
 		</li>
-		<li class="list-group-item"><a href="${pageContext.request.contextPath}/menu/cart">Cart</a></li>
+		<li class="list-group-item"><a href="${pageContext.request.contextPath}/order/menu">Cart</a></li>
 		<li class="list-group-item"><a href="${pageContext.request.contextPath}/board/boardList">Board</a></li>
 		<li class="list-group-item"><a href="${pageContext.request.contextPath}/admin/dashboard">Admin Page</a></li>
 		<li class="list-group-item"><a href="https://github.com/GIM-YOUNG-JOO/codebrew">Developers</a></li>

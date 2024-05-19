@@ -3,99 +3,114 @@
 <html lang="en">
 <head>
 <title>게시판 작성</title>
-    <!-- Bootstrap 5를 위한 외부 라이브러리 설정 -->
-    <!-- Latest compiled and minified CSS -->
-    <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet">
-    
-    <!-- Latest compiled JavaScript -->
-    <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- jQuery -->
-    <script
-    src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-        
-    <!-- 아이콘 추가 링크 -->
-    <!-- 초기화 아이콘 -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Bootstrap 5를 위한 외부 라이브러리 설정 -->
+<!-- Latest compiled and minified CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
-    <!-- 위지윅 HTML 에디터 cdn 추가 -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-	<!-- alert 레이아웃 외부 라이브러리 사용 설정  -->
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- jQuery -->
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<!-- 폰트 설정을 위한 링크 추가 -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+	rel="stylesheet">
+<!-- 아이콘 추가 링크 -->
+<!-- 초기화 아이콘 -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boardRegister.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 위지윅 HTML 에디터 cdn 추가 -->
+<script
+	src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js"
+	referrerpolicy="origin"></script>
 
-    <script src="https://cdn.tiny.cloud/1/q1ztz0dzw4cplndsd7c2q2n21lddorqil2kaqrmhenhmfi8w/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-    
-    <script>
-      tinymce.init({
-        selector: '#mytextarea',
-        menubar: false,
-        toolbar: '| bold aligncenter alignjustify alignleft alignright alignnone'
-      });
-      
-    function imageAddAndBlock(event){
-    	
-    	event.preventDefault();
-    	console.log("이미지 추가 실행");
-    	document.getElementById('battach').click();
-    }
-    
-    function displayFileName() {
-        const fileInput = document.getElementById('battach');
-        const fileNameDisplay = document.getElementById('fileNameDisplay');
-        
-        // 파일이 선택되지 않았을 경우 표시할 메시지
-        if (!fileInput.files.length) {
-            fileNameDisplay.textContent = "파일을 선택하세요.";
-            return;
-        }
-        
-        // 선택한 파일의 이름을 표시
-        const fileName = fileInput.files[0].name;
-        fileNameDisplay.textContent = fileName;
-    }
-    
-    
-    function clickedNoticeButton() {
-    	event.preventDefault();
-    	// 버튼 클릭시 category 값 변경
-        document.getElementById("category").value = 1;
-        
-    	// 클릭시 색상 변경
-        document.getElementById("noticeButton").style.backgroundColor = "#2C4E80";
-        document.getElementById("noticeButton").style.color = "#fff";
-        
-        
-        document.getElementById("reviewButton").style.backgroundColor = "";
-        document.getElementById("reviewButton").style.color = "#000";
-        
-    }
-    
-    function clickedReviewButton() {
-    	event.preventDefault();
-    	// 버튼 클릭시 category 값 변경
-        document.getElementById("category").value = 2; 
-        
-    	 // 클릭시 색상 변경
-        document.getElementById("reviewButton").style.backgroundColor = "#2C4E80";
-        document.getElementById("reviewButton").style.color = "#fff";
-        
+<!-- alert 레이아웃 외부 라이브러리 사용 설정  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-        document.getElementById("noticeButton").style.backgroundColor = "";
-        document.getElementById("noticeButton").style.color = "#000";
-        
-    }
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/boardRegister.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    </script>
-    
+<script
+	src="https://cdn.tiny.cloud/1/q1ztz0dzw4cplndsd7c2q2n21lddorqil2kaqrmhenhmfi8w/tinymce/7/tinymce.min.js"
+	referrerpolicy="origin"></script>
+
+<script>
+	tinymce
+			.init({
+				selector : '#mytextarea',
+				menubar : false,
+				toolbar : '| bold aligncenter alignjustify alignleft alignright alignnone'
+			});
+
+	function imageAddAndBlock(event) {
+
+		event.preventDefault();
+		console.log("이미지 추가 실행");
+		document.getElementById('battach').click();
+	}
+
+	function displayFileName() {
+		const fileInput = document.getElementById('battach');
+		const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+		// 파일이 선택되지 않았을 경우 표시할 메시지
+		if (!fileInput.files.length) {
+			fileNameDisplay.textContent = "파일을 선택하세요.";
+			return;
+		}
+
+		// 선택한 파일의 이름을 표시
+		const fileName = fileInput.files[0].name;
+		fileNameDisplay.textContent = fileName;
+	}
+
+	function clickedNoticeButton() {
+		event.preventDefault();
+		// 버튼 클릭시 category 값 변경
+		document.getElementById("category").value = 1;
+
+		// 클릭시 색상 변경
+		document.getElementById("noticeButton").style.backgroundColor = "#2C4E80";
+		document.getElementById("noticeButton").style.color = "#fff";
+
+		document.getElementById("reviewButton").style.backgroundColor = "";
+		document.getElementById("reviewButton").style.color = "#000";
+
+	}
+
+	function clickedReviewButton() {
+		event.preventDefault();
+		// 버튼 클릭시 category 값 변경
+		document.getElementById("category").value = 2;
+
+		// 클릭시 색상 변경
+		document.getElementById("reviewButton").style.backgroundColor = "#2C4E80";
+		document.getElementById("reviewButton").style.color = "#fff";
+
+		document.getElementById("noticeButton").style.backgroundColor = "";
+		document.getElementById("noticeButton").style.color = "#000";
+
+	}
+</script>
+<style>
+body {
+	font-family: "Do Hyeon", sans-serif;
+	font-weight: 400;
+	font-style: normal;	
+}
+
+</style>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>

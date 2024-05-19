@@ -19,5 +19,5 @@ public class Payment {
 	private int paPay;
 	private int brId;
 	private List<PaymentDetail> paymentDetail;
-	
+	private int detailCount;
 }

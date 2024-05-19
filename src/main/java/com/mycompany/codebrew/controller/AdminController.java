@@ -19,6 +19,7 @@ import com.mycompany.codebrew.dto.Dashboard;
 import com.mycompany.codebrew.dto.Pager;
 import com.mycompany.codebrew.dto.Product;
 import com.mycompany.codebrew.service.AdminService;
+import com.mycompany.codebrew.service.PaymentsService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -217,4 +218,9 @@ public class AdminController {
 		return "admin/orderManagement";
 	}
 
+	@GetMapping("/paymentsList")
+	public String paymentsList() {
+		log.info("결제 내역 출력");
+		return "admin/paymentsList";
+	}
 }

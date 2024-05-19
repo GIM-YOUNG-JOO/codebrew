@@ -34,4 +34,8 @@ public class PaymentsService {
 		//카트 비우기
 		paymentsDao.deleteCartList(payment.getAcId());
 	}
+	
+	public List<Payment> getPaymentsList(Payment payment){
+		return paymentsDao.selectPayments(payment);
+	}
 }

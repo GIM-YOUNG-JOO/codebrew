@@ -16,6 +16,10 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
 		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 		
+		<script type="text/javascript">
+
+		</script>
+		
         <style>
         	* {
 			  font-family: "Do Hyeon", sans-serif;
@@ -44,11 +48,17 @@
         </div>
         <div class="border border-secondar rounded m-5 p-3" style="background: #F0F0F0">
             <!-- 로그인폼 -->
-            <form id="signInForm" method="post" action="${pageContext.request.contextPath}/login">
+            <form id="signInForm" name="signInForm" method="post" action="${pageContext.request.contextPath}/login" novalidate>
                 <div class="m-2 p-2 text-start"><span class="star">* </span> indicates required field</div>
                 	<!-- 아이디바/패스워드바 -->
-                    <div class="d-flex"><input id="acId" name="acId" type="text" class="flex-grow-1 border rounded m-3 px-3 py-2"  placeholder="*id"></div>
-                    <div class="d-flex"><input id="acPassword" name="acPassword" type="password" class="flex-grow-1 border rounded m-3 px-3 py-2" placeholder="*password"></div>
+                    <div class="d-flex">
+                    <input id="acId" name="acId" type="text" class="flex-grow-1 border rounded m-3 px-3 py-2"  placeholder="*id">
+                    <h6 id="acIdCheck"></h6>
+                    </div>
+                    <div class="d-flex">
+                    <input id="acPassword" name="acPassword" type="password" class="flex-grow-1 border rounded m-3 px-3 py-2" placeholder="*password">
+                    <h6 id="acPasswordCheck"></h6>
+                    </div>
                 
                 <!-- 로그인 정보 저장 -->
                 <div class="m-2 p-2 text-start">
@@ -61,7 +71,7 @@
                 </div>
                 <!-- 로그인 제출 버튼 -->
                 <div class="text-end me-4">
-                    <button id="signInBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" type="submit" style="background: #2C4E80; color: white;">Sign In</button>
+                    <button id="signInBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" style="background: #2C4E80; color: white;">Sign In</button>
                 </div>
             </form>
         </div>

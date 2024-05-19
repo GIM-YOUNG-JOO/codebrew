@@ -41,7 +41,7 @@
 		rgba(0, 0, 0, 0.22);
 }
 
-.pfont {
+* {
 	font-family: "Do Hyeon", sans-serif;
 	font-style: normal;
 }
@@ -139,7 +139,7 @@
 
 				<!-- AJAX로 변경하는 시작점 -->
 				<div id="innerContainer"
-					class="p-5 d-flex flex-grow-1 align-items-center">
+					class="px-5 d-flex flex-grow-1 align-items-center">
 					<div id="myInfoDetailBox" class="p-5 d-flex align-items-center">
 						<div id="hovershadow"
 							class="p-5 rounded-4 d-flex flex-column align-items-center"
@@ -148,7 +148,7 @@
 								src="${pageContext.request.contextPath}/resources/image/cut/PineapplePassionfruitRefreshersLemonade.png"
 								width="200px" class="rounded-4 mt-5 ms-5 me-5" />
 							<div class="row h5 text-secondary mb-5 pfont">${account.acRole}</div>
-							<div class="row h1 text-dark pfont">${account.acName}</div>
+							<div class="row h2 text-dark pfont">${account.acName}</div>
 							<div class="row h5 text-info mb-5 pfont">${account.acEmail}</div>
 							<div class="row h3 text-dark pfont">${account.acTel}</div>
 						</div>
@@ -163,9 +163,9 @@
 						novalidate>
 						<div class="p-5 flex-grow-1 d-flex align-items-center">
 							<div id="hovershadow"
-								class="d-grid gap-4 p-5 bg-dark rounded-4 w-100">
+								class="d-grid gap-4 p-5 rounded-4 w-100" style="background: #00215E;">
 								<div class="row text-center">
-									<h1 class="text-light pfont">개인정보 수정</h1>
+									<h2 class="text-light pfont">개인정보 수정</h2>
 								</div>
 								<div class="row">
 									<div class="col-4">
@@ -176,7 +176,7 @@
 											<input type="file" class="form-control btn btn-outline-secondary" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 										</div>
 									</div>
-									<div class="col-8 flex-column d-grid gap-4 ps-5 pe-4">
+									<div class="col-8 flex-column d-grid gap-2 ps-5 pe-4">
 										<div class="row">
 											<label class="form-label h4 text-light pfont align-text-bottom">Name</label>
 											<input class="form-control" list="datalistOptions" id="acName" name="acName" value="${account.acName}">

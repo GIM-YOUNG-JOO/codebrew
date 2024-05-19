@@ -37,9 +37,20 @@ public class AccountController {
 	@Autowired
 	private AccountService acservice;
 	
+	//여기 다시 해야함
 	@GetMapping("/signIn")
 	public String signIn() {
-		log.info("실행");
+		log.info("로그인실행");
+	    /*String acId = account.getAcId();
+	    String acPassword = account.getAcPassword();
+	    Account acCheck = acservice.getAcIdAndAcPassword(account);
+	    
+	    log.info("acId: " + acId); 
+	    log.info("acPassword: " + acPassword);
+	    log.info("acCheck: " + acCheck);
+	    model.addAttribute("acId", acId);
+	    model.addAttribute("acPassword", acPassword);
+	    model.addAttribute("acCheck" + acCheck);*/
 		return "signJoin/signIn";
 	}
 	

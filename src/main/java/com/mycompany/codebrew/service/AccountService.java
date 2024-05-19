@@ -36,7 +36,13 @@ public class AccountService {
 		Account account = accountDao.selectByAcId(acId);
 		return account;
 	}
-
+	
+	//로그인 계정 일치 체크
+	/*public Account getAcIdAndAcPassword(Account account) {
+		Account accountCheck = accountDao.selectAcIdAndAcPassword(account);
+			return accountCheck;
+	}*/
+	
 	public Account findAccountPwByIdAndTelAndEmail(Account account) {
 		
 		// 여러개의 매개변수 전달을 위해 Map으로 변환

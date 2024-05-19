@@ -20,6 +20,12 @@
         where acName = #{acName} and acTel = #{acTel}
     </select>
 	
+	<!-- 아이디와 패스워드가 일치할 때 로그인 -->
+	<!-- <select id="selectAcIdAndAcPassword" parameterType="Account" resultType="Account">
+		select *
+        from account
+        where acId = #{acId} and acPassword = #{acPassword}
+	</select> -->
 
 	<!-- 이메일로 아이디 찾기 -->	
 	
@@ -31,8 +37,6 @@
 	</select>
 	
 	<!-- 이메일로 비밀번호 찾기 -->
-	
-	<!-- 비밀번호 바꾸기 -->
 	
 	<select id="count" resultType="int">
 		select count(*) from account

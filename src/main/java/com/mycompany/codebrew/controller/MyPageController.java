@@ -71,10 +71,10 @@ public class MyPageController {
 	    String acPasswordCheck = account.getAcPasswordCheck();
 	    CodebrewUserDetails codebrewUserDetails = (CodebrewUserDetails)authentication.getPrincipal();
 	    //유효성 검사 진행 시 에러가 존재할 경우 error에 저장하고 myInfo.jsp로 이동
-	    if(errors.hasErrors()) {  
+	    /*if(errors.hasErrors()) {  
 			model.addAttribute("errors", errors);
 	    	return "mypage/myInfo";
-		}
+		}*/
 	    //받아온 값으로 계정의 정보를 업데이트 해주는 코드(전달)
 	    Account ac = new Account();
 	    ac.setAcId(codebrewUserDetails.getAcId());

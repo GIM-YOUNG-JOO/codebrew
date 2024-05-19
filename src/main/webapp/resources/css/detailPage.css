@@ -1,5 +1,5 @@
 .product_first_container{
-    background-color: #1f3933;
+    background-color: #1f3933; 
     border: 1px solid black;
 }
 .box_container{
@@ -84,7 +84,7 @@
 
   .option_one label div {
     font-weight: bold;
-    color: #1f3933;
+    color: #00215E;
   }
 
   .dust-class{

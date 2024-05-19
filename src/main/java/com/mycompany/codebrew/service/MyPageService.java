@@ -50,6 +50,7 @@ public class MyPageService {
 		return myBoardCommentList;
 	}
 	
+	// 아이디로 계정정보 불러오기용
 	public Account getAccount(String acId) {
 		Account account = accountDao.selectByAcId(acId);
 			return account;

@@ -16,7 +16,7 @@ public interface AccountDao {
 	public int deleteByAcId(String acId);
 	public int count();
 	
-	//전화번호로 아이디 찾기용
+	// 전화번호로 아이디 찾기용
 	public String selectAcIdByAcTel(Map<String, Object> params);
 	
 	// 게시판 user, admin 확인 용 DAO

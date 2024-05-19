@@ -129,8 +129,8 @@ body {
     <!-- action의 이름으로 컨트롤러 이동 -->
     <form id="boardRegister" method="post" action="boardRegister" enctype="multipart/form-data">
         <div class="nav_bar">
-        
-        	<c:if test="${account.acRole == 'ROLE_ADMIN' }">
+        	
+        	<c:if test="${account.acRole == 'ROLE_ADMIN'}">
         		<button id="noticeButton" class="button_tags hover_grey button register_btn rounded-1" value="1" onclick="clickedNoticeButton()">공지사항</button>
         	</c:if>
         	
@@ -155,7 +155,8 @@ body {
 					class="title form-control" placeholder="제목을 입력해주세요">
 			</div>
 			<!-- action을 통해서 Controller를 타고 가서 boardDetail로 변경해야함 -->
-			<!-- 내용 -->
+			
+			<!-- 내용 외부 API 사용 -->
 			<textarea id="mytextarea" name="boContent" placeholder="내용을 입력해주세요"></textarea>
 			<div class="mb-4"></div>
 

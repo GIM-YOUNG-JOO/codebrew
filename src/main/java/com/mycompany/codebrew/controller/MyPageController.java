@@ -61,18 +61,21 @@ public class MyPageController {
 	@PostMapping("/myInfoChange")
 	public String myInfoChange(@Validated Account account, Authentication authentication, Errors errors, Model model) {
 		log.info("MyPageController - myInfoChange실행");
+		
 	    // input으로 들어온 값을 변수에 저장
 	    String acName = account.getAcName();
 	    String acEmail = account.getAcEmail();
 	    String acTel = account.getAcTel();
 	    String acPassword = account.getAcPassword();
 	    String acPasswordCheck = account.getAcPasswordCheck();
+	    // input으로 들어오지않는 Id 값은 로그인 시 security를 통해 저장되는 값을 Authentication 객체로 불러오기
 	    CodebrewUserDetails codebrewUserDetails = (CodebrewUserDetails)authentication.getPrincipal();
 	    //유효성 검사 진행 시 에러가 존재할 경우 error에 저장하고 myInfo.jsp로 이동
-	    if(errors.hasErrors()) {  
+	    /*if(errors.hasErrors()) {  
 			model.addAttribute("errors", errors);
 	    	return "mypage/myInfo";
-		}
+		}*/
+	    
 	    //받아온 값으로 계정의 정보를 업데이트 해주는 코드(전달)
 	    Account ac = new Account();
 	    ac.setAcId(codebrewUserDetails.getAcId());
@@ -82,7 +85,8 @@ public class MyPageController {
 	    ac.setAcPassword(acPassword);
 	    ac.setAcPasswordCheck(acPasswordCheck);
 	    ac.setAcRole(codebrewUserDetails.getAcRole());
-	    myPageService.ChangeAccount(ac);    
+	    myPageService.ChangeAccount(ac); 
+	    
 		// 업데이트한 계정의 정보를 불러오는 코드(받아오기)
 	    String acId = codebrewUserDetails.getAcId();
 	    Account accountChanged = myPageService.getAccount(acId);

@@ -31,24 +31,27 @@ public class AccountController {
 	@Autowired
 	private AccountService acservice;
 	
-	//여기 다시 해야함
+	// 로그인 페이지 이동
 	@GetMapping("/signIn")
 	public String signIn() {
 		log.info("AccountController - signIn실행");
 		return "signJoin/signIn";
 	}
 	
+	// 회원가입 페이지 이동
 	@GetMapping("/joinNow")
 	public String joinNow() {
 		log.info("AccountController - joinNow실행");
 		return "signJoin/joinNow";
 	}
 	
+	// 회원가입 유효성 검사
 	@InitBinder("account") //Account dto 객체 관련 유효성 검사는 joinNowValidator 객체로 진행
 	public void joinNowValidator(WebDataBinder binder) {
 		binder.setValidator(new JoinNowValidator());	
 	}
 	
+	// 회원가입 진행
 	@RequestMapping ("/signUp")
 	public String signUp(@Valid Account account, Errors errors) {
 		log.info("AccountController - signUp실행");
@@ -62,14 +65,14 @@ public class AccountController {
 		return "redirect:/"; 
 	}
 	
-	//아이디 찾기 페이지 이동
+	// 아이디 찾기 페이지 이동
 	@GetMapping("/findId")
 	public String findId() {
 		log.info("AccountController - findId실행");
 		return "signJoin/findId";	
 	}
 	
-	//이름, 전화번호로 아이디 찾기
+	//이름, 전화번호로 아이디 찾기 진행
     @PostMapping("/findIdByTel")
     public ResponseEntity<Object> findId(@RequestParam("acName") String acName, @RequestParam("acTel") String acTel) {
     	log.info("AccountController - findIdByTel실행");
@@ -84,7 +87,8 @@ public class AccountController {
         }
     }
 	
-	//비밀번호 찾기 페이지 이동
+    // 이경환
+	// 비밀번호 찾기 페이지 이동
 	@GetMapping("/changePassword")
 	public String changePassword() {
 		log.info("AccountController - changePassword실행");
@@ -105,6 +109,8 @@ public class AccountController {
 		return map;
 		}
 	
+	// 이경환
+	// 업데이트 시 post로 값을 넘기는 컨트롤러
 	@PostMapping("/updatePassword")
 	public String updatePassword(Account account) {
 		log.info("AccountController - updatePassword실행");

@@ -23,6 +23,7 @@ public class AccountService {
 		accountDao.update(account);
 	}
 	
+	// 전화번호로 아이디 찾기
     public String findAccountIdByTel(String acName, String acTel) {
         // 매개변수를 Map으로 변환하여 전달
         Map<String, Object> params = new HashMap<>();
@@ -57,6 +58,7 @@ public class AccountService {
 	}
 
 	public void updatePassword(Account account) {
+		// 비밀번호를 암호화해서 저장
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		account.setAcPassword(passwordEncoder.encode(account.getAcPassword()));	
 		

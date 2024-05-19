@@ -102,7 +102,8 @@ body {
                     <i class="bi bi-arrow-clockwise"></i>
                     초기화</button>
              </div> -->
-
+			
+			<!-- 정렬을 위한 버튼들 -->
 			<div class="d-flex ss edit_box mb-2">
 				<ul class="select_box ss">
 					<li class="ss me-4"><button class="select_box_button" onclick="sortByDate()">최신순</button></li>
@@ -123,6 +124,7 @@ body {
 			
             <div id="boardContainer">
 			    <table class="table table-sm table-bordered">
+			    <!-- 게시판 내용 불러오는 코드 -->
 			        <c:forEach var="board" items="${boardList}">
 			            <ul class="question_list">
 			                <li class="li mb-3">
@@ -168,7 +170,7 @@ body {
 			        </c:forEach>
 			    </table>
 			
-
+				<!-- 페이징 처리 하는 부분 -->
 				<table class="table text-center">
 				    <tr>
 				        <td colspan="4" class="text-center">
@@ -202,6 +204,7 @@ body {
 
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
+	
 	function clickedNoticeButton() {
     	event.preventDefault();
     	// 버튼 클릭시 category 값 변경

@@ -143,7 +143,7 @@ body {
 <body>
    <%@ include file="/WEB-INF/views/common/header.jsp"%>
    
-    <div class="container ss mt-5">
+    <div class="container ss mt-3">
     <!-- action의 이름으로 컨트롤러 이동 -->
     <form id="updateRegister" method="post" action="updateRegister" enctype="multipart/form-data">
         <div class="nav_bar ss">

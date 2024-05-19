@@ -34,6 +34,8 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
+	// 이경환
+	// 게시판 jsp를 부르는 컨트롤러
 	@RequestMapping("/boardList")
 	public String boardList(String pageNo, Model model, HttpSession session) {
 		log.info("BoardController - boardList실행");
@@ -210,6 +212,8 @@ public class BoardController {
 		return map;
 	}
 	
+	// 이경환
+	// 게시판 등록 페이지 jsp 호출 컨트롤러
 	@Secured("ROLE_USER")
 	@GetMapping("/boardRegister")
 	public String boardRegisterGet(Model model, Authentication authentication) {
@@ -221,6 +225,8 @@ public class BoardController {
 		return "board/boardRegister";
 	}
 	
+	// 이경환
+	// 게시판 등록 값 전달 post 컨트롤러
 	@PostMapping("/boardRegister")
 	public String boardRegisterPost(Authentication authentication, Board board, @RequestParam ("category") int category) {
 		log.info("BoardController - boardRegistre(Post)실행");
@@ -250,6 +256,7 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}
 	
+	// 이경환
 	// 날짜별 정렬 및 제목 정렬
 	@GetMapping(value ="/sortByDate", produces = "application/json; charset=UTF-8")
 	public String sortByDate(String pageNo, String searchText, Model model, HttpSession session) {
@@ -284,6 +291,7 @@ public class BoardController {
 		return "board/boardListAjaxByDate";
 	}
 	
+	// 이경환
 	// 조회수 정렬 및 제목 정렬
 	@GetMapping(value ="/sortByHitcount", produces = "application/json; charset=UTF-8")
 	public String sortByHitcount(String pageNo, String searchText, Model model, HttpSession session) {
@@ -318,7 +326,8 @@ public class BoardController {
 		return "board/boardListAjaxByHitcount";
 	}
 	
-	// 좋아요 정렬 및 제목 정렬
+	// 이경환
+	// 좋아요 수에 따른 정렬
 	@GetMapping(value ="/sortByLike", produces = "application/json; charset=UTF-8")
 	public String sortByLike(String pageNo, String searchText, Model model, HttpSession session) {
 		log.info("BoardController - sortByLike실행");
@@ -353,6 +362,8 @@ public class BoardController {
 		return "board/boardListAjaxByLike";
 	}
 	
+	// 이경환
+	// 댓글 수에 따른 정렬
 	@GetMapping(value ="/sortByComment", produces = "application/json; charset=UTF-8")
 	public String sortByComment(String pageNo, String searchText, Model model, HttpSession session) {
 		log.info("BoardController - sortByComment실행");
@@ -387,7 +398,8 @@ public class BoardController {
 		return "board/boardListAjaxByLike";
 	}
 	
-	// 제목으로 검색시 AJAX
+	// 이경환
+	// 제목으로 검색시 정렬
 	@GetMapping(value ="/searchTitle", produces = "application/json; charset=UTF-8")
 	public String searchTitle(String pageNo, String searchText, Model model, HttpSession session) {
 		log.info("BoardController - searchTitle실행");
@@ -411,6 +423,7 @@ public class BoardController {
 		return "board/boardListAjaxByTitle";
 	}
 	
+	// 업데이트 시 
 	// Board 수정 버튼 클릭시 연결하는 컨트롤러
 	@GetMapping("/updateRegister")
 	public String updateRegisterGet(Board board, Model model) {
@@ -446,4 +459,5 @@ public class BoardController {
 		boardService.updateBoard(boardSaved);
 		return "redirect:/board/boardDetail?boId="+board.getBoId();
 	}
+	
 }

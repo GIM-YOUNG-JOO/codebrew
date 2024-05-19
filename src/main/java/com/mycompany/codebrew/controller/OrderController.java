@@ -119,7 +119,7 @@ public class OrderController {
 		cart.setPdId(productDetail.getPdId());
 		service.registCart(cart);
 		}
-		return "redirect:/order/menu";
+		return "redirect:/order/cart";
 	}
 	
 	//정태환

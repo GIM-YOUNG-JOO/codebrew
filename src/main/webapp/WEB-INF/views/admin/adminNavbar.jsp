@@ -20,16 +20,16 @@
 				</ul>
 			</div>
 		</li>
-		<li>
+<%-- 		<li>
 			<a href="${pageContext.request.contextPath}/admin/accountList" class="nav-link text-white" aria-expanded="false">
-			<i class="bi bi-person-video2 me-2"></i> Account</a></li>
+			<i class="bi bi-person-video2 me-2"></i> Account</a></li> --%>
 		<li>
 			<a href="#" class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#order-collapse" aria-expanded="false">
 			<i class="bi bi-cup me-2"></i> Order</a>
 			<div class="collapse" id="order-collapse">
 				<ul class="ms-2">
 					<li><a href="${pageContext.request.contextPath}/admin/paymentList" class="text-white text-decoration-none">결제 내역</a></li>
-					<li><a href="${pageContext.request.contextPath}/admin/orderManagement" class="text-white text-decoration-none">주문 관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/orderManagement" class="text-white text-decoration-none">주문 관리(미구현)</a></li>
 				</ul>
 			</div>
 		</li>

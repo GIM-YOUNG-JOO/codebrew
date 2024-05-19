@@ -79,7 +79,7 @@
                 	
                 <!-- 비밀번호 찾기 폼 제출 버튼 -->
                 <div class="text-center">
-                    <button id="changePasswordBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" onclick="findPassword()" style="background: #2C4E80; color: white;">submit</button>
+                    <button id="changePasswordBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" onclick="findPassword()" style="background: #1f3933; color: white;">submit</button>
                 </div>
                 <div id="hiddenDiv" style="display: none;"></div>
                <!--  <div style="margin-top: 10px; font-size: 30px; color: #2C4E80; text-align: center;">정확한 정보를 입력하세요</div> -->
@@ -140,7 +140,7 @@
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
 <script>
-	//최신순으로 정렬하는 함수
+	// 비밀번호를 찾는 함수 - AJAX
 	function findPassword() {
 	var acId = $("#acId").val();
 	var acName = $("#acName").val();
@@ -158,11 +158,13 @@
 			data: account,
 			success: function(response){
 				console.log(response.result);
+				// 값이 다를 경우 result에 0를 넣어서 아래 내용을 출력하게 함
 				if(response.result == 0){
-					var failedHtml = '<div style="margin-top: 10px; font-size: 30px; color: #2C4E80; text-align: center;">' + '정확한 정보를 입력하세요' + '</div>';
+					var failedHtml = '<div style="margin-top: 10px; font-size: 30px; color: #1f3933; text-align: center;">' + '정확한 정보를 입력하세요' + '</div>';
 					$("#hiddenDiv").html(failedHtml);
 					$("#hiddenDiv").show();
 				} else {
+					// 값이 맞을 경우 모달을 실행하게 함
 					console.info("실행")
 					console.info("acId: " + acId);
 					$('#modalAcId').val(acId);

@@ -58,6 +58,7 @@ public class AccountService {
 	}
 
 	public void updatePassword(Account account) {
+		// 비밀번호를 암호화해서 저장
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		account.setAcPassword(passwordEncoder.encode(account.getAcPassword()));	
 		

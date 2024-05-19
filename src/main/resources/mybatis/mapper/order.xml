@@ -29,7 +29,7 @@
 		where pcId = 4
 	</select>
 	<select id="selectCoffeeByPrId" parameterType="int" resultType="Product">
-		select prId, prName, pcId, prPrice, prImage as prImgData
+		select prId, prName, prInfo, pcId, prPrice, prImage as prImgData
 		from product
 		where prId = #{prId}
 	</select>

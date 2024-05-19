@@ -103,11 +103,11 @@
 		           
 				<!-- 아이디 찾기 버튼 -->
 				<div class="text-center">
-					<button id="findIdBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" style="background: #2C4E80; color: white;">search</button>
+					<button id="findIdBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" style="background: #1f3933; color: white;">search</button>
 				</div> 
 					    
 				<!-- 아이디 찾기 결과 표시 -->
-				<div id="findIdResult" class="text-center m-3" style="font-size: 30px; color: #2C4E80;"></div>
+				<div id="findIdResult" class="text-center m-3" style="font-size: 30px; color: #1f3933;"></div>
 			</form>
 		</div>
 	

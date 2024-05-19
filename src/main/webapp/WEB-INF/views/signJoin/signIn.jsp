@@ -35,6 +35,7 @@
             #signInForm {
             	min-width: 500px;  
             }
+           
 
         </style>
 </head>
@@ -71,7 +72,11 @@
                 </div>
                 <!-- 로그인 제출 버튼 -->
                 <div class="text-end me-4">
+
+                    <button id="signInBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" type="submit" style="background: #1f3933; color: white;">Sign In</button>
+
                     <button id="signInBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" style="background: #2C4E80; color: white;">Sign In</button>
+
                 </div>
             </form>
         </div>

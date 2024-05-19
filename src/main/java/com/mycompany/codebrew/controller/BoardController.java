@@ -49,12 +49,18 @@ public class BoardController {
 		session.setAttribute("pageNo", pageNo);
 		// 문자열로 받은 pageNo를 정수로 변환
 		int intPageNo = Integer.parseInt(pageNo);
-		// Pager 객체 생성
+		
+		// 전체 열의 수를 서버에서 받아옴
 		int rowsPagingTarget = boardService.getTotalRow();
+		
+		// Pager 객체 생성
 		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 		// 페이지당 행수, 한번에 보이는 페이징 수, 전체 행수, 원하는 페이지 넘버
 		// 페이징 처리
+		
+		// 게시판의 내용을 리스트로 받아와서 뿌려주기 위해서 서버에서 찾아옴
 		List<Board> boardList = boardService.getBoardList(pager);
+		
 		// JSP에서 사용하려면 값을 넘겨줘야함
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
@@ -218,8 +224,12 @@ public class BoardController {
 	@GetMapping("/boardRegister")
 	public String boardRegisterGet(Model model, Authentication authentication) {
 		log.info("BoardController - boardRegister(Get)실행");
+		
+		// 게시판 작성시 자신의 번호를 서버에 저장해야 해서 acId 받아옴
 		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
 		String acId = codebrewUserDetail.getAccount().getAcId();
+		
+		// 찾아온 값의 권한(role)을 확인하기 위해서 account를 서버에서 찾아서 넘겨야함
 		Account account = boardService.getAccountRole(acId);
 		model.addAttribute("account", account);
 		return "board/boardRegister";
@@ -242,9 +252,8 @@ public class BoardController {
 			} catch (Exception e) {
 			}
 		}
-		// 로그인된 사용자 아이디 설정 - 로그인해야만 넣을 수 있음
-		// Security 사용시 principal에서 로그인된 id값 받아 올 수 있음
-		// 로그인 안하면 에러남
+	
+		// 로그인을해야 authentication에서 값을 받아 올 수 있음
 		board.setAcId(acId);
 		// 카테고리 값 (공지사항 = 1, 리뷰 = 2) 받아와서 넣어줌
 		board.setBcId(category);
@@ -252,12 +261,13 @@ public class BoardController {
 		board.setBoCommentCount(0);
 		// 최초 좋아요 0으로 초기화
 		board.setBoLike(0);
+		// 게시판 작성하여 DB에 저장
 		boardService.writeBoard(board);
 		return "redirect:/board/boardList";
 	}
 	
 	// 이경환
-	// 날짜별 정렬 및 제목 정렬
+	// 날짜별 정렬 및 제목 정렬 - AJAX 컨트롤러
 	@GetMapping(value ="/sortByDate", produces = "application/json; charset=UTF-8")
 	public String sortByDate(String pageNo, String searchText, Model model, HttpSession session) {
 		log.info("BoardController - sortByDate실행");
@@ -267,23 +277,28 @@ public class BoardController {
 				pageNo = "1";
 			}
 		}
+		
 		// 세션에 pageNo 변환
 		session.setAttribute("pageNo", pageNo);
 		// 문자열로 받은 pageNo를 정수로 변환
 		Pager pager;
 		List<Board> boardList;
-	    // 제목 없을 경우 실행되는 정렬
+	    // 검색 내용이 없을 경우 실행되는 날짜별 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
 			int intPageNo = Integer.parseInt(pageNo);
+			// 서버의 전체 열의 수를 받아옴
 			int rowsPagingTarget = boardService.getTotalRow();
 			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
+			// 최신 순으로 게시글을 받아옴
 			boardList = boardService.getDate(pager);
 		} else {
+			// 검색 내용이 있을 경우 실행되는 날짜별 정렬
 			int intPageNo = Integer.parseInt(pageNo);
+			// 서버에서 검색 내용의 열의 수를 받아옴
 			int rowsPagingTarget = boardService.getRowBySearchText(searchText);
 			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
-			// 제목 있을 경우 실행되는 정렬
 			pager.setSearchText(searchText);
+			// 검색 내용에 맞는 게시글을 찾아와서 최신 순으로 정렬
 			boardList = boardService.getDateByTitle(pager);
 		}
 		model.addAttribute("boardList", boardList);
@@ -292,7 +307,7 @@ public class BoardController {
 	}
 	
 	// 이경환
-	// 조회수 정렬 및 제목 정렬
+	// 조회수 정렬 및 제목 정렬 - AJAX 컨트롤러
 	@GetMapping(value ="/sortByHitcount", produces = "application/json; charset=UTF-8")
 	public String sortByHitcount(String pageNo, String searchText, Model model, HttpSession session) {
 		log.info("BoardController - sortByHitcount실행");
@@ -307,18 +322,20 @@ public class BoardController {
 		// 문자열로 받은 pageNo를 정수로 변환
 		Pager pager;
 		List<Board> boardList;
-	    // 제목 없을 경우 실행되는 정렬
+	    // 검색 내용 없을 경우 실행되는 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
 			int intPageNo = Integer.parseInt(pageNo);
 			int rowsPagingTarget = boardService.getTotalRow();
 			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
+			// 조회수가 많은 순으로 정렬
 			boardList = boardService.getHitcount(pager);
 		} else {
-			// 제목 있을 경우 실행되는 정렬
+			// 검색 내용이 있을 경우 실행되는 정렬
 			int intPageNo = Integer.parseInt(pageNo);
 			int rowsPagingTarget = boardService.getRowBySearchText(searchText);
 			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 			pager.setSearchText(searchText);
+			// 검색 내용에 맞는 게시글 중 조회수가 많은 순으로 정렬
 			boardList = boardService.getHitcountByTitle(pager);
 		}
 		model.addAttribute("boardList", boardList);
@@ -342,18 +359,19 @@ public class BoardController {
 		// 문자열로 받은 pageNo를 정수로 변환
 		Pager pager;
 		List<Board> boardList;
-	    // 제목 없을 경우 실행되는 정렬
+	    // 검색 내용이 없을 경우 실행되는 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
 			int intPageNo = Integer.parseInt(pageNo);
 			int rowsPagingTarget = boardService.getTotalRow();
 			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
+			//
 			boardList = boardService.getLike(pager);
 		} else {
-			// 제목 있을 경우 실행되는 정렬
+			// 검색 내용이 있을 경우 실행되는 정렬
 			int intPageNo = Integer.parseInt(pageNo);
 			int rowsPagingTarget = boardService.getRowBySearchText(searchText);
 			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
-			// 제목 있을 경우 실행되는 정렬
+			// 검색 내용에 맞는 게시글 중 좋아요 수가 많은 순으로 정렬
 			pager.setSearchText(searchText);
 			boardList = boardService.getLikeByTitle(pager);
 		}
@@ -378,18 +396,19 @@ public class BoardController {
 		// 문자열로 받은 pageNo를 정수로 변환
 		Pager pager;
 		List<Board> boardList;
-	    // 제목 없을 경우 실행되는 정렬
+	    // 검색 내용이 없을 경우 실행되는 정렬
 		if(searchText == null || searchText.equals(" ") || searchText.isEmpty()) {
 			int intPageNo = Integer.parseInt(pageNo);
 			int rowsPagingTarget = boardService.getTotalRow();
 			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
+			// 댓글 수가 많은 순으로 정렬
 			boardList = boardService.getComment(pager);
 		} else {
-			// 제목 있을 경우 실행되는 정렬
+			// 검색 내용이 있을 경우 실행되는 정렬
 			int intPageNo = Integer.parseInt(pageNo);
 			int rowsPagingTarget = boardService.getRowBySearchText(searchText);
 			pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
-			// 제목 있을 경우 실행되는 정렬
+			// 검색 내용이 있는 게시글 중 댓글 수가 많은 순으로 정렬
 			pager.setSearchText(searchText);
 			boardList = boardService.getCommentByTitle(pager);
 		}
@@ -417,6 +436,7 @@ public class BoardController {
 		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 		List<Board> boardList;
 		pager.setSearchText(searchText);
+		// 검색의 제목과 내용에 맞는 값을 찾아옴
 		boardList = boardService.getSearchTitle(pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pager", pager);
@@ -437,6 +457,7 @@ public class BoardController {
 	}
 	
 	// 이경환
+	// Board 수정시 업데이트를 위한 컨트롤러
 	@PostMapping("/updateRegister")
 	public String updateRegisterPost(Board board) {
 		log.info("BoardController - updateRegister(Post)실행");

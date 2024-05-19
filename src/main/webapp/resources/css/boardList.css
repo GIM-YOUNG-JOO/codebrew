@@ -2,7 +2,7 @@
 .first_box{
     display: flex;
     align-items: center;
-    background-color: #00215E;
+    background-color: #1f3933;
     height: 100px;
     margin-bottom: 60px;
 }
@@ -84,7 +84,7 @@ a{
 }
 
 .search_button{
-    background-color: #2C4E80;
+    background-color: #1f3933;
     color: #fff;
     min-width: 100px;
     height: 48px;
@@ -145,7 +145,7 @@ ul{
 }
 
 .edit_button{
-    background-color: #2C4E80;
+    background-color: #1f3933;
     min-width: 100px;
     height: 48px;
     border: none;

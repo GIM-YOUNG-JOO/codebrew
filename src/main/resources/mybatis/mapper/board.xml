@@ -259,6 +259,16 @@
 			boLike = boLike - 2
 			where boId = #{boId}
 	</update>
+	<update id="updateBoardCommentIncrease" parameterType="int">
+		update board set
+			boCommentCount = boCommentCount + 1
+			where boId = #{boId}
+	</update>
+	<update id="updateBoardCommentDecrease" parameterType="int">
+		update board set
+			boCommentCount = boCommentCount - 1
+			where boId = #{boId}
+	</update>
 	<delete id="deleteBoardByBoId" parameterType="int">
 		delete
 		from board

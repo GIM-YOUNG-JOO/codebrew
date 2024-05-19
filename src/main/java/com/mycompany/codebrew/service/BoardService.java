@@ -113,7 +113,7 @@ public class BoardService {
 
 	public void writeBoardComment(BoardComment formData) {
 		boardCommentDao.insertComment(formData);
-		
+		boardDao.updateBoardCommentIncrease(formData.getBoId());
 		
 	}
 
@@ -226,8 +226,9 @@ public class BoardService {
 		
 	}
 
-	public void deleteComment(int bocId) {
+	public void deleteComment(int bocId,int boId) {
 		int result = boardCommentDao.deleteBoardCommentByBocId(bocId);
+		boardDao.updateBoardCommentDecrease(boId);
 	}
 	public void updateBoard(Board board) {
 		// boUpdateCheck가 1일 경우 수정시 사진이 변경됨

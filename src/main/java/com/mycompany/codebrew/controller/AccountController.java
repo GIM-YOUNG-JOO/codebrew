@@ -77,6 +77,7 @@ public class AccountController {
     public ResponseEntity<Object> findId(@RequestParam("acName") String acName, @RequestParam("acTel") String acTel) {
     	log.info("AccountController - findIdByTel실행");
         String acId = acservice.findAccountIdByTel(acName, acTel);
+        log.info("찾은 acId : " + acId);
         if (acId != null) {
             // 만약 아이디가 존재하면 JSON 형식으로 아이디를 리턴
             return new ResponseEntity<>(acId, HttpStatus.OK);

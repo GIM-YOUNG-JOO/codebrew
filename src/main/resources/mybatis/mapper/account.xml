@@ -14,7 +14,7 @@
 	</select>
 	
 	<!-- 전화번호로 아이디 찾기 -->
-    <select id="selectAcIdByAcTel" parameterType="map" resultType="Account">
+    <select id="selectAcIdByAcTel" parameterType="map" resultType="String">
         select acId
         from account
         where acName = #{acName} and acTel = #{acTel}

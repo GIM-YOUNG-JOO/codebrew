@@ -1,5 +1,6 @@
 package com.mycompany.codebrew.controller;
 
+import java.security.Principal;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,11 @@ import com.mycompany.codebrew.dto.Account;
 import com.mycompany.codebrew.dto.Board;
 import com.mycompany.codebrew.dto.BoardComment;
 import com.mycompany.codebrew.dto.Pager;
+import com.mycompany.codebrew.dto.Payment;
 import com.mycompany.codebrew.security.CodebrewUserDetails;
 import com.mycompany.codebrew.service.MyPageService;
+import com.mycompany.codebrew.service.PaymentsService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -26,6 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageController {
 	@Autowired
 	MyPageService myPageService;
+	@Autowired
+	private PaymentsService payService;
+
+	
 	
 	//MyPageService myPageService; 로 주입할 수 있도록 service단 수정해야함
 
@@ -83,9 +91,10 @@ public class MyPageController {
 		// 업데이트 된 정보를 에이젝스로 보여줌
 		return "mypage/myInfoAjax";
 	}
-
+	
+	// 이경환
 	@GetMapping(value ="/myWriteBoardHistory", produces = "application/json; charset=UTF-8")
-	public String myWriteBoardHistory(String pageNo, Model model, HttpSession session,Authentication authentication) {
+	public String myWriteBoardHistory(String pageNo, Model model, HttpSession session, Authentication authentication) {
 		log.info("MyPageController - myWriteBoardHistory(Get)실행");
 		CodebrewUserDetails codebrewUserDetails = (CodebrewUserDetails)authentication.getPrincipal();
 		String acId = codebrewUserDetails.getAccount().getAcId();
@@ -133,5 +142,25 @@ public class MyPageController {
 		model.addAttribute("boardCommentList", boardCommentList);
 		model.addAttribute("pager", pager);
 		return "mypage/myWriteBoardCommentHistory";
-	}	
+	}
+	
+	
+	//결제 내역 출력
+	@GetMapping(value ="/myPayment" , produces = "application/json; charset=UTF-8")
+	public String myPayment(Principal principal, Model model) {
+		log.info("개인정보 실행");
+		List<Payment> paymentList = payService.getPaymentsListByAcId(principal.getName());
+		model.addAttribute("paymentList", paymentList);
+		return "mypage/myPayment";
+	}
+	
+	// 개인 정보 재 출력
+		@GetMapping(value ="/myAccount" , produces = "application/json; charset=UTF-8")
+		public String myAccount(Authentication authentication, Model model) {
+			CodebrewUserDetails codebrewUserDetails = (CodebrewUserDetails)authentication.getPrincipal();
+			Account account = codebrewUserDetails.getAccount();
+			model.addAttribute("account", account);
+			return "mypage/myAccount";
+		}
+	
 }

@@ -41,7 +41,7 @@
 		rgba(0, 0, 0, 0.22);
 }
 
-.pfont {
+* {
 	font-family: "Do Hyeon", sans-serif;
 	font-style: normal;
 }
@@ -83,7 +83,7 @@ div.row.h5.text-info.mb-5.pfont{
 				<div
 					class="d-flex col flex-column flex-shrink-0 p-3 text-white bg-dark rounded-start-4"
 					style="max-width: 280px; min-width: 280px;">
-					<a href="/"
+					<a href="${pageContext.request.contextPath}"
 						class="d-flex justify-content-center align-items-center text-white text-decoration-none">
 						<span class="fs-4 pfont">마이 페이지</span>
 					</a>
@@ -91,12 +91,12 @@ div.row.h5.text-info.mb-5.pfont{
 					<ul class="nav nav-pills flex-column mb-auto">
 						<li><a href="#" class="nav-link text-white fs-3 pfont"
 							data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
-							aria-expanded="false"> <i class="bi bi-box me-2"></i> 주문 기록
+							aria-expanded="false" onclick="myPaymentHistory()"> <i class="bi bi-box me-2"></i> 주문 기록
 						</a>
 						</li>
 						<li><a href="#" class="nav-link text-white fs-3 pfont"
 							data-bs-toggle="collapse" data-bs-target="#account-collapse"
-							aria-expanded="false"> <i class="bi bi-person-video2 me-2"></i>
+							aria-expanded="false" onclick="myAccount()"> <i class="bi bi-person-video2 me-2"></i>
 								개인정보
 						</a>
 							</li>
@@ -116,21 +116,15 @@ div.row.h5.text-info.mb-5.pfont{
 					</ul>
 					<hr>
 					<div class="dropdown">
-						<a href="#"
-							class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-							id="dropdownUser1" data-bs-toggle="dropdown"
-							aria-expanded="false"> <img src="https://github.com/mdo.png"
-							alt="" width="32" height="32" class="rounded-circle me-2">
-							<strong>dd</strong>
-						</a>
+						
 						<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
 							aria-labelledby="dropdownUser1">
-							<li><a class="dropdown-item" href="#">New project...</a></li>
+<!-- 							<li><a class="dropdown-item" href="#">New project...</a></li>
 							<li><a class="dropdown-item" href="#">Settings</a></li>
 							<li><a class="dropdown-item" href="#">Profile</a></li>
 							<li>
 								<hr class="dropdown-divider">
-							</li>
+							</li> -->
 							<li><a class="dropdown-item" href="#">Sign out</a></li>
 						</ul>
 					</div>
@@ -138,7 +132,7 @@ div.row.h5.text-info.mb-5.pfont{
 
 				<!-- AJAX로 변경하는 시작점 -->
 				<div id="innerContainer"
-					class="p-5 d-flex flex-grow-1 align-items-center">
+					class="px-5 d-flex flex-grow-1 align-items-center">
 					<div id="myInfoDetailBox" class="p-5 d-flex align-items-center">
 						<div id="hovershadow"
 							class="p-5 rounded-4 d-flex flex-column align-items-center"
@@ -146,7 +140,10 @@ div.row.h5.text-info.mb-5.pfont{
 							<img
 								src="${pageContext.request.contextPath}/resources/image/cut/PineapplePassionfruitRefreshersLemonade.png"
 								width="200px" class="rounded-4 mt-5 ms-5 me-5" />
+
 							<div class="row h1 text-dark pfont">${account.acName}</div>
+							<div class="row h5 text-secondary mb-5 pfont">${account.acRole}</div>
+							<div class="row h2 text-dark pfont">${account.acName}</div>
 							<div class="row h5 text-info mb-5 pfont">${account.acEmail}</div>
 							<div class="row h3 text-dark pfont">${account.acTel}</div>
 						</div>
@@ -161,9 +158,9 @@ div.row.h5.text-info.mb-5.pfont{
 						novalidate>
 						<div class="p-5 flex-grow-1 d-flex align-items-center">
 							<div id="hovershadow"
-								class="d-grid gap-4 p-5 bg-dark rounded-4 w-100">
+								class="d-grid gap-4 p-5 rounded-4 w-100" style="background: #00215E;">
 								<div class="row text-center">
-									<h1 class="text-light pfont">개인정보 수정</h1>
+									<h2 class="text-light pfont">개인정보 수정</h2>
 								</div>
 								<div class="row">
 									<div class="col-4">
@@ -174,7 +171,7 @@ div.row.h5.text-info.mb-5.pfont{
 											<input type="file" class="form-control btn btn-outline-secondary" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 										</div>
 									</div>
-									<div class="col-8 flex-column d-grid gap-4 ps-5 pe-4">
+									<div class="col-8 flex-column d-grid gap-2 ps-5 pe-4">
 										<div class="row">
 											<label class="form-label h4 text-light pfont align-text-bottom">Name</label>
 											<input class="form-control" list="datalistOptions" id="acName" name="acName" value="${account.acName}">
@@ -378,6 +375,7 @@ div.row.h5.text-info.mb-5.pfont{
  			}
 		});
 	}
+	
 	function myWriteBoardCommentHistory(pageNo=1) {
 		
 		$.ajax({
@@ -392,6 +390,35 @@ div.row.h5.text-info.mb-5.pfont{
  			}
 		});
 	}
+	
+	function myPaymentHistory() {
+		
+		$.ajax({
+			url: 'myPayment',
+ 			type: 'get',
+ 			success: function(response){
+ 				$("#innerContainer").html(response);
+ 			}, 
+ 			error: function(xhr, status, error){
+ 				console.error(xhr.responseText);
+ 			}
+		});
+	}
+	
+	function myAccount() {
+		console.log("개인정보 실행")
+		$.ajax({
+			url: 'myAccount',
+ 			type: 'get',
+ 			success: function(response){
+ 				$("#innerContainer").html(response);
+ 			}, 
+ 			error: function(xhr, status, error){
+ 				console.error(xhr.responseText);
+ 			}
+		});
+	}
+	
 	</script>
 </body>
 </html>

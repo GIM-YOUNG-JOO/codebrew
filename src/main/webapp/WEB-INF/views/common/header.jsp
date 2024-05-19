@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <!--nav바 위의 상단바 필요할 시 활용
         <div class="d-flex justify-content-end">
         <a href="#" class=""><i class="me-2 bi-person-circle"></i>
@@ -18,8 +19,8 @@
     </div> -->
 <nav class="navbar navbar-expand-lg shadow bg-body rounded" style="height: 100px">
 	<div class="container-fluid">
-		<a class="navbar-brand ms-5" href="${pageContext.request.contextPath}"><img
-			src="${pageContext.request.contextPath}/resources/image/codebrew.png" style="width: 50px"></a>
+		<a class="navbar-brand ms-5" href="${pageContext.request.contextPath}">
+		<img src="${pageContext.request.contextPath}/resources/image/codebrew.jpg" class="rounded-circle" style="width: 80px"></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>

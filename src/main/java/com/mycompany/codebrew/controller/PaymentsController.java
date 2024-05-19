@@ -25,6 +25,7 @@ public class PaymentsController {
 	@Autowired
 	private PaymentsService service;
 	
+	//결제창 출력
 	@GetMapping("")
 	public String payments(Authentication authentication, Model model) {
 		log.info("PaymentsController - payments실행");
@@ -42,6 +43,7 @@ public class PaymentsController {
 		return "payments/payments";
 	}
 	
+	//결제 완료
 	@PostMapping("/paymentsComplete")
 	public String paymentsComplete(Authentication authentication, Payment payment) {
 		log.info("PaymentsController - paymentsComplete실행");

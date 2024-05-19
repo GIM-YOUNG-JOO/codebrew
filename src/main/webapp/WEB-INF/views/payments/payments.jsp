@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>결제</title>
 
 <!-- Bootstrap5 외부 라이브러리 설정 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -184,8 +184,9 @@ span {
 		  var modal = document.getElementById("myModal");
 		  if (event.target == modal) {
 		    modal.style.display = "none";
-		    // 모달이 닫힐 때 다른 페이지로 이동
-		    window.location.href = "/codebrew/";
+		    // 모달이 닫힐 때 홈페이지로 이동
+		    document.getElementById("payment").submit();
+		    
 		  }
 		}
 	</script>

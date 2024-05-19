@@ -59,18 +59,85 @@
 		acid = #{acId}
 	</delete>
 
+	<resultMap id="paymentMap" type="Payment">
+		<id property="paId" column="paId" />
+		<result property="paId" column="paId"/>
+	    <result property="paName" column="paName"/>
+	    <result property="paTel" column="paTel"/>
+	    <result property="paDate" column="paDate"/>
+	    <result property="paRequest" column="paRequest"/>
+	    <result property="paPay" column="paPay"/>
+	    <result property="brName" column="brName"/>
+		<!-- PaymentDetail 컬렉션에 대한 매핑 -->
+		<collection property="paymentDetail" ofType="com.mycompany.codebrew.dto.PaymentDetail">
+			<result column="prName" property="prName" />
+			<result column="prPrice" property="prPrice" />
+			<result column="sopName" property="sopName" />
+			<result column="bopName" property="bopName" />
+			<result column="topName" property="topName" />
+			<result column="pdShotCount" property="pdShotCount" />
+			<result column="pdCount" property="pdCount" />
+		</collection>
+	</resultMap>
 
-	<select id="selectPaymentWithDetail" resultType="Payment">
-	    SELECT pay.paId as paId, pay.paName as paName, pay.paTel as paTel, pay.paDate as paDate, pay.paRequest as paRequest, br.brName as brName,
-			p.prName as prName, p.prPrice as prPrice, bop.bopName as bopName, top.topName as topName, pd.pdShotCount as pdShotCount, pd.pdCount as pdCount
+	<select id="selectPayments" resultMap="paymentMap">
+		SELECT 
+		pay.paId as paId, 
+		pay.paName as paName, 
+		pay.paTel as paTel,
+		pay.paDate as paDate,
+		pay.paRequest as paRequest,
+		pay.paPay as paPay,
+		br.brName as brName,
+		p.prName as prName,
+		p.prPrice as prPrice,
+		sop.sopName as sopName,
+		bop.bopName as bopName, top.topName as topName, pd.pdShotCount as
+		pdShotCount, pd.pdCount as pdCount
 		FROM payment pay
-		INNER JOIN paymentDetail pad ON pay.paId = pad.paId
-		INNER JOIN productDetail pd ON pad.pdId = pd.pdId
+		INNER JOIN
+		paymentDetail pad ON pay.paId = pad.paId
+		INNER JOIN productDetail pd ON
+		pad.pdId = pd.pdId
 		INNER JOIN branch br ON pay.brid = br.brid
-		INNER JOIN product p ON pd.prId = p.prId
-		INNER JOIN beansOption bop ON pd.bopId = bop.bopId
+		INNER JOIN
+		product p ON pd.prId = p.prId
+		INNER JOIN beansOption bop ON pd.bopId =
+		bop.bopId
 		INNER JOIN sizeOption sop ON pd.sopId = sop.sopId
-		INNER JOIN tempOption top ON pd.topId = top.topId
+		INNER JOIN
+		tempOption top ON pd.topId = top.topId
+		ORDER BY
+		pay.paid ASC
+	</select>
+	
+	<select id="selectPaymentsByAcId" parameterType="String" resultMap="paymentMap">
+		SELECT 
+		pay.paId as paId, 
+		pay.paName as paName, 
+		pay.paTel as paTel,
+		pay.paDate as paDate,
+		pay.paRequest as paRequest,
+		pay.paPay as paPay,
+		br.brName as brName,
+		p.prName as prName,
+		p.prPrice as prPrice,
+		sop.sopName as sopName,
+		bop.bopName as bopName, top.topName as topName, pd.pdShotCount as
+		pdShotCount, pd.pdCount as pdCount
+		FROM payment pay
+		INNER JOIN
+		paymentDetail pad ON pay.paId = pad.paId
+		INNER JOIN productDetail pd ON
+		pad.pdId = pd.pdId
+		INNER JOIN branch br ON pay.brid = br.brid
+		INNER JOIN
+		product p ON pd.prId = p.prId
+		INNER JOIN beansOption bop ON pd.bopId =
+		bop.bopId
+		INNER JOIN sizeOption sop ON pd.sopId = sop.sopId
+		INNER JOIN
+		tempOption top ON pd.topId = top.topId
 		WHERE pay.acId = #{acId}
 		ORDER BY pay.paid ASC
 	</select>

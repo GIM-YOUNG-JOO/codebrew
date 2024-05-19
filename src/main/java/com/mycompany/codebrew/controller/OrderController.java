@@ -29,6 +29,7 @@ public class OrderController {
 	@Autowired
 	private OrderService service;
 
+	//메뉴 출력 - 김영주
 	@GetMapping("/menu")
 	public String menu(Model model) {
 		log.info("OrderController - menu실행");
@@ -119,7 +120,7 @@ public class OrderController {
 		cart.setPdId(productDetail.getPdId());
 		service.registCart(cart);
 		}
-		return "redirect:/order/menu";
+		return "redirect:/order/cart";
 	}
 	
 	//정태환

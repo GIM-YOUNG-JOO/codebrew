@@ -13,12 +13,12 @@
 	</select>
 	
 	<select id="totalSalesCount" resultType="int">
-		select count(*)
-		from product
+		SELECT COUNT(*) as totalSalesCount
+		from payment
 	</select>
 	
 	<select id="totalSalesRevenue" resultType="int">
-		select count(*)
-		from product
+		SELECT SUM(paPay) AS totalSalesRevenue
+		FROM payment
 	</select>
 </mapper>

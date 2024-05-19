@@ -53,9 +53,9 @@ body {
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<br>
-	<div class="first_box ss">
-		<div class="first_in_box ss">
-			<h3 class="mb-3 ss">자유 게시판</h3>
+	<div class="first_box">
+		<div class="first_in_box">
+			<h3 class="mb-3">자유 게시판</h3>
 			<div>리뷰를 남겨주세요</div>
 		</div>
 	</div>
@@ -76,10 +76,10 @@ body {
 			</li>
 		</div> -->
 
-		<div class="main_text_box ss mb-3">
-			<div class="first_input_box mb-2 ss">
-				<div class="search_input_box ss">
-					<div class="search_flex_box ss">
+		<div class="main_text_box mb-3">
+			<div class="first_input_box mb-2">
+				<div class="search_input_box">
+					<div class="search_flex_box">
 						<div class="ss icon">
 							<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
 								<path fill="#212529" fill-rule="evenodd" clip-rule="evenodd" d="M11.5 7c0 .59-.116 1.176-.343 1.722-.226.546-.557 1.042-.975 1.46-.418.418-.914.75-1.46.975-.546.226-1.131.343-1.722.343-.59 0-1.176-.117-1.722-.343-.546-.226-1.042-.557-1.46-.975-.418-.418-.75-.914-.975-1.46C2.616 8.176 2.5 7.591 2.5 7c0-1.194.474-2.338 1.318-3.182C4.662 2.974 5.807 2.5 7 2.5c1.193 0 2.338.474 3.182 1.318C11.026 4.662 11.5 5.806 11.5 7zm-.82 4.74c-1.206.936-2.723 1.377-4.242 1.234-1.52-.143-2.928-.86-3.937-2.005C1.49 9.825.956 8.34 1.004 6.813c.047-1.526.675-2.976 1.754-4.055 1.08-1.08 2.53-1.707 4.055-1.755 1.525-.047 3.012.488 4.156 1.498 1.145 1.01 1.862 2.417 2.005 3.937.143 1.52-.298 3.036-1.234 4.242l3.04 3.04c.074.069.133.151.174.243.04.092.063.192.065.292.001.101-.017.201-.055.294-.038.094-.094.179-.165.25-.071.071-.156.127-.25.165-.093.038-.193.056-.293.054-.101-.001-.2-.023-.293-.064-.091-.041-.174-.1-.243-.174l-3.04-3.04z"></path></svg>
@@ -102,9 +102,10 @@ body {
                     <i class="bi bi-arrow-clockwise"></i>
                     초기화</button>
              </div> -->
-
+			
+			<!-- 정렬을 위한 버튼들 -->
 			<div class="d-flex ss edit_box mb-2">
-				<ul class="select_box ss">
+				<ul class="select_box">
 					<li class="ss me-4"><button class="select_box_button" onclick="sortByDate()">최신순</button></li>
 					<li class="ss me-4"><button class="select_box_button" onclick="sortByHitcount()">조회순</button></li>
 					<li class="ss me-4"><button class="select_box_button" onclick="sortByLike()">좋아요순</button></li>
@@ -123,6 +124,7 @@ body {
 			
             <div id="boardContainer">
 			    <table class="table table-sm table-bordered">
+			    <!-- 게시판 내용 불러오는 코드 -->
 			        <c:forEach var="board" items="${boardList}">
 			            <ul class="question_list">
 			                <li class="li mb-3">
@@ -168,7 +170,7 @@ body {
 			        </c:forEach>
 			    </table>
 			
-
+				<!-- 페이징 처리 하는 부분 -->
 				<table class="table text-center">
 				    <tr>
 				        <td colspan="4" class="text-center">
@@ -202,6 +204,7 @@ body {
 
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
+	
 	function clickedNoticeButton() {
     	event.preventDefault();
     	// 버튼 클릭시 category 값 변경

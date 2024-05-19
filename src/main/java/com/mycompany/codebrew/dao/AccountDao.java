@@ -23,4 +23,8 @@ public interface AccountDao {
 	public String selectRole(String acId);
 	public Account selectByAcIdAndAcNameAndAcEmail(Account account);
 	public void updatePassword(Account account);
+	
+	// 아이디, 비밀번호 일치 시 로그인 허용
+	/*public Account selectAcIdAndAcPassword(Account account);*/
+	
 }

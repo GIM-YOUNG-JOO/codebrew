@@ -79,12 +79,13 @@ public class AdminService {
 		accountDao.deleteByAcId(acId);
 	}
 
+	//대시보드 출력 서비스 -김영주
 	public Dashboard getDashboardInfo() {
 		Dashboard dashboard = new Dashboard();
 		dashboard.setUserCount(dashboardDao.countUser());
 		dashboard.setMenuCount(dashboardDao.countMenu());
-		dashboard.setTotalSalesCount(100); // 결제 기능 완료 후 dashboardDao.totalSalesCount()
-		dashboard.setTotalSalesRevenue(500000); // dashboardDao.totalSalesRevenue()
+		dashboard.setTotalSalesCount(dashboardDao.totalSalesCount()); // 결제 기능 완료 후 dashboardDao.totalSalesCount()
+		dashboard.setTotalSalesRevenue(dashboardDao.totalSalesRevenue()); // dashboardDao.totalSalesRevenue()
 		return dashboard;
 	}
 }

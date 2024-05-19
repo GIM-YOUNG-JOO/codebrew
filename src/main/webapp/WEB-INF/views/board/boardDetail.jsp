@@ -32,6 +32,7 @@
 }
 .like_button:hover {
 	cursor: pointer;
+	
 }
 </style>
 <script type="text/javascript">
@@ -226,18 +227,18 @@ function boardCommentLike(bocId, boclState){
 				<c:if test="${board.acId eq user}">
 				<div style="margin-left:420px; margin-bottom:40px;">
 				<a href="${pageContext.request.contextPath}/board/updateRegister?&boId=${board.boId}">
-					<button class="btn btn-dark" type="button">수정</button>
+					<button class="btn btn-success" type="button">수정</button>
 				</a>
 					<form method="post" action="boardDelete" style="display: inline-block;">
 						<input type="hidden" name=boId value="${board.boId}">
-						<button class="btn btn-dark" name="boId">삭제</button>
+						<button class="btn btn-success" name="boId">삭제</button>
 					</form>
 				</div>
 				</c:if>
 				<div class="input-group shadow" style="width: 100%; height: 15%;">
 					<textarea class="form-control" Id="bocContents" aria-label="With textarea"
 						style="background-color: white;"></textarea>
-					<button class="btn btn-dark" onclick="commentRegist('${board.boId}')">댓글 등록</button>
+					<button class="btn btn-success" onclick="commentRegist('${board.boId}')">댓글 등록</button>
 				</div>
 			</div>
 			<div style="width: 50%">
@@ -261,7 +262,7 @@ function boardCommentLike(bocId, boclState){
 								</div>
 								<c:if test="${boardComment.acId eq user}">
 								<div style="width: 100%; height: 30px;"></div>
-								<button type="button" class="btn btn-dark" style="float:right;" onclick="boardCommentDelete('${boardComment.bocId}','${boardComment.boId}',this)">삭제</button>
+								<button type="button" class="btn btn-success" style="float:right;" onclick="boardCommentDelete('${boardComment.bocId}','${boardComment.boId}',this)">삭제</button>
 								</c:if>
 							</div>
 						</div>

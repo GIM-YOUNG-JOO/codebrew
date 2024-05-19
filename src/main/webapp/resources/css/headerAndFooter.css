@@ -40,7 +40,7 @@ a:hover {
 	font-style: normal;	
 }
 .btn-outline-info {
-    --bs-btn-color: #6c757d;
+    --bs-btn-color: #3CA03C;
     --bs-btn-border-color: #6c757d;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #1f3933;
@@ -56,11 +56,11 @@ a:hover {
     --bs-gradient: none;
 }
 .btn-info{
-	--bs-btn-bg:#1f3933;
+	--bs-btn-bg:#198754;
 	--bs-btn-color: #6c757d;
     --bs-btn-border-color: #6c757d;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #1f3933;
+    --bs-btn-hover-bg: #198754;
     --bs-btn-hover-border-color: green;
     --bs-btn-focus-shadow-rgb: 13, 202, 240;
     --bs-btn-active-color: #000;

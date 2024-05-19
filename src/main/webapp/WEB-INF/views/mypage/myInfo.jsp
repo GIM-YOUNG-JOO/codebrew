@@ -70,42 +70,17 @@ body {
 					</a>
 					<hr>
 					<ul class="nav nav-pills flex-column mb-auto">
-						<li><a href="#" class="nav-link text-white fs-3 pfont"> <i
-								class="bi bi-speedometer me-2"></i> 대시보드
-						</a></li>
 						<li><a href="#" class="nav-link text-white fs-3 pfont"
 							data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
 							aria-expanded="false"> <i class="bi bi-box me-2"></i> 주문 기록
 						</a>
-							<div class="collapse" id="dashboard-collapse">
-								<ul class="ms-2">
-									<li><a href="#" class="text-white text-decoration-none">상품
-											목록</a></li>
-									<li><a href="#" class="text-white text-decoration-none">상품
-											등록</a></li>
-									<li><a href="#" class="text-white text-decoration-none">상품
-											관리</a></li>
-									<li><a href="#" class="text-white text-decoration-none">상품
-											삭제</a></li>
-								</ul>
-							</div></li>
+						</li>
 						<li><a href="#" class="nav-link text-white fs-3 pfont"
 							data-bs-toggle="collapse" data-bs-target="#account-collapse"
 							aria-expanded="false"> <i class="bi bi-person-video2 me-2"></i>
 								개인정보
 						</a>
-							<div class="collapse" id="account-collapse">
-								<ul class="ms-2">
-									<li><a href="#" class="text-white text-decoration-none">계정
-											목록</a></li>
-									<li><a href="#" class="text-white text-decoration-none">계정
-											등록</a></li>
-									<li><a href="#" class="text-white text-decoration-none">계정
-											관리</a></li>
-									<li><a href="#" class="text-white text-decoration-none">계정
-											삭제</a></li>
-								</ul>
-							</div></li>
+							</li>
 						<li><a href="#" class="nav-link text-white fs-3 pfont"
 							data-bs-toggle="collapse" data-bs-target="#board-collapse"
 							aria-expanded="false"> <i class="bi bi-chat-left-text me-2"></i>

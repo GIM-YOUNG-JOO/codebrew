@@ -79,7 +79,7 @@
                 	
                 <!-- 비밀번호 찾기 폼 제출 버튼 -->
                 <div class="text-center">
-                    <button id="changePasswordBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" onclick="findPassword()" style="background: #2C4E80; color: white;">submit</button>
+                    <button id="changePasswordBtn" class="m-2 p-2 btn btn-lg rounded-pill border-secondary" onclick="findPassword()" style="background: #1f3933; color: white;">submit</button>
                 </div>
                 <div id="hiddenDiv" style="display: none;"></div>
                <!--  <div style="margin-top: 10px; font-size: 30px; color: #2C4E80; text-align: center;">정확한 정보를 입력하세요</div> -->

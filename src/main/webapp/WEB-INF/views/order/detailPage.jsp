@@ -67,8 +67,15 @@
 				<img class="product_img" src="data:image/jpeg;base64,${coffee.prImageOut}">
 			</div>
 			<div class="box box2">
-				<h1>${coffee.prName}</h1>
+				<div class="box2_product"> 
+					<span>${coffee.prName}</span>
+					<br>
+					${coffee.prInfo}
+				</div>
 			</div>
+			
+			
+			
 		</div>
 
 	</div>

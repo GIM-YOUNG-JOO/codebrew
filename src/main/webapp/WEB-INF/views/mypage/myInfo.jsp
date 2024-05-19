@@ -50,6 +50,25 @@ body {
 	font-family: "Do Hyeon", sans-serif;
 	font-style: normal;
 }
+.btn-outline-info{
+	--bs-btn-color: #6c757d;
+    --bs-btn-border-color: #6c757d;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #1f3933;
+    --bs-btn-hover-border-color: #1f3933;
+    --bs-btn-focus-shadow-rgb: 13, 202, 240;
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #1f3933;
+    --bs-btn-active-border-color: #1f3933;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #0dcaf0;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #1f3933;
+    --bs-gradient: none;
+}
+div.row.h5.text-info.mb-5.pfont{
+	color: green !important;
+}
 </style>
 </head>
 
@@ -127,7 +146,6 @@ body {
 							<img
 								src="${pageContext.request.contextPath}/resources/image/cut/PineapplePassionfruitRefreshersLemonade.png"
 								width="200px" class="rounded-4 mt-5 ms-5 me-5" />
-							<div class="row h5 text-secondary mb-5 pfont">${account.acRole}</div>
 							<div class="row h1 text-dark pfont">${account.acName}</div>
 							<div class="row h5 text-info mb-5 pfont">${account.acEmail}</div>
 							<div class="row h3 text-dark pfont">${account.acTel}</div>

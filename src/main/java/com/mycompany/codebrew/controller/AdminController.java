@@ -29,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	private PaymentsService payService;
 
 	@GetMapping("/dashboard")
 	public String dashboard(Model model) {

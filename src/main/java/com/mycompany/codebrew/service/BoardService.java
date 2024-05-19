@@ -99,24 +99,26 @@ public class BoardService {
 		List<Board> searchTitleList = boardDao.selectByTitle(pager);
 		return searchTitleList;
 	}
-
+	//정태환
 	public Board getBoard(int boId) {
 		int hitCount = boardDao.updateHitCount(boId);
 		return boardDao.selectBoardByNum(boId);
 	}
-
+	//정태환
 	public List<BoardComment> getCommentList(int boId) {
-		
 		return boardCommentDao.selectCommentList(boId);
 	}
 
-
+	//정태환
 	public void writeBoardComment(BoardComment formData) {
-		boardCommentDao.insertComment(formData);
-		boardDao.updateBoardCommentIncrease(formData.getBoId());
-		
+		//매개변수boardComment를 DB에 insert해주는 코드
+		int result = boardCommentDao.insertComment(formData);
+		//insertComment가 정상적으로 실행되었다면 해당 boId의 댓글 수를 증가시켜주는 코드
+		if(result != 0) {
+			boardDao.updateBoardCommentIncrease(formData.getBoId());
+		}
 	}
-
+	//정태환
 	public BoLike getBoardLike(BoLike boLike) {
 		BoLike db = boardDao.selectBoardLike(boLike);
 		if(db == null) {

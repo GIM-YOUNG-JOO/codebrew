@@ -23,6 +23,7 @@ public class AccountService {
 		accountDao.update(account);
 	}
 	
+	// 전화번호로 아이디 찾기
     public String findAccountIdByTel(String acName, String acTel) {
         // 매개변수를 Map으로 변환하여 전달
         Map<String, Object> params = new HashMap<>();

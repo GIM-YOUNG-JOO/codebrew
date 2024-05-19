@@ -11,7 +11,7 @@
 			                <li class="li mb-3">
 			                    <a class="" href="${pageContext.request.contextPath}/board/boardDetail?boId=${board.boId}">
 			                        <div class="question_info">
-			                            <h6 class="title_text">${board.boTitle}</h6>
+			                            <h4 class="title_text">${board.boTitle}</h4>
 			                        </div>
 			
 			                        <p class="question_body">${board.boContent}</p>

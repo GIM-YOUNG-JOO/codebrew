@@ -65,22 +65,24 @@ public class BoardController {
 	@Secured("ROLE_USER")
 	@GetMapping("/boardDetail")
 	public String boardDetail(int boId, Model model, Authentication authentication) {
+		//실행  여부를 판단하기 위한 코드
 		log.info("BoardController - boardDetail실행");
-		//게시글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
+		//게시글 작성자와 로그인한 유저의 일치여부 확인을 위해 현재 로그인한 회원 정보를 불러와주는 코드
 		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
 		String user = codebrewUserDetail.getAccount().getAcId();
-		model.addAttribute("user", user);
-		//boid를 통해 게시물 상세내용 가져와주기
+		//boId를 통해 게시물 상세내용 가져와주기
 		Board board = boardService.getBoard(boId);
+		//board의 이미지가 있는지 확인하고 있다면 불러와서 이미지를 보여줄 수 있게 작업해주는 코드
 		byte[] imageData = board.getBoAttachdata();
 		if (imageData != null) {
 			String img = Base64.getEncoder().encodeToString(imageData);
 			board.setBoImageOut(img);
 		}
-		//상세내용을 화면에 넘겨주기
-		model.addAttribute("board", board);
-		//board와 관련된 comment 모두 찾아와서 list로 넘겨주기
+		//board와 관련된 comment boId를 통해 모두 찾아와서 List로 저장을 위한 코드
 		List<BoardComment> commentList = boardService.getCommentList(boId);
+		//jsp에 필요한 정보들을 저장해주는 코드
+		model.addAttribute("board", board);
+		model.addAttribute("user", user);
 		model.addAttribute("boardCommentList", commentList);
 		return "board/boardDetail";
 	}
@@ -88,17 +90,19 @@ public class BoardController {
 	//정태환
 	@PostMapping("/boardCommentAjax")
 	public String boardCommentRegister(Authentication authentication, @RequestBody BoardComment formData, Model model) {
+		//실행 여부를 판단하기 위한 코드
 		log.info("BoardController - boardCommentAjax실행");
-		//댓글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
+		//댓글 작성자와 로그인한 유저의 일치여부 확인을 위해 현재 로그인한 회원 정보를 불러와주는 코드
 		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
 		String user = codebrewUserDetail.getAccount().getAcId();
-		model.addAttribute("user", user);
+		//받아온 BoardComment Dto에 현재 로그인한 유저의 acId를 저장해주는 코드
 		formData.setAcId(user);
-		//받아왔으니 insert를 통해 등록해주자
+		//객체 모두를 보드 서비스를 통해 DB에 저장해주는 코드
 		boardService.writeBoardComment(formData);
 		//등록해줬으니 commentList를 다시 불러와서 model을 통해 다시 저장해주고 뿌려주자
 		List<BoardComment> commentList = boardService.getCommentList(formData.getBoId());
 		model.addAttribute("boardCommentList", commentList);
+		model.addAttribute("user", user);
 		return "board/boardDetailAjax";
 	}
 	

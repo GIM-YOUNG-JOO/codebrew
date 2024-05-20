@@ -442,6 +442,7 @@ public class BoardController {
 		// 문자열로 받은 pageNo를 정수로 변환
 		int intPageNo = Integer.parseInt(pageNo);
 		int rowsPagingTarget = boardService.getRowBySearchText(searchText);
+		log.info("갯수: " + rowsPagingTarget);
 		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 		List<Board> boardList;
 		pager.setSearchText(searchText);

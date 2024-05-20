@@ -52,35 +52,35 @@
 			<div class="col p-4 z-0">
 				<div class="slider position-relative w-100 z-1 bg-dark rounded-4 overflow-hidden" style="height: 60%; box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
 					<div class="card item">
-						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img rounded-3" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/image/coffee_man.jpg" class="card-img rounded-3" alt="...">
 						<div class="card-body p-0">
 							<p class="card-title pfont text-white">${dashboard.userCount}명</p>
 							<p class="card-text pfont text-white">총 회원 수</p>
 						</div>
 					</div>
 					<div class="card item">
-						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/image/coffee_money.jpg" class="card-img" alt="...">
 						<div class="card-body p-0">
 							<p class="card-title pfont text-white">${dashboard.totalSalesCount}잔</p>
 							<p class="card-text pfont text-white">총 판매량</p>
 						</div>
 					</div>
 					<div class="card item">
-						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/image/coffee_money.jpg" class="card-img" alt="...">
 						<div class="card-body p-0">
 							<p class="card-title pfont text-white">${dashboard.totalSalesRevenue}원</p>
 							<p class="card-text pfont text-white">총 수익</p>
 						</div>
 					</div>
 					<div class="card item">
-						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/image/cafeMenu.jpg" class="card-img" alt="...">
 						<div class="card-body p-0">
 							<p class="card-title pfont text-white">${dashboard.menuCount}개</p>
 							<p class="card-text pfont text-white">메뉴 개수</p>
 						</div>
 					</div>
 					<div class="card item">
-						<img src="${pageContext.request.contextPath}/resources/image/cut/Americano.jpg" class="card-img" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/image/codebrew.jpg" class="card-img" alt="...">
 						<div class="card-body p-0">
 							<p class="card-title pfont text-white">${dashboard.maker}명</p>
 							<p class="card-text pfont text-white">제작 인원</p>

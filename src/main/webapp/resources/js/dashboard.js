@@ -16,7 +16,7 @@ function loadShow() {
     items[active].style.zIndex = 1;
     items[active].style.filter = 'none';
     items[active].style.opacity = 1;
-    // show after
+    // 요소 순서 세팅
     let stt = 0;
     for (var i = active + 1; i < items.length; i++) {
         stt++;

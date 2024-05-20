@@ -118,7 +118,7 @@ span {
 					</c:forEach>
 						<div class="d-flex justify-content-around mt-3">
 							<button class="btn btn-outline-info btn-lg" id="paymentBtn" data-bs-dismiss="modal">\${sum}￦ 결제</button> <%--data-bs-toggle="modal" data-bs-target="#myModal"--%> 
-							<button class="btn btn-outline-secondary btn-lg">돌아가기</button>
+							<button class="btn btn-outline-secondary btn-lg" onclick = "location.href='${pageContext.request.contextPath}/order/cart'">돌아가기</button>
 						</div>
 
 						<!-- The Modal -->

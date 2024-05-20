@@ -77,24 +77,24 @@
 							</tbody>
 						</table>
 						<div class="mb-3">
-							<a class="btn btn-outline-primary btn-sm" href="productDelete?pageNo=1">처음</a>
+							<a class="btn btn-outline-dark btn-sm" href="productDelete?pageNo=1">처음</a>
 							<c:if test="${pager.groupNo>1}">
-								<a class="btn btn-outline-info btn-sm" href="productDelete?pageNo=${pager.startPageNo-1}">이전</a>
+								<a class="btn btn-outline-dark btn-sm" href="productDelete?pageNo=${pager.startPageNo-1}">이전</a>
 							</c:if>
 
 							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 								<c:if test="${pager.pageNo != i}">
-									<a class="btn btn-outline-success btn-sm" href="productDelete?pageNo=${i}">${i}</a>
+									<a class="btn btn-outline-dark btn-sm" href="productDelete?pageNo=${i}">${i}</a>
 								</c:if>
 								<c:if test="${pager.pageNo == i}">
-									<a class="btn btn-danger btn-sm" href="productDelete?pageNo=${i}">${i}</a>
+									<a class="btn btn-outline-dark btn-sm" href="productDelete?pageNo=${i}">${i}</a>
 								</c:if>
 							</c:forEach>
 
 							<c:if test="${pager.groupNo<pager.totalGroupNo}">
-								<a class="btn btn-outline-info btn-sm" href="productDelete?pageNo=${pager.endPageNo+1}">다음</a>
+								<a class="btn btn-outline-dark btn-sm" href="productDelete?pageNo=${pager.endPageNo+1}">다음</a>
 							</c:if>
-							<a class="btn btn-outline-primary btn-sm" href="productDelete?pageNo=${pager.totalPageNo}">맨끝</a>
+							<a class="btn btn-outline-dark btn-sm" href="productDelete?pageNo=${pager.totalPageNo}">맨끝</a>
 						</div>
 					</div>
 				</div>

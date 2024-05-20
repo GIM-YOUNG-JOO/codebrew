@@ -9,7 +9,7 @@
 	</Appenders>
 
 	<Loggers>
-		<Logger name="com.mycompany.codebrew" level="info"
+		<Logger name="com.mycompany.codebrew" level="warn"
 			additivity="false">
 			<AppenderRef ref="Out" />
 		</Logger>

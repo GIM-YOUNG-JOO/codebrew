@@ -37,12 +37,12 @@
 </style>
 </head>
 
-<body class="p-5 h-100">
+<body class="p-5">
 	<div class="container-fluid bg-white rounded-4"
 		style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
 		<div class="row">
 			<%@ include file="/WEB-INF/views/admin/adminNavbar.jsp"%>
-			<div class="col p-4">
+			<div class="col p-5 overflow-auto" style="max-height:820px">
 				<table class="table table-bordered border-light table-dark table-striped align-middle">
 					<thead>
 						<tr>
@@ -58,7 +58,7 @@
 					<c:forEach var="payment" items="${paymentList}">
 						<tbody>
 							<tr>
-								<td rowspan="${payment.detailCount}">${payment.paId}<br>${payment.paDate}<br>${payment.brName}</td>
+								<td rowspan="${payment.detailCount}"><strong>${payment.paId}</strong><br>${payment.paDate}<br>${payment.brName}</td>
 								<td rowspan="${payment.detailCount}">${payment.paName}<br>${payment.paTel}</td>
 								<td rowspan="${payment.detailCount}">${payment.paRequest}</td>
 								<td rowspan="${payment.detailCount}">${payment.paPay}</td>

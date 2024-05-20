@@ -97,7 +97,7 @@ public class AccountController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/findPassword")
+	@PostMapping("/findPassword")
 	public Map<String ,Integer> findPassword(Account account) {
 		log.info("AccountController - findPassword실행");
 		Map<String,Integer> map = new HashMap<>();

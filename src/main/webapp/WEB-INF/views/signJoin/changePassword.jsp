@@ -154,7 +154,7 @@
 	    	
 		 $.ajax({
 			url: 'findPassword',
-			type: 'get',
+			type: 'post',
 			data: account,
 			success: function(response){
 				console.log(response.result);

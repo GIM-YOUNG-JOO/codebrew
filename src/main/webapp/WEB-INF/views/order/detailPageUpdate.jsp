@@ -68,7 +68,11 @@ function decreaseAmount1(element) {
                 <img class= "product_img" src="data:image/jpeg;base64,${pd.prImageOut}">
             </div>
             <div class="box box2">
-                <h1>${pd.prName}</h1>
+                <div class="box2_product"> 
+					<span>${pd.prName}</span>
+					<br>
+					${pd.prInfo}
+				</div>
             </div>
         </div>
         

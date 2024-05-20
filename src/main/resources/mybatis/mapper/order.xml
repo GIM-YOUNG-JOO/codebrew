@@ -67,7 +67,7 @@
 		where pdId=#{pdId}
 	</update>
 	<select id="selectProductDetail" parameterType="int" resultType="ProductDetail">
-		select pd.pdId as pdId, pd.pdShotCount as pdShotCount, pd.pdCount as pdCount, pr.pcId as pcId,
+		select pd.pdId as pdId, pd.pdShotCount as pdShotCount, pd.pdCount as pdCount, pr.prInfo as prInfo, pr.pcId as pcId,
 		pd.sopId as sopId, pd.bopId as bopId, pd.topId as topId, pr.prName as prName, pr.prImage as prImgData
 		from PRODUCTDETAIL pd
 		INNER JOIN product pr ON pd.prid = pr.prid

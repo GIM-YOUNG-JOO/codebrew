@@ -76,17 +76,18 @@ public class BoardController {
 		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
 		String user = codebrewUserDetail.getAccount().getAcId();
 		model.addAttribute("user", user);
-		//boid를 통해 게시물 상세내용 가져와주기
+		//boId를 통해 게시물 상세내용 가져와주는 코드
 		Board board = boardService.getBoard(boId);
+		//board데이터에 이미지를 바이트 타입으로 불러오고 데이터가 있다면 스트링타입으로 변환해서 board에 저장해준다.
 		byte[] imageData = board.getBoAttachdata();
 		if (imageData != null) {
 			String img = Base64.getEncoder().encodeToString(imageData);
 			board.setBoImageOut(img);
 		}
-		//상세내용을 화면에 넘겨주기
-		model.addAttribute("board", board);
 		//board와 관련된 comment 모두 찾아와서 list로 넘겨주기
 		List<BoardComment> commentList = boardService.getCommentList(boId);
+		//상세내용을 jsp에 넘겨주는 코드
+		model.addAttribute("board", board);
 		model.addAttribute("boardCommentList", commentList);
 		return "board/boardDetail";
 	}
@@ -98,13 +99,13 @@ public class BoardController {
 		//댓글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
 		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
 		String user = codebrewUserDetail.getAccount().getAcId();
-		model.addAttribute("user", user);
 		formData.setAcId(user);
-		//받아왔으니 insert를 통해 등록해주자
+		//받아왔으니 insert를 통해 등록해주는 코드
 		boardService.writeBoardComment(formData);
-		//등록해줬으니 commentList를 다시 불러와서 model을 통해 다시 저장해주고 뿌려주자
+		//등록해줬으니 commentList를 다시 불러와서 model을 통해 다시 저장해주는 코드
 		List<BoardComment> commentList = boardService.getCommentList(formData.getBoId());
 		model.addAttribute("boardCommentList", commentList);
+		model.addAttribute("user", user);
 		return "board/boardDetailAjax";
 	}
 	
@@ -115,11 +116,11 @@ public class BoardController {
 		//댓글 작성자와 로그인한 유저의 일치여부 확인을 위한 코드
 		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
 		String user = codebrewUserDetail.getAccount().getAcId();
-		model.addAttribute("user", user);
-		//받아온 댓글을 지워주자
+		//받아온 댓글을 지워주는 코드
 		boardService.deleteComment(boardComment.getBocId(),boardComment.getBoId());
 		List<BoardComment> commentList = boardService.getCommentList(boardComment.getBoId());
 		model.addAttribute("boardCommentList", commentList);
+		model.addAttribute("user", user);
 		return "board/boardDetailAjax";
 	}
 	
@@ -127,7 +128,7 @@ public class BoardController {
 	@PostMapping("/boardDelete")
 	public String boardDelete(Board board) {
 		log.info("BoardController - boardDelete실행");
-		//게시물 삭제
+		//받아온 정보를 이용해 게시글을 삭제해주는 코드
 		boardService.boardDelete(board.getBoId());
 		return "redirect:/board/boardList";
 	}
@@ -137,36 +138,44 @@ public class BoardController {
 	@PostMapping("/boardLike")
 	public Map<String, Integer> boardLike(Authentication authentication,@RequestBody BoLike boLike) {
 		log.info("BoardController - boardLike실행");
+		//어떤 유저가 좋아요를 했는지 확인하기 위한 코드
 		CodebrewUserDetails codebrewUserDetail = (CodebrewUserDetails)authentication.getPrincipal();
 		String acId = codebrewUserDetail.getAccount().getAcId();
 		boLike.setAcId(acId);
-		//좋아요 여부를 확인하고 좋아요를 한 적 없으면 좋아요 해주고 이미 좋아요 했다면 할 수 없다고 알려주자.
+		//유저의 좋아요 여부를 확인하고 좋아요를 한 적 없으면 좋아요 해주고 이미 좋아요 했다면 할 수 없다고 알려주자.
 		//좋아요 테이블을 불러와주자
 		BoLike boLikeDb = boardService.getBoardLike(boLike);
-		int state = boLikeDb.getBolState();
+		int state = boLikeDb.getBolState(); //좋아요 기본값 0
 		int result = 0;
 		if(boLike.getBolState() != state && boLike.getBolState() == 1) {
-			//boLiKe의 상태를  1로 바꿔주고 board의 좋아요를 1 증가시켜주자
+			//boLiKe의 상태를  1로 바꿔주고 board의 추천을 1 증가시켜주는 코드
 			if(boLikeDb.getBolState() != -1) {
+				//직전의 추천상태가 -1이 아니였다면 1증가
 				boardService.getIncreaseLike(boLike);
 			}else if(boLikeDb.getBolState() == -1) {
+				//직전의 추천상태가 1이 였다면 2증가
 				boardService.getDoubleIncreaseLike(boLike);
 			}
+			//스크립트 화면에 보내줄 결과 값 1
 			result = 1;
 		}else if(boLike.getBolState() != state && boLike.getBolState() == -1) {
-			//boLike의 상태를 -1로 바꿔주고 board의 좋아요를  1 감소시켜주자
+			//boLike의 상태를 -1로 바꿔주고 board의 좋아요를  1 감소시켜주는 코드
 			if(boLikeDb.getBolState() != 1) {
+				//직전의 추천상태가 1이 아니였다면 1감소
 				boardService.getDecreaseLike(boLike);
 			}else if(boLikeDb.getBolState() == 1) {
+				//직전의 추천상태가 1이 였다면 2감소
 				boardService.getDoubleDecreaseLike(boLike);
 			}
+			//스크립트에 보내줄 결과 값 2
 			result = 2;
 		}else if(boLike.getBolState() == state && boLike.getBolState() == 1) {
-			//좋아요를 취소해주자 bolState를 0으로 업데이
+			//DB에 저장되어있는 추천상태와 DB의 추천상태가 같고 받아온 데이터의 상태가 추천이라면 추천을 취소해주는 코드
 			boardService.restoreBoardLike(boLike);
+			//스크립트에 보내줄 결과 값 3
 			result = 3;
 		}else if(boLike.getBolState() == state && boLike.getBolState() == -1) {
-			//싫어요를 취소해주자 bolaState를 0으로 업데이트
+			//DB에 저장되어있는 추천상태와 DB의 추천상태가 같고 받아온 데이터의 상태가 비추천이라면 비추천을 취소해주는 코드
 			boardService.restoreBoardLike(boLike);
 			result = 4;
 		}

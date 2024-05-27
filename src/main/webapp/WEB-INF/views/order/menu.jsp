@@ -21,13 +21,6 @@
 	referrerpolicy="no-referrer"></script>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-<!-- <style>
-.row {
-	display: flex;
-	justify-content: flex-start;
-	margin-top: 30px;
-}
-</style> -->
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -44,10 +37,10 @@
 						<c:forEach var="coffee" items="${coffee}">
 
 							<div class="owl-item">
-								<div class="item">
-									<a href="${pageContext.request.contextPath}/order/detailPageGet?prId=${coffee.prId}">
-									<img src="data:image/jpeg;base64,${coffee.prImageOut}" class="rounded">
-									<p class="h3 text-center mt-2">${coffee.prName}</p>
+								<div class="item text-center">
+									<a class="h3" href="${pageContext.request.contextPath}/order/detailPageGet?prId=${coffee.prId}">
+									<img src="data:image/jpeg;base64,${coffee.prImageOut}" class="rounded-circle mb-2">
+									${coffee.prName}
 									</a>
 								</div>
 							</div>
@@ -71,10 +64,10 @@
 						<c:forEach var="beveridge" items="${beveridge}">
 
 							<div class="owl-item">
-								<div class="item">
-									<a href="${pageContext.request.contextPath}/order/detailPageGet?prId=${beveridge.prId}">
-									<img src="data:image/jpeg;base64,${beveridge.prImageOut}" class="rounded">
-									<p class="h3 text-center mt-2">${beveridge.prName}</p>
+								<div class="item text-center">
+									<a class="h3" href="${pageContext.request.contextPath}/order/detailPageGet?prId=${beveridge.prId}">
+									<img src="data:image/jpeg;base64,${beveridge.prImageOut}" class="rounded-circle mb-2">
+									${beveridge.prName}
 									</a>
 								</div>
 							</div>
@@ -95,10 +88,10 @@
 						<c:forEach var="bean" items="${bean}">
 
 							<div class="owl-item">
-								<div class="item">
-									<a href="${pageContext.request.contextPath}/order/detailPageGet?prId=${bean.prId}">
-									<img src="data:image/jpeg;base64,${bean.prImageOut}" class="rounded">
-									<p class="h3 text-center mt-2">${bean.prName}</p>
+								<div class="item text-center">
+									<a class="h3" href="${pageContext.request.contextPath}/order/detailPageGet?prId=${bean.prId}">
+									<img src="data:image/jpeg;base64,${bean.prImageOut}" class="rounded-circle mb-2">
+									${bean.prName}
 									</a>
 								</div>
 							</div>
@@ -119,14 +112,13 @@
 						<c:forEach var="merchandise" items="${merchandise}">
 
 							<div class="owl-item">
-								<div class="item">
-									<a href="${pageContext.request.contextPath}/order/detailPageGet?prId=${merchandise.prId}">
-									<img src="data:image/jpeg;base64,${merchandise.prImageOut}" class="rounded">
-									<p class="h3 text-center mt-2">${merchandise.prName}</p>
+								<div class="item text-center">
+									<a class="h3" href="${pageContext.request.contextPath}/order/detailPageGet?prId=${merchandise.prId}">
+									<img src="data:image/jpeg;base64,${merchandise.prImageOut}" class="rounded-circle mb-2">
+									${merchandise.prName}
 									</a>
 								</div>
 							</div>
-
 						</c:forEach>
 					</div>
 				</div>

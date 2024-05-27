@@ -17,24 +17,30 @@
         <a href="#" class=""><span class="me-2 bi-person-circle"></span> <span
                 class="d-none d-md-inline-block">고객센터</span></a>
     </div> -->
-<nav class="navbar navbar-expand-lg shadow bg-body rounded" style="height: 100px">
+<nav class="navbar navbar-expand-lg shadow-sm bg-body rounded" style="height: 100px">
 	<div class="container-fluid">
-		<a class="navbar-brand ms-5" href="${pageContext.request.contextPath}">
+		<a class="navbar-brand p-0 ms-5" href="${pageContext.request.contextPath}">
 		<img src="${pageContext.request.contextPath}/resources/image/codebrew.jpg" class="rounded-circle" style="width: 80px"></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-			<div class="offcanvas-header">
-				<img src="${pageContext.request.contextPath}/resources/image/codebrew.png" style="width: 50px">
+			<div class="offcanvas-header justify-content-between">
+				<img src="${pageContext.request.contextPath}/resources/image/codebrew.jpg" class="rounded-circle"style="width: 80px">
+				<sec:authorize access="isAnonymous()">
+					<span class="flex-grow-1 text-center">CodeBrew에 오신걸 환영합니다.</span>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<span class="flex-grow-1 text-center"><sec:authentication property="principal.username"/> 님, 환영합니다.</span>
+				</sec:authorize>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
-			<div class="offcanvas-body">
-				<ul class="navbar-nav justify-content-start flex-grow-1 ms-3 mt-2 mb-2">
-					<li class="nav-item ms-2"><a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/order/menu">Menu</a></li>
-					<li class="nav-item ms-2"><a class="nav-link" href="${pageContext.request.contextPath}/mypage/myInfo">My Page</a></li>
-					<li class="nav-item ms-2"><a class="nav-link" href="${pageContext.request.contextPath}/board/boardList">Board</a></li>
+			<div class="offcanvas-body justify-content-between">
+				<ul class="navbar-nav ps-3">
+					<li class="nav-item"><a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/order/menu">메뉴</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mypage/myInfo">마이 페이지</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/boardList">게시판</a></li>
 					<!-- 드롭다운 메뉴 쓸 경우를 대비해 유지
                              <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -52,20 +58,13 @@
                         </li> -->
 				</ul>
 				<hr>
-				<div class="d-flex justify-content-around align-items-center">
+				<div>
 					<sec:authorize access="isAnonymous()">
-						<a href="${pageContext.request.contextPath}/signJoin/signIn"><button class="btn btn-light btn-md rounded-pill border ms-4 me-2">Sign
-								In</button></a>
-						<a href="${pageContext.request.contextPath}/signJoin/joinNow"><button class="btn btn-dark btn-md rounded-pill border ms-2 me-4">Join
-								Now</button></a>
+						<a href="${pageContext.request.contextPath}/signJoin/signIn"><button class="btn btn-light btn-md rounded-pill border ms-4 me-2">로그인</button></a>
+						<a href="${pageContext.request.contextPath}/signJoin/joinNow"><button class="btn btn-dark btn-md rounded-pill border ms-2 me-4">회원가입</button></a>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
-						<a href="${pageContext.request.contextPath}/order/cart" class="btn btn-info rounded-pill border me-5"><i class="h1 bi bi-cart2"></i></a>
-						<%-- 사이트간 요청 위조 방지 설정이 비활성화되어 있을 경우: GET 방식으로도 요청 가능 --%>
-						<b class="text-black me-2">
-							<sec:authentication property="principal.username" />
-						</b>
-						<a href="${pageContext.request.contextPath}/logout" class="btn btn-danger rounded-pill border">Sign Out</a>
+						<a href="${pageContext.request.contextPath}/logout" class="btn btn-outline-dark rounded-pill me-4">로그아웃</a>
 					</sec:authorize>
 				</div>
 			</div>

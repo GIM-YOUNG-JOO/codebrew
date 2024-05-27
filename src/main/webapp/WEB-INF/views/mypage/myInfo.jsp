@@ -24,52 +24,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
 	rel="stylesheet">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
-<link
-	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
-	rel="stylesheet">
-
-<style>
-#hovershadow {
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-	transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-}
-
-#hovershadow:hover {
-	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px
-		rgba(0, 0, 0, 0.22);
-}
-
-* {
-	font-family: "Do Hyeon", sans-serif;
-	font-style: normal;
-}
-
-body {
-	font-family: "Do Hyeon", sans-serif;
-	font-style: normal;
-}
-.btn-outline-info{
-	--bs-btn-color: #6c757d;
-    --bs-btn-border-color: #6c757d;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #1f3933;
-    --bs-btn-hover-border-color: #1f3933;
-    --bs-btn-focus-shadow-rgb: 13, 202, 240;
-    --bs-btn-active-color: #000;
-    --bs-btn-active-bg: #1f3933;
-    --bs-btn-active-border-color: #1f3933;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #0dcaf0;
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: #1f3933;
-    --bs-gradient: none;
-}
-div.row.h5.text-info.mb-5.pfont{
-	color: green !important;
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerAndFooter.css">
 </head>
 
 
@@ -77,8 +32,7 @@ div.row.h5.text-info.mb-5.pfont{
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="p-5">
-		<div class="container-fluid bg-white rounded-4 p-0 shadow-lg"
-			style="height: 80%">
+		<div class="container-fluid bg-white rounded-4 p-0 shadow-lg" style="height: 80%">
 			<div class="d-flex flex-row">
 				<div
 					class="d-flex col flex-column flex-shrink-0 p-3 text-white bg-dark rounded-start-4"

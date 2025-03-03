@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!doctype html>
 <html lang="en">
 
@@ -12,17 +10,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>상품 등록</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style>
 #hovershadow {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -30,8 +21,7 @@
 }
 
 #hovershadow:hover {
-	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px
-		rgba(0, 0, 0, 0.22);
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .pfont {
@@ -75,37 +65,26 @@
 		<div class="row h-100">
 			<%@ include file="/WEB-INF/views/admin/adminNavbar.jsp"%>
 			<div class="col p-4">
-				<form id="productRegistration" method="post" action="registComplete"
-					enctype="multipart/form-data">
+				<form id="productRegistration" method="post" action="registComplete" enctype="multipart/form-data">
 
 					<div class="overflow-hidden card rounded-4" id="hovershadow">
 						<div class="overflow-hidden card table-nowrap rounded-4">
-							<div class="card-header bg-dark text-white">Product
-								Registration</div>
+							<div class="card-header bg-dark text-white">Product Registration</div>
 							<div class="card-body d-flex flex-column p-0">
 								<div class="d-flex">
 									<div class="p-2">
-										<div class="border border-5" id="imageContainer"
-											style="width: 200px; height: 200px;"></div>
+										<div class="border border-5" id="imageContainer" style="width: 200px; height: 200px;"></div>
 										<div class="input-group mt-3" style="width: 200px">
-											<input type="file" class="form-control" id="prImage"
-												name="prImage" aria-describedby="inputGroupFileAddon"
-												aria-label="Upload" accept="image/*"
-												onchange="displayImage(this)">
+											<input type="file" class="form-control" id="prImage" name="prImage" aria-describedby="inputGroupFileAddon" aria-label="Upload" accept="image/*" onchange="displayImage(this)">
 										</div>
 									</div>
 									<div class="d-flex flex-column flex-grow-1">
 										<div class="input-group p-2">
-											<span class="input-group-text text-center"
-												style="width: 100px">상품명</span> <input type="text"
-												class="form-control" id="prName" name="prName"
-												placeholder="Menu Name" aria-label="Username"
+											<span class="input-group-text text-center" style="width: 100px">상품명</span> <input type="text" class="form-control" id="prName" name="prName" placeholder="Menu Name" aria-label="Username"
 												aria-describedby="basic-addon1">
 										</div>
 										<div class="input-group p-2">
-											<label class="input-group-text" for="pcid"
-												style="width: 100px">카테고리</label> <select
-												class="form-select" id="pcId" name="pcId">
+											<label class="input-group-text" for="pcid" style="width: 100px">카테고리</label> <select class="form-select" id="pcId" name="pcId">
 												<option selected value="1">커피</option>
 												<option value="2">음료</option>
 												<option value="3">원두</option>
@@ -113,20 +92,15 @@
 											</select>
 										</div>
 										<div class="input-group p-2">
-											<span class="input-group-text" id="basic-addon1"
-												style="width: 100px">가격</span> <input type="text"
-												class="form-control" id="prPrice" name="prPrice"
-												placeholder="Price">
+											<span class="input-group-text" id="basic-addon1" style="width: 100px">가격</span> <input type="text" class="form-control" id="prPrice" name="prPrice" placeholder="Price">
 										</div>
 										<div class="input-group p-2 flex-grow-1">
-											<span class="input-group-text" style="width: 100px">상품
-												설명</span>
-											<textarea class="form-control" id="prInfo" name="prInfo"
-												aria-label="With textarea"></textarea>
+											<span class="input-group-text" style="width: 100px">상품 설명</span>
+											<textarea class="form-control" id="prInfo" name="prInfo" aria-label="With textarea"></textarea>
 										</div>
 									</div>
 									<div class="d-flex flex-column flex-grow-1 p-2">
-<!-- 										<div class="input-group p-2 flex-grow-1">
+										<!-- 										<div class="input-group p-2 flex-grow-1">
 											<span class="input-group-text" style="width: 100px">관리자
 												메모</span>
 											<textarea class="form-control" id="prMemo" name="prMemo"
@@ -134,12 +108,10 @@
 										</div> -->
 										<div class="card flex-grow-1 border-0">
 											<h5 class="card-header input-group-text border-bottom-0">관리자 메모</h5>
-												<textarea class="card-body form-control rounded-0 rounded-bottom" id="prMemo" name="prMemo"
-													aria-label="With textarea"></textarea>
+											<textarea class="card-body form-control rounded-0 rounded-bottom" id="prMemo" name="prMemo" aria-label="With textarea"></textarea>
 										</div>
 										<div class="d-flex justify-content-around mt-2">
-											<button class="btn btn-light btn-md rounded-pill border"
-												type="submit" form="productRegistration">Save</button>
+											<button class="btn btn-light btn-md rounded-pill border" type="submit" form="productRegistration">Save</button>
 											<button class="btn btn-dark btn-md rounded-pill border">Cancel</button>
 										</div>
 									</div>
